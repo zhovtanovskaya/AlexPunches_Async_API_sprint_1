@@ -1,12 +1,10 @@
-import orjson
-from datetime import datetime
-
 import more_itertools
+from datetime import datetime
 from psycopg2.extras import DictRow
 from typing import Generator
 
+import orjson
 import requests
-
 from postgres_to_es import DbConnect, settings
 from postgres_to_es.data_scheme import MovieEsModel
 from postgres_to_es.elastic_index_state import (ElasticIndexState,

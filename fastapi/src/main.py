@@ -1,11 +1,11 @@
 import logging
 import os
-
 import sys
 
 import aioredis
 import uvicorn as uvicorn
 from elasticsearch import AsyncElasticsearch
+
 from fastapi import FastAPI
 from fastapi.responses import ORJSONResponse
 
@@ -16,7 +16,6 @@ from api.v1 import films
 from core import config
 from core.logger import LOGGING
 from db import elastic, redis
-
 
 app = FastAPI(
     # Конфигурируем название проекта. Оно будет отображаться в документации

@@ -1,7 +1,7 @@
 from datetime import datetime
 from enum import Enum
 
-from postgres_to_es import DbConnect, logger
+from postgres_to_es import DbConnect
 
 
 class Tracked(str, Enum):

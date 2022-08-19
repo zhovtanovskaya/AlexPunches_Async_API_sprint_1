@@ -11,7 +11,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(
 sys.path.append(BASE_DIR)
 
 from sqlite_to_postgres import logger, settings
-from sqlite_to_postgres.loaders import (ForeignKeyError, ExtractDataError,
+from sqlite_to_postgres.loaders import (ExtractDataError, ForeignKeyError,
                                         PostgresSaver, SQLiteExtractor)
 
 
