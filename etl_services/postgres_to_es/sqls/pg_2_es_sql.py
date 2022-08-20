@@ -54,11 +54,29 @@ LEFT JOIN content.person p ON p.id = pfw.person_id
 LEFT JOIN content.genre_film_work gfw ON gfw.film_work_id = fw.id
 LEFT JOIN content.genre g ON g.id = gfw.genre_id
 WHERE
-    fw.updated_at > %s
+    fw.updated_at > %(timestamp)s
     OR
-    g.updated_at > %s
+    g.updated_at > %(timestamp)s
     OR
-    p.updated_at > %s
+    p.updated_at > %(timestamp)s
 GROUP BY fw.id
+;
+"""
+
+genre_2_es = """SELECT
+    g.id, g.name, g.description
+FROM content.genre g
+WHERE
+    g.updated_at > %(timestamp)s
+ORDER BY g.id
+;
+"""
+
+person_2_es = """SELECT
+    p.id, p.full_name as name
+FROM content.person p
+WHERE
+    p.updated_at > %(timestamp)s
+ORDER BY p.id
 ;
 """

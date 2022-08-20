@@ -1,6 +1,6 @@
 import orjson
 import requests
-from postgres_to_es import logger, settings
+from config import logger, settings
 from postgres_to_es.services import ElasticInsertError
 
 

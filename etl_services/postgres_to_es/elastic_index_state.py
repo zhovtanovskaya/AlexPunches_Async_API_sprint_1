@@ -1,16 +1,6 @@
 from datetime import datetime
-from enum import Enum
 
 from postgres_to_es import DbConnect
-
-
-class Tracked(str, Enum):
-    """Список изменяемых сущностей,
-    после изменения которых нужно обновить индекс ElasticSearch.
-    """
-    FILM_WORK = 'film_work'
-    GENRE = 'genre'
-    PERSON = 'person'
 
 
 class ElasticIndexStateError(Exception):
@@ -21,52 +11,32 @@ class ElasticIndexState(DbConnect):
     """Класс сохранения и получения состояния индексации Elastic's."""
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.were_lasts = self.get_all_was_finish()
-        self.will_last = self.get_all_will_finish()
+        self.timestamp_now = self._get_now()
 
-    def get_all_was_finish(self) -> dict[Tracked, datetime]:
-        """Определяем на каком значении updates_at остановились прошлый раз."""
-        return {
-            entity: self._get_last_finish(entity)
-            for entity in Tracked
-        }
+    def _get_now(self):
+        stmt = "SELECT NOW();"
+        self.cursor.execute(stmt)
+        now = self.cursor.fetchone()
+        if now and len(now) > 0:
+            return now[0]
 
-    def get_all_will_finish(self) -> dict[Tracked, datetime]:
-        """Определяем крайние updated_at после текущего импорта."""
-        return {
-            entity: self._get_will_finish(entity)
-            for entity in Tracked
-        }
-
-    def finish(self) -> None:
-        """Удачно завершаем импорт,
-        устанавливая новые modified_at в elastic_watcher.
-        """
-        for _type, modified_at in self.will_last.items():
-            self._set_last_finish(_type, modified_at)
-
-    def _get_last_finish(self, entity: Tracked) -> datetime:
-        stmt = "SELECT modified_at FROM content.elastic_watcher "
-        stmt += " WHERE watcher = %s ;"
-        self.cursor.execute(stmt, [entity])
-        last_modified = self.cursor.fetchone()
-        if last_modified and len(last_modified) > 0:
-            return last_modified[0]
+    def get_last_time(self, entity: str):
+        stmt = """
+        SELECT timestamp FROM content.elastic_state
+        WHERE namestamp = %s
+        ;"""
+        self.cursor.execute(stmt, ([entity]))
+        timestamp = self.cursor.fetchone()
+        if timestamp and len(timestamp) > 0:
+            return timestamp[0]
         return datetime.fromtimestamp(0)
 
-    def _get_will_finish(self, entity: Tracked) -> datetime:
-        stmt = "SELECT max(updated_at) FROM content.{} ".format(entity)
-        self.cursor.execute(stmt)
-        last_modified = self.cursor.fetchone()
-        if last_modified and len(last_modified) > 0:
-            return last_modified[0]
-
-    def _set_last_finish(self, entity: Tracked, modified_at: datetime) -> None:
+    def set_last_time(self, key: str) -> None:
         stmt = """
-        INSERT INTO content.elastic_watcher (watcher, modified_at)
+        INSERT INTO content.elastic_state (namestamp, timestamp)
             VALUES (%s, %s)
-        ON CONFLICT (watcher) DO UPDATE SET
-            modified_at=EXCLUDED.modified_at;
-        """
-        self.cursor.execute(stmt, (entity, modified_at))
+        ON CONFLICT (namestamp) DO UPDATE SET
+            timestamp=EXCLUDED.timestamp
+        ;"""
+        self.cursor.execute(stmt, (key, self.timestamp_now))
         self.connection.commit()

@@ -2,7 +2,7 @@ import more_itertools
 import psycopg2
 import sqlite3
 
-from sqlite_to_postgres import logger, settings
+from config import logger, settings
 from sqlite_to_postgres.data_classes import DATACLASSES_MAP
 
 
@@ -112,7 +112,7 @@ class PostgresSaver(DbConnect):
         if pk and len(pk) > 0:
             return pk[0]
 
-    def clear_watcher(self):
-        stmt = "truncate table content.elastic_watcher;"
+    def clear_state(self):
+        stmt = "truncate table content.elastic_state;"
         self.cursor.execute(stmt)
         self.connection.commit()

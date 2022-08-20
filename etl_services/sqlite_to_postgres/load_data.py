@@ -10,7 +10,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(
     __file__)))
 sys.path.append(BASE_DIR)
 
-from sqlite_to_postgres import logger, settings
+from config import logger, settings
 from sqlite_to_postgres.loaders import (ExtractDataError, ForeignKeyError,
                                         PostgresSaver, SQLiteExtractor)
 
@@ -50,9 +50,9 @@ def load_from_sqlite(
         else:
             logger.info("Table <%s> finished. "
                         "Processed %s rows.", table, count)
-    # Обнулим вотчер,
+    # Обнулим стэйт,
     # чтобы следующая синхронизация из PG в ES стала полной - мало ли чего.
-    postgres_saver.clear_watcher()
+    postgres_saver.clear_state()
 
 
 if __name__ == '__main__':

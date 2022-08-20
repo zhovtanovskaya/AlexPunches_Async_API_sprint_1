@@ -143,9 +143,9 @@ class PersonFilmwork(UUIDMixin):
         return self.role
 
 
-class ElasticWatcher(models.Model):
-    watcher = models.CharField(max_length=32, primary_key=True, null=False)
-    modified_at = models.DateTimeField(null=True)
+class ElasticState(models.Model):
+    namestamp = models.CharField(max_length=32, primary_key=True, null=False)
+    timestamp = models.DateTimeField(null=False)
 
     class Meta:
-        db_table = "content\".\"elastic_watcher"
+        db_table = "content\".\"elastic_state"

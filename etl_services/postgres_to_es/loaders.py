@@ -1,17 +1,14 @@
 import more_itertools
-from datetime import datetime
 from psycopg2.extras import DictRow
 from typing import Generator
 
 import orjson
 import requests
-from postgres_to_es import DbConnect, settings
-from postgres_to_es.data_scheme import MovieEsModel
+from config import EsIndex, settings
+from postgres_to_es import DbConnect
 from postgres_to_es.elastic_index_state import (ElasticIndexState,
-                                                ElasticIndexStateError,
-                                                Tracked)
+                                                ElasticIndexStateError)
 from postgres_to_es.services import ElasticInsertError
-from postgres_to_es.sqls.film_work_2_es_sql import film_work_2_es as fw2es
 
 
 class PostgresExtracter(DbConnect):
@@ -20,19 +17,13 @@ class PostgresExtracter(DbConnect):
         self.es_state = self.create_es_state()
 
     def extract_movie_data(self,
-                           all_data: bool = False
+                           es_index: EsIndex
                            ) -> Generator[DictRow, None, None]:
         """Получить данные обновленных фильмов."""
-        if all_data:
-            was_lasts = [datetime.fromtimestamp(0)] * 3
-        else:
-            was_lasts = [
-                self.es_state.were_lasts[Tracked.FILM_WORK],
-                self.es_state.were_lasts[Tracked.GENRE],
-                self.es_state.were_lasts[Tracked.PERSON],
-            ]
-        self.cursor.execute(fw2es, was_lasts)
-
+        self.cursor.execute(
+            es_index.sql,
+            {'timestamp': self.es_state.get_last_time(es_index.name)}
+        )
         while fetched := self.cursor.fetchmany(settings.bunch_extract):
             yield from fetched
 
@@ -47,14 +38,14 @@ class ElasticLoader:
     @classmethod
     def save_data(cls,
                   data: Generator[DictRow, None, None],
-                  es_index_name: str,
+                  es_index: EsIndex,
                   ) -> int:
         """Записать данные в Elastic."""
         count = 0
         headers = {'Content-Type': 'application/x-ndjson'}
         for items in more_itertools.ichunked(data, settings.bunch_es_load):
             bulk_items = ''.join([
-                cls._make_es_item_for_bulk(item, es_index_name)
+                cls._make_es_item_for_bulk(item, es_index)
                 for item in items
             ])
 
@@ -63,6 +54,7 @@ class ElasticLoader:
                                  headers=headers,
                                  data=bulk_items,
                                  )
+                pass
             except requests.exceptions.ConnectionError as e:
                 raise ElasticInsertError() from e
             if r.status_code == 200:
@@ -74,22 +66,22 @@ class ElasticLoader:
         return count
 
     @staticmethod
-    def _make_es_item_for_bulk(row: DictRow, es_index_name: str) -> str:
+    def _make_es_item_for_bulk(row: DictRow, es_index: EsIndex) -> str:
         """
         Сделать пару строк[json-объектов] для Bulk-запроса в Elasticsearch
         :param row: DictRow из постгреса
-        :param es_index_name: str, название индекса
+        :param es_index: EsIndex
         :return: str, пара json-объектов в виде строк,
-            вторая строка - это MovieEsModel,
+            вторая строка - это EsModel,
             пример:
             {"index": {"_index": "es_index_name", "_id": "my_id"}}
             {"field1": "1", "field2": "2"}
         PS
         перенос строки "\n" должен быть у каждой, даже самой последней.
         """
-        es_index = {'_index': es_index_name, '_id': row['id']}
-        es_item = orjson.dumps({'index': es_index}).decode("utf-8") + '\n'
+        es_index_str = {'_index': es_index.name, '_id': row['id']}
+        es_item = orjson.dumps({'index': es_index_str}).decode("utf-8") + '\n'
 
-        movie_obj = MovieEsModel.parse_obj(row)
+        movie_obj = es_index.es_model.parse_obj(row)
         es_item += movie_obj.json() + '\n'
         return es_item
