@@ -26,10 +26,13 @@ class Person(BaseModel):
         allow_population_by_field_name = True
 
 
-class Film(BaseModel):
+class FilmShort(BaseModel):
     uuid: str
     title: str
     imdb_rating: Optional[float]
+
+
+class Film(FilmShort):
     description: Optional[str]
     genre: Optional[list[Genre]]
     actors: list[Person]
