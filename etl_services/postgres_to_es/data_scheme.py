@@ -11,11 +11,17 @@ class Person(TypedDict):
     name: str
 
 
+class Genre(TypedDict):
+    id: UUID
+    name: str
+
+
 class MovieEsModel(BaseModel):
     id: UUID
     title: str
     imdb_rating: float = Field(None, alias='rating')
     genre: Optional[list[str]]
+    genres: Optional[list[Genre]]
     description: Optional[str]
     directors: Optional[list[Person]]
     actors: Optional[list[Person]]
