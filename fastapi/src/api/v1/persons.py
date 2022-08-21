@@ -1,3 +1,8 @@
+"""
+/api/v1/persons/search/
+/api/v1/persons/<uuid:UUID>/
+/api/v1/persons/<uuid:UUID>/film/
+"""
 from http import HTTPStatus
 from typing import Optional
 from uuid import UUID
@@ -24,4 +29,3 @@ class Person(BaseModel):
 
     class Config:
         allow_population_by_field_name = True
-

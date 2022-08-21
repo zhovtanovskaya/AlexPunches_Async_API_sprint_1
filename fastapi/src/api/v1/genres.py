@@ -1,3 +1,7 @@
+"""
+/api/v1/genres/
+/api/v1/genres/<uuid:UUID>/
+"""
 from http import HTTPStatus
 from typing import Optional
 from uuid import UUID
