@@ -1,9 +1,7 @@
 from functools import lru_cache
 from typing import Optional
 
-from aioredis import Redis
 from db.elastic import get_elastic
-from db.redis import get_redis
 from elasticsearch import AsyncElasticsearch, NotFoundError
 from models.genre import Genre
 
@@ -28,7 +26,10 @@ class GenreService:
 
     async def get_all(self) -> list[Genre]:
         try:
-            result = await self.elastic.search(index='genre', body={'query': {'match_all': {}}}, size=999)
+            result = await self.elastic.search(
+                index='genre',
+                body={'query': {'match_all': {}}}, size=999,
+            )
         except NotFoundError:
             return None
         _genres = result['hits']['hits']

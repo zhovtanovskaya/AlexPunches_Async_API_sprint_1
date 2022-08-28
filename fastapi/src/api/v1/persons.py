@@ -3,14 +3,12 @@
 /api/v1/persons/<uuid:UUID>/
 /api/v1/persons/<uuid:UUID>/film/
 """
-from http import HTTPStatus
 from typing import Optional
 from uuid import UUID
 
 from pydantic import BaseModel, Field
-from services.film import FilmService, get_film_service
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter
 
 router = APIRouter()
 

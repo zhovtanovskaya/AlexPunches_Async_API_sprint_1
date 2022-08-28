@@ -14,3 +14,5 @@ ELASTIC_HOST = os.getenv('ES_HOST', '127.0.0.1')
 ELASTIC_PORT = int(os.getenv('ES_PORT', 9200))
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+REDIS_CACHE_EXPIRE_IN_SECONDS = 60 * 5
