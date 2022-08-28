@@ -19,8 +19,8 @@ class RedisCacheMiddleware:
                 request.headers.get('X-Not-Cache') == 'True'):
             return await call_next(request)
 
-        is_cached = await self.redis.get(str(request.url))
-        if is_cached is None:
+        cache = await self.redis.get(key=str(request.url))
+        if cache is None:
             response = await call_next(request)
 
             if response.background is not None:
@@ -36,9 +36,7 @@ class RedisCacheMiddleware:
             )
             await self.redis.set(str(request.url), pickle.dumps(cache_obj),
                                  expire=config.REDIS_CACHE_EXPIRE_IN_SECONDS)
-            pass
         else:
-            cache = await self.redis.get(key=str(request.url))
             cache_obj = pickle.loads(cache)
             cache_obj.headers['X-From-Redis-Cache'] = 'True'
 
