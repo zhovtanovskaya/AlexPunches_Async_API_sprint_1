@@ -3,7 +3,6 @@ import sys
 
 import aioredis
 import uvicorn as uvicorn
-from core.cache_middleware import RedisCacheMiddleware
 from elasticsearch import AsyncElasticsearch
 from starlette.middleware.base import BaseHTTPMiddleware
 
@@ -15,6 +14,7 @@ sys.path.append(BASE_DIR)
 
 from api.v1 import films, genres
 from core import config
+from core.cache_middleware import RedisCacheMiddleware
 from db import elastic, redis
 
 app = FastAPI(
