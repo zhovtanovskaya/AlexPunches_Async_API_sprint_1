@@ -1,0 +1,45 @@
+services:
+  test-elastic:
+    image: elasticsearch:7.17.5
+    restart: unless-stopped
+    environment:
+      - discovery.type=single-node
+    expose:
+      - "9200"
+    ports:
+      - "9200:9200"
+
+  test-redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    expose:
+      - "6379"
+    ports:
+      - "6379:6379"
+
+  test-fastapi:
+    build: ../../.
+    image: fastapi-image
+    expose:
+      - "8000"
+    env_file:
+      - ../../../.env.pytests
+    ports:
+      - "8000:8000"
+
+  pytests:
+    image: fastapi-image
+    expose:
+      - "8000"
+    env_file:
+      - ../../../.env.pytests
+    depends_on:
+      - test-elastic
+      - test-redis
+      - test-fastapi
+    entrypoint: >
+      sh -c "pwd -P && ls -la
+      && pip install -r /opt/app/tests/functional/requirements.txt
+      && python3 /opt/app/tests/functional/utils/wait_for_es.py
+      && python3 /opt/app/tests/functional/utils/wait_for_redis.py
+      && pytest /opt/app/tests/functional/src"

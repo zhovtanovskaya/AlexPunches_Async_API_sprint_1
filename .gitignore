@@ -135,4 +135,4 @@ dmypy.json
 admin_panel/static/
 
 # Other
-.env.local
+.env.dev
