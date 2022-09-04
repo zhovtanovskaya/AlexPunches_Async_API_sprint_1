@@ -49,6 +49,25 @@ class Film(FilmShort):
     directors: list[Person]
 
 
+@router.get('/', response_model=list[Film])
+async def film_list(
+          film_service: FilmService = Depends(get_film_service)
+) -> list[Film]:
+    films = await film_service.get_all()
+    if not films:
+        return []
+    return [Film(
+        uuid=film.id,
+        title=film.title,
+        imdb_rating=film.imdb_rating,
+        description=film.description,
+        genre=[Genre(**genre.dict()) for genre in film.genres],
+        actors=[Person(**actor.dict()) for actor in film.actors],
+        writers=[Person(**writer.dict()) for writer in film.writers],
+        directors=[Person(**director.dict()) for director in film.directors],
+    ) for film in films]
+
+
 @router.get('/{film_id}', response_model=Film)
 async def film_details(
           film_id: str,

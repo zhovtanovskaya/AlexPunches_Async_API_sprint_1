@@ -46,6 +46,17 @@ class FilmService:
         await self.redis.set(film.id, film.json(),
                              expire=FILM_CACHE_EXPIRE_IN_SECONDS)
 
+    async def get_all(self) -> list[Film]:
+        try:
+            result = await self.elastic.search(
+                index='movies',
+                body={'query': {'match_all': {}}}, size=1000,
+            )
+        except NotFoundError:
+            return None
+        _films = result['hits']['hits']
+        return [Film(**_film['_source']) for _film in _films]
+
 
 @lru_cache()
 def get_film_service(

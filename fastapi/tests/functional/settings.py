@@ -21,7 +21,7 @@ class RedisBaseUrl(BaseSettings, GetUrlMixin):
 
 class ApiBaseUrl(BaseSettings, GetUrlMixin):
     host: str = Field(..., env='api_host')
-    port: str = Field('6379', env='api_port')
+    port: str = Field('8000', env='api_port')
 
 
 class TestSettings(BaseSettings):
@@ -29,8 +29,10 @@ class TestSettings(BaseSettings):
     es_index: str = 'movies'
     es_id_field: str = 'id'
     # es_index_mapping: dict = ''
+    redis_host: str = RedisBaseUrl().host
+    redis_port: str = RedisBaseUrl().port
 
-    redis_host: str = RedisBaseUrl().get_url()
+    redis_url: str = RedisBaseUrl().get_url()
     service_url: str = ApiBaseUrl().get_url()
 
 
