@@ -502,39 +502,9 @@ films = [
         "imdb_rating": 4.2,
         "title": "Morning explain light",
         "description": "Now energy rather lay return identify many.\nScience alone quite old simply.\nSeveral might history strong economy. Not forget why under.",
-        "genre": "Horror History News Reality-TV Musical Game-Show Music Sci-Fi Mystery",
+        "genre": "Horror",
         "director": "Eric Wilson Amanda Griffin",
-        "actors_names": "Tonya Sharp Robert Oneal Eric Wilson",
-        "writers_names": "Andrea Barry Eric Wilson Amanda Griffin",
         "directors": [
-            {
-                "id": "8611f583-b2d1-4e3d-809e-2109c7867a38",
-                "name": "Eric Wilson"
-            },
-            {
-                "id": "27f9e728-c618-4c1e-aa48-05421965e435",
-                "name": "Amanda Griffin"
-            }
-        ],
-        "actors": [
-            {
-                "id": "7f22cd12-07b6-408e-aac1-ca75afb918c8",
-                "name": "Tonya Sharp"
-            },
-            {
-                "id": "3acaaf82-374a-4cc9-a039-7e67926146de",
-                "name": "Robert Oneal"
-            },
-            {
-                "id": "8611f583-b2d1-4e3d-809e-2109c7867a38",
-                "name": "Eric Wilson"
-            }
-        ],
-        "writers": [
-            {
-                "id": "3b019fcb-f96d-4403-948c-93f3028d042b",
-                "name": "Andrea Barry"
-            },
             {
                 "id": "8611f583-b2d1-4e3d-809e-2109c7867a38",
                 "name": "Eric Wilson"
@@ -548,38 +518,6 @@ films = [
             {
                 "id": "f39d7b6d-aef2-40b1-aaf0-cf05e7048011",
                 "name": "Horror",
-            },
-            {
-                "id": "eb7212a7-dd10-4552-bf7b-7a505a8c0b95",
-                "name": "History",
-            },
-            {
-                "id": "f24fd632-b1a5-4273-a835-0119bd12f829",
-                "name": "News",
-            },
-            {
-                "id": "e508c1c8-24c0-4136-80b4-340c4befb190",
-                "name": "Reality-TV",
-            },
-            {
-                "id": "9c91a5b2-eb70-4889-8581-ebe427370edd",
-                "name": "Musical",
-            },
-            {
-                "id": "fb58fd7f-7afd-447f-b833-e51e45e2a778",
-                "name": "Game-Show",
-            },
-            {
-                "id": "56b541ab-4d66-4021-8708-397762bff2d4",
-                "name": "Music",
-            },
-            {
-                "id": "6c162475-c7ed-4461-9184-001ef3d9f26e",
-                "name": "Sci-Fi",
-            },
-            {
-                "id": "ca88141b-a6b4-450d-bbc3-efa940e4953f",
-                "name": "Mystery",
             }
         ]
     },
@@ -708,24 +646,7 @@ films = [
         "description": "Other identify fill art. Throughout treat relate respond. Role mind statement.",
         "genre": "Mystery Horror Musical Romance Game-Show Music Reality-TV News",
         "director": "Richard Jones Amanda Griffin",
-        "actors_names": "Amanda Griffin",
         "writers_names": "Amanda Griffin",
-        "directors": [
-            {
-                "id": "30c32323-c1b1-49c4-9f1f-f97c71cff814",
-                "name": "Richard Jones"
-            },
-            {
-                "id": "27f9e728-c618-4c1e-aa48-05421965e435",
-                "name": "Amanda Griffin"
-            }
-        ],
-        "actors": [
-            {
-                "id": "27f9e728-c618-4c1e-aa48-05421965e435",
-                "name": "Amanda Griffin"
-            }
-        ],
         "writers": [
             {
                 "id": "27f9e728-c618-4c1e-aa48-05421965e435",

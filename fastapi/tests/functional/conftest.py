@@ -11,9 +11,8 @@ from elasticsearch import AsyncElasticsearch
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(BASE_DIR)
 
-from functional.settings import test_settings
-from functional.testdata import (determination_data, es_mapping, es_setting,
-                                 faker_films)
+from functional.settings import EsIndex, test_settings
+from functional.testdata import determination_data, faker_films
 from utils.helpers import orjson_dumps
 
 
@@ -43,8 +42,8 @@ async def aiohttp_get():
         """"Отправить GET запрос и получить ответ."""
         session = aiohttp.ClientSession(headers=headers)
         async with session.get(url, params=params) as response:
-            body = await response.json()  # noqa:F841
-            headers = response.headers  # noqa:F841
+            body = await response.json()
+            headers = response.headers
             status = response.status
         await session.close()
         return {'body': body, 'headers': headers, 'status': status}
@@ -74,21 +73,27 @@ async def es_client():
         validate_cert=False,
         use_ssl=False
     )
-    await client.indices.create(
-            index=test_settings.es_index,
-            body={'settings': es_setting.es_setting,
-                  'mappings': es_mapping.movie_mappings},
-        )
+    for es_index in test_settings.es_indexes.values():
+        await client.indices.create(
+                index=es_index.name,
+                body={'settings': es_index.setting,
+                      'mappings': es_index.mapping},
+            )
     yield client
-    await client.indices.delete(index=test_settings.es_index)
+    for es_index in test_settings.es_indexes.values():
+        await client.indices.delete(index=es_index.name)
     await client.close()
 
 
 @pytest.fixture
 def es_write_data(es_client):
     """Записать данные в Эластик."""
-    async def inner(data: list[dict], es_index: str, es_id_field: str) -> None:
-        bulk_query = create_es_bulk_query(data, es_index, es_id_field)
+    async def inner(data: list[dict], es_index: EsIndex) -> None:
+
+        bulk_query = create_es_bulk_query(data,
+                                          es_index.name,
+                                          es_index.id_field,
+                                          )
         str_query = '\n'.join(bulk_query) + '\n'
 
         response = await es_client.bulk(str_query, refresh=True)
@@ -100,9 +105,9 @@ def es_write_data(es_client):
 @pytest.fixture
 def es_clear_data(es_client):
     """Удалить все объекты из индекса в Эластике."""
-    async def inner():
+    async def inner(es_index: EsIndex):
         return await es_client.delete_by_query(
-            index=test_settings.es_index,
+            index=es_index.name,
             body={'query': {'match_all': {}}},
             refresh='true',
         )

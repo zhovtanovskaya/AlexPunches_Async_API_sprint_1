@@ -1,6 +1,6 @@
 import pickle
 
-from core import config
+from core.config import config
 from db import redis
 from models.json_response import CacheResponseScheme
 from starlette.responses import StreamingResponse
@@ -16,7 +16,8 @@ class RedisCacheMiddleware:
         self.redis = await redis.get_redis()
 
         if (request.method != 'GET' or
-                request.headers.get('X-Not-Cache') == 'True'):
+                request.headers.get('X-Not-Cache') == 'True' or
+                not config.use_cache):
             return await call_next(request)
 
         cache = await self.redis.get(key=str(request.url))
@@ -35,7 +36,7 @@ class RedisCacheMiddleware:
                 media_type=response.media_type,
             )
             await self.redis.set(str(request.url), pickle.dumps(cache_obj),
-                                 expire=config.REDIS_CACHE_EXPIRE_IN_SECONDS)
+                                 expire=config.redis_cache_expire_in_seconds)
         else:
             cache_obj = pickle.loads(cache)
             cache_obj.headers['X-From-Redis-Cache'] = 'True'

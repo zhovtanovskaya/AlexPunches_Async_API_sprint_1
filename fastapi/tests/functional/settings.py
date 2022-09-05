@@ -1,3 +1,4 @@
+from functional.testdata import es_mapping, es_setting
 from pydantic import BaseSettings, Field
 
 
@@ -24,16 +25,28 @@ class ApiBaseUrl(BaseSettings, GetUrlMixin):
     port: str = Field('8000', env='api_port')
 
 
+class EsIndex(BaseSettings):
+    name: str
+    mapping: dict
+    id_field: str = 'id'
+    setting: dict = es_setting.es_setting
+
+
 class TestSettings(BaseSettings):
     es_host: str = EsBaseUrl().get_url()
-    es_index: str = 'movies'
-    es_id_field: str = 'id'
-    # es_index_mapping: dict = ''
+    es_index_film: str = 'movies'
+    # es_id_field: str = 'id'
     redis_host: str = RedisBaseUrl().host
     redis_port: str = RedisBaseUrl().port
 
     redis_url: str = RedisBaseUrl().get_url()
     service_url: str = ApiBaseUrl().get_url()
+
+    es_indexes: dict = {
+        'movies': EsIndex(name='movies', mapping=es_mapping.movie_mappings),
+        'genres': EsIndex(name='genres', mapping=es_mapping.genre_mapping),
+        'persons': EsIndex(name='persons', mapping=es_mapping.person_mapping),
+    }
 
 
 test_settings = TestSettings()

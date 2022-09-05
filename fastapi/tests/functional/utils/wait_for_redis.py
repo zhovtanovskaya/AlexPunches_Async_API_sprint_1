@@ -11,7 +11,7 @@ sys.path.append(BASE_DIR)
 from functional.settings import test_settings
 
 if __name__ == '__main__':
-    redis_client = Redis(test_settings.redis_url)
+    redis_client = Redis(test_settings.redis_host, test_settings.redis_port)
 
     while True:
         if redis_client.ping():
