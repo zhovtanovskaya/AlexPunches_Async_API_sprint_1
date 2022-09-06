@@ -28,7 +28,7 @@ class FakerFilms:
     def make_films(self, films_count: int) -> list:
         return [self._make_a_film() for _ in range(films_count)]
 
-    def _make_a_film(self) -> list:
+    def _make_a_film(self) -> dict[str, str | list]:
         film_genres = fake.random_elements(
             elements=self.genres, length=fake.random_int(min=1, max=5),
             unique=True)

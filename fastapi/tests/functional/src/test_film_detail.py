@@ -66,7 +66,7 @@ async def test_film_detail(
     )
 
     headers = {'X-Not-Cache': 'True'}
-    url = '{}/api/v1/films/{}/'.format(
+    url = '{}/api/v1/films/{}'.format(
         test_settings.service_url, path_param['film_uuid'])
     response = await aiohttp_get(url=url, headers=headers)
 

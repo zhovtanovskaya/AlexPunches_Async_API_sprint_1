@@ -13,12 +13,12 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(BASE_DIR)
 
 from api.v1 import films, genres
-from core import config
 from core.cache_middleware import RedisCacheMiddleware
+from core.config import config
 from db import elastic, redis
 
 app = FastAPI(
-    title=config.PROJECT_NAME,
+    title=config.project_name,
     docs_url='/api/openapi',
     openapi_url='/api/openapi.json',
     default_response_class=ORJSONResponse,
@@ -28,9 +28,9 @@ app = FastAPI(
 @app.on_event('startup')
 async def startup():
     redis.redis = await aioredis.create_redis_pool(
-            (config.REDIS_HOST, config.REDIS_PORT), minsize=10, maxsize=20)
+            (config.redis_host, config.redis_port), minsize=10, maxsize=20)
     elastic.es = AsyncElasticsearch(
-        hosts=[f'{config.ELASTIC_HOST}:{config.ELASTIC_PORT}']
+        hosts=[f'{config.elastic_host}:{config.elastic_port}']
     )
 
 

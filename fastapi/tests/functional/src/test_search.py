@@ -9,7 +9,7 @@ from functional.settings import test_settings
         ({'search': 'Glass'}, {'status': 200, 'length': 2})
     ]
 )
-# @pytest.mark.skipif(True, reason="Api not ready")
+@pytest.mark.skipif(True, reason="Api not ready")
 @pytest.mark.asyncio
 async def test_search(
           es_write_data,

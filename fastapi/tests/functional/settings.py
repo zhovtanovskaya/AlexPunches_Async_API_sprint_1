@@ -33,9 +33,7 @@ class EsIndex(BaseSettings):
 
 
 class TestSettings(BaseSettings):
-    es_host: str = EsBaseUrl().get_url()
-    es_index_film: str = 'movies'
-    # es_id_field: str = 'id'
+    es_url: str = EsBaseUrl().get_url()
     redis_host: str = RedisBaseUrl().host
     redis_port: str = RedisBaseUrl().port
 

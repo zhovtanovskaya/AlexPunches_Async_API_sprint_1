@@ -12,7 +12,7 @@ from functional.settings import test_settings
 
 if __name__ == '__main__':
     es_client = Elasticsearch(
-        hosts=test_settings.es_host,
+        hosts=test_settings.es_url,
         validate_cert=False,
         use_ssl=False,
         )

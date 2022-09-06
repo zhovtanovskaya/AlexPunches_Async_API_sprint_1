@@ -1,6 +1,7 @@
 import asyncio
 import os
 import sys
+from typing import Any
 
 import aiohttp
 import aioredis
@@ -38,15 +39,15 @@ async def aiohttp_get():
     async def inner(url: str,
                     headers: dict | None = None,
                     params: dict | None = None,
-                    ) -> dict:
+                    ) -> dict[str, Any]:
         """"Отправить GET запрос и получить ответ."""
         session = aiohttp.ClientSession(headers=headers)
         async with session.get(url, params=params) as response:
             body = await response.json()
-            headers = response.headers
+            _headers = response.headers
             status = response.status
         await session.close()
-        return {'body': body, 'headers': headers, 'status': status}
+        return {'body': body, 'headers': _headers, 'status': status}
     return inner
 
 
@@ -69,7 +70,7 @@ async def es_client():
     """Получить клиент Эластика перед сессией
     и закрыть его в конце сессии."""
     client = AsyncElasticsearch(
-        hosts=test_settings.es_host,
+        hosts=test_settings.es_url,
         validate_cert=False,
         use_ssl=False
     )
@@ -86,10 +87,12 @@ async def es_client():
 
 
 @pytest.fixture
-def es_write_data(es_client):
+def es_write_data(es_client, es_clear_data):
     """Записать данные в Эластик."""
     async def inner(data: list[dict], es_index: EsIndex) -> None:
-
+        await es_clear_data(es_index=es_index)
+        if not data:
+            return None
         bulk_query = create_es_bulk_query(data,
                                           es_index.name,
                                           es_index.id_field,
