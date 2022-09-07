@@ -12,7 +12,7 @@ from fastapi.responses import ORJSONResponse
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(BASE_DIR)
 
-from api.v1 import films, genres
+from api.v1 import films, genres, persons
 from core.cache_middleware import RedisCacheMiddleware
 from core.config import config
 from db import elastic, redis
@@ -42,6 +42,7 @@ async def shutdown():
 
 app.include_router(films.router, prefix='/api/v1/films', tags=['films'])
 app.include_router(genres.router, prefix='/api/v1/genres', tags=['genres'])
+app.include_router(persons.router, prefix='/api/v1/persons', tags=['persons'])
 
 my_middleware = RedisCacheMiddleware()
 app.add_middleware(BaseHTTPMiddleware, dispatch=my_middleware)

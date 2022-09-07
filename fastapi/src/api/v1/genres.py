@@ -3,42 +3,31 @@
 /api/v1/genres/<uuid:UUID>/
 """
 from http import HTTPStatus
-from uuid import UUID
 
-from pydantic import BaseModel, Field
+from api.v1.shemes.genre import Genre
+from api.v1.shemes.transform_schemes import es_genre_to_genre_scheme
+from fastapi_utils.cbv import cbv
+from fastapi_utils.inferring_router import InferringRouter
 from services.genre import GenreService, get_genre_service
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import Depends, HTTPException
 
-router = APIRouter()
-
-
-class Genre(BaseModel):
-    id: UUID = Field(..., alias='uuid')
-    name: str
-
-    class Config:
-        allow_population_by_field_name = True
+router = InferringRouter()
 
 
-@router.get('/')
-async def genres_list(
-          genre_service: GenreService = Depends(get_genre_service)) -> Genre:
-    genres = await genre_service.get_all()
-    return [Genre(uuid=genre.id, name=genre.name) for genre in genres]
+@cbv(router)
+class FilmCBV:
+    genre_service: GenreService = Depends(get_genre_service)
 
+    @router.get('/')
+    async def genres_list(self) -> list[Genre]:
+        if genres := await self.genre_service.get_all():
+            return [es_genre_to_genre_scheme(genre) for genre in genres]
+        return []
 
-@router.get('/{genre_id}', response_model=Genre)
-async def genre_details(
-          genre_id: str,
-          genre_service: GenreService = Depends(get_genre_service),
-) -> Genre:
-    genre = await genre_service.get_by_id(genre_id)
-    if not genre:
+    @router.get('/{genre_id}', response_model=Genre)
+    async def genre_details(self, genre_id: str) -> Genre:
+        if genre := await self.genre_service.get_by_id(genre_id):
+            return es_genre_to_genre_scheme(genre)
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND,
                             detail='genre not found')
-
-    return Genre(
-        uuid=genre.id,
-        name=genre.name,
-    )

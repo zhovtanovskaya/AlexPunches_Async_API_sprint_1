@@ -25,15 +25,15 @@ async def test_cache_film_without_header(
 
     url = test_settings.service_url + '/api/v1/films/'
 
-    first_response = await aiohttp_get(url=url)
+    before_clean_es_response = await aiohttp_get(url=url)
     await es_clear_data(es_index=es_index)
-    after_es_clear_response = await aiohttp_get(url=url)
+    after_clean_es_response = await aiohttp_get(url=url)
 
-    assert first_response['status'] == 200
-    assert after_es_clear_response['status'] == 200
-    assert len(after_es_clear_response['body']) == 10
-    assert first_response['body'] == after_es_clear_response['body']
-    assert after_es_clear_response['headers']['X-From-Redis-Cache'] == 'True'
+    assert before_clean_es_response['status'] == 200
+    assert after_clean_es_response['status'] == 200
+    assert len(after_clean_es_response['body']) == 10
+    assert before_clean_es_response['body'] == after_clean_es_response['body']
+    assert after_clean_es_response['headers']['X-From-Redis-Cache'] == 'True'
 
 
 @pytest.mark.asyncio
@@ -50,12 +50,12 @@ async def test_cache_film_with_header(
     headers = {'X-Not-Cache': 'True'}
     url = test_settings.service_url + '/api/v1/films/'
 
-    first_response = await aiohttp_get(url=url, headers=headers)
+    before_clean_es_response = await aiohttp_get(url=url, headers=headers)
     cleaner = await es_clear_data(es_index=es_index)
-    after_es_clear_response = await aiohttp_get(url=url, headers=headers)
+    after_clean_es_response = await aiohttp_get(url=url, headers=headers)
 
-    assert first_response['status'] == 200
-    assert after_es_clear_response['status'] == 200
-    assert len(first_response['body']) == 10
+    assert before_clean_es_response['status'] == 200
+    assert after_clean_es_response['status'] == 200
+    assert len(before_clean_es_response['body']) == 10
     assert cleaner['deleted'] == 10
-    assert len(after_es_clear_response['body']) == 0
+    assert len(after_clean_es_response['body']) == 0

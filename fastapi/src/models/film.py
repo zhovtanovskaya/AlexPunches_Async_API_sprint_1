@@ -22,9 +22,9 @@ class Film(BaseModel):
     imdb_rating: float
     description: Optional[str]
     genre: str
-    actors: list[Person]
-    writers: list[Person]
-    directors: list[Person]
+    actors: list[Person] = []
+    writers: list[Person] = []
+    directors: list[Person] = []
     genres: list[Genre]
 
     class Config:
