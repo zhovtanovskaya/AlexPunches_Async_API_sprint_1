@@ -12,10 +12,10 @@ class Roles(str, Enum):
     writer = 'writer'
 
 
-class PersonRole(BaseModel):
+class Person(BaseModel):
     id: UUID
-    full_name: str
-    role: Roles
+    name: str
+    role: list[Roles]
     film_ids: list[UUID]
 
     class Config:

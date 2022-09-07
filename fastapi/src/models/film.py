@@ -21,10 +21,10 @@ class Film(BaseModel):
     title: str
     imdb_rating: float
     description: Optional[str]
-    genre: list[str]
-    actors: list[Person]
-    writers: list[Person]
-    directors: list[Person]
+    genre: str
+    actors: list[Person] = []
+    writers: list[Person] = []
+    directors: list[Person] = []
     genres: list[Genre]
 
     class Config:

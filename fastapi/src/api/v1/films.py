@@ -8,64 +8,49 @@
 """
 
 from http import HTTPStatus
-from typing import Optional
-from uuid import UUID
 
-from pydantic import BaseModel, Field
+from api.v1 import ElasticPaginateSort
+from api.v1.shemes.film import Film
+from api.v1.shemes.transform_schemes import es_film_to_film_scheme
+from fastapi_utils.cbv import cbv
+from fastapi_utils.inferring_router import InferringRouter
 from services.film import FilmService, get_film_service
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import Depends, HTTPException, Query
 
-router = APIRouter()
-
-
-class Genre(BaseModel):
-    id: UUID = Field(..., alias='uuid')
-    name: str
-
-    class Config:
-        allow_population_by_field_name = True
+router = InferringRouter()
 
 
-class Person(BaseModel):
-    id: UUID = Field(..., alias='uuid')
-    name: str = Field(..., alias='full_name')
+@cbv(router)
+class FilmCBV:
+    film_service: FilmService = Depends(get_film_service)
+    page: ElasticPaginateSort = Depends()
 
-    class Config:
-        allow_population_by_field_name = True
+    @router.get('/')
+    async def film_list(
+        self,
+        filter_genre: str | None = Query(default=None, alias='filter[genre]'),
+    ) -> list[Film]:
+        if films := await self.film_service.get_all():
+            return [es_film_to_film_scheme(film) for film in films]
+        return []
 
-
-class FilmShort(BaseModel):
-    uuid: str
-    title: str
-    imdb_rating: Optional[float]
-
-
-class Film(FilmShort):
-    description: Optional[str]
-    genre: Optional[list[Genre]]
-    actors: list[Person]
-    writers: list[Person]
-    directors: list[Person]
+    @router.get('/search')
+    async def film_search(
+        self,
+        query: str | None = Query(default=None),
+    ) -> list[Film]:
+        if films := await self.film_service.search():
+            return [es_film_to_film_scheme(film) for film in films]
+        return []
 
 
 @router.get('/{film_id}', response_model=Film)
 async def film_details(
           film_id: str,
-          film_service: FilmService = Depends(get_film_service)
+          film_service: FilmService = Depends(get_film_service),
 ) -> Film:
-    film = await film_service.get_by_id(film_id)
-    if not film:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND,
-                            detail='film not found')
-
-    return Film(
-        uuid=film.id,
-        title=film.title,
-        imdb_rating=film.imdb_rating,
-        description=film.description,
-        genre=[Genre(**genre.dict()) for genre in film.genres],
-        actors=[Person(**actor.dict()) for actor in film.actors],
-        writers=[Person(**writer.dict()) for writer in film.writers],
-        directors=[Person(**director.dict()) for director in film.directors],
-    )
+    if film := await film_service.get_by_id(film_id):
+        return es_film_to_film_scheme(film)
+    raise HTTPException(status_code=HTTPStatus.NOT_FOUND,
+                        detail='film not found')

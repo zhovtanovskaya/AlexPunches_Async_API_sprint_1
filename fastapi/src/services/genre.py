@@ -2,18 +2,18 @@ from functools import lru_cache
 
 from db.elastic import get_elastic
 from elasticsearch import AsyncElasticsearch
-from models.film import Film
+from models.genre import Genre
 from services import BaseElasticService
 
 from fastapi import Depends
 
 
-class FilmService(BaseElasticService):
+class GenreService(BaseElasticService):
     pass
 
 
 @lru_cache()
-def get_film_service(
+def get_genre_service(
         elastic: AsyncElasticsearch = Depends(get_elastic),
-) -> FilmService:
-    return FilmService(elastic, es_index='movies', es_model=Film)
+) -> GenreService:
+    return GenreService(elastic=elastic, es_index='genres', es_model=Genre)
