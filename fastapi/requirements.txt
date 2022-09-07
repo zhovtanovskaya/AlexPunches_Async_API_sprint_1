@@ -5,3 +5,4 @@ orjson==3.7.12
 pydantic==1.9.0
 uvicorn==0.12.2
 uvloop==0.16.0
+fastapi_utils==0.2.1
