@@ -101,8 +101,7 @@ async def test_genre_detail(
     )
 
     headers = {'X-Not-Cache': 'True'}
-    url = '{}/api/v1/genres/{}/'.format(
-        test_settings.service_url, path_param['genre_uuid'])
+    url = f"{test_settings.service_url}/api/v1/genres/{path_param['genre_uuid']}/"
     response = await aiohttp_get(url=url, headers=headers)
 
     assert response['status'] == expected_answer['status']
