@@ -15,9 +15,11 @@ class RedisCacheMiddleware:
 
         self.redis = await redis.get_redis()
 
-        if (request.method != 'GET' or
-                request.headers.get('X-Not-Cache') == 'True' or
-                not config.use_cache):
+        if (
+                request.method != 'GET' or
+                not config.use_cache or
+                request.headers.get('X-Not-Cache') == 'True'
+        ):
             return await call_next(request)
 
         cache = await self.redis.get(key=str(request.url))
