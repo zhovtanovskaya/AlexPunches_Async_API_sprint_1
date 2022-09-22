@@ -19,7 +19,7 @@ class FilmShort(BaseModel):
 
 
 class Person(PersonShort):
-    role: list[str]  # TODO может быть список все таки тут?
+    role: Optional[list[str]]
     film_ids: Optional[list[UUID]]
 
     class Config:

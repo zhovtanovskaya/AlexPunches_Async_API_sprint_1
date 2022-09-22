@@ -8,7 +8,7 @@ from functional.settings import test_settings
         (
             {'film_uuid': '1a42b629-14af-4646-be32-16bd97d01e70'},
             {'status': 200,
-                'title': 'Film heavy chair by development',
+                'title': 'Film heavy chair by development wikipedia amazon',
                 'genre': [{'uuid': '9c91a5b2-eb70-4889-8581-ebe427370edd', 'name': 'Musical'}],
                 'actors': [{'uuid': '3acaaf82-374a-4cc9-a039-7e67926146de', 'full_name': 'Robert Oneal'}, {'uuid': 'a8b56f85-346d-4b7e-80d3-d1af353e0c86', 'full_name': 'Teresa Martinez'}],
                 'writers': [{'uuid': '3acaaf82-374a-4cc9-a039-7e67926146de', 'full_name': 'Robert Oneal'}, {'uuid': 'a8b56f85-346d-4b7e-80d3-d1af353e0c86', 'full_name': 'Teresa Martinez'}, {'uuid': '3b019fcb-f96d-4403-948c-93f3028d042b', 'full_name': 'Andrea Barry'}, {'uuid': '30c32323-c1b1-49c4-9f1f-f97c71cff814', 'full_name': 'Richard Jones'}],

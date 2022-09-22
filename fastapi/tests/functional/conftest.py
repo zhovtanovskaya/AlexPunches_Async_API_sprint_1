@@ -69,11 +69,7 @@ async def redis_client():
 async def es_client():
     """Получить клиент Эластика перед сессией
     и закрыть его в конце сессии."""
-    client = AsyncElasticsearch(
-        hosts=test_settings.es_url,
-        validate_cert=False,
-        use_ssl=False
-    )
+    client = AsyncElasticsearch(hosts=test_settings.es_url)
     for es_index in test_settings.es_indexes.values():
         await client.indices.create(
                 index=es_index.name,
@@ -99,7 +95,7 @@ def es_write_data(es_client, es_clear_data):
                                           )
         str_query = '\n'.join(bulk_query) + '\n'
 
-        response = await es_client.bulk(str_query, refresh=True)
+        response = await es_client.bulk(operations=str_query, refresh=True)
         if response['errors']:
             raise Exception('Ошибка записи данных в Elasticsearch')
     return inner

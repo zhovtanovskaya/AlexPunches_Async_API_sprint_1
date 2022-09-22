@@ -5,9 +5,9 @@ from functional.settings import test_settings
 @pytest.mark.parametrize(
     'query_data, expected_answer',
     [
-        ({'search': 'Question set'}, {'status': 200, 'length': 1}),
-        ({'search': 'Glass'}, {'status': 200, 'length': 2}),
-        ({'search': 'AAABBBCCC'}, {'status': 200, 'length': 0}),
+        ({'query': 'Question set'}, {'status': 200, 'length': 1}),
+        ({'query': 'Glass'}, {'status': 200, 'length': 2}),
+        ({'query': 'AAABBBCCC'}, {'status': 200, 'length': 0}),
     ]
 )
 @pytest.mark.asyncio
@@ -35,8 +35,8 @@ async def test_search(
 @pytest.mark.parametrize(
     'query_data, expected_answer',
     [
-        ({'search': 'wikipedia amazon', 'page[size]': '3', 'page[number]': '1'}, {'status': 200, 'length': 3}),
-        ({'search': 'wikipedia amazon', 'page[size]': '3', 'page[number]': '2'}, {'status': 200, 'length': 2}),
+        ({'query': 'wikipedia amazon', 'page[size]': '3', 'page[number]': '1'}, {'status': 200, 'length': 3}),
+        ({'query': 'wikipedia amazon', 'page[size]': '3', 'page[number]': '2'}, {'status': 200, 'length': 2}),
     ]
 )
 @pytest.mark.asyncio

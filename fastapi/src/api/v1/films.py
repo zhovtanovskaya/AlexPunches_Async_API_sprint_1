@@ -10,8 +10,10 @@
 from http import HTTPStatus
 
 from api.v1 import ElasticPaginateSort
-from api.v1.shemes.film import Film
-from api.v1.shemes.transform_schemes import es_film_to_film_scheme
+from api.v1.shemes.film import Film, FilmShort
+from api.v1.shemes.transform_schemes import (es_film_to_film_scheme,
+                                             es_film_to_film_short_scheme)
+from elasticsearch import BadRequestError
 from fastapi_utils.cbv import cbv
 from fastapi_utils.inferring_router import InferringRouter
 from services.film import FilmService, get_film_service
@@ -24,25 +26,32 @@ router = InferringRouter()
 @cbv(router)
 class FilmCBV:
     film_service: FilmService = Depends(get_film_service)
-    page: ElasticPaginateSort = Depends()
+    params: ElasticPaginateSort = Depends()
 
     @router.get('/')
     async def film_list(
         self,
         filter_genre: str | None = Query(default=None, alias='filter[genre]'),
     ) -> list[Film]:
-        if films := await self.film_service.get_all():
-            return [es_film_to_film_scheme(film) for film in films]
-        return []
+        films = await self.film_service.get_all()
+        return [es_film_to_film_scheme(film) for film in films]
 
     @router.get('/search')
     async def film_search(
         self,
-        query: str | None = Query(default=None),
-    ) -> list[Film]:
-        if films := await self.film_service.search():
-            return [es_film_to_film_scheme(film) for film in films]
-        return []
+        query: str | None = Query(default=None)
+    ) -> list[FilmShort]:
+        try:
+            films = await self.film_service.search(
+                page_size=self.params.page.size,
+                page_number=self.params.page.number,
+                sort=self.params.sort,
+                query=query,
+            )
+        except BadRequestError as e:
+            raise HTTPException(status_code=e.status_code,
+                                detail=f'Bad Request. {e.error}')
+        return [es_film_to_film_short_scheme(film) for film in films]
 
 
 @router.get('/{film_id}', response_model=Film)

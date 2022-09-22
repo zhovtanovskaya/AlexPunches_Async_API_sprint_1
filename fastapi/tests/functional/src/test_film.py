@@ -89,7 +89,7 @@ async def test_list_films_sort(
         ),
         (
             {'page[size]': '3', 'page[number]': '4'},
-            {'status': 200, 'length': 1}
+            {'status': 200, 'length': 1, 'ids': ['fdc12930-82ae-452f-ad40-76bcf9cb2ee8']}
         )
     ]
 )

@@ -54,8 +54,7 @@ class FakerFilms:
                 number=70, min=10, max=100,) / 10,
             'title': fake.sentence(nb_words=4)[:-1],
             'description': fake.text(max_nb_chars=150),
-            'genre':
-                ' '.join([genre['name'] for genre in film_genres]),
+            'genre': [genre['name'] for genre in film_genres],
             'director':
                 ' '.join([director['name'] for director in film_directors]),
             'actors_names':

@@ -21,9 +21,8 @@ class FilmCBV:
 
     @router.get('/')
     async def genres_list(self) -> list[Genre]:
-        if genres := await self.genre_service.get_all():
-            return [es_genre_to_genre_scheme(genre) for genre in genres]
-        return []
+        genres = await self.genre_service.get_all()
+        return [es_genre_to_genre_scheme(genre) for genre in genres]
 
     @router.get('/{genre_id}', response_model=Genre)
     async def genre_details(self, genre_id: str) -> Genre:
