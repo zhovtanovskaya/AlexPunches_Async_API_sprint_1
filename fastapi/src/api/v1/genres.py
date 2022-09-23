@@ -1,7 +1,3 @@
-"""
-/api/v1/genres/
-/api/v1/genres/<uuid:UUID>/
-"""
 from http import HTTPStatus
 
 from api.v1.shemes.genre import Genre

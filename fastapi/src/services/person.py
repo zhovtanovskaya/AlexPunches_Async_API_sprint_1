@@ -73,7 +73,7 @@ class PersonService(BaseElasticService):
             )
         films_pages = es_scroll_all_pages(
             elastic=self.elastic,
-            index=config.es_indexes[self.es_index].name,
+            index=config.es_indexes['movies'].name,
             keep_alive=config.elastic_keep_alive,
             dsl=dsl,
             sort=make_es_sort_name(config.elastic_default_sort),

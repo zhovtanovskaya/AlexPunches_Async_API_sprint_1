@@ -1,12 +1,3 @@
-"""
-/api/v1/films?sort=-imdb_rating
-/api/v1/films?sort=-imdb_rating&filter[genre]=<comedy-uuid>
-/api/v1/films/search/
-✓   /api/v1/films/<uuid:UUID>/
-/api/v1/films?... # покажем фильмы того же жанра.
-/api/v1/films...  # Популярные фильмы в жанре.
-"""
-
 from http import HTTPStatus
 
 from api.v1 import ElasticPaginateSort

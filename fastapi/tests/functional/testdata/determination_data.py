@@ -210,10 +210,6 @@ films = [
                 'name': 'Richard Jones'
             },
             {
-                'id': '7f22cd12-07b6-408e-aac1-ca75afb918c8',
-                'name': 'Tonya Sharp'
-            },
-            {
                 'id': '0a3c2c6f-ef2d-4a38-a6e4-b8df0b6d9611',
                 'name': 'Dr. Tony Estrada'
             },
@@ -544,10 +540,6 @@ films = [
                 'name': 'Teresa Martinez'
             },
             {
-                'id': '7f22cd12-07b6-408e-aac1-ca75afb918c8',
-                'name': 'Tonya Sharp'
-            },
-            {
                 'id': '3acaaf82-374a-4cc9-a039-7e67926146de',
                 'name': 'Robert Oneal'
             }
@@ -586,10 +578,6 @@ films = [
             {
                 'id': '3acaaf82-374a-4cc9-a039-7e67926146de',
                 'name': 'Robert Oneal'
-            },
-            {
-                'id': '7f22cd12-07b6-408e-aac1-ca75afb918c8',
-                'name': 'Tonya Sharp'
             },
             {
                 'id': '30c32323-c1b1-49c4-9f1f-f97c71cff814',
