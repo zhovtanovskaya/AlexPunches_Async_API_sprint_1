@@ -23,6 +23,12 @@ class EsBaseUrl(BaseSettings, GetUrlMixin):
     port: str = Field('9200', env='es_port')
 
 
+class EsIndex(BaseSettings):
+    name: str
+    search_field: str | None = None
+    id_field: str = 'id'
+
+
 class ApiSettings(BaseSettings):
     project_name: str = Field('Movies', env='project_name')
     base_dir: str = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -39,6 +45,12 @@ class ApiSettings(BaseSettings):
     elastic_port: str = EsBaseUrl().port
     elastic_keep_alive: str = '1m'
     elastic_default_sort: str = 'id'
+
+    es_indexes: dict = {
+        'movies': EsIndex(name='movies', search_field='title'),
+        'genres': EsIndex(name='genres', search_field='name'),
+        'persons': EsIndex(name='persons', search_field='name'),
+    }
 
 
 @lru_cache()

@@ -21,7 +21,7 @@ class FilmCBV:
 
     @router.get('/')
     async def genres_list(self) -> list[Genre]:
-        genres = await self.genre_service.get_all()
+        genres = await self.genre_service.get_all_from_elastic()
         return [es_genre_to_genre_scheme(genre) for genre in genres]
 
     @router.get('/{genre_id}', response_model=Genre)

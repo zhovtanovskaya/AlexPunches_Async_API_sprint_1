@@ -53,7 +53,7 @@ def es_person_to_person_scheme(es_person: PersonModel) -> PersonScheme:
 
 def api_field_name_to_es_field_name(
           api_field_name: str,
-          es_scheme: Type[BaseModel],
+          api_scheme: Type[BaseModel],
 ) -> str:
     """Перевести имя поля из АПИ-схемы в соответствующе имя Эластик-схемы.
 
@@ -73,7 +73,7 @@ def api_field_name_to_es_field_name(
         prefix = '-'
 
     name_splited = api_field_name.split('.', 1)
-    for k, v in es_scheme.__fields__.items():
+    for k, v in api_scheme.__fields__.items():
         if v.alias == name_splited[0]:
             name_splited[0] = k
     es_field_name = '.'.join(name_splited)

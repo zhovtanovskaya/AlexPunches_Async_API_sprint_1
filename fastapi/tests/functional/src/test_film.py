@@ -11,7 +11,7 @@ from functional.settings import test_settings
         ),
         (
          {'filter[genre]': '', 'sort': '-imdb_rating', 'page[size]': '50', 'page[number]': '1'},
-         {'status': 200, 'length': 10, 'ids': []}
+         {'status': 200, 'length': 10, 'ids': ['e32866d3-0d6a-48b0-beda-9ab9bec60ffe', '6d4ba69c-d169-43f2-93bf-a9fe9cdd9f6c', '1a42b629-14af-4646-be32-16bd97d01e70', '6c98f73d-27fe-4b4b-9bf1-f1d18b92c247', 'f8db1a4d-584d-4c02-8ff9-d318d22a3a62', 'f0fcccc6-fb46-4d39-8772-c3475cba9be3', 'fdc12930-82ae-452f-ad40-76bcf9cb2ee8', '0b36f3cd-0acf-4ba4-8410-30ae56525ce0', '50852f4f-0b09-4c41-b89a-28298a663359', '6480fdc0-f1c5-4f44-be08-3c1bcda6a326']}
         ),
     ]
 )
@@ -33,7 +33,7 @@ async def test_list_films(
 
     headers = {'X-Not-Cache': 'True'}
     url = test_settings.service_url + '/api/v1/films/'
-    response = await aiohttp_get(url=url, headers=headers)
+    response = await aiohttp_get(url=url, headers=headers, params=query_data)
     films_ids = [film['uuid'] for film in response['body']]
 
     assert response['status'] == expected_answer['status']
@@ -85,7 +85,7 @@ async def test_list_films_sort(
     [
         (
             {'page[size]': '5', 'page[number]': '1'},
-            {'status': 200, 'length': 5}
+            {'status': 200, 'length': 5, 'ids': ['0b36f3cd-0acf-4ba4-8410-30ae56525ce0', '1a42b629-14af-4646-be32-16bd97d01e70', '50852f4f-0b09-4c41-b89a-28298a663359', '6480fdc0-f1c5-4f44-be08-3c1bcda6a326', '6c98f73d-27fe-4b4b-9bf1-f1d18b92c247']}
         ),
         (
             {'page[size]': '3', 'page[number]': '4'},

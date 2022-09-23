@@ -5,7 +5,8 @@ from core.config import config
 from elastic_transport import ObjectApiResponse
 from elasticsearch import AsyncElasticsearch, NotFoundError
 from pydantic import BaseModel
-from utils.elastic import es_scroll_all_pages, make_es_sort_name
+from utils.elastic import (es_scroll_all_pages, get_one_page_from_elastic,
+                           make_es_sort_name)
 
 
 class NotFoundElasticError(Exception):
@@ -34,11 +35,11 @@ class BaseElasticService:
             return None
         return doc['_source']
 
-    async def get_all(
+    async def get_all_from_elastic(
               self,
               sort: str = config.elastic_default_sort,
               keep_alive: str = config.elastic_keep_alive,
-              query: Mapping[str,  Mapping[str, Any]] | None = None,
+              dsl: Mapping[str,  Mapping[str, Any]] | None = None,
           ) -> list[BaseModel]:
 
         sort = make_es_sort_name(sort)
@@ -46,7 +47,7 @@ class BaseElasticService:
             elastic=self.elastic,
             index=self.es_index,
             keep_alive=keep_alive,
-            query=query,
+            dsl=dsl,
             sort=sort,
         )
 
@@ -56,24 +57,49 @@ class BaseElasticService:
                 items.append(self.es_model.parse_obj(item['_source']))
         return items
 
-    async def get_search_es_page(
-              self,
-              page_size: int,
-              page_number: int,
-              dsl: Mapping[str, Any],
-              es_scheme: Type[BaseModel],
-              sort: str = config.elastic_default_sort,
-          ) -> ObjectApiResponse:
-        sort = api_field_name_to_es_field_name(api_field_name=sort,
-                                               es_scheme=es_scheme)
-        sort = make_es_sort_name(sort)
+    async def pagination_search(
+        self,
+        page_size: int,
+        page_number: int,
+        sort: str,
+        dsl: Mapping[str,  Mapping[str, Any]] | None = None,
+    ) -> ObjectApiResponse:
 
-        from_ = page_size * (page_number - 1)
-
-        return await self.elastic.search(
+        return await get_one_page_from_elastic(
+            elastic=self.elastic,
             index=self.es_index,
-            query=dsl,
+            page_size=page_size,
+            page_number=page_number,
+            dsl=dsl,
             sort=sort,
-            from_=from_,
-            size=page_size,
         )
+
+    @staticmethod
+    def _make_es_sort(api_field: str, api_scheme: Type[BaseModel]):
+        sort = api_field_name_to_es_field_name(api_field_name=api_field,
+                                               api_scheme=api_scheme)
+        return make_es_sort_name(sort)
+
+    def _make_search_dsl(self,
+                         search_fields: str | None = None,
+                         query: str | None = None,
+                         ):
+        if search_fields is None:
+            search_fields = config.es_indexes[self.es_index].search_field
+        fields = search_fields.split(',')
+        if query:
+            return {'bool': {
+                'should': [{'match': {field: query}} for field in fields]
+            }}
+        return {'match_all': {}}
+
+    @staticmethod
+    def _make_search_nested_dsl(
+              path_fields: list[tuple[str, str]],
+              query: str | list[str],
+            ):
+        type_term = 'terms' if type(query) == list else 'term'
+        return {"bool": {"should": [
+               {"nested": {"path": path_field[0], "query": {
+                    type_term: {f"{path_field[0]}.{path_field[1]}": query}}}}
+               for path_field in path_fields]}}

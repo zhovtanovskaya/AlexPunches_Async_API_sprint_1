@@ -30,17 +30,17 @@ class PersonService(BaseElasticService):
                      page_number: int,
                      sort: str = config.elastic_default_sort,
                      query: str | None = None,
+                     search_fields: str | None = None,
                      ) -> list[BaseModel]:
-        if query:
-            dsl = {'match': {'name': query}}
-        else:
-            dsl = {'match_all': {}}
-        persons_page = await super().get_search_es_page(
+        dsl = super()._make_search_dsl(query=query,
+                                       search_fields=search_fields)
+        sort = super()._make_es_sort(api_field=sort, api_scheme=PersonScheme)
+
+        persons_page = await super().pagination_search(
             page_size=page_size,
             page_number=page_number,
-            dsl=dsl,
-            es_scheme=PersonScheme,
             sort=sort,
+            dsl=dsl,
         )
         persons = [
             person['_source'] for person in persons_page['hits']['hits']
@@ -65,29 +65,17 @@ class PersonService(BaseElasticService):
     async def _get_all_films_for_persons(self,
                                          persons_ids: list[str],
                                          ) -> list[Mapping]:
-        query = {
-            "bool": {
-                "should": [
-                    {"nested": {
-                            "path": "writers",
-                            "query": {"terms": {"writers.id": persons_ids}}
-                    }},
-                    {"nested": {
-                            "path": "directors",
-                            "query": {"terms": {"directors.id": persons_ids}}
-                    }},
-                    {"nested": {
-                            "path": "actors",
-                            "query": {"terms": {"actors.id": persons_ids}}
-                    }},
-                ]
-            }
-        }
+        nested_fields = [
+            ('writers', 'id'), ('directors', 'id'), ('actors', 'id')
+        ]
+        dsl = super()._make_search_nested_dsl(
+                query=persons_ids, path_fields=nested_fields
+            )
         films_pages = es_scroll_all_pages(
             elastic=self.elastic,
-            index='movies',
+            index=config.es_indexes[self.es_index].name,
             keep_alive=config.elastic_keep_alive,
-            query=query,
+            dsl=dsl,
             sort=make_es_sort_name(config.elastic_default_sort),
         )
         films = []

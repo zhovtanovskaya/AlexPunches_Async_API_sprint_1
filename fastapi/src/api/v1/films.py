@@ -33,7 +33,13 @@ class FilmCBV:
         self,
         filter_genre: str | None = Query(default=None, alias='filter[genre]'),
     ) -> list[Film]:
-        films = await self.film_service.get_all()
+        films = await self.film_service.search(
+            page_size=self.params.page.size,
+            page_number=self.params.page.number,
+            sort=self.params.sort,
+            nested_fields=[('genres', 'id')],
+            query=filter_genre,
+        )
         return [es_film_to_film_scheme(film) for film in films]
 
     @router.get('/search')

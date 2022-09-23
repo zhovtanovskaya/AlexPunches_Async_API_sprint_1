@@ -16,17 +16,23 @@ class FilmService(BaseElasticService):
                      page_number: int,
                      sort: str = config.elastic_default_sort,
                      query: str | None = None,
+                     search_fields: str | None = None,
+                     nested_fields: list[tuple[str, str]] | None = None,
                      ) -> list[Film]:
-        if query:
-            dsl = {'match': {'title': query}}
+
+        if query and nested_fields is not None:
+            dsl = super()._make_search_nested_dsl(
+                query=query, path_fields=nested_fields)
         else:
-            dsl = {'match_all': {}}
-        films_page = await super().get_search_es_page(
+            dsl = super()._make_search_dsl(
+                query=query, search_fields=search_fields)
+        sort = super()._make_es_sort(api_field=sort, api_scheme=FilmScheme)
+
+        films_page = await super().pagination_search(
             page_size=page_size,
             page_number=page_number,
-            dsl=dsl,
-            es_scheme=FilmScheme,
             sort=sort,
+            dsl=dsl,
         )
         return [
             Film.parse_obj(film['_source'])

@@ -19,7 +19,7 @@ class Person(BaseModel):
 class Film(BaseModel):
     id: str
     title: str
-    imdb_rating: float
+    imdb_rating: Optional[float]
     description: Optional[str]
     genre: list[str]
     actors: list[Person] = []
