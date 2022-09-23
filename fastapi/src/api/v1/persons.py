@@ -38,7 +38,7 @@ class FilmCBV:
         if person := await self.person_service.get_by_id(person_id):
             return es_person_to_person_scheme(person)
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND,
-                            detail='film not found')
+                            detail='Person not found')
 
     @router.get('/{person_id}/films')
     async def person_films(self, person_id: str) -> list[FilmShort]:

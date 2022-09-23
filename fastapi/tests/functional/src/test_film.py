@@ -77,6 +77,7 @@ async def test_list_films_sort(
     films_ids = [film['uuid'] for film in response['body']]
 
     assert response['status'] == expected_answer['status']
+    assert len(response['body']) == expected_answer['length']
     assert films_ids == expected_answer['ids']
 
 
@@ -116,4 +117,5 @@ async def test_list_films_pagination(
     films_ids = [film['uuid'] for film in response['body']]
 
     assert response['status'] == expected_answer['status']
+    assert len(response['body']) == expected_answer['length']
     assert films_ids == expected_answer['ids']
