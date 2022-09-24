@@ -12,4 +12,4 @@ COPY . .
 
 COPY ./wait-for-it.sh /opt/app/wait-for-it.sh
 
-CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["gunicorn", "-b", "0.0.0.0:8000", "--workers", "4", "-k", "uvicorn.workers.UvicornWorker", "src.main:app"]

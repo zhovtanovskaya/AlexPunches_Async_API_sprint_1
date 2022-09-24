@@ -1,5 +1,9 @@
+from http import HTTPStatus
+
 import pytest
 from functional.settings import test_settings
+
+pytestmark = pytest.mark.asyncio
 
 
 @pytest.fixture(scope='function')
@@ -10,7 +14,6 @@ def redis_clear_data(redis_client):
     return inner
 
 
-@pytest.mark.asyncio
 async def test_cache_film_without_header(
           es_write_data,
           es_determination_data,
@@ -29,14 +32,13 @@ async def test_cache_film_without_header(
     await es_clear_data(es_index=es_index)
     after_clean_es_response = await aiohttp_get(url=url)
 
-    assert before_clean_es_response['status'] == 200
-    assert after_clean_es_response['status'] == 200
+    assert before_clean_es_response['status'] == HTTPStatus.OK
+    assert after_clean_es_response['status'] == HTTPStatus.OK
     assert len(after_clean_es_response['body']) == 10
     assert before_clean_es_response['body'] == after_clean_es_response['body']
     assert after_clean_es_response['headers']['X-From-Redis-Cache'] == 'True'
 
 
-@pytest.mark.asyncio
 async def test_cache_film_with_header(
           es_write_data,
           es_determination_data,
@@ -54,8 +56,8 @@ async def test_cache_film_with_header(
     cleaner = await es_clear_data(es_index=es_index)
     after_clean_es_response = await aiohttp_get(url=url, headers=headers)
 
-    assert before_clean_es_response['status'] == 200
-    assert after_clean_es_response['status'] == 200
+    assert before_clean_es_response['status'] == HTTPStatus.OK
+    assert after_clean_es_response['status'] == HTTPStatus.OK
     assert len(before_clean_es_response['body']) == 10
     assert cleaner['deleted'] == 10
     assert len(after_clean_es_response['body']) == 0

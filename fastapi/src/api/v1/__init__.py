@@ -6,14 +6,14 @@ from fastapi import Depends, Query
 
 class ElasticPaginate:
     def __init__(self,
-                 number: PositiveInt = Query(default=1, alias='page[number]'),
                  size: PositiveInt = Query(default=50, alias='page[size]'),
+                 number: PositiveInt = Query(default=1, alias='page[number]'),
                  ):
-        self.number = number
         self.size = size
+        self.number = number
 
 
-class ElasticPaginateSort:
+class ElasticSortedPaginate:
     def __init__(self,
                  page: ElasticPaginate = Depends(),
                  sort: str | None = Query(default=config.elastic_default_sort),

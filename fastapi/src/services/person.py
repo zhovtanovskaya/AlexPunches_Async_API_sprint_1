@@ -1,6 +1,7 @@
 from functools import lru_cache
 from typing import Mapping
 
+from api.v1 import ElasticSortedPaginate
 from api.v1.shemes.person import Person as PersonScheme
 from core.config import config
 from db.elastic import get_elastic
@@ -26,20 +27,19 @@ class PersonService(BaseElasticService):
         return None
 
     async def search(self,
-                     page_size: int,
-                     page_number: int,
-                     sort: str = config.elastic_default_sort,
+                     sorted_paginate: ElasticSortedPaginate = Depends(),
                      query: str | None = None,
                      search_fields: str | None = None,
                      ) -> list[BaseModel]:
         dsl = super()._make_search_dsl(query=query,
                                        search_fields=search_fields)
-        sort = super()._make_es_sort(api_field=sort, api_scheme=PersonScheme)
+        sorted_paginate.sort = super()._make_es_sort(
+            api_field=sorted_paginate.sort,
+            api_scheme=PersonScheme,
+        )
 
         persons_page = await super().pagination_search(
-            page_size=page_size,
-            page_number=page_number,
-            sort=sort,
+            sorted_paginate=sorted_paginate,
             dsl=dsl,
         )
         persons = [

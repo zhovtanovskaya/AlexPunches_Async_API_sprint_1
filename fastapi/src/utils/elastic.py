@@ -1,7 +1,10 @@
 from typing import Any, AsyncGenerator, Mapping
 
+from api.v1 import ElasticSortedPaginate
 from elastic_transport import ObjectApiResponse
 from elasticsearch import AsyncElasticsearch
+
+from fastapi import Depends
 
 
 def make_es_sort_name(sort: str) -> str:
@@ -30,18 +33,16 @@ async def es_scroll_all_pages(
 async def get_one_page_from_elastic(
           elastic: AsyncElasticsearch,
           index: str,
-          page_size: int,
-          page_number: int,
           dsl: Mapping[str, Any],
-          sort: str,
+          sorted_paginate: ElasticSortedPaginate = Depends(),
       ) -> ObjectApiResponse:
 
-    from_ = page_size * (page_number - 1)
+    from_ = sorted_paginate.page.size * (sorted_paginate.page.number - 1)
 
     return await elastic.search(
         index=index,
         query=dsl,
-        sort=sort,
+        sort=sorted_paginate.sort,
         from_=from_,
-        size=page_size,
+        size=sorted_paginate.page.size,
     )

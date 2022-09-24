@@ -1,14 +1,17 @@
+from http import HTTPStatus
+
 import pytest
 from functional.settings import test_settings
+
+pytestmark = pytest.mark.asyncio
 
 
 @pytest.mark.parametrize(
     'expected_answer',
     [
-        {'status': 200, 'length': 100, 'type_body': list}
+        {'status': HTTPStatus.OK, 'length': 100, 'type_body': list}
     ]
 )
-@pytest.mark.asyncio
 async def test_genres_list(
           es_write_data,
           es_fake_data_fix_count,
@@ -33,10 +36,9 @@ async def test_genres_list(
 @pytest.mark.parametrize(
     'expected_answer',
     [
-        {'status': 200, 'length': 0, 'type_body': list}
+        {'status': HTTPStatus.OK, 'length': 0, 'type_body': list}
     ]
 )
-@pytest.mark.asyncio
 async def test_genres_empty_list(
           es_write_data,
           expected_answer,
@@ -62,25 +64,24 @@ async def test_genres_empty_list(
     [
         (
             {'genre_uuid': 'fb58fd7f-7afd-447f-b833-e51e45e2a778'},
-            {'status': 200,
+            {'status': HTTPStatus.OK,
                 'name': 'Game-Show',
                 'description': 'Have heart cover analysis carry specific media husband.',
             }
         ),
         (
             {'genre_uuid': 'f24fd632-b1a5-4273-a835-0119bd12f829'},
-            {'status': 200,
+            {'status': HTTPStatus.OK,
                 'name': 'News',
                 'description': None,
             }
         ),
         (
               {'genre_uuid': '01af52ec-9345-4d66-adbe-50eb917f463e'},
-              {'status': 404}
+              {'status': HTTPStatus.NOT_FOUND}
         )
     ]
 )
-@pytest.mark.asyncio
 async def test_genre_detail(
           es_write_data,
           es_determination_data,

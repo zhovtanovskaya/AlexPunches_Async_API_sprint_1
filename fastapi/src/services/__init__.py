@@ -1,5 +1,6 @@
 from typing import Any, Mapping, Type
 
+from api.v1 import ElasticSortedPaginate
 from api.v1.shemes.transform_schemes import api_field_name_to_es_field_name
 from core.config import config
 from elastic_transport import ObjectApiResponse
@@ -7,6 +8,8 @@ from elasticsearch import AsyncElasticsearch, NotFoundError
 from pydantic import BaseModel
 from utils.elastic import (es_scroll_all_pages, get_one_page_from_elastic,
                            make_es_sort_name)
+
+from fastapi import Depends
 
 
 class NotFoundElasticError(Exception):
@@ -59,19 +62,15 @@ class BaseElasticService:
 
     async def pagination_search(
         self,
-        page_size: int,
-        page_number: int,
-        sort: str,
+        sorted_paginate: ElasticSortedPaginate = Depends(),
         dsl: Mapping[str,  Mapping[str, Any]] | None = None,
     ) -> ObjectApiResponse:
 
         return await get_one_page_from_elastic(
             elastic=self.elastic,
             index=self.es_index,
-            page_size=page_size,
-            page_number=page_number,
+            sorted_paginate=sorted_paginate,
             dsl=dsl,
-            sort=sort,
         )
 
     @staticmethod

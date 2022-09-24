@@ -1,16 +1,19 @@
+from http import HTTPStatus
+
 import pytest
 from functional.settings import test_settings
+
+pytestmark = pytest.mark.asyncio
 
 
 @pytest.mark.parametrize(
     'query_data, expected_answer',
     [
-        ({'query': 'Question set'}, {'status': 200, 'length': 1}),
-        ({'query': 'Glass'}, {'status': 200, 'length': 2}),
-        ({'query': 'AAABBBCCC'}, {'status': 200, 'length': 0}),
+        ({'query': 'Question set'}, {'status': HTTPStatus.OK, 'length': 1}),
+        ({'query': 'Glass'}, {'status': HTTPStatus.OK, 'length': 2}),
+        ({'query': 'AAABBBCCC'}, {'status': HTTPStatus.OK, 'length': 0}),
     ]
 )
-@pytest.mark.asyncio
 async def test_search(
           es_write_data,
           es_determination_data,
@@ -36,12 +39,11 @@ async def test_search(
     'query_data, expected_answer',
     [
         ({'query': 'wikipedia amazon', 'page[size]': '3', 'page[number]': '1'},
-         {'status': 200, 'length': 3}),
+         {'status': HTTPStatus.OK, 'length': 3}),
         ({'query': 'wikipedia amazon', 'page[size]': '3', 'page[number]': '2'},
-         {'status': 200, 'length': 2}),
+         {'status': HTTPStatus.OK, 'length': 2}),
     ]
 )
-@pytest.mark.asyncio
 async def test_search_paginate(
           es_write_data,
           es_determination_data,
