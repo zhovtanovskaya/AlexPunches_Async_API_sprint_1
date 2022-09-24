@@ -73,8 +73,8 @@ async def es_client():
     for es_index in test_settings.es_indexes.values():
         await client.indices.create(
                 index=es_index.name,
-                body={'settings': es_index.setting,
-                      'mappings': es_index.mapping},
+                settings=es_index.setting,
+                mappings=es_index.mapping,
             )
     yield client
     for es_index in test_settings.es_indexes.values():
@@ -107,7 +107,7 @@ def es_clear_data(es_client):
     async def inner(es_index: EsIndex):
         return await es_client.delete_by_query(
             index=es_index.name,
-            body={'query': {'match_all': {}}},
+            query={'match_all': {}},
             refresh='true',
         )
     return inner

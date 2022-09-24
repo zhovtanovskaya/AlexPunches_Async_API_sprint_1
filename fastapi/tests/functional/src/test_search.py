@@ -35,8 +35,10 @@ async def test_search(
 @pytest.mark.parametrize(
     'query_data, expected_answer',
     [
-        ({'query': 'wikipedia amazon', 'page[size]': '3', 'page[number]': '1'}, {'status': 200, 'length': 3}),
-        ({'query': 'wikipedia amazon', 'page[size]': '3', 'page[number]': '2'}, {'status': 200, 'length': 2}),
+        ({'query': 'wikipedia amazon', 'page[size]': '3', 'page[number]': '1'},
+         {'status': 200, 'length': 3}),
+        ({'query': 'wikipedia amazon', 'page[size]': '3', 'page[number]': '2'},
+         {'status': 200, 'length': 2}),
     ]
 )
 @pytest.mark.asyncio
