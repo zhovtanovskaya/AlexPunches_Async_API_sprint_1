@@ -21,7 +21,7 @@ class FilmCBV:
         """
         Все жанры.
         """
-        genres = await self.genre_service.get_all_from_elastic()
+        genres = await self.genre_service.get_all_genres()
         return [es_genre_to_genre_scheme(genre) for genre in genres]
 
     @router.get('/{genre_id}', response_model=Genre,

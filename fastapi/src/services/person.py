@@ -1,23 +1,23 @@
 from functools import lru_cache
 from typing import Mapping
 
-from api.v1 import ElasticSortedPaginate
+from api.v1 import SearchEngineSortedPaginate
 from api.v1.shemes.person import Person as PersonScheme
 from core.config import config
 from db.elastic import get_elastic
-from elasticsearch import AsyncElasticsearch
 from models.film import Film
 from models.person import Person
 from pydantic import BaseModel
-from services import BaseElasticService, NotFoundElasticError
-from utils.elastic import es_scroll_all_pages, make_es_sort_name
+from services import BaseSearchEngineService, NotFoundSearchEngineError
+from services.search_engine import AsyncSearchEngine
+from utils.search_engine import es_scroll_all_pages, make_es_sort_name
 
 from fastapi import Depends
 
 
-class PersonService(BaseElasticService):
+class PersonService(BaseSearchEngineService):
     async def get_by_id(self, id: str) -> BaseModel | None:
-        if person := await super()._get_item_from_elastic(id):
+        if person := await super()._get_item_from_search_engine(id):
             films = await self._get_all_films_for_persons([person['id']])
             params = self._get_person_param_from_films_list(person['id'],
                                                             films)
@@ -27,7 +27,7 @@ class PersonService(BaseElasticService):
         return None
 
     async def search(self,
-                     sorted_paginate: ElasticSortedPaginate = Depends(),
+                     sorted_paginate: SearchEngineSortedPaginate = Depends(),
                      query: str | None = None,
                      search_fields: str | None = None,
                      ) -> list[BaseModel]:
@@ -57,8 +57,8 @@ class PersonService(BaseElasticService):
         return [self.es_model.parse_obj(person) for person in persons]
 
     async def get_films_by_person(self, person_id: str) -> list[BaseModel]:
-        if not await super()._get_item_from_elastic(person_id):
-            raise NotFoundElasticError()
+        if not await super()._get_item_from_search_engine(person_id):
+            raise NotFoundSearchEngineError()
         films = await self._get_all_films_for_persons([person_id])
         return [Film.parse_obj(film) for film in films]
 
@@ -72,7 +72,7 @@ class PersonService(BaseElasticService):
                 query=persons_ids, path_fields=nested_fields
             )
         films_pages = es_scroll_all_pages(
-            elastic=self.elastic,
+            search_engine=self.search_engine,
             index=config.es_indexes['movies'].name,
             keep_alive=config.elastic_keep_alive,
             dsl=dsl,
@@ -114,6 +114,7 @@ def _thereis_id_in_list_obj(id: str, list_obj: list[Mapping[str, str]]):
 
 @lru_cache()
 def get_person_service(
-        elastic: AsyncElasticsearch = Depends(get_elastic),
+        search_engine: AsyncSearchEngine = Depends(get_elastic),
 ) -> PersonService:
-    return PersonService(elastic=elastic, es_index='persons', es_model=Person)
+    return PersonService(search_engine=search_engine,
+                         es_index='persons', es_model=Person)

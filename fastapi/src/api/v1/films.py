@@ -1,6 +1,6 @@
 from http import HTTPStatus
 
-from api.v1 import ElasticSortedPaginate
+from api.v1 import SearchEngineSortedPaginate
 from api.v1.shemes.film import Film, FilmShort
 from api.v1.shemes.transform_schemes import (es_film_to_film_scheme,
                                              es_film_to_film_short_scheme)
@@ -18,7 +18,7 @@ router = InferringRouter()
 @cbv(router)
 class FilmCBV:
     film_service: FilmService = Depends(get_film_service)
-    sorted_paginate: ElasticSortedPaginate = Depends()
+    sorted_paginate: SearchEngineSortedPaginate = Depends()
 
     @router.get('/', summary='Фильтрация по жанру')
     async def film_list(

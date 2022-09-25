@@ -1,18 +1,18 @@
 from functools import lru_cache
 
-from api.v1 import ElasticSortedPaginate
+from api.v1 import SearchEngineSortedPaginate
 from api.v1.shemes.film import Film as FilmScheme
 from db.elastic import get_elastic
-from elasticsearch import AsyncElasticsearch
 from models.film import Film
-from services import BaseElasticService
+from services import BaseSearchEngineService
+from services.search_engine import AsyncSearchEngine
 
 from fastapi import Depends
 
 
-class FilmService(BaseElasticService):
+class FilmService(BaseSearchEngineService):
     async def search(self,
-                     sorted_paginate: ElasticSortedPaginate = Depends(),
+                     sorted_paginate: SearchEngineSortedPaginate = Depends(),
                      query: str | None = None,
                      search_fields: str | None = None,
                      nested_fields: list[tuple[str, str]] | None = None,
@@ -41,6 +41,6 @@ class FilmService(BaseElasticService):
 
 @lru_cache()
 def get_film_service(
-        elastic: AsyncElasticsearch = Depends(get_elastic),
+        search_engine: AsyncSearchEngine = Depends(get_elastic),
 ) -> FilmService:
-    return FilmService(elastic, es_index='movies', es_model=Film)
+    return FilmService(search_engine, es_index='movies', es_model=Film)

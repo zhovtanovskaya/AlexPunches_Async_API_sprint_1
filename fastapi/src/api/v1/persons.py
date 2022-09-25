@@ -1,13 +1,13 @@
 from http import HTTPStatus
 
-from api.v1 import ElasticSortedPaginate
+from api.v1 import SearchEngineSortedPaginate
 from api.v1.shemes.film import FilmShort
 from api.v1.shemes.person import Person
 from api.v1.shemes.transform_schemes import (es_film_to_film_short_scheme,
                                              es_person_to_person_scheme)
 from fastapi_utils.cbv import cbv
 from fastapi_utils.inferring_router import InferringRouter
-from services import NotFoundElasticError
+from services import NotFoundSearchEngineError
 from services.person import PersonService, get_person_service
 from utils import messages as msg
 
@@ -24,7 +24,7 @@ class FilmCBV:
     async def person_search(
         self,
         query: str | None = Query(default=None),
-        sorted_paginate: ElasticSortedPaginate = Depends(),
+        sorted_paginate: SearchEngineSortedPaginate = Depends(),
     ) -> list[Person]:
         """
         Поиск персоны по имени.
@@ -65,7 +65,7 @@ class FilmCBV:
         """
         try:
             films = await self.person_service.get_films_by_person(person_id)
-        except NotFoundElasticError:
+        except NotFoundSearchEngineError:
             raise HTTPException(status_code=HTTPStatus.NOT_FOUND,
                                 detail=msg.person_not_found_error)
         return [es_film_to_film_short_scheme(film) for film in films]
