@@ -1,5 +1,10 @@
+import logging
+
 from functional.testdata import es_mapping, es_setting
 from pydantic import BaseSettings, Field
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 
 class GetUrlMixin:
