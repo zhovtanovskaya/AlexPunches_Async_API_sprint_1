@@ -1,7 +1,7 @@
 build:
-	docker-compose -f ./docker-compose.yml build
+	docker-compose -f ./docker-compose.yml --env-file .env build
 up:
-	docker-compose -f ./docker-compose.yml up -d
+	docker-compose -f ./docker-compose.yml --env-file .env up -d
 createsuperuser:
 	docker-compose -f ./docker-compose.yml exec admin_panel python manage.py createsuperuser
 makemigrations:
@@ -21,7 +21,7 @@ logs:
 load-es-movies:
 	docker-compose -f ./docker-compose.yml run etl python postgres_to_es/load_indexes.py
 up-dev:
-	docker-compose -f ./docker-compose.dev.yml up -d
+	docker-compose -f ./docker-compose.dev.yml --env-file .env.dev up -d
 api-pytest:
-	docker-compose -f ./fastapi/tests/functional/docker-compose.yml up -d --build
+	docker-compose -f ./fastapi/tests/functional/docker-compose.yml --env-file .env.pytests up -d --build
 	docker-compose -f ./fastapi/tests/functional/docker-compose.yml logs -f pytests

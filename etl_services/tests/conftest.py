@@ -14,11 +14,11 @@ sys.path.append(BASE_DIR)
 load_dotenv('config/.env')
 
 dsl = {
-    'dbname':    os.environ.get('POSTGRES_DB'),
-    'user':      os.environ.get('POSTGRES_USER'),
-    'password':  os.environ.get('POSTGRES_PASSWORD'),
-    'host':      os.environ.get('DB_HOST', '127.0.0.1'),
-    'port':      os.environ.get('DB_PORT', 5432),
+    'dbname':    os.environ.get('POSTGRES_DB_ADMIN'),
+    'user':      os.environ.get('POSTGRES_USER_ADMIN'),
+    'password':  os.environ.get('POSTGRES_PASSWORD_ADMIN'),
+    'host':      os.environ.get('DB_HOST_ADMIN', '127.0.0.1'),
+    'port':      os.environ.get('DB_PORT_ADMIN', 5432),
 }
 sqlite3_path = os.path.join(os.environ.get('SQLITE3_PATH'))
 

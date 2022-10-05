@@ -1,14 +1,16 @@
 version: '3'
 services:
-  postgres:
+  admin_postgres:
     image: postgres:14-alpine
     restart: unless-stopped
     volumes:
-      - /var/lib/postgresql/data/
+      - pg_data_admin:/var/lib/postgresql/data/
     ports:
       - "5432:5432"
-    env_file:
-      - ./.env
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB_ADMIN}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_ADMIN}
+      POSTGRES_USER: ${POSTGRES_USER_ADMIN}
 
   elastic:
     image: elasticsearch:7.17.5
@@ -22,7 +24,7 @@ services:
     ports:
       - "9200:9200"
     depends_on:
-      - postgres
+      - admin_postgres
 
   redis:
     image: redis:7-alpine
@@ -56,8 +58,25 @@ services:
     ports:
       - "8000:80"
 
-  # запустим пустой хост, просто чтобы nginx не трогать
+  auth_postgres:
+    image: postgres:14-alpine
+    restart: unless-stopped
+    volumes:
+      - pg_data_auth:/var/lib/postgresql/data/
+    ports:
+      - "15432:5432"
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB_AUTH}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_AUTH}
+      POSTGRES_USER: ${POSTGRES_USER_AUTH}
+
+  # запустим пустые хосты, просто чтобы nginx не трогать
   fastapi:
+    image: alpine
+    stdin_open: true
+    tty: true
+
+  auth_flask:
     image: alpine
     stdin_open: true
     tty: true
@@ -66,3 +85,5 @@ volumes:
   service_static_value:
   service_media_value:
   elasticsearch_value:
+  pg_data_admin:
+  pg_data_auth:
