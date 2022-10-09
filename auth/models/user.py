@@ -1,12 +1,9 @@
 import uuid
-from http import HTTPStatus
 
-from auth_models import AdvanceModel, roles_users
 from core.db import db
-from core.exceptions import BasicExceptionError
 from flask_security import UserMixin
-from flask_security.registerable import register_user
-from routers.v1.schemes.users import UserCreate
+from models import AdvanceModel, Role, roles_users
+from services.user import UserService, get_user_service
 from sqlalchemy.dialects.postgresql import UUID
 
 
@@ -20,23 +17,21 @@ class User(AdvanceModel, UserMixin):
     active = db.Column(db.Boolean, default=True, nullable=False)
     is_superuser = db.Column(db.Boolean, default=False, nullable=False)
     password = db.Column(db.String, nullable=False)
-    roles = db.relationship('Role', secondary=roles_users,
-                            backref=db.backref('users', lazy='dynamic'))
+    roles = db.relationship('Role', secondary=roles_users, lazy="subquery",
+                            backref=db.backref('users', lazy='subquery'))
+
+    @property
+    def services(self):
+        services: UserService = get_user_service(
+            user=self, role_model=Role
+        )
+        return services
 
     def __repr__(self):
         return f'<User {self.login}>'
 
-    @staticmethod
-    def create_user(scheme: UserCreate):
-        try:
-            user = register_user(**scheme.dict())
-        except Exception as e:
-            db.session.rollback()
-            raise BasicExceptionError(
-                f"Error: {e}", HTTPStatus.BAD_REQUEST) from e
-        else:
-            user.save()
-        return user
+    def __str__(self):
+        return self.login
 
     def get_security_payload(self):
         return {

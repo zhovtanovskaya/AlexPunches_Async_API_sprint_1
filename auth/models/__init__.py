@@ -8,6 +8,8 @@ from core.exceptions import BasicExceptionError, ResourceNotFoundError
 from flask_sqlalchemy import BaseQuery, Pagination
 from pydantic import BaseModel
 from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.exc import IntegrityError
+from sqlalchemy.inspection import inspect
 from utils import messages as msg
 
 
@@ -53,7 +55,7 @@ class AdvanceModel(db.Model):
         except ResourceNotFoundError:
             db.session.rollback()
             raise ResourceNotFoundError(
-                f"{cls.__name__} id={id} {msg.not_found_error}",
+                f"{cls.__name__} {msg.not_found_error}, id={id}",
                 HTTPStatus.NOT_FOUND
             )
 
@@ -67,15 +69,16 @@ class AdvanceModel(db.Model):
             raise BasicExceptionError(
                 f"Error: {e}", HTTPStatus.BAD_REQUEST) from e
 
-    @staticmethod
-    def save():
+    @classmethod
+    def save(cls):
         """Закоммитить сессию."""
         try:
             db.session.commit()
-        except Exception as e:
+        except IntegrityError as e:
             db.session.rollback()
             raise BasicExceptionError(
-                f"{msg.not_saved}: {e}", HTTPStatus.INTERNAL_SERVER_ERROR
+                f"{cls.__name__} {msg.not_saved}: {e}",
+                HTTPStatus.INTERNAL_SERVER_ERROR
             ) from e
 
     def remove(self):
@@ -104,12 +107,12 @@ class AdvanceModel(db.Model):
             k: getattr(self, k) for (k, v) in vars(self.__class__).items()
             if type(v) is property
         }
-        colums = {
-            c.name: getattr(self, c.name) for c in self.__table__.columns
+        attrs = {
+            k: getattr(self, k) for (k, v)
+            in inspect(self.__class__).attrs.items()
         }
-        colums.update(**props)
-
-        return colums
+        attrs.update(**props)
+        return attrs
 
 
 roles_users = db.Table(
@@ -117,3 +120,7 @@ roles_users = db.Table(
     db.Column('user_id', UUID(as_uuid=True), db.ForeignKey('users.id')),
     db.Column('role_id', db.Integer(), db.ForeignKey('roles.id')),
 )
+
+
+from .role import Role
+from .user import User
