@@ -20,6 +20,8 @@ class User(AdvanceModel, UserMixin):
     roles = db.relationship('Role', secondary=roles_users, lazy="subquery",
                             backref=db.backref('users', lazy='subquery'))
 
+    fs_uniquifier = db.Column(db.String(255), unique=True, nullable=False)
+
     @property
     def services(self):
         services: UserService = get_user_service(

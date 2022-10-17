@@ -12,18 +12,18 @@ class UserBase(BaseModel):
 
 class UserCreate(UserBase):
     password: str
-    roles: list[str] | None = None
+    roles: list[str] = []
 
 
 class UserEdit(UserBase):
     login: str | None
     email: EmailStr | None
-    roles: list[str] | None = None
+    roles: list[str] = []
 
 
 class UserScheme(UserBase):
     id: UUID
-    roles: list[RoleScheme] | None = None
+    roles: list[RoleScheme] = []
 
     class Config:
         orm_mode = True
