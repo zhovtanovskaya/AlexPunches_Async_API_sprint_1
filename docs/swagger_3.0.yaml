@@ -25,7 +25,7 @@ tags:
     description: Управление списком ролей
 
 paths:
-  /auth/login:
+  /auth/v1/login:
     get: 
       tags:
         - auth
@@ -64,8 +64,8 @@ paths:
         '400':
           description: Invalid username/password supplied
 
-  /auth/logout:
-    get:
+  /auth/v1/logout:
+    post:
       tags:
         - auth
       summary: Logout
@@ -76,7 +76,7 @@ paths:
         default:
           description: successful operation
 
-  /auth/v1/users/:
+  /auth/v1/users:
     get:
       tags:
         - user
@@ -179,7 +179,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/BaseMessage'
 
-  /auth/v1/roles/:
+  /auth/v1/roles:
     get:
       tags:
         - role
