@@ -203,6 +203,34 @@ paths:
       tags:
         - role
       responses:
+  /auth/v1/signup:
+    post:
+      description: ""
+      parameters:
+        - name: email
+          in: query
+          description: Электронная почта.
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: Пароль.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "OK"
+  /auth/v1/login/history:
+    get:
+      description: "История логинов клиента в систему."
+      parameters: []
+      responses:
+        "200":
+          description: "Показывает историю входов текущего залогиненного пользователя."
+        "403":
+          description: "Не доступна для анонимного пользователя."
 
 components:
   schemas:
