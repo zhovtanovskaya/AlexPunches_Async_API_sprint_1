@@ -1,0 +1,332 @@
+openapi: 3.0.3
+info:
+  title: Auth. Sprint 6.
+  description: |-
+    ## TODO
+      - продумать и решить каким будет роутинг
+      - добавить Роли
+      - где-то тут должны появиться пермишены
+    ### Вопросики:
+      - наверено, не нужны одновременно `login` и `email` для юзера. (Не помню откуда притащил login, может быть откуда-то из теории.)  
+      
+    --  
+    _ЗЫ 🤕_  
+    _как же было хорошо с [Фастапи](https://fastapi.tiangolo.com/features/#automatic-docs) и со свагером автоматическим_
+  version: 0.1.0
+servers:
+  - url: http://127.0.0.1:5000
+  - url: http://127.0.0.1
+tags:
+  - name: auth
+    description: Аутентификация
+  - name: user
+    description: Действия над пользователями
+  - name: role
+    description: Управление списком ролей
+
+paths:
+  /auth/login:
+    get: 
+      tags:
+        - auth
+      summary: Login
+      description: ''
+      operationId: loginUser
+      parameters:
+        - name: email
+          in: query
+          description: Электропочта
+          required: false
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: Пароль
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          headers:
+            X-Success-Token:
+              description: JWT
+              schema:
+                type: string
+            X-Refresh-Token:
+              description: Обычный UUID
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Invalid username/password supplied
+
+  /auth/logout:
+    get:
+      tags:
+        - auth
+      summary: Logout
+      description: ''
+      operationId: logoutUser
+      parameters: []
+      responses:
+        default:
+          description: successful operation
+
+  /auth/v1/users/:
+    get:
+      tags:
+        - user
+      summary: Построчный список пользователей
+      operationId: getAllUsers
+      parameters:
+        - name: page
+          in: query
+          description: Номер страницы
+          schema:
+            type: string
+            default: 1
+        - name: per_page
+          in: query
+          description: Кол-во юзеров на странице
+          schema:
+            type: string
+            default: 20
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginationResponseUsers'
+    post:
+      tags:
+        - user
+      summary: Регистрация пользователя.
+      description: Регистрация отличается от простого добавления пользователя. Например, отправкой уведомлений если настроено и т.п. 
+      operationId: registrationUser
+      requestBody:
+        description: roles пока не добавляются при регистрации
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreateScheme'
+        required: true
+      responses:
+        '201':
+          description:  User has registered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserScheme'
+        '400':
+          description: Что-то пошло не так
+
+  /auth/v1/users/{user_id}:
+    get:
+      tags:
+        - user
+      summary: Найти пользователя по ID
+      operationId: getUserById
+      parameters:
+        - name: user_id
+          in: path
+          description: ID пользователя
+          required: true
+          schema:
+            type: string
+            format: uuid
+            title: uuid
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserScheme'
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseMessage'
+    patch:
+      tags:
+        - user
+      summary: Редактировать данные пользователя
+      operationId: EditUser
+      requestBody:
+        description: Если поля нет, значение не изменится (PATCH)
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreateScheme'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserScheme'
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseMessage'
+
+  /auth/v1/roles/:
+    get:
+      tags:
+        - role
+      responses:
+        
+    post:
+      tags:
+        - role
+      responses:
+
+  /auth/v1/roles/{role_id}:
+    get:
+      tags:
+        - role
+      responses:
+    put:
+      tags:
+        - role
+      responses:
+    delete:
+      tags:
+        - role
+      responses:
+
+components:
+  schemas:
+    UserScheme:
+      required: 
+        - id
+        - email
+      type: object
+      properties: 
+        id:
+          type: string
+          title: uuid
+          format: uuid
+        email:
+          type: string
+        login:
+          type: string
+        is_superuser:
+          type: boolean
+        password:
+          type: string
+        roles:
+          type: array
+          items: 
+            $ref: '#/components/schemas/RoleScheme'
+    UserCreateScheme:
+      required:
+        - email
+        - name
+      type: object
+      properties: 
+        email:
+          type: string
+        login:
+          type: string
+        is_superuser:
+          type: boolean
+        password:
+          type: string
+    UserEditScheme:
+      required:
+        - email
+        - name
+      type: object
+      properties: 
+        email:
+          type: string
+        login:
+          type: string
+        is_superuser:
+          type: boolean
+        password:
+          type: string
+        roles:
+          type: array
+    RoleScheme:
+      required:
+        - id
+        - name
+      type: object
+      properties: 
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+    RoleEdit:
+      required:
+        - name
+      type: object
+      properties: 
+        name:
+          type: string
+        description:
+          type: string
+    PaginationResponseUsers:
+      required:
+      type: object
+      properties:
+        total:
+          type: integer
+        page:
+          type: integer
+          example: 1
+        pages:
+          type: integer
+          example: 1
+        results:
+          type: array
+          xml:
+            name: addresses
+            wrapped: true
+          items:
+            $ref: '#/components/schemas/UserScheme'
+    BaseMessage:
+      type: object
+      properties:
+        message:
+          type: string
+
+  requestBodies:
+    UserEdit:
+      description: Редактирование данных пользователя
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserEditScheme'
+    UserCreate:
+      description: Редактирование данных пользователя
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserCreateScheme'
+
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    access-token:
+      type: apiKey
+      name: access_token
+      in: header
+    refresh-token:
+      type: apiKey
+      name: refresh_token
+      in: header
