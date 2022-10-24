@@ -102,28 +102,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PaginationResponseUsers'
-    post:
-      tags:
-        - user
-      summary: Регистрация пользователя.
-      description: Регистрация отличается от простого добавления пользователя. Например, отправкой уведомлений если настроено и т.п. 
-      operationId: registrationUser
-      requestBody:
-        description: roles пока не добавляются при регистрации
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UserCreateScheme'
-        required: true
-      responses:
-        '201':
-          description:  User has registered
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserScheme'
-        '400':
-          description: Что-то пошло не так
 
   /auth/v1/users/{user_id}:
     get:
