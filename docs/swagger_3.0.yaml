@@ -2,16 +2,9 @@ openapi: 3.0.3
 info:
   title: Auth. Sprint 6.
   description: |-
-    ## TODO
-      - продумать и решить каким будет роутинг
-      - добавить Роли
-      - где-то тут должны появиться пермишены
     ### Вопросики:
       - наверено, не нужны одновременно `login` и `email` для юзера. (Не помню откуда притащил login, может быть откуда-то из теории.)  
-      
-    --  
-    _ЗЫ 🤕_  
-    _как же было хорошо с [Фастапи](https://fastapi.tiangolo.com/features/#automatic-docs) и со свагером автоматическим_
+
   version: 0.1.0
 servers:
   - url: http://127.0.0.1:5000
@@ -25,7 +18,7 @@ tags:
     description: Управление списком ролей
 
 paths:
-  /auth/v1/signup:
+  /api/v1/signup:
     post:
       tags:
         - auth
@@ -48,7 +41,7 @@ paths:
         "200":
           description: "OK"
 
-  /auth/v1/singin:
+  /api/v1/singin:
     get: 
       tags:
         - auth
@@ -87,7 +80,7 @@ paths:
         '400':
           description: Invalid username/password supplied
 
-  /auth/v1/signout:
+  /api/v1/signout:
     post:
       tags:
         - auth
@@ -99,14 +92,14 @@ paths:
         default:
           description: successful operation
 
-  /auth/v1/refresh:
+  /api/v1/refresh:
     post:
       tags:
         - auth
       summary: Обновить refresh-токен.
 
 
-  /auth/v1/users:
+  /api/v1/users:
     get:
       tags:
         - user
@@ -133,7 +126,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginationResponseUsers'
 
-  /auth/v1/users/{user_id}/:
+  /api/v1/users/{user_id}/:
     get:
       tags:
         - user
@@ -188,7 +181,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/BaseMessage'
 
-  /auth/v1/users/{user_id}/singins/:
+  /api/v1/users/{user_id}/singins/:
     get:
       tags:
         - user
@@ -201,7 +194,7 @@ paths:
         "404":
           description: "Нет пользователя с таким user_id."
 
-  /auth/v1/users/{user_id}/roles/:
+  /api/v1/users/{user_id}/roles/:
     get:
       tags:
         - user
@@ -214,14 +207,14 @@ paths:
         201:
           description: Роль назначена пользователю.
 
-  /auth/v1/users/{user_id}/roles/{role_id}:
+  /api/v1/users/{user_id}/roles/{role_id}:
     delete:
       tags:
         - user
       summary: Отобрать у пользователя роль.
 
 
-  /auth/v1/roles:
+  /api/v1/roles:
     get:
       summary: Получить все роли.
       tags:
@@ -234,7 +227,7 @@ paths:
         - role
       responses:
 
-  /auth/v1/roles/{role_id}:
+  /api/v1/roles/{role_id}:
     patch:
       tags:
         - role
