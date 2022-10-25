@@ -340,20 +340,6 @@ components:
         message:
           type: string
 
-  requestBodies:
-    UserEdit:
-      description: Редактирование данных пользователя
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UserEditScheme'
-    UserCreate:
-      description: Редактирование данных пользователя
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UserCreateScheme'
-
   securitySchemes:
     basicAuth:
       type: http
