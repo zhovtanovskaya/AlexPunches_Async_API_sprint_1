@@ -100,7 +100,7 @@ services:
       - "5000"
     env_file:
       - .env
-    command: ["gunicorn", "-b", "0.0.0.0:5000", "--workers", "4", "pywsgi:app"]
+#    command: ["gunicorn", "-b", "0.0.0.0:5000", "--workers", "4", "src.pywsgi:app"]
 
 volumes:
   service_static_value:
