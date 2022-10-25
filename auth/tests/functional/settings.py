@@ -60,20 +60,24 @@ class TestSettings(BaseSettings):
 
     pg_settings: PgBaseUrl = PgBaseUrl()
 
+    # TODO придумать модель данных покрасивее
     users_tablename = 'users'
     roles_tablename = 'roles'
     roles_users_tablename = 'roles_users'
-
     fake_data_map = {
         users_tablename: User,
         roles_tablename: Role,
         roles_users_tablename: RoleUser,
     }
 
-    signin_url: str = service_url + '/api/v1/signin'
-    signup_url: str = service_url + '/api/v1/signup'
-    signout_url: str = service_url + '/api/v1/signout'
-    refresh_url: str = service_url + '/api/v1/refresh'
+    # TODO сделать при помощи urllib3
+    api_version_url: str = '/api/v1'
+    signin_endpoint: str = service_url + api_version_url + '/signin'
+    signup_endpoint: str = service_url + api_version_url + '/signup'
+    signout_endpoint: str = service_url + api_version_url + '/signout'
+    refresh_endpoint: str = service_url + api_version_url + '/refresh'
+    users_endpoint: str = api_version_url + '/users'
+    roles_endpoint: str = api_version_url + '/roles'
 
 
 test_settings = TestSettings()
