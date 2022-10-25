@@ -25,11 +25,34 @@ tags:
     description: Управление списком ролей
 
 paths:
-  /auth/v1/login:
+  /auth/v1/signup:
+    post:
+      tags:
+        - auth
+      summary: Регистрация клиента, админа или другого пользователя.
+      description: ""
+      parameters:
+        - name: email
+          in: query
+          description: Электронная почта.
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: Пароль.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "OK"
+
+  /auth/v1/singin:
     get: 
       tags:
         - auth
-      summary: Login
+      summary: Аутентификация пользователя.
       description: ''
       operationId: loginUser
       parameters:
@@ -64,11 +87,11 @@ paths:
         '400':
           description: Invalid username/password supplied
 
-  /auth/v1/logout:
+  /auth/v1/signout:
     post:
       tags:
         - auth
-      summary: Logout
+      summary: Выход пользователя.
       description: ''
       operationId: logoutUser
       parameters: []
@@ -76,11 +99,18 @@ paths:
         default:
           description: successful operation
 
+  /auth/v1/refresh:
+    post:
+      tags:
+        - auth
+      summary: Обновить refresh-токен.
+
+
   /auth/v1/users:
     get:
       tags:
         - user
-      summary: Построчный список пользователей
+      summary: Список пользователей.
       operationId: getAllUsers
       parameters:
         - name: page
@@ -103,11 +133,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginationResponseUsers'
 
-  /auth/v1/users/{user_id}:
+  /auth/v1/users/{user_id}/:
     get:
       tags:
         - user
-      summary: Найти пользователя по ID
+      summary: Получить личные данные пользователя.
       operationId: getUserById
       parameters:
         - name: user_id
@@ -134,7 +164,8 @@ paths:
     patch:
       tags:
         - user
-      summary: Редактировать данные пользователя
+      summary: Изменить личные данные пользователя.
+      description: Редактировать username, email или другие сведенья.
       operationId: EditUser
       requestBody:
         description: Если поля нет, значение не изменится (PATCH)
@@ -157,58 +188,64 @@ paths:
               schema:
                 $ref: '#/components/schemas/BaseMessage'
 
+  /auth/v1/users/{user_id}/singins/:
+    get:
+      tags:
+        - user
+      summary: "Получить список входов пользователя в систему."
+      description: "История входов текущего пользователя в систему."
+      parameters: []
+      responses:
+        "200":
+          description: "Показывает историю входов пользователя."
+        "404":
+          description: "Нет пользователя с таким user_id."
+
+  /auth/v1/users/{user_id}/roles/:
+    get:
+      tags:
+        - user
+      summary: Получить роли и права пользователя.
+    post:
+      tags:
+        - user
+      summary: Назначить роль пользователю.
+      responses:
+        201:
+          description: Роль назначена пользователю.
+
+  /auth/v1/users/{user_id}/roles/{role_id}:
+    delete:
+      tags:
+        - user
+      summary: Отобрать у пользователя роль.
+
+
   /auth/v1/roles:
     get:
+      summary: Получить все роли.
       tags:
         - role
       responses:
         
     post:
+      summary: Создать новую роль.
       tags:
         - role
       responses:
 
   /auth/v1/roles/{role_id}:
-    get:
+    patch:
       tags:
         - role
-      responses:
-    put:
-      tags:
-        - role
+      summary: Изменить существующую роль.
       responses:
     delete:
       tags:
         - role
+      summary: Удалить роль.
       responses:
-  /auth/v1/signup:
-    post:
-      description: ""
-      parameters:
-        - name: email
-          in: query
-          description: Электронная почта.
-          required: true
-          schema:
-            type: string
-        - name: password
-          in: query
-          description: Пароль.
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: "OK"
-  /auth/v1/login/history:
-    get:
-      description: "История логинов клиента в систему."
-      parameters: []
-      responses:
-        "200":
-          description: "Показывает историю входов текущего залогиненного пользователя."
-        "403":
-          description: "Не доступна для анонимного пользователя."
+
 
 components:
   schemas:
