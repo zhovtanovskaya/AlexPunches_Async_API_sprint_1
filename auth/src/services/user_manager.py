@@ -6,6 +6,10 @@ from flask_security.datastore import SQLAlchemyUserDatastore
 
 
 class UserManagerService:
+    """
+    Класс управления пользователями.
+    Регистрировать, назначать роли, хешировать пароли и т.д.
+    """
     def __init__(self, user_model: Type[db.Model], role_model: Type[db.Model]):
         self.executor = SQLAlchemyUserDatastore(
             db=db, user_model=user_model, role_model=role_model
@@ -17,6 +21,10 @@ class UserManagerService:
                     login: str | None = None,
                     is_superuser: bool = False,
                     ) -> db.Model:
+        """Создать пользователя.
+        Именно создать, а НЕ зарегистрировать.
+        https://flask-security-too.readthedocs.io/en/stable/api.html#flask_security.UserDatastore.create_user
+        """
         return self.executor.create_user(
             login=login,
             email=email,

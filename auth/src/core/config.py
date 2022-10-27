@@ -9,6 +9,7 @@ logging_config.dictConfig(LOGGING)
 
 
 class PgBaseUrl(BaseSettings):
+    """Настройки подкдючения к постгрессу."""
     scheme: str = 'postgresql'
     username: str = Field(..., env='postgres_user_auth')
     password: str = Field(..., env='postgres_password_auth')
@@ -17,6 +18,7 @@ class PgBaseUrl(BaseSettings):
     database_name: str = Field(..., env='postgres_db_auth')
 
     def get_url(self):
+        """Метод для удобной конкатинации настроек в одну строку."""
         return (
             f'{self.scheme}://{self.username}:{self.password}@'
             f'{self.host}:{self.port}/{self.database_name}'
@@ -24,6 +26,7 @@ class PgBaseUrl(BaseSettings):
 
 
 class FlaskConfig(BaseSettings):
+    """Настройки Фласка."""
     SQLALCHEMY_TRACK_MODIFICATIONS: bool = False
     SQLALCHEMY_DATABASE_URI: PostgresDsn = PgBaseUrl().get_url()
     SECRET_KEY: str = Field(..., env='flask_secret_key')
@@ -37,6 +40,7 @@ class FlaskConfig(BaseSettings):
 
 
 class ApiSettings(BaseSettings):
+    """Настройки сервиса Auth."""
     project_name: str = Field('Movies', env='project_name')
 
     redis_host: str = Field('127.0.0.1', env='redis_host')

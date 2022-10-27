@@ -7,6 +7,9 @@ exceptions = Blueprint('exceptions', __name__)
 
 
 class BasicExceptionError(Exception):
+    """Расширить возможности Exception.
+    Чтобы сообщать отдавать клиету jsonify в API.
+    """
     status_code = HTTPStatus.BAD_REQUEST
 
     def __init__(self,
