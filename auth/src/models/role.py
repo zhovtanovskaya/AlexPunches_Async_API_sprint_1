@@ -1,9 +1,9 @@
 from core.db import db
 from flask_security import RoleMixin
-from models import AdvanceModel
+from models import BaseModel
 
 
-class Role(AdvanceModel, RoleMixin):
+class Role(BaseModel, RoleMixin):
     __tablename__ = 'roles'
 
     id = db.Column(db.Integer(), primary_key=True)
