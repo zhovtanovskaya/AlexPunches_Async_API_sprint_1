@@ -198,10 +198,17 @@ paths:
 
   /api/v1/roles:
     get:
-      summary: Получить все роли.
       tags:
         - role
+      summary: Получить все роли.
+      description: Список всех ролей.
       responses:
+        200:
+          description: Список всех ролей.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleScheme'
         
     post:
       summary: Создать новую роль.
@@ -299,6 +306,9 @@ components:
           type: string
           enum: [superuser, viewer, ]
           description: Уникальное название роли.
+        description:
+          type: string
+          description: Короткое описание роли.
       required:
         - id
         - name
