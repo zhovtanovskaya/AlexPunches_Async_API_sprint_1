@@ -27,13 +27,13 @@ paths:
       parameters:
         - name: email
           in: query
-          description: Электронная почта.
+          description: Электронная почта
           required: true
           schema:
             type: string
         - name: password
           in: query
-          description: Пароль.
+          description: Пароль
           required: true
           schema:
             type: string
@@ -42,7 +42,7 @@ paths:
           description: "OK"
 
   /api/v1/singin:
-    get: 
+    post:
       tags:
         - auth
       summary: Аутентификация пользователя.
@@ -51,7 +51,7 @@ paths:
       parameters:
         - name: email
           in: query
-          description: Электропочта
+          description: Электронная почта
           required: false
           schema:
             type: string
@@ -98,33 +98,6 @@ paths:
         - auth
       summary: Обновить refresh-токен.
 
-
-  /api/v1/users:
-    get:
-      tags:
-        - user
-      summary: Список пользователей.
-      operationId: getAllUsers
-      parameters:
-        - name: page
-          in: query
-          description: Номер страницы
-          schema:
-            type: string
-            default: 1
-        - name: per_page
-          in: query
-          description: Кол-во юзеров на странице
-          schema:
-            type: string
-            default: 20
-      responses:
-        '200':
-          description: Successful Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PaginationResponseUsers'
 
   /api/v1/users/{user_id}/:
     get:
@@ -315,25 +288,6 @@ components:
           type: string
         description:
           type: string
-    PaginationResponseUsers:
-      required:
-      type: object
-      properties:
-        total:
-          type: integer
-        page:
-          type: integer
-          example: 1
-        pages:
-          type: integer
-          example: 1
-        results:
-          type: array
-          xml:
-            name: addresses
-            wrapped: true
-          items:
-            $ref: '#/components/schemas/UserScheme'
     BaseMessage:
       type: object
       properties:
