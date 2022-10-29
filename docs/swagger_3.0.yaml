@@ -113,16 +113,15 @@ paths:
           schema:
             type: string
             format: uuid
-            title: uuid
       responses:
         '200':
-          description: Successful Response
+          description: Детали о пользователе с таким user_id.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserScheme'
         '404':
-          description: User not found
+          description:  Сообщение, что пользователь с таким user_id не найден.
           content:
             application/json:
               schema:
@@ -216,27 +215,29 @@ paths:
 components:
   schemas:
     UserScheme:
-      required: 
-        - id
-        - email
       type: object
       properties: 
         id:
           type: string
-          title: uuid
           format: uuid
+          description: Уникальный ID пользователя.
         email:
           type: string
-        login:
+          format: email
+          description: Email пользователя.
+        username:
           type: string
-        is_superuser:
-          type: boolean
-        password:
-          type: string
+          description: Имя пользователя для логина.
         roles:
           type: array
           items: 
             $ref: '#/components/schemas/RoleScheme'
+          description: Роли пользователя, дающие ему права на действия.
+      required:
+        - id
+        - email
+        - username
+        - roles
     UserCreateScheme:
       required:
         - email
