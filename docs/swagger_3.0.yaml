@@ -107,12 +107,7 @@ paths:
       operationId: getUserById
       parameters:
         - name: user_id
-          in: path
-          description: ID пользователя
-          required: true
-          schema:
-            type: string
-            format: uuid
+          $ref: '#/components/parameters/user_id'
       responses:
         200:
           description: Детали о пользователе с таким user_id.
@@ -121,11 +116,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserScheme'
         404:
-          description:  Сообщение, что пользователь с таким user_id не найден.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BaseMessage'
+            $ref: '#/components/responses/User404'
     patch:
       tags:
         - user
@@ -161,12 +152,7 @@ paths:
       description: "История входов текущего пользователя в систему."
       parameters:
         - name: user_id
-          in: path
-          description: ID пользователя
-          required: true
-          schema:
-            type: string
-            format: uuid
+          $ref: '#/components/parameters/user_id'
       responses:
         200:
           description: Список попыток входа пользователя в систему.
@@ -174,18 +160,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SignInScheme'
-        '404':
-          description:  Сообщение, что пользователь с таким user_id не найден.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BaseMessage'
+        404:
+            $ref: '#/components/responses/User404'
 
   /api/v1/users/{user_id}/roles/:
     get:
       tags:
         - user
-      summary: Получить роли и права пользователя.
+      summary: Получить роли пользователя.
+      description: Список ролей пользователя.
+      parameters:
+        - name: user_id
+          $ref: '#/components/parameters/user_id'
+      responses:
+        200:
+          description: Список ролей и прав.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleScheme'
+        404:
+          $ref: '#/components/responses/User404'
     post:
       tags:
         - user
@@ -228,6 +223,16 @@ paths:
 
 
 components:
+  parameters:
+    user_id:
+      name: user_id
+      in: path
+      description: ID пользователя
+      required: true
+      schema:
+        type: string
+        format: uuid
+
   schemas:
     UserScheme:
       type: object
@@ -284,17 +289,19 @@ components:
         roles:
           type: array
     RoleScheme:
-      required:
-        - id
-        - name
       type: object
       properties: 
         id:
-          type: integer
+          type: string
+          format: uuid
+          description: Уникальный идентификатор роли.
         name:
           type: string
-        description:
-          type: string
+          enum: [superuser, viewer, ]
+          description: Уникальное название роли.
+      required:
+        - id
+        - name
     RoleEdit:
       required:
         - name
@@ -326,6 +333,14 @@ components:
       properties:
         message:
           type: string
+
+  responses:
+    User404:
+      description: Сообщение, что пользователь с таким user_id не найден.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BaseMessage'
 
   securitySchemes:
     basicAuth:
