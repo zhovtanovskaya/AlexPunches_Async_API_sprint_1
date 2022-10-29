@@ -114,13 +114,13 @@ paths:
             type: string
             format: uuid
       responses:
-        '200':
+        200:
           description: Детали о пользователе с таким user_id.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserScheme'
-        '404':
+        404:
           description:  Сообщение, что пользователь с таким user_id не найден.
           content:
             application/json:
@@ -159,12 +159,27 @@ paths:
         - user
       summary: "Получить список входов пользователя в систему."
       description: "История входов текущего пользователя в систему."
-      parameters: []
+      parameters:
+        - name: user_id
+          in: path
+          description: ID пользователя
+          required: true
+          schema:
+            type: string
+            format: uuid
       responses:
-        "200":
-          description: "Показывает историю входов пользователя."
-        "404":
-          description: "Нет пользователя с таким user_id."
+        200:
+          description: Список попыток входа пользователя в систему.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignInScheme'
+        '404':
+          description:  Сообщение, что пользователь с таким user_id не найден.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseMessage'
 
   /api/v1/users/{user_id}/roles/:
     get:
@@ -289,6 +304,23 @@ components:
           type: string
         description:
           type: string
+    SignInScheme:
+      type: object
+      properties:
+        signin_date:
+          type: string
+          format: date-time
+          description: Дата и время попытки логина.
+        status:
+          type: string
+          enum: ['success', 'fail']
+          description: Удалось залогиниться или нет.
+        device:
+          type: string
+          description: Детали об устройстве (телефон, компьютер), с которого входил пользователь.
+      required:
+        - signin_date
+        - status
     BaseMessage:
       type: object
       properties:
