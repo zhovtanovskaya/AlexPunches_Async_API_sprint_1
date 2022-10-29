@@ -227,6 +227,10 @@ paths:
         - role
       summary: Удалить роль.
       responses:
+        204:
+          description: Роль удалена и HTTP-ответ пуст.
+        404:
+          $ref: '#/components/responses/Role404'
 
 
 components:
@@ -347,6 +351,12 @@ components:
   responses:
     User404:
       description: Сообщение, что пользователь с таким user_id не найден.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BaseMessage'
+    Role404:
+      description: Сообщение, что роль с таким role_id не найдена.
       content:
         application/json:
           schema:
