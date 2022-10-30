@@ -22,24 +22,13 @@ paths:
     post:
       tags:
         - auth
-      summary: Регистрация клиента, админа или другого пользователя.
-      description: ""
-      parameters:
-        - name: email
-          in: query
-          description: Электронная почта
-          required: true
-          schema:
-            type: string
-        - name: password
-          in: query
-          description: Пароль
-          required: true
-          schema:
-            type: string
+      summary: Регистрация пользователя.
+      description: Регистрация клиента, админа или другого пользователя.
+      requestBody:
+        $ref: '#/components/requestBodies/UserCredentials'
       responses:
-        "200":
-          description: "OK"
+        200:
+          $ref: '#/components/responses/JWTTokens'
 
   /api/v1/singin:
     post:
@@ -49,19 +38,7 @@ paths:
       description: 'Войти в существующий аккаунт пользователя.'
       operationId: loginUser
       requestBody:
-        description: Имя пользователя и пароль.
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                username:
-                  type: string
-                  description: Имя пользователя.
-                password:
-                  type: string
-                  description: Пароль пользователя.
+        $ref: '#/components/requestBodies/UserCredentials'
       responses:
         200:
           $ref: '#/components/responses/JWTTokens'
@@ -73,9 +50,9 @@ paths:
       tags:
         - auth
       summary: Выход пользователя.
-      description: ''
       operationId: logoutUser
-      parameters: []
+      requestBody:
+        $ref: '#/components/requestBodies/RefreshToken'
       responses:
         default:
           description: successful operation
@@ -86,15 +63,7 @@ paths:
         - auth
       summary: Обновить JWT-токены авторизации.
       requestBody:
-        description: Токен для обновления.
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                refresh_token:
-                  type: string
+        $ref: '#/components/requestBodies/RefreshToken'
       security:
         - JWTAccessToken: []
       responses:
@@ -349,6 +318,32 @@ components:
       schema:
         type: string
         format: uuid
+
+  requestBodies:
+    UserCredentials:
+      description: Имя пользователя и пароль.
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+                description: Имя пользователя.
+              password:
+                type: string
+                description: Пароль пользователя.
+    RefreshToken:
+      description: Токен для обновления.
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              refresh_token:
+                type: string
 
   schemas:
     UserScheme:
