@@ -4,9 +4,15 @@
 
 # Подготовка
 
-Заполнить `.env` используя заготовку
+В проекте используются переменные окружения. Они определяются несколькими  `.env`-файлами  
+`.env` —   
+`.env.dev` —   
+`.env.pytests` —   
+
 ```bash
 cp .env.sample .env
+cp .env.sample .env.dev
+cp .env.sample .env.pytests
 ```
 
 # Запуск

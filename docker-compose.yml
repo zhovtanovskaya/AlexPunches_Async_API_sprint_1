@@ -1,14 +1,16 @@
 version: '3'
 services:
-  postgres:
+  admin_postgres:
     image: postgres:14-alpine
     restart: unless-stopped
     volumes:
-      - /var/lib/postgresql/data/
+      - pg_data_admin:/var/lib/postgresql/data/
     expose:
       - "5432"
-    env_file:
-      - ./.env
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB_ADMIN}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_ADMIN}
+      POSTGRES_USER: ${POSTGRES_USER_ADMIN}
 
   elastic:
     image: elasticsearch:7.17.5
@@ -20,7 +22,7 @@ services:
     expose:
       - "9200"
     depends_on:
-      - postgres
+      - admin_postgres
 
   redis:
     image: redis:7-alpine
@@ -51,7 +53,6 @@ services:
     entrypoint: ["./wait-for-it.sh", "-s", "-t", "0", "elastic:9200", "--"]
     command: ["gunicorn", "-b", "0.0.0.0:8000", "--workers", "4", "-k", "uvicorn.workers.UvicornWorker", "src.main:app"]
 
-
   nginx:
     image: nginx:1.23
     restart: unless-stopped
@@ -63,6 +64,7 @@ services:
     depends_on:
       - fastapi
       - admin_panel
+      - auth_flask
     ports:
       - "8000:80"
 
@@ -77,7 +79,32 @@ services:
     entrypoint: ["./wait-for-it.sh", "-s", "-t", "0", "elastic:9200", "--"]
     command: ["python3", "/opt/app/postgres_to_es/load_indexes.py"]
 
+  auth_postgres:
+    image: postgres:14-alpine
+    restart: unless-stopped
+    volumes:
+      - pg_data_auth:/var/lib/postgresql/data/
+    expose:
+      - "5432"
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB_AUTH}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_AUTH}
+      POSTGRES_USER: ${POSTGRES_USER_AUTH}
+
+  auth_flask:
+    build: auth
+    depends_on:
+      - auth_postgres
+      - redis
+    expose:
+      - "5000"
+    env_file:
+      - .env
+#    command: ["gunicorn", "-b", "0.0.0.0:5000", "--workers", "4", "src.pywsgi:app"]
+
 volumes:
   service_static_value:
   service_media_value:
   elasticsearch_value:
+  pg_data_admin:
+  pg_data_auth:

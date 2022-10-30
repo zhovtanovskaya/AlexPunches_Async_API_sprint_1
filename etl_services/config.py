@@ -12,11 +12,11 @@ logger = logging.getLogger(__name__)
 
 
 class Dsl(BaseSettings):
-    dbname: str = Field(..., env='postgres_db')
-    user: str = Field('app', env='postgres_user')
-    password: str = Field(..., env='postgres_password')
-    host: str = Field('127.0.0.1', env='db_host')
-    port: str = Field(5432, env='db_port')
+    dbname: str = Field(..., env='postgres_db_admin')
+    user: str = Field('app', env='postgres_user_admin')
+    password: str = Field(..., env='postgres_password_admin')
+    host: str = Field('127.0.0.1', env='db_host_admin')
+    port: str = Field(5432, env='db_port_admin')
 
 
 class EsBaseUrl(BaseSettings):
