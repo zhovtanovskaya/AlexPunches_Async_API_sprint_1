@@ -96,7 +96,22 @@ paths:
     post:
       tags:
         - auth
-      summary: Обновить refresh-токен.
+      summary: Обновить JWT-токены авторизации.
+      requestBody:
+        description: Токен для обновления.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                refresh_token:
+                  type: string
+      security:
+        - JWTAccessToken: []
+      responses:
+        200:
+          $ref: '#/components/responses/JWTTokens'
 
 
   /api/v1/users/{user_id}/:
@@ -479,6 +494,19 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/RoleScheme'
+    JWTTokens:
+      description: Пара токенов авторизации.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              access_token:
+                type: string
+                description: JWT-токен доступа.
+              refresh_token:
+                type: string
+                description: JWT-токен для обновления.
 
   securitySchemes:
     JWTAccessToken:
