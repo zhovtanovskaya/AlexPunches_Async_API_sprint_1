@@ -1,8 +1,9 @@
 from functools import lru_cache
 
+from db.elastic import get_elastic
+
 from api.v1 import SearchEngineSortedPaginate
 from api.v1.shemes.film import Film as FilmScheme
-from db.elastic import get_elastic
 from models.film import Film
 from services import BaseSearchEngineService
 from services.search_engine import AsyncSearchEngine
