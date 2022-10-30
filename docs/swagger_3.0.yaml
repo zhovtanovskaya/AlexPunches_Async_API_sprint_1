@@ -170,30 +170,60 @@ paths:
       summary: Получить роли пользователя.
       description: Список ролей пользователя.
       parameters:
-        - name: user_id
+        - in: path
           $ref: '#/components/parameters/user_id'
       responses:
         200:
-          description: Список ролей и прав.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RoleScheme'
+          $ref: '#/components/responses/UserRoleList'
         404:
           $ref: '#/components/responses/User404'
     post:
       tags:
         - user
       summary: Назначить роль пользователю.
+      parameters:
+        - in: path
+          $ref: '#/components/parameters/user_id'
+      requestBody:
+        description: Добавить роль пользователю.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleAssignScheme'
       responses:
         201:
-          description: Роль назначена пользователю.
+          $ref: '#/components/responses/UserRoleList'
+        404:
+          $ref: '#/components/responses/User404'
+        422:
+          description: Не удалось назначить пользователю роль. В теле ответа описание ошибки.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseMessage'
 
   /api/v1/users/{user_id}/roles/{role_id}:
     delete:
       tags:
         - user
-      summary: Отобрать у пользователя роль.
+      summary: Отобрать роль у пользователя.
+      parameters:
+        - in: path
+          $ref: '#/components/parameters/user_id'
+        - name: role_id
+          $ref: '#/components/parameters/role_id'
+      responses:
+        200:
+          $ref: '#/components/responses/UserRoleList'
+        404:
+          $ref: '#/components/responses/User404'
+        422:
+          description: Не удалось отнять у пользователя роль. В теле ответа описание ошибки.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseMessage'
 
 
   /api/v1/roles:
@@ -301,6 +331,7 @@ components:
       schema:
         type: string
         format: uuid
+
   schemas:
     UserScheme:
       type: object
@@ -382,6 +413,15 @@ components:
           type: string
         description:
           type: string
+    RoleAssignScheme:
+      type: object
+      properties:
+        name:
+          type: string
+          enum: [superuser, viewer, ]
+          description: Уникальное название роли.
+      required:
+        - name
     SignInScheme:
       type: object
       properties:
@@ -423,6 +463,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/BaseMessage'
+    UserRoleList:
+      description: Актуальный список ролей пользователя.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/RoleScheme'
 
   securitySchemes:
     basicAuth:
