@@ -106,8 +106,7 @@ paths:
       summary: Получить личные данные пользователя.
       operationId: getUserById
       parameters:
-        - name: user_id
-          $ref: '#/components/parameters/user_id'
+        - $ref: '#/components/parameters/user_id'
       responses:
         200:
           description: Детали о пользователе с таким user_id.
@@ -151,8 +150,7 @@ paths:
       summary: "Получить список входов пользователя в систему."
       description: "История входов текущего пользователя в систему."
       parameters:
-        - name: user_id
-          $ref: '#/components/parameters/user_id'
+        - $ref: '#/components/parameters/user_id'
       responses:
         200:
           description: Список попыток входа пользователя в систему.
@@ -170,8 +168,7 @@ paths:
       summary: Получить роли пользователя.
       description: Список ролей пользователя.
       parameters:
-        - in: path
-          $ref: '#/components/parameters/user_id'
+        - $ref: '#/components/parameters/user_id'
       responses:
         200:
           $ref: '#/components/responses/UserRoleList'
@@ -182,8 +179,7 @@ paths:
         - user
       summary: Назначить роль пользователю.
       parameters:
-        - in: path
-          $ref: '#/components/parameters/user_id'
+        - $ref: '#/components/parameters/user_id'
       requestBody:
         description: Добавить роль пользователю.
         required: true
@@ -209,10 +205,8 @@ paths:
         - user
       summary: Отобрать роль у пользователя.
       parameters:
-        - in: path
-          $ref: '#/components/parameters/user_id'
-        - name: role_id
-          $ref: '#/components/parameters/role_id'
+        - $ref: '#/components/parameters/user_id'
+        - $ref: '#/components/parameters/role_id'
       responses:
         200:
           $ref: '#/components/responses/UserRoleList'
@@ -271,8 +265,7 @@ paths:
         - role
       summary: Изменить существующую роль.
       parameters:
-        - name: role_id
-          $ref: '#/components/parameters/role_id'
+        - $ref: '#/components/parameters/role_id'
       requestBody:
         description: Изменить роль.
         required: true
@@ -304,8 +297,7 @@ paths:
         - role
       summary: Удалить роль.
       parameters:
-        - name: role_id
-          $ref: '#/components/parameters/role_id'
+        - $ref: '#/components/parameters/role_id'
       responses:
         204:
           description: Роль удалена и HTTP-ответ пуст.
