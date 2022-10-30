@@ -107,6 +107,8 @@ paths:
       operationId: getUserById
       parameters:
         - $ref: '#/components/parameters/user_id'
+      security:
+        - JWTAccessToken: []
       responses:
         200:
           description: Детали о пользователе с таким user_id.
@@ -131,6 +133,8 @@ paths:
             schema:
               $ref: '#/components/schemas/UserEditScheme'
         required: true
+      security:
+        - JWTAccessToken: []
       responses:
         '200':
           description: Successful Response
@@ -155,6 +159,8 @@ paths:
       description: "История входов текущего пользователя в систему."
       parameters:
         - $ref: '#/components/parameters/user_id'
+      security:
+        - JWTAccessToken: []
       responses:
         200:
           description: Список попыток входа пользователя в систему.
@@ -173,6 +179,8 @@ paths:
       description: Список ролей пользователя.
       parameters:
         - $ref: '#/components/parameters/user_id'
+      security:
+        - JWTAccessToken: []
       responses:
         200:
           $ref: '#/components/responses/UserRoleList'
@@ -181,16 +189,18 @@ paths:
     post:
       tags:
         - user
-      summary: Назначить роль пользователю.
+      summary: Добавить роль пользователю.
       parameters:
         - $ref: '#/components/parameters/user_id'
       requestBody:
-        description: Добавить роль пользователю.
+        description: Роль, которую нужно добавить пользователю.
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/RoleAssignScheme'
+      security:
+        - JWTAccessToken: []
       responses:
         201:
           $ref: '#/components/responses/UserRoleList'
@@ -211,6 +221,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/user_id'
         - $ref: '#/components/parameters/role_id'
+      security:
+        - JWTAccessToken: []
       responses:
         200:
           $ref: '#/components/responses/UserRoleList'
@@ -230,6 +242,8 @@ paths:
         - role
       summary: Получить все роли.
       description: Список всех ролей.
+      security:
+        - JWTAccessToken: []
       responses:
         200:
           description: Список всех ролей.
@@ -237,7 +251,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RoleScheme'
-        
     post:
       tags:
         - role
@@ -249,6 +262,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/RoleEditScheme'
+      security:
+        - JWTAccessToken: []
       responses:
         201:
           description: Создана новая роль.
@@ -277,6 +292,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/RoleEditScheme'
+      security:
+        - JWTAccessToken: []
       responses:
         200:
           description: Роль изменена.
@@ -302,6 +319,8 @@ paths:
       summary: Удалить роль.
       parameters:
         - $ref: '#/components/parameters/role_id'
+      security:
+        - JWTAccessToken: []
       responses:
         204:
           description: Роль удалена и HTTP-ответ пуст.
@@ -462,14 +481,7 @@ components:
               $ref: '#/components/schemas/RoleScheme'
 
   securitySchemes:
-    basicAuth:
+    JWTAccessToken:
       type: http
-      scheme: basic
-    access-token:
-      type: apiKey
-      name: access_token
-      in: header
-    refresh-token:
-      type: apiKey
-      name: refresh_token
-      in: header
+      scheme: bearer
+      bearerFormat: JWT
