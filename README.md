@@ -86,3 +86,12 @@ cp .env.sample .env.dev
 _Для `admin_panel` режим разработки уже, наверно, неактуален._  
 _Но если потребуется, нужно будет подкорректировать `docker-compose.dev.yml`_  
 
+# Настройка разработки
+
+```bash
+pip install -r auth/requirements.dev.txt
+pre-commit install
+```
+
+Вариант подключения [flake8 к PyCharm](https://melevir.medium.com/pycharm-loves-flake-671c7fac4f52).
+Плагин [mypy для PyCharm](https://plugins.jetbrains.com/plugin/11086-mypy).
