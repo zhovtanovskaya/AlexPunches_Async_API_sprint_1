@@ -122,12 +122,14 @@ paths:
       summary: Изменить личные данные пользователя.
       description: Редактировать username, email или другие сведенья.
       operationId: EditUser
+      parameters:
+        - $ref: '#/components/parameters/user_id'
       requestBody:
         description: Если поля нет, значение не изменится (PATCH)
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserCreateScheme'
+              $ref: '#/components/schemas/UserEditScheme'
         required: true
       responses:
         '200':
@@ -136,8 +138,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserScheme'
-        '404':
-          description: User not found
+        404:
+          $ref: '#/components/responses/User404'
+        422:
+          description: Не удалось изменить пользователя. В теле ответа описание ошибки.
           content:
             application/json:
               schema:
@@ -364,21 +368,14 @@ components:
         password:
           type: string
     UserEditScheme:
-      required:
-        - email
-        - name
       type: object
       properties: 
         email:
           type: string
         login:
           type: string
-        is_superuser:
-          type: boolean
         password:
           type: string
-        roles:
-          type: array
     RoleScheme:
       type: object
       properties: 
