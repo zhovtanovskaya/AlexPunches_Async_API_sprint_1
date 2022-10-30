@@ -1,6 +1,7 @@
 from functools import lru_cache
 
 from db.elastic import get_elastic
+
 from models.genre import Genre
 from services import BaseSearchEngineService
 from services.search_engine import AsyncSearchEngine

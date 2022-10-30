@@ -1,13 +1,14 @@
 from functools import lru_cache
 from typing import Mapping
 
+from db.elastic import get_elastic
+from pydantic import BaseModel
+
 from api.v1 import SearchEngineSortedPaginate
 from api.v1.shemes.person import Person as PersonScheme
 from core.config import config
-from db.elastic import get_elastic
 from models.film import Film
 from models.person import Person
-from pydantic import BaseModel
 from services import BaseSearchEngineService, NotFoundSearchEngineError
 from services.search_engine import AsyncSearchEngine
 from utils.search_engine import es_scroll_all_pages, make_es_sort_name

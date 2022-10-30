@@ -1,9 +1,10 @@
 import pickle
 
-from core.config import config
 from db import redis
-from models.json_response import CacheResponseScheme
 from starlette.responses import StreamingResponse
+
+from core.config import config
+from models.json_response import CacheResponseScheme
 
 from fastapi import Request
 

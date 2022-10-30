@@ -1,5 +1,7 @@
 from typing import Type
 
+from pydantic import BaseModel
+
 from api.v1.shemes.film import Film as FilmScheme
 from api.v1.shemes.film import FilmShort
 from api.v1.shemes.genre import Genre as GenreScheme
@@ -9,7 +11,6 @@ from api.v1.shemes.person import PersonShort
 from models.film import Film as FilmModel
 from models.genre import Genre as GenreModel
 from models.person import Person as PersonModel
-from pydantic import BaseModel
 
 
 def es_film_to_film_scheme(es_film: FilmModel) -> FilmScheme:

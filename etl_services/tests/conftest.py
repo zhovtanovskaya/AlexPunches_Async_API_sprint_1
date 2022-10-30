@@ -1,12 +1,12 @@
 import os
-import psycopg2
 import sqlite3
 import sys
 from contextlib import contextmanager
-from psycopg2.extras import DictCursor
 
+import psycopg2
 import pytest
 from dotenv import load_dotenv
+from psycopg2.extras import DictCursor
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(BASE_DIR)

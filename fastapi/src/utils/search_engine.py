@@ -1,7 +1,8 @@
 from typing import Any, AsyncGenerator, Mapping
 
-from api.v1 import SearchEngineSortedPaginate
 from elastic_transport import ObjectApiResponse
+
+from api.v1 import SearchEngineSortedPaginate
 from services.search_engine import AsyncSearchEngine
 
 from fastapi import Depends

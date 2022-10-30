@@ -1,9 +1,10 @@
 from http import HTTPStatus
 
-from api.v1.shemes.genre import Genre
-from api.v1.shemes.transform_schemes import es_genre_to_genre_scheme
 from fastapi_utils.cbv import cbv
 from fastapi_utils.inferring_router import InferringRouter
+
+from api.v1.shemes.genre import Genre
+from api.v1.shemes.transform_schemes import es_genre_to_genre_scheme
 from services.genre import GenreService, get_genre_service
 from utils import messages as msg
 

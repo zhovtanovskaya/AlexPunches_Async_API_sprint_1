@@ -1,5 +1,6 @@
-from core.config import config
 from pydantic import PositiveInt
+
+from core.config import config
 
 from fastapi import Depends, Query
 
