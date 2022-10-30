@@ -211,21 +211,71 @@ paths:
                 $ref: '#/components/schemas/RoleScheme'
         
     post:
-      summary: Создать новую роль.
       tags:
         - role
+      summary: Создать новую роль.
+      requestBody:
+        description: Создать роль.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleEditScheme'
       responses:
+        201:
+          description: Создана новая роль.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleScheme'
+        422:
+          description: Не удалось создать роль. Например, потому что роль с таким именем уже существует.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseMessage'
 
   /api/v1/roles/{role_id}:
     patch:
       tags:
         - role
       summary: Изменить существующую роль.
+      parameters:
+        - name: role_id
+          $ref: '#/components/parameters/role_id'
+      requestBody:
+        description: Изменить роль.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleEditScheme'
       responses:
+        200:
+          description: Роль изменена.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleScheme'
+        404:
+          description: Роли с таким role_id не существует.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseMessage'
+        422:
+          description: Не удалось изменить атрибуты роли. В ответе описание ошибок.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseMessage'
     delete:
       tags:
         - role
       summary: Удалить роль.
+      parameters:
+        - name: role_id
+          $ref: '#/components/parameters/role_id'
       responses:
         204:
           description: Роль удалена и HTTP-ответ пуст.
@@ -243,7 +293,14 @@ components:
       schema:
         type: string
         format: uuid
-
+    role_id:
+      name: role_id
+      in: path
+      description: ID роли
+      required: true
+      schema:
+        type: string
+        format: uuid
   schemas:
     UserScheme:
       type: object
@@ -316,7 +373,7 @@ components:
       required:
         - id
         - name
-    RoleEdit:
+    RoleEditScheme:
       required:
         - name
       type: object
@@ -347,6 +404,11 @@ components:
       properties:
         message:
           type: string
+        errors:
+          type: array
+          description: Ошибки в запросе. Например, ошибки валидации данных в запросе.
+      required:
+        - message
 
   responses:
     User404:
