@@ -1,7 +1,8 @@
-from core.config import config
-from core.db import db
 from flask import Flask
 from flask_security import Security, SQLAlchemyUserDatastore
+
+from core.config import config
+from core.db import db
 from models.role import Role
 from models.user import User
 

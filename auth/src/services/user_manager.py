@@ -1,8 +1,9 @@
 from functools import lru_cache
 from typing import Type
 
-from core.db import db
 from flask_security.datastore import SQLAlchemyUserDatastore
+
+from core.db import db
 
 
 class UserManagerService:

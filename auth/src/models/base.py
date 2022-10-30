@@ -1,10 +1,11 @@
 import uuid
 from http import HTTPStatus
 
-from core.db import db
-from core.exceptions import BasicExceptionError
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.exc import IntegrityError
+
+from core.db import db
+from core.exceptions import BasicExceptionError
 from utils import messages as msg
 
 

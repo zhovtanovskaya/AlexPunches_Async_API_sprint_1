@@ -1,7 +1,8 @@
 from http import HTTPStatus
 
-from core.exceptions import ResourceNotFoundError
 from flask_sqlalchemy import BaseQuery, SQLAlchemy
+
+from core.exceptions import ResourceNotFoundError
 from utils import messages as msg
 
 
@@ -16,5 +17,6 @@ class CustomBaseQuery(BaseQuery):
                                         status_code=HTTPStatus.NOT_FOUND)
         return rv
 
+ 
 
 db = SQLAlchemy(query_class=CustomBaseQuery)
