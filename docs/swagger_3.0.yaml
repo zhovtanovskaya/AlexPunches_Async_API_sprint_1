@@ -451,9 +451,9 @@ components:
           type: string
           enum: ['success', 'fail']
           description: Удалось залогиниться или нет.
-        device:
+        user_agent:
           type: string
-          description: Детали об устройстве (телефон, компьютер), с которого входил пользователь.
+          description: Описание браузера или другого клиента, которым пользовался пользователь при логине.
       required:
         - signin_date
         - status
