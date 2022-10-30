@@ -1,13 +1,14 @@
 from functools import wraps
+from logging import Logger
 from time import sleep
 
 
 def backoff(
           *exceptions,
-          logger,
-          start_sleep_time=0.1,
-          factor=2,
-          border_sleep_time=30,
+          logger: Logger,
+          start_sleep_time: float = 0.1,
+          factor: int = 2,
+          border_sleep_time: int = 30,
 ):
     """Функция для повторного выполнения функции через некоторое время."""
     def func_wrapper(func):
