@@ -1,9 +1,10 @@
 import uuid
 
-from core.db import db
 from flask_security import UserMixin
-from models import BaseModel, roles_users
 from sqlalchemy.dialects.postgresql import UUID
+
+from core.db import db
+from models import BaseModel, roles_users
 
 
 class User(BaseModel, UserMixin):

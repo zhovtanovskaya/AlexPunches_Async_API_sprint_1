@@ -1,5 +1,6 @@
-from core.db import db
 from flask_security import RoleMixin
+
+from core.db import db
 from models import BaseModel
 
 

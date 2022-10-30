@@ -1,8 +1,9 @@
 import click
-from app import create_app
-from core.db import db
 from flask.cli import FlaskGroup
 from flask_security.utils import hash_password
+
+from app import create_app
+from core.db import db
 from models import Role, User
 from services.user_manager import get_user_manager_service
 
