@@ -2,11 +2,16 @@ import uuid
 
 from core.db import db
 from flask_security import UserMixin
-from models import AdvanceModel, roles_users
+from models import BaseModel, roles_users
 from sqlalchemy.dialects.postgresql import UUID
 
 
-class User(AdvanceModel, UserMixin):
+class User(BaseModel, UserMixin):
+    """Модель пользователя.
+    В проекте используем библиотеку flask-security-too
+    базовый набор полей Пользователя зависит от нее
+    https://flask-security-too.readthedocs.io/en/stable/models.html
+    """
     __tablename__ = 'users'
 
     id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4,
