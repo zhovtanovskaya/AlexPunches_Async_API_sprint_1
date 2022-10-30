@@ -3,7 +3,7 @@ info:
   title: Auth. Sprint 6.
   description: |-
     ### Вопросики:
-      - наверено, не нужны одновременно `login` и `email` для юзера. (Не помню откуда притащил login, может быть откуда-то из теории.)  
+      - Наверно, не нужны одновременно `username` и `email` для юзера. И можно удалить `username`, а вместо него использовать `email`.   
 
   version: 0.1.0
 servers:
@@ -27,8 +27,10 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/UserCredentials'
       responses:
-        200:
+        201:
           $ref: '#/components/responses/JWTTokens'
+        422:
+          $ref: '#/components/responses/Unprocessable'
 
   /api/v1/singin:
     post:
@@ -43,7 +45,7 @@ paths:
         200:
           $ref: '#/components/responses/JWTTokens'
         422:
-          description: Invalid username/password supplied
+          $ref: '#/components/responses/Unprocessable'
 
   /api/v1/signout:
     post:
@@ -53,22 +55,32 @@ paths:
       operationId: logoutUser
       requestBody:
         $ref: '#/components/requestBodies/RefreshToken'
+      security:
+        - JWTAccessToken: []
       responses:
-        default:
-          description: successful operation
+        204:
+          description: Пользователь разлогинен. Тело ответа пусто.
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        422:
+          $ref: '#/components/responses/Unprocessable'
 
   /api/v1/refresh:
     post:
       tags:
         - auth
-      summary: Обновить JWT-токены авторизации.
+      summary: Сознать новую пару JWT-токенов авторизации.
       requestBody:
         $ref: '#/components/requestBodies/RefreshToken'
       security:
         - JWTAccessToken: []
       responses:
-        200:
+        201:
           $ref: '#/components/responses/JWTTokens'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        422:
+          $ref: '#/components/responses/Unprocessable'
 
 
   /api/v1/users/{user_id}/:
@@ -88,6 +100,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserScheme'
+        401:
+          $ref: '#/components/responses/Unauthorized'
         404:
             $ref: '#/components/responses/User404'
     patch:
@@ -114,14 +128,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserScheme'
+        401:
+          $ref: '#/components/responses/Unauthorized'
         404:
           $ref: '#/components/responses/User404'
         422:
-          description: Не удалось изменить пользователя. В теле ответа описание ошибки.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BaseMessage'
+          $ref: '#/components/responses/Unprocessable'
 
   /api/v1/users/{user_id}/singins/:
     get:
@@ -140,6 +152,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SignInScheme'
+        401:
+          $ref: '#/components/responses/Unauthorized'
         404:
             $ref: '#/components/responses/User404'
 
@@ -156,6 +170,8 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/UserRoleList'
+        401:
+          $ref: '#/components/responses/Unauthorized'
         404:
           $ref: '#/components/responses/User404'
     post:
@@ -176,14 +192,12 @@ paths:
       responses:
         201:
           $ref: '#/components/responses/UserRoleList'
+        401:
+          $ref: '#/components/responses/Unauthorized'
         404:
           $ref: '#/components/responses/User404'
         422:
-          description: Не удалось назначить пользователю роль. В теле ответа описание ошибки.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BaseMessage'
+          $ref: '#/components/responses/Unprocessable'
 
   /api/v1/users/{user_id}/roles/{role_id}:
     delete:
@@ -198,14 +212,12 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/UserRoleList'
+        401:
+          $ref: '#/components/responses/Unauthorized'
         404:
           $ref: '#/components/responses/User404'
         422:
-          description: Не удалось отнять у пользователя роль. В теле ответа описание ошибки.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BaseMessage'
+          $ref: '#/components/responses/Unprocessable'
 
 
   /api/v1/roles:
@@ -223,6 +235,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RoleScheme'
+        401:
+          $ref: '#/components/responses/Unauthorized'
     post:
       tags:
         - role
@@ -243,12 +257,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RoleScheme'
+        401:
+          $ref: '#/components/responses/Unauthorized'
         422:
-          description: Не удалось создать роль. Например, потому что роль с таким именем уже существует.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BaseMessage'
+          $ref: '#/components/responses/Unprocessable'
 
   /api/v1/roles/{role_id}:
     patch:
@@ -273,6 +285,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RoleScheme'
+        401:
+          $ref: '#/components/responses/Unauthorized'
         404:
           description: Роли с таким role_id не существует.
           content:
@@ -280,11 +294,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/BaseMessage'
         422:
-          description: Не удалось изменить атрибуты роли. В ответе описание ошибок.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BaseMessage'
+          $ref: '#/components/responses/Unprocessable'
     delete:
       tags:
         - role
@@ -296,6 +306,8 @@ paths:
       responses:
         204:
           description: Роль удалена и HTTP-ответ пуст.
+        401:
+          $ref: '#/components/responses/Unauthorized'
         404:
           $ref: '#/components/responses/Role404'
 
@@ -465,6 +477,18 @@ components:
             $ref: '#/components/schemas/BaseMessage'
     Role404:
       description: Сообщение, что роль с таким role_id не найдена.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BaseMessage'
+    Unprocessable:
+      description: Операция не выполнена. В теле ответа описание ошибки.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BaseMessage'
+    Unauthorized:
+      description: Операция не выполнена потому что нужна авторизация.
       content:
         application/json:
           schema:
