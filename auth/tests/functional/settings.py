@@ -43,5 +43,7 @@ class TestSettings(BaseSettings):
     redis_url: str = RedisBaseUrl().get_url()
     service_url: str = AuthBaseUrl().get_url()
 
+    pg_settings: PgBaseUrl = PgBaseUrl()
+
 
 test_settings = TestSettings()
