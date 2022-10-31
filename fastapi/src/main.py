@@ -4,10 +4,9 @@ import sys
 import aioredis
 import uvicorn as uvicorn
 from elasticsearch import AsyncElasticsearch
-from starlette.middleware.base import BaseHTTPMiddleware
-
 from fastapi import FastAPI
 from fastapi.responses import ORJSONResponse
+from starlette.middleware.base import BaseHTTPMiddleware
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(BASE_DIR)

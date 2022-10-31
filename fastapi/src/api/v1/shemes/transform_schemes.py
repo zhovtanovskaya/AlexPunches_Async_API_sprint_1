@@ -1,13 +1,13 @@
 from typing import Type
 
-from pydantic import BaseModel
-
 from api.v1.shemes.film import Film as FilmScheme
 from api.v1.shemes.film import FilmShort
 from api.v1.shemes.genre import Genre as GenreScheme
 from api.v1.shemes.genre import GenreShort
 from api.v1.shemes.person import Person as PersonScheme
 from api.v1.shemes.person import PersonShort
+from pydantic import BaseModel
+
 from models.film import Film as FilmModel
 from models.genre import Genre as GenreModel
 from models.person import Person as PersonModel
