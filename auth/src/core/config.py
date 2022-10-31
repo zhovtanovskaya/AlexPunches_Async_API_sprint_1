@@ -3,9 +3,11 @@ from functools import lru_cache
 from logging import config as logging_config
 
 from pydantic import BaseSettings, Field, PostgresDsn
+from dotenv import load_dotenv
 
 from core.logger import LOGGING
 
+load_dotenv('.env.dev')
 logging_config.dictConfig(LOGGING)
 
 
