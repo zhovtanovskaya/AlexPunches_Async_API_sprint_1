@@ -1,8 +1,11 @@
 from functools import lru_cache
+from http import HTTPStatus
 
 from core.config import config
 from core.db import db
+from core.exceptions import ResourceNotFoundError
 from services.user_manager import get_user_manager_service
+from utils import messages as msg
 
 
 class UserRoleService:
@@ -20,6 +23,9 @@ class UserRoleService:
                                      ) -> None:
         """Добавить пользователю Роль по названию Роли."""
         role = self._get_role_by_rolename(rolename=rolename)
+        if not role:
+            raise ResourceNotFoundError(
+                msg.role_not_found_error, HTTPStatus.NOT_FOUND)
         self.create_user_role(user=user, role=role)
 
     def create_user_role(self,
@@ -35,6 +41,9 @@ class UserRoleService:
                                      ) -> None:
         """Отнять у пользователя Роль по названию Роли."""
         role = self._get_role_by_rolename(rolename=rolename)
+        if not role:
+            raise ResourceNotFoundError(
+                msg.role_not_found_error, HTTPStatus.NOT_FOUND)
         self.remove_user_role(user=user, role=role)
 
     def remove_user_role(self,

@@ -2,7 +2,7 @@ from uuid import UUID
 
 from pydantic import BaseModel, EmailStr
 
-from api.v1.schemes.roles import RoleScheme
+from api.v1.schemes.user_roles import RoleScheme
 
 
 class UserScheme(BaseModel):

@@ -4,6 +4,7 @@ from http import HTTPStatus
 from flask import Blueprint, Response, jsonify
 from flask_pydantic import validate
 
+from api.v1.schemes.user_roles import ListUserRolesScheme, RoleScheme
 from api.v1.schemes.users import UserScheme
 from models import Role, User
 from models.schemes.user_roles import UserRoleCreateScheme
@@ -48,21 +49,32 @@ def edit_user(user_id: uuid.UUID, body: UserEditScheme) -> UserScheme:
 @validate(on_success_status=HTTPStatus.CREATED)
 def create_user_role(user_id: uuid.UUID,
                      body: UserRoleCreateScheme,
-                     ) -> UserScheme:
+                     ) -> ListUserRolesScheme:
     """Добавить роль пользователю."""
     user = User.get_or_404(id=user_id)
     user_role_service.create_user_role_by_rolename(
         user=user, rolename=body.name,
     )
     user.save()
-    return UserScheme.parse_obj(user.as_dict)
+    user_roles = [RoleScheme.parse_obj(role.as_dict) for role in user.roles]
+    return ListUserRolesScheme(user_roles=user_roles)
 
 
-@users.route('/users/<user_id>/roles/<role_id>', methods=['DELETE'])
+@users.route('/users/<user_id>/roles/', methods=['GET'])
+@validate()
+def user_role_list(user_id: uuid.UUID) -> ListUserRolesScheme:
+    """Список Ролей пользователя."""
+    user = User.get_or_404(id=user_id)
+    user_roles = [RoleScheme.parse_obj(role.as_dict) for role in user.roles]
+    return ListUserRolesScheme(user_roles=user_roles)
+
+
+@users.route('/users/<user_id>/roles/<role_id>/', methods=['DELETE'])
 @validate()
 def remove_user_role(user_id: uuid.UUID,
                      role_id: int,
                      ) -> tuple[Response, HTTPStatus]:
+    """Удалить Роль у пользователя."""
     user = User.get_or_404(id=user_id)
     role = Role.get_or_404(id=role_id)
     user_role_service.remove_user_role(user=user, role=role)
