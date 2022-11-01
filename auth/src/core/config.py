@@ -50,9 +50,11 @@ class ApiSettings(BaseSettings):
     redis_maxsize: int = 20
     redis_expire_in_seconds: int = 60 * 5
 
-    flask_config = FlaskConfig()
-    paginator_per_page = 20
-    paginator_start_page = 1
+    flask_config: BaseSettings = FlaskConfig()
+    paginator_per_page: int = 20
+    paginator_start_page: int = 1
+
+    admin_role_name: str = 'admin'
 
 
 @lru_cache()
