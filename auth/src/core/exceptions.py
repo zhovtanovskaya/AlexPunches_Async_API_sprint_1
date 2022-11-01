@@ -8,8 +8,10 @@ exceptions = Blueprint('exceptions', __name__)
 
 class BasicExceptionError(Exception):
     """Расширить возможности Exception.
+
     Чтобы сообщать отдавать клиету jsonify в API.
     """
+
     status_code = HTTPStatus.BAD_REQUEST
 
     def __init__(self,
@@ -24,17 +26,21 @@ class BasicExceptionError(Exception):
         self.payload = payload
 
     def to_dict(self):
+        """Вернуть в виде дикта."""
         rv = dict(self.payload or ())
         rv['error_message'] = self.message
         return rv
 
 
 class ResourceNotFoundError(BasicExceptionError):
+    """Exception, когда что-то не нашлось."""
+
     pass
 
 
 @exceptions.app_errorhandler(BasicExceptionError)
 def exception(error: BasicExceptionError) -> Response:
+    """Вернуть jsonify, чтобы для API хорошо."""
     response = jsonify(error.to_dict())
     response.status_code = error.status_code
     return response
@@ -42,6 +48,7 @@ def exception(error: BasicExceptionError) -> Response:
 
 @exceptions.app_errorhandler(ResourceNotFoundError)
 def resource_not_found(error: ResourceNotFoundError) -> Response:
+    """Вернуть jsonify, чтобы для API хорошо."""
     response = jsonify(error.to_dict())
     response.status_code = error.status_code
     return response

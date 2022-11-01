@@ -1,0 +1,522 @@
+openapi: 3.0.3
+info:
+  title: Auth. Sprint 6.
+  description: |-
+    ### Вопросики:
+      - Наверно, не нужны одновременно `username` и `email` для юзера. И можно удалить `username`, а вместо него использовать `email`.   
+
+  version: 0.1.0
+servers:
+  - url: http://127.0.0.1:5000
+  - url: http://127.0.0.1
+tags:
+  - name: auth
+    description: Аутентификация
+  - name: user
+    description: Действия над пользователями
+  - name: role
+    description: Управление списком ролей
+
+paths:
+  /api/v1/signup:
+    post:
+      tags:
+        - auth
+      summary: Регистрация пользователя.
+      description: Регистрация клиента, админа или другого пользователя.
+      requestBody:
+        $ref: '#/components/requestBodies/UserCredentials'
+      responses:
+        201:
+          $ref: '#/components/responses/JWTTokens'
+        422:
+          $ref: '#/components/responses/Unprocessable'
+
+  /api/v1/singin:
+    post:
+      tags:
+        - auth
+      summary: Аутентификация пользователя.
+      description: 'Войти в существующий аккаунт пользователя.'
+      operationId: loginUser
+      requestBody:
+        $ref: '#/components/requestBodies/UserCredentials'
+      responses:
+        200:
+          $ref: '#/components/responses/JWTTokens'
+        422:
+          $ref: '#/components/responses/Unprocessable'
+
+  /api/v1/signout:
+    post:
+      tags:
+        - auth
+      summary: Выход пользователя.
+      operationId: logoutUser
+      requestBody:
+        $ref: '#/components/requestBodies/RefreshToken'
+      security:
+        - JWTAccessToken: []
+      responses:
+        204:
+          description: Пользователь разлогинен. Тело ответа пусто.
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        422:
+          $ref: '#/components/responses/Unprocessable'
+
+  /api/v1/refresh:
+    post:
+      tags:
+        - auth
+      summary: Сознать новую пару JWT-токенов авторизации.
+      requestBody:
+        $ref: '#/components/requestBodies/RefreshToken'
+      security:
+        - JWTAccessToken: []
+      responses:
+        201:
+          $ref: '#/components/responses/JWTTokens'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        422:
+          $ref: '#/components/responses/Unprocessable'
+
+
+  /api/v1/users/{user_id}/:
+    get:
+      tags:
+        - user
+      summary: Получить личные данные пользователя.
+      operationId: getUserById
+      parameters:
+        - $ref: '#/components/parameters/user_id'
+      security:
+        - JWTAccessToken: []
+      responses:
+        200:
+          description: Детали о пользователе с таким user_id.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserScheme'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+            $ref: '#/components/responses/User404'
+    patch:
+      tags:
+        - user
+      summary: Изменить личные данные пользователя.
+      description: Редактировать username, email или другие сведенья.
+      operationId: EditUser
+      parameters:
+        - $ref: '#/components/parameters/user_id'
+      requestBody:
+        description: Если поля нет, значение не изменится (PATCH)
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserEditScheme'
+        required: true
+      security:
+        - JWTAccessToken: []
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserScheme'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/User404'
+        422:
+          $ref: '#/components/responses/Unprocessable'
+
+  /api/v1/users/{user_id}/singins/:
+    get:
+      tags:
+        - user
+      summary: "Получить список входов пользователя в систему."
+      description: "История входов текущего пользователя в систему."
+      parameters:
+        - $ref: '#/components/parameters/user_id'
+      security:
+        - JWTAccessToken: []
+      responses:
+        200:
+          description: Список попыток входа пользователя в систему.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignInScheme'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+            $ref: '#/components/responses/User404'
+
+  /api/v1/users/{user_id}/roles/:
+    get:
+      tags:
+        - user
+      summary: Получить роли пользователя.
+      description: Список ролей пользователя.
+      parameters:
+        - $ref: '#/components/parameters/user_id'
+      security:
+        - JWTAccessToken: []
+      responses:
+        200:
+          $ref: '#/components/responses/UserRoleList'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/User404'
+    post:
+      tags:
+        - user
+      summary: Добавить роль пользователю.
+      parameters:
+        - $ref: '#/components/parameters/user_id'
+      requestBody:
+        description: Роль, которую нужно добавить пользователю.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleAssignScheme'
+      security:
+        - JWTAccessToken: []
+      responses:
+        201:
+          $ref: '#/components/responses/UserRoleList'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/User404'
+        422:
+          $ref: '#/components/responses/Unprocessable'
+
+  /api/v1/users/{user_id}/roles/{role_id}:
+    delete:
+      tags:
+        - user
+      summary: Отобрать роль у пользователя.
+      parameters:
+        - $ref: '#/components/parameters/user_id'
+        - $ref: '#/components/parameters/role_id'
+      security:
+        - JWTAccessToken: []
+      responses:
+        200:
+          $ref: '#/components/responses/UserRoleList'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/User404'
+        422:
+          $ref: '#/components/responses/Unprocessable'
+
+
+  /api/v1/roles:
+    get:
+      tags:
+        - role
+      summary: Получить все роли.
+      description: Список всех ролей.
+      security:
+        - JWTAccessToken: []
+      responses:
+        200:
+          description: Список всех ролей.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleScheme'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      tags:
+        - role
+      summary: Создать новую роль.
+      requestBody:
+        description: Создать роль.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleEditScheme'
+      security:
+        - JWTAccessToken: []
+      responses:
+        201:
+          description: Создана новая роль.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleScheme'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        422:
+          $ref: '#/components/responses/Unprocessable'
+
+  /api/v1/roles/{role_id}:
+    patch:
+      tags:
+        - role
+      summary: Изменить существующую роль.
+      parameters:
+        - $ref: '#/components/parameters/role_id'
+      requestBody:
+        description: Изменить роль.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleEditScheme'
+      security:
+        - JWTAccessToken: []
+      responses:
+        200:
+          description: Роль изменена.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleScheme'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          description: Роли с таким role_id не существует.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseMessage'
+        422:
+          $ref: '#/components/responses/Unprocessable'
+    delete:
+      tags:
+        - role
+      summary: Удалить роль.
+      parameters:
+        - $ref: '#/components/parameters/role_id'
+      security:
+        - JWTAccessToken: []
+      responses:
+        204:
+          description: Роль удалена и HTTP-ответ пуст.
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/Role404'
+
+
+components:
+  parameters:
+    user_id:
+      name: user_id
+      in: path
+      description: ID пользователя
+      required: true
+      schema:
+        type: string
+        format: uuid
+    role_id:
+      name: role_id
+      in: path
+      description: ID роли
+      required: true
+      schema:
+        type: string
+        format: uuid
+
+  requestBodies:
+    UserCredentials:
+      description: Имя пользователя и пароль.
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+                description: Имя пользователя.
+              password:
+                type: string
+                description: Пароль пользователя.
+    RefreshToken:
+      description: Токен для обновления.
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              refresh_token:
+                type: string
+
+  schemas:
+    UserScheme:
+      type: object
+      properties: 
+        id:
+          type: string
+          format: uuid
+          description: Уникальный ID пользователя.
+        email:
+          type: string
+          format: email
+          description: Email пользователя.
+        username:
+          type: string
+          description: Имя пользователя для логина.
+        roles:
+          type: array
+          items: 
+            $ref: '#/components/schemas/RoleScheme'
+          description: Роли пользователя, дающие ему права на действия.
+      required:
+        - id
+        - email
+        - username
+        - roles
+    UserCreateScheme:
+      required:
+        - email
+        - name
+      type: object
+      properties: 
+        email:
+          type: string
+        login:
+          type: string
+        is_superuser:
+          type: boolean
+        password:
+          type: string
+    UserEditScheme:
+      type: object
+      properties: 
+        email:
+          type: string
+        login:
+          type: string
+        password:
+          type: string
+    RoleScheme:
+      type: object
+      properties: 
+        id:
+          type: string
+          format: uuid
+          description: Уникальный идентификатор роли.
+        name:
+          type: string
+          enum: [superuser, viewer, ]
+          description: Уникальное название роли.
+        description:
+          type: string
+          description: Короткое описание роли.
+      required:
+        - id
+        - name
+    RoleEditScheme:
+      required:
+        - name
+      type: object
+      properties: 
+        name:
+          type: string
+        description:
+          type: string
+    RoleAssignScheme:
+      type: object
+      properties:
+        name:
+          type: string
+          enum: [superuser, viewer, ]
+          description: Уникальное название роли.
+      required:
+        - name
+    SignInScheme:
+      type: object
+      properties:
+        signin_date:
+          type: string
+          format: date-time
+          description: Дата и время попытки логина.
+        status:
+          type: string
+          enum: ['success', 'fail']
+          description: Удалось залогиниться или нет.
+        user_agent:
+          type: string
+          description: Описание браузера или другого клиента, которым пользовался пользователь при логине.
+      required:
+        - signin_date
+        - status
+    BaseMessage:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          description: Ошибки в запросе. Например, ошибки валидации данных в запросе.
+      required:
+        - message
+
+  responses:
+    User404:
+      description: Сообщение, что пользователь с таким user_id не найден.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BaseMessage'
+    Role404:
+      description: Сообщение, что роль с таким role_id не найдена.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BaseMessage'
+    Unprocessable:
+      description: Операция не выполнена. В теле ответа описание ошибки.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BaseMessage'
+    Unauthorized:
+      description: Операция не выполнена потому что нужна авторизация.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BaseMessage'
+    UserRoleList:
+      description: Актуальный список ролей пользователя.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/RoleScheme'
+    JWTTokens:
+      description: Пара токенов авторизации.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              access_token:
+                type: string
+                description: JWT-токен доступа.
+              refresh_token:
+                type: string
+                description: JWT-токен для обновления.
+
+  securitySchemes:
+    JWTAccessToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
