@@ -1,3 +1,5 @@
+"""Дождаться готовности хоста с Редисом."""
+
 import os
 import sys
 
@@ -12,11 +14,14 @@ from functional.utils.backoff import backoff  # noqa
 
 
 class RedisPingError(Exception):
+    """Exception недоступности Редиса."""
+
     ...
 
 
 @backoff(RedisPingError, logger=logger)
 def ping_redis(redis_client):
+    """Пинговать Редис пока не ответит."""
     if not redis_client.ping():
         raise RedisPingError()
     redis_client.close()

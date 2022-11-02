@@ -1,3 +1,5 @@
+"""Фикстуры клиентов."""
+
 import psycopg2
 from psycopg2.extras import DictCursor
 from typing import Any
@@ -10,11 +12,12 @@ from functional.settings import test_settings
 
 @pytest_asyncio.fixture(scope='function')
 async def aiohttp_get():
+    """Клиент aiohttp для тестирования API."""
     async def inner(url: str,
                     headers: dict | None = None,
                     params: dict | None = None,
                     ) -> dict[str, Any]:
-        """"Отправить GET запрос и получить ответ."""
+        """Отправить GET запрос и получить ответ."""
         session = aiohttp.ClientSession(headers=headers)
         async with session.get(url, params=params) as response:
             body = await response.json()
@@ -27,8 +30,7 @@ async def aiohttp_get():
 
 @pytest_asyncio.fixture(scope='session')
 async def redis_client():
-    """Получить клиент Редиса перед сессией
-    и закрыть его в конце сессии."""
+    """Получить клиент Редиса перед сессией и закрыть его в конце сессии."""
     _client = await aioredis.create_redis_pool(
         (test_settings.redis_host, test_settings.redis_port),
         minsize=10,

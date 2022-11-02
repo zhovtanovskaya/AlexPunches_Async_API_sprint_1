@@ -1,3 +1,5 @@
+"""Backoff для определенных exceptions."""
+
 from functools import wraps
 from logging import Logger
 from time import sleep
