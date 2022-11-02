@@ -1,3 +1,5 @@
+"""Подключить Алхимию."""
+
 from http import HTTPStatus
 
 from flask_sqlalchemy import BaseQuery, SQLAlchemy

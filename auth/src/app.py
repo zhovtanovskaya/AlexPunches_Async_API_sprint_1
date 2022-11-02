@@ -1,3 +1,5 @@
+"""Создать фабрику для приложения."""
+
 from flask import Flask
 from flask_security import Security, SQLAlchemyUserDatastore
 

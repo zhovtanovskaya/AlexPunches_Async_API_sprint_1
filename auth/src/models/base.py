@@ -1,4 +1,5 @@
-"""Lhjhhj nnp."""
+"""Базовая SQLAlchemy-модель для БД."""
+
 import uuid
 from http import HTTPStatus
 from typing import AbstractSet, Any, Mapping

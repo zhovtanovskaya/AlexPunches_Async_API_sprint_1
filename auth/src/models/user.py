@@ -1,3 +1,5 @@
+"""SQLAlchemy-модель Пользователя для БД."""
+
 import uuid
 
 from flask_security import UserMixin

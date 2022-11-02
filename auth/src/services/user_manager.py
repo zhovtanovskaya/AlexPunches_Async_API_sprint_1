@@ -1,3 +1,5 @@
+"""Слой абстракции между сервисами и внешней либой (Flask-Security-Too)."""
+
 from functools import lru_cache
 from typing import Type
 
@@ -12,7 +14,7 @@ from core.db import db
 
 
 class ExtendedRegForm(RegisterForm):
-    """Добавить поля для "формы" регистрации."""
+    """Класс добавляет кастомные поля для "формы" регистрации."""
 
     username = StringField('Login')
 
@@ -27,6 +29,7 @@ class UserManagerService:
                  user_model: Type[db.Model],
                  role_model: Type[db.Model],
                  ):
+        """Подключаем внешнюю библиотеку Flask-Security-Too."""
         self.executor = SQLAlchemyUserDatastore(
             db=db, user_model=user_model, role_model=role_model,
         )

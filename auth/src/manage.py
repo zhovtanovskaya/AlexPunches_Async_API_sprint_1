@@ -1,3 +1,5 @@
+"""Запустить приложение и cli-команды."""
+
 import click
 from flask.cli import FlaskGroup
 from flask_security.utils import hash_password

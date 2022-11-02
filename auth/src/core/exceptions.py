@@ -1,3 +1,5 @@
+"""Набор кастомных исключений в виде Response jsonify."""
+
 from http import HTTPStatus
 from typing import Any, Mapping
 
@@ -19,6 +21,7 @@ class BasicExceptionError(Exception):
                  status_code: HTTPStatus | None = None,
                  payload: Mapping[str, Any] | None = None,
                  ) -> None:
+        """Расширить инит дополнительными полезными данными."""
         super().__init__()
         self.message = message
         if status_code is not None:

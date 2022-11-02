@@ -1,3 +1,5 @@
+"""Все конфиги для Auth-приложения."""
+
 import logging
 from functools import lru_cache
 from logging import config as logging_config
