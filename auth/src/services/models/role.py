@@ -1,10 +1,10 @@
-"""Роли уровня сервисов."""
+"""Объектное представление ролей уровня сервисов."""
 
 from pydantic import BaseModel, constr
 
 
 class Role(BaseModel):
-    """Роль для сервиса RoleService."""
+    """Роли, с которыми работают методы RoleService."""
 
     id: int | None = None
     name: constr(max_length=80) | None = None
