@@ -9,8 +9,8 @@ from pydantic import BaseModel, EmailStr
 class LoginHistoryBaseScheme(BaseModel):
     """Базовая схема истории."""
 
-    username: str | None = None
-    email: EmailStr | None = None
+    username: str
+    email: EmailStr
     data_create: datetime
     data_login: datetime
 
@@ -33,6 +33,6 @@ class LoginHistoryCreateScheme(LoginHistoryBaseScheme):
     """Использовать при создании истории."""
 
     email: EmailStr
-    password: str
+    email: str
     data_create: datetime
     data_login: datetime

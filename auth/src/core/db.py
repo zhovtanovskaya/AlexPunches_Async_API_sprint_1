@@ -17,6 +17,5 @@ class CustomBaseQuery(BaseQuery):
                                         status_code=HTTPStatus.NOT_FOUND)
         return rv
 
- 
 
 db = SQLAlchemy(query_class=CustomBaseQuery)
