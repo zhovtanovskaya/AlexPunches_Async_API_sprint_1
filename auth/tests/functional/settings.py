@@ -2,6 +2,7 @@
 
 import logging
 
+from functional.testdata.models import Role, RoleUser, User
 from pydantic import BaseSettings, Field
 
 logging.basicConfig(level=logging.INFO)
@@ -62,6 +63,12 @@ class TestSettings(BaseSettings):
     users_tablename = 'users'
     roles_tablename = 'roles'
     roles_users_tablename = 'roles_users'
+
+    fake_data_map = {
+        users_tablename: User,
+        roles_tablename: Role,
+        roles_users_tablename: RoleUser,
+    }
 
 
 test_settings = TestSettings()

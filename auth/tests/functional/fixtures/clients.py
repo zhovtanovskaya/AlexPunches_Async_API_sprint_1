@@ -1,24 +1,25 @@
 """Фикстуры клиентов."""
-
 import psycopg2
 from psycopg2.extras import DictCursor
+from typing import Generator
 
 import aioredis
 import pytest
 from functional.settings import test_settings
+from redis.client import Redis
 
 
+# Фикстура еще не проверялась в действии
 @pytest.fixture(scope='session')
-async def redis_client():
+def redis_client() -> Generator[None, Redis, None]:
     """Получить клиент Редиса перед сессией и закрыть его в конце сессии."""
-    _client = await aioredis.create_redis_pool(
+    _client = aioredis.create_redis_pool(
         (test_settings.redis_host, test_settings.redis_port),
         minsize=10,
         maxsize=20,
     )
     yield _client
     _client.close()
-    await _client.wait_closed()
 
 
 @pytest.fixture(scope='session')

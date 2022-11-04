@@ -6,7 +6,10 @@ from functional.settings import test_settings
 
 @pytest.mark.parametrize(
     'table, count',
-    [(test_settings.users_tablename, 10), (test_settings.roles_tablename, 0)],
+    [
+        (test_settings.users_tablename, 100),
+        (test_settings.roles_tablename, 10),
+    ],
 )
 def test_test(db_insert_fake_data, pg_cursor, table: str, count: int):
     """Тестовый тест."""
@@ -20,7 +23,10 @@ def test_test(db_insert_fake_data, pg_cursor, table: str, count: int):
 
 @pytest.mark.parametrize(
     'table, count',
-    [(test_settings.users_tablename, 10), (test_settings.roles_tablename, 0)],
+    [
+        (test_settings.users_tablename, 100),
+        (test_settings.roles_tablename, 10),
+    ],
 )
 def test_user_detail(db_insert_fake_data, pg_cursor, table: str, count: int):
     """Тестовый тест."""
