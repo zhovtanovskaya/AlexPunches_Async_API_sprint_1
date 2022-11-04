@@ -36,7 +36,7 @@ class AuthBaseUrl(BaseSettings, GetUrlMixin):
 class PgBaseUrl(BaseSettings):
     """Переменные для подключения к Постгрессу."""
 
-    scheme: str = 'postgresql+asyncpg'
+    scheme: str = 'postgresql'
     username: str = Field(..., env='postgres_user_auth')
     password: str = Field(..., env='postgres_password_auth')
     host: str = Field(..., env='db_host_auth')
@@ -58,6 +58,10 @@ class TestSettings(BaseSettings):
     service_url: str = AuthBaseUrl().get_url()
 
     pg_settings: PgBaseUrl = PgBaseUrl()
+
+    users_tablename = 'users'
+    roles_tablename = 'roles'
+    roles_users_tablename = 'roles_users'
 
 
 test_settings = TestSettings()
