@@ -2,8 +2,16 @@ openapi: 3.0.3
 info:
   title: Auth. Sprint 6.
   description: |-
-    ### Вопросики:
-      - Наверно, не нужны одновременно `username` и `email` для юзера. И можно удалить `username`, а вместо него использовать `email`.   
+    ### Вопросы
+    
+      - Наверно, не нужны одновременно `username` и `email` 
+        для юзера. И можно удалить `username`, а вместо него
+        использовать `email`.
+      - Здесь есть end-point'ы, которые возвращают списки.  Может
+        оказаться, что это не корректно.  И что JSON API 
+        должно всегда возвращать объект.  Тогда при реализации
+        надо будет позаботиться, чтобы список был обернут в
+        объект.  Пример такого объекта обсуждался в Slack.
 
   version: 0.1.0
 servers:
@@ -151,7 +159,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SignInScheme'
+                type: array
+                items:
+                  $ref: '#/components/schemas/SignInScheme'
         401:
           $ref: '#/components/responses/Unauthorized'
         404:
