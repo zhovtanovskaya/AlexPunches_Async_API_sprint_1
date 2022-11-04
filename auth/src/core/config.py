@@ -4,8 +4,8 @@ import logging
 from functools import lru_cache
 from logging import config as logging_config
 
-from pydantic import BaseSettings, Field, PostgresDsn
 from dotenv import load_dotenv
+from pydantic import BaseSettings, Field, PostgresDsn
 
 from core.db import db
 from core.logger import LOGGING
