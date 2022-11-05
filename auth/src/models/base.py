@@ -4,7 +4,7 @@ import uuid
 from http import HTTPStatus
 from typing import AbstractSet, Any, Mapping
 
-from pydantic import BaseModel
+from pydantic import BaseModel as PydanticBaseModel
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.inspection import inspect
@@ -35,13 +35,14 @@ class BaseModel(db.Model):
             ) from e
 
     def edit(self,
-             scheme_in: BaseModel,
+             scheme_in: PydanticBaseModel,
              exclude: AbstractSet[str] | Mapping[int | str, Any] | None = None,
              ) -> None:
         """Редактировать объект."""
         _values = scheme_in.dict(exclude=exclude, exclude_unset=True)
         for key in _values:
-            setattr(self, key, _values[key])
+            if _values[key] is not None:
+                setattr(self, key, _values[key])
 
     @classmethod
     def get_or_404(cls, id: uuid.UUID):

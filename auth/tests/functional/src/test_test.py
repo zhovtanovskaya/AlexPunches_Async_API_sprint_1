@@ -8,6 +8,7 @@ import pytest
 from functional.settings import test_settings
 
 
+@pytest.mark.skip(reason='')
 @pytest.mark.parametrize(
     'table, count',
     [

@@ -1,6 +1,4 @@
 """Фикстуры с данными."""
-from psycopg2.extensions import connection as _connection
-from psycopg2.extras import DictCursor, execute_batch
 from typing import Generator
 
 import functional.testdata.tables as ddl_tables
@@ -9,6 +7,8 @@ from faker import Faker
 from functional.settings import test_settings
 from functional.testdata.faker_data import get_faker_data
 from functional.utils.helpers import construct_query
+from psycopg2.extensions import connection as _connection
+from psycopg2.extras import DictCursor, execute_batch
 
 fake = Faker()
 Faker.seed(0)
@@ -29,7 +29,7 @@ def create_tables(pg_conn: _connection,
     pg_cursor.execute(ddl_tables.drop_user)
 
 
-@pytest.fixture
+@pytest.fixture(scope='function')
 def db_insert_fake_data(pg_conn: _connection,
                         pg_cursor: DictCursor,
                         create_tables: None,

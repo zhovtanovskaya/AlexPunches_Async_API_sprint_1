@@ -16,7 +16,7 @@ def create_app():
     from core.exceptions import exceptions
 
     app.register_blueprint(exceptions)
-    app.register_blueprint(users, url_prefix='/auth/v1')
+    app.register_blueprint(users, url_prefix='/api/v1')
 
     db.app = app
     db.init_app(app)

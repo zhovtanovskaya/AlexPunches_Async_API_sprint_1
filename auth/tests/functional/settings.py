@@ -70,5 +70,10 @@ class TestSettings(BaseSettings):
         roles_users_tablename: RoleUser,
     }
 
+    signin_url: str = service_url + '/api/v1/signin'
+    signup_url: str = service_url + '/api/v1/signup'
+    signout_url: str = service_url + '/api/v1/signout'
+    refresh_url: str = service_url + '/api/v1/refresh'
+
 
 test_settings = TestSettings()
