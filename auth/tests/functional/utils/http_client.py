@@ -3,6 +3,7 @@ from functools import lru_cache
 from typing import Any, Mapping, MutableMapping
 
 import requests
+from requests import Response
 from requests.auth import HTTPBasicAuth
 
 
@@ -11,7 +12,7 @@ class HttpClient:
 
     headers: MutableMapping = {'accept': 'application/json'}
 
-    def __init__(self, bearer: str | None = None):
+    def __init__(self, bearer: str | None = None) -> None:
         """Подключить requests и Добавить заголовок авторизации."""
         self._client = requests
         if bearer:
@@ -21,7 +22,7 @@ class HttpClient:
             url: str,
             headers: MutableMapping[str, str] | None = None,
             payload: Mapping[str, Any] | None = None,
-            ):
+            ) -> Response:
         """Отправить GET-запрос и получить ответ."""
         if headers:
             self.headers = headers
@@ -31,7 +32,7 @@ class HttpClient:
              url: str,
              headers: MutableMapping[str, str] | None = None,
              payload: Mapping[str, Any] | None = None,
-             ):
+             ) -> Response:
         """Отправить POST-запрос и получить ответ."""
         if headers:
             self.headers = headers
@@ -41,17 +42,17 @@ class HttpClient:
               url: str,
               headers: MutableMapping[str, str] | None = None,
               payload: Mapping[str, Any] | None = None,
-              ):
+              ) -> Response:
         """Отправить PATCH-запрос и получить ответ."""
         if headers:
             self.headers = headers
         return self._client.patch(url=url, headers=self.headers, json=payload)
 
-    def delete(self, url: str):
+    def delete(self, url: str) -> Response:
         """Отправить DELETE-запрос и получить ответ."""
         return self._client.delete(url=url)
 
-    def auth(self, url: str, username: str, password: str):
+    def auth(self, url: str, username: str, password: str) -> Response:
         """Аутентифицироваться через HTTPBasic и получить ответ."""
         basic = HTTPBasicAuth(username, password)
         return self._client.get(url=url, auth=basic)
