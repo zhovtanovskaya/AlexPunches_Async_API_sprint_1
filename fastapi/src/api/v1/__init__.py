@@ -1,7 +1,7 @@
-from core.config import config
+from fastapi import Depends, Query
 from pydantic import PositiveInt
 
-from fastapi import Depends, Query
+from core.config import config
 
 
 class SearchEnginePaginate:

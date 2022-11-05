@@ -1,5 +1,8 @@
-from core.db import db
+"""M2M Users и Roles."""
+
 from sqlalchemy.dialects.postgresql import UUID
+
+from core.db import db
 
 roles_users = db.Table(
     'roles_users',

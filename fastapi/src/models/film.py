@@ -2,8 +2,9 @@ from typing import Optional
 from uuid import UUID
 
 import orjson
-from models import orjson_dumps
 from pydantic import BaseModel
+
+from models import orjson_dumps
 
 
 class Genre(BaseModel):

@@ -1,7 +1,10 @@
+"""Подключить Алхимию."""
+
 from http import HTTPStatus
 
-from core.exceptions import ResourceNotFoundError
 from flask_sqlalchemy import BaseQuery, SQLAlchemy
+
+from core.exceptions import ResourceNotFoundError
 from utils import messages as msg
 
 

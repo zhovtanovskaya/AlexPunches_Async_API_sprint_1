@@ -1,10 +1,10 @@
 from typing import Any, AsyncGenerator, Mapping
 
-from api.v1 import SearchEngineSortedPaginate
 from elastic_transport import ObjectApiResponse
-from services.search_engine import AsyncSearchEngine
-
 from fastapi import Depends
+
+from api.v1 import SearchEngineSortedPaginate
+from services.search_engine import AsyncSearchEngine
 
 
 def make_es_sort_name(sort: str) -> str:

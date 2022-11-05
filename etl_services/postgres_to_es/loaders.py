@@ -1,7 +1,6 @@
-import more_itertools
-from psycopg2.extras import DictRow
 from typing import Generator
 
+import more_itertools
 import orjson
 import requests
 from config import EsIndex, settings
@@ -9,6 +8,7 @@ from postgres_to_es import DbConnect
 from postgres_to_es.elastic_index_state import (ElasticIndexState,
                                                 ElasticIndexStateError)
 from postgres_to_es.services import ElasticInsertError
+from psycopg2.extras import DictRow
 
 
 class PostgresExtracter(DbConnect):

@@ -1,11 +1,11 @@
 from functools import lru_cache
 
 from db.elastic import get_elastic
+from fastapi import Depends
+
 from models.genre import Genre
 from services import BaseSearchEngineService
 from services.search_engine import AsyncSearchEngine
-
-from fastapi import Depends
 
 
 class GenreService(BaseSearchEngineService):
