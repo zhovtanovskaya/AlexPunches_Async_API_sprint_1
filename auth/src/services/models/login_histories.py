@@ -1,6 +1,7 @@
 """Пидантик модели User для сервисов."""
 
 from datetime import datetime
+
 from pydantic import BaseModel, EmailStr
 
 

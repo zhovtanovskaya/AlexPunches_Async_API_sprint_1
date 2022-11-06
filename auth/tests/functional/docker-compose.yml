@@ -1,0 +1,50 @@
+services:
+  test-redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    expose:
+      - "6379"
+    ports:
+      - "6379:6379"
+
+  test-auth-postgres:
+    image: postgres:14-alpine
+    restart: unless-stopped
+    volumes:
+      - pg_data_auth_test:/var/lib/postgresql/data/
+    expose:
+      - "5432"
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB_AUTH}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_AUTH}
+      POSTGRES_USER: ${POSTGRES_USER_AUTH}
+
+  test-auth:
+    build: ../../.
+    image: auth-flask-image
+    expose:
+      - "5000"
+    env_file:
+      - ../../../.env.pytests
+    ports:
+      - "5000:5000"
+
+
+  auth-pytests:
+    image: auth-flask-image
+    expose:
+      - "5000"
+    env_file:
+      - ../../../.env.pytests
+    depends_on:
+      - test-auth-postgres
+      - test-redis
+      - test-auth
+    entrypoint: >
+      sh -c "pip install -r /opt/app/tests/functional/requirements.txt
+      && python3 /opt/app/tests/functional/utils/wait_for_redis.py
+      && pytest /opt/app/tests/functional/src"
+volumes:
+  pg_data_auth_test:

@@ -1,4 +1,3 @@
-from datetime import datetime
 from functools import lru_cache
 from typing import Type
 
@@ -17,7 +16,10 @@ class LoginHistoryManagerService:
         """Создать историю пользователя.
         """
         login_history = self.login_history_model(**kwargs)
-        return self.put.login_history_model(login_history)
+        db.session.add(login_history)
+        login_history.save()
+
+        return login_history
 
 
 @lru_cache()

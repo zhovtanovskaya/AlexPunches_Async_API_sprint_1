@@ -1,4 +1,5 @@
 import pytest
+
 from sqlite_to_postgres.data_classes import DATACLASSES_MAP
 
 

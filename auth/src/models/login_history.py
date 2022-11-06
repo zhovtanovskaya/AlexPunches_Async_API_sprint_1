@@ -1,6 +1,6 @@
 import uuid
-
 from datetime import datetime
+
 from sqlalchemy.dialects.postgresql import UUID
 
 from core.db import db
@@ -19,8 +19,9 @@ class LoginHistory(BaseModel):
     data_create = db.Column(db.DateTime(), default=datetime.utcnow)
     data_login = db.Column(db.DateTime(), default=datetime.utcnow)
     # не решил нужна ли перекрестая ссылка на пользователя
-    # user = db.relationship('User', secondary=users_login_histories, lazy="subquery",
-    #                        backref=db.backref('login_histories', lazy='subquery'))
+    # user = db.relationship(
+    #   'User', secondary=users_login_histories, lazy="subquery",
+    #   backref=db.backref('login_histories', lazy='subquery'))
 
     def __repr__(self):
         return (

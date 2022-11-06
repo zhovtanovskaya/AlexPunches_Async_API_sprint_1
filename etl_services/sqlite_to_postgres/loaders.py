@@ -2,6 +2,7 @@ import sqlite3
 
 import more_itertools
 import psycopg2
+
 from config import logger, settings
 from sqlite_to_postgres.data_classes import DATACLASSES_MAP
 

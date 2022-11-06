@@ -32,7 +32,7 @@ class ListLoginHistoryScheme(BaseModel):
 class LoginHistoryCreateScheme(LoginHistoryBaseScheme):
     """Использовать при создании истории."""
 
+    username: str
     email: EmailStr
-    email: str
     data_create: datetime
     data_login: datetime

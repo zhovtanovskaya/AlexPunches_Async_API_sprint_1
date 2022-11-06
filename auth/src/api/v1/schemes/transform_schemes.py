@@ -7,7 +7,8 @@ from services.models.login_histories import LoginHistoryCreateModel
 def login_history_create_scheme_to_login_history_create_model(
         login_history_scheme: LoginHistoryCreateScheme,
         ) -> LoginHistoryCreateModel:
-    """Трансформитровать LoginHistoryCreateScheme -> LoginHistoryCreateModel."""
+    """Трансформитровать LoginHistoryCreateScheme ->
+        LoginHistoryCreateModel."""
     return LoginHistoryCreateModel(
         username=login_history_scheme.username,
         email=login_history_scheme.email,

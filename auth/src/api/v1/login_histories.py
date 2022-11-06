@@ -1,15 +1,10 @@
 """Роутеры для АПИ к сущности User."""
 
-import uuid
-from http import HTTPStatus
-from auth.src.models import login_history
-
 from flask import Blueprint
 from flask_pydantic import validate
 
-from api.v1.schemes.login_histories import (
-    LoginHistoryScheme, ListLoginHistoryScheme
-)
+from api.v1.schemes.login_histories import (ListLoginHistoryScheme,
+                                            LoginHistoryScheme)
 from models import LoginHistory
 from services.login_history import get_login_history_service
 
