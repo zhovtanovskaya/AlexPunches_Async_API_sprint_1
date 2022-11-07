@@ -16,26 +16,26 @@ class UserActions(object):
     def register(self, username: str, password: str) -> Response:
         """Зарегистрировать пользователя."""
         payload = {'email': username, 'password': password}
-        return self.http_client.post(url=test_settings.signup_url,
+        return self.http_client.post(url=test_settings.signup_endpoint,
                                      payload=payload,
                                      )
 
     def login(self, username: str, password: str) -> Response:
         """Аутентифицировать пользователя."""
-        return self.http_client.auth(url=test_settings.signin_url,
+        return self.http_client.auth(url=test_settings.signin_endpoint,
                                      username=username,
                                      password=password,
                                      )
 
     def logout(self) -> Response:
         """Логаут."""
-        return self.http_client.post(url=test_settings.signout_url)
+        return self.http_client.post(url=test_settings.signout_endpoint)
 
     def refresh(self,
                 headers: MutableMapping[str, Any] | None = None,
                 ) -> Response:
         """Обновить токены."""
-        return self.http_client.post(url=test_settings.refresh_url,
+        return self.http_client.post(url=test_settings.refresh_endpoint,
                                      headers=headers,
                                      )
 
@@ -44,10 +44,10 @@ class UserActions(object):
              payload: Mapping[str, Any] | None = None,
              ) -> Response:
         """Редактировать данные пользователя, частями. PATCH."""
-        url = test_settings.service_url + f'/api/v1/users/{user_id}'
+        url = test_settings.service_url + test_settings.users_endpoint + f'/{user_id}/'  # noqa
         return self.http_client.patch(url=url, payload=payload)
 
     def get_user_detail(self, user_id: str) -> Response:
         """Получить детальные данные о пользователе."""
-        url = test_settings.service_url + f'/api/v1/users/{user_id}'
+        url = test_settings.service_url + test_settings.users_endpoint + f'/{user_id}/'  # noqa
         return self.http_client.get(url=url)
