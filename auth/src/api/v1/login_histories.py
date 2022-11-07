@@ -1,4 +1,4 @@
-"""Роутеры для АПИ к сущности User."""
+"""Роутеры для АПИ к сущности LoginHistory."""
 
 from flask import Blueprint
 from flask_pydantic import validate

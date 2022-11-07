@@ -2,7 +2,7 @@
 
 import logging
 
-from functional.testdata.models import Role, RoleUser, User, LoginHistory
+from functional.testdata.models import LoginHistory, Role, RoleUser, User
 from pydantic import BaseSettings, Field
 
 logging.basicConfig(level=logging.INFO)

@@ -43,7 +43,7 @@ create_login_history = """create table if not exists {login_histories_tablename}
     data_create   varchar      not null,
     data_login    varchar      not null,
     primary key (id),
-    unique (email)
+    unique (username)
 );
 """.format(login_histories_tablename=test_settings.login_histories_tablename)
 
@@ -56,6 +56,8 @@ drop_roles = 'drop table if exists  {roles_tablename};'.format(
 drop_roles_users = 'drop table if exists  {roles_users_tablename};'.format(
     roles_users_tablename=test_settings.roles_users_tablename,
 )
-drop_login_histories = 'drop table if exists {login_histories_tablename};'.format(
-    login_histories_tablename=test_settings.login_histories_tablename,
+drop_login_histories = (
+    'drop table if exists {login_histories_tablename};'.format(
+        login_histories_tablename=test_settings.login_histories_tablename,
+    )
 )

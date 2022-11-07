@@ -1,4 +1,4 @@
-"""Пидантик модели User для сервисов."""
+"""Пидантик модели LoginHistory для сервисов."""
 
 from datetime import datetime
 

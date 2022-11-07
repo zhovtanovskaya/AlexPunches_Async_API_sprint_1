@@ -25,7 +25,7 @@ class LoginHistory(BaseModel):
 
     def __repr__(self):
         return (
-            f'Login history (id={self.id!r},\
-            name={self.username!r},\
-            mail={self.email!r})'
+            f'Login history (id={self.id!r}, '
+            f'name={self.username!r},'
+            f'mail={self.email!r})'
         )

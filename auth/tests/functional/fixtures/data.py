@@ -1,6 +1,4 @@
 """Фикстуры с данными."""
-from psycopg2.extensions import connection as _connection
-from psycopg2.extras import DictCursor, execute_batch
 from typing import Generator
 
 import functional.testdata.tables as ddl_tables
@@ -9,6 +7,8 @@ from faker import Faker
 from functional.settings import test_settings
 from functional.testdata.faker_data import get_faker_data
 from functional.utils.helpers import construct_query
+from psycopg2.extensions import connection as _connection
+from psycopg2.extras import DictCursor, execute_batch
 
 fake = Faker()
 Faker.seed(0)
@@ -60,7 +60,9 @@ def db_insert_fake_data(pg_conn: _connection,
     pg_cursor.execute('truncate table {roles_users_tablename} cascade;'.format(
         roles_users_tablename=test_settings.roles_users_tablename,
     ))
-    pg_cursor.execute('truncate table {login_histories_tablename} cascade;'.format(
-        login_histories_tablename=test_settings.login_histories_tablename,
-    ))
+    pg_cursor.execute(
+        'truncate table {login_histories_tablename} cascade;'.format(
+            login_histories_tablename=test_settings.login_histories_tablename,
+        )
+    )
     pg_conn.commit()

@@ -18,8 +18,6 @@ class LoginHistoryBaseScheme(BaseModel):
 class LoginHistoryScheme(LoginHistoryBaseScheme):
     """Основная схема истории."""
 
-    email: EmailStr
-
     id: UUID
 
 
@@ -32,7 +30,4 @@ class ListLoginHistoryScheme(BaseModel):
 class LoginHistoryCreateScheme(LoginHistoryBaseScheme):
     """Использовать при создании истории."""
 
-    username: str
-    email: EmailStr
-    data_create: datetime
-    data_login: datetime
+    pass

@@ -2,8 +2,8 @@ from functools import lru_cache
 
 from faker import Faker
 from functional.settings import test_settings
-from functional.testdata.models import (
-    BaseDt, LoginHistory, Role, RoleUser, User)
+from functional.testdata.models import (BaseDt, LoginHistory, Role, RoleUser,
+                                        User)
 
 
 fake = Faker()

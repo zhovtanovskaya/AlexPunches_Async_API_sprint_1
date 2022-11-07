@@ -141,3 +141,4 @@ admin_panel/static/
 
 # Other
 .env.dev
+.env.pytests
