@@ -46,5 +46,6 @@ services:
       sh -c "pip install -r /opt/app/tests/functional/requirements.txt
       && python3 /opt/app/tests/functional/utils/wait_for_redis.py
       && pytest /opt/app/tests/functional/src"
+
 volumes:
   pg_data_auth_test:

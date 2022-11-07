@@ -1,3 +1,5 @@
+"""Импортировать сюда модели, чтобы потом импортировать их в одной строке."""
+
 from .base import BaseModel
 from .login_history import LoginHistory
 from .role import Role

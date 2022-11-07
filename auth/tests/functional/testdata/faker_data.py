@@ -1,4 +1,3 @@
-"""Генератор фейковых данных."""
 from functools import lru_cache
 
 from faker import Faker
@@ -6,12 +5,14 @@ from functional.settings import test_settings
 from functional.testdata.models import (
     BaseDt, LoginHistory, Role, RoleUser, User)
 
+
 fake = Faker()
 Faker.seed(0)
 
 
 class FakerData:
     """Фейковые данные для тестов.
+
     !Изменение COUNT_* констант может неожиданно повлиять на значения в данных.
     """
 
@@ -29,7 +30,6 @@ class FakerData:
 
     def get_data_by_table_name(self, table_name: str) -> list[BaseDt] | None:
         """Получить фейковые данные по названию таблицы."""
-        print(f'table_name={table_name}')
         if table_name == test_settings.users_tablename:
             return self.users
         if table_name == test_settings.roles_tablename:
@@ -37,7 +37,7 @@ class FakerData:
         if table_name == test_settings.roles_users_tablename:
             return self.roles_users
         if table_name == test_settings.login_histories_tablename:
-            return self.login_histories
+            return self.login_histories    
         return None
 
     def make_users(self) -> list[User]:
@@ -71,7 +71,7 @@ class FakerData:
             email=fake.email(),
             data_create=fake.date_time(),
             data_login=fake.date_time(),
-        ) for _ in range(self.COUNT_LOGIN_HISTORIES)]
+        ) for _ in range(self.COUNT_LOGIN_HISTORIES)]    
 
 
 @lru_cache()
