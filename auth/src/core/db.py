@@ -1,3 +1,5 @@
+"""Подключить Алхимию."""
+
 from http import HTTPStatus
 
 from flask_sqlalchemy import BaseQuery, SQLAlchemy
@@ -17,6 +19,5 @@ class CustomBaseQuery(BaseQuery):
                                         status_code=HTTPStatus.NOT_FOUND)
         return rv
 
- 
 
 db = SQLAlchemy(query_class=CustomBaseQuery)

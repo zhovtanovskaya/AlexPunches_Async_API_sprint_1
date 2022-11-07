@@ -10,4 +10,4 @@ RUN  pip install --no-cache-dir --upgrade pip \
 
 COPY . .
 
-CMD ["gunicorn", "-b", "0.0.0.0:5000", "--workers", "4", "-k", "uvicorn.workers.UvicornWorker", "src.pywsgi:app"]
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "--workers", "4", "src.pywsgi:app"]

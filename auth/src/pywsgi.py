@@ -1,3 +1,5 @@
+"""Сделать Flask ассинхронным."""
+
 import os
 import sys
 
