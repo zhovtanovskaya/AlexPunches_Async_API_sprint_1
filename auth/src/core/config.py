@@ -65,7 +65,7 @@ class ApiSettings(BaseSettings):
     redis_maxsize: int = 20
     redis_expire_in_seconds: int = 60 * 5
 
-    flask_config: BaseSettings = FlaskConfig()
+    flask_config: FlaskConfig = FlaskConfig()
     paginator_per_page: int = 20
     paginator_start_page: int = 1
 
