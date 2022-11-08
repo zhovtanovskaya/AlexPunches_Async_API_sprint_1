@@ -1,6 +1,7 @@
 """Все конфиги для Auth-приложения."""
 
 import logging
+import os
 from datetime import timedelta
 from functools import lru_cache
 from logging import config as logging_config
@@ -12,7 +13,8 @@ from core.db import db
 from core.logger import LOGGING
 from models import Role, User
 
-load_dotenv('.env.dev')
+REPOSITORY_ROOT = os.path.abspath(os.path.dirname(__file__) + '/../../..')
+load_dotenv(REPOSITORY_ROOT + '/.env.dev')
 logging_config.dictConfig(LOGGING)
 
 
