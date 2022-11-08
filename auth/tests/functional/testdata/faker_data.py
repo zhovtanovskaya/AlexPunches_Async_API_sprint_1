@@ -5,7 +5,6 @@ from functional.settings import test_settings
 from functional.testdata.models import (BaseDt, LoginHistory, Role, RoleUser,
                                         User)
 
-
 fake = Faker()
 Faker.seed(0)
 
@@ -37,7 +36,7 @@ class FakerData:
         if table_name == test_settings.roles_users_tablename:
             return self.roles_users
         if table_name == test_settings.login_histories_tablename:
-            return self.login_histories    
+            return self.login_histories
         return None
 
     def make_users(self) -> list[User]:
@@ -71,7 +70,7 @@ class FakerData:
             email=fake.email(),
             data_create=fake.date_time(),
             data_login=fake.date_time(),
-        ) for _ in range(self.COUNT_LOGIN_HISTORIES)]    
+        ) for _ in range(self.COUNT_LOGIN_HISTORIES)]
 
 
 @lru_cache()

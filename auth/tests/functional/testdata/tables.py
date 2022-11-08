@@ -35,7 +35,8 @@ create_roles_users = """create table if not exists {roles_users_tablename}
 );
 """.format(roles_users_tablename=test_settings.roles_users_tablename)
 
-create_login_history = """create table if not exists {login_histories_tablename}
+create_login_history = """create table if not exists
+{login_histories_tablename}
 (
     id            uuid         not null,
     username      varchar,
