@@ -26,5 +26,5 @@ def create_app():
         db=db, user_model=config.user_model, role_model=config.role_model,
     )
     app.security = Security(app, user_datastore)
-    JWTManager(app)
+    app.jwt = JWTManager(app)
     return app

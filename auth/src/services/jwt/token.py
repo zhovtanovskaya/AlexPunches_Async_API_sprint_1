@@ -2,6 +2,11 @@
 
 from flask_jwt_extended import create_access_token, create_refresh_token
 
+from core.config import config
+from core.redis import jwt_redis_blocklist
+
+ACCESS_EXPIRES = config.flask_config.JWT_ACCESS_TOKEN_EXPIRES
+
 
 class TokenService:
     """Сервис для создания и отзыва JWT-токенов доступа и обновления."""
@@ -12,3 +17,8 @@ class TokenService:
         access_token = create_access_token(identity=username)
         refresh_token = create_refresh_token(identity=username)
         return access_token, refresh_token
+
+    def revoke_tokens(self, token: dict):
+        """Отозвать JWT-токен доступа или обновления."""
+        jti = token['jti']
+        jwt_redis_blocklist.set(jti, '', ex=ACCESS_EXPIRES)
