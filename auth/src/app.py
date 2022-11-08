@@ -1,6 +1,7 @@
 """Создать фабрику для приложения."""
 
 from flask import Flask
+from flask_jwt_extended import JWTManager
 from flask_security import Security, SQLAlchemyUserDatastore
 
 from core.config import config
@@ -25,5 +26,5 @@ def create_app():
         db=db, user_model=config.user_model, role_model=config.role_model,
     )
     app.security = Security(app, user_datastore)
-
+    JWTManager(app)
     return app

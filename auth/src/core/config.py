@@ -1,6 +1,7 @@
 """Все конфиги для Auth-приложения."""
 
 import logging
+from datetime import timedelta
 from functools import lru_cache
 from logging import config as logging_config
 
@@ -46,6 +47,9 @@ class FlaskConfig(BaseSettings):
     SECURITY_SEND_PASSWORD_CHANGE_EMAIL: bool = False
     SECURITY_SEND_PASSWORD_RESET_EMAIL: bool = False
     SECURITY_SEND_PASSWORD_RESET_NOTICE_EMAIL: bool = False
+    JWT_SECRET_KEY: str = ''
+    JWT_ACCESS_TOKEN_EXPIRES: timedelta
+    JWT_REFRESH_TOKEN_EXPIRES: timedelta
 
 
 class ApiSettings(BaseSettings):
