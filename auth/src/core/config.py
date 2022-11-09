@@ -49,7 +49,7 @@ class FlaskConfig(BaseSettings):
     SECURITY_SEND_PASSWORD_CHANGE_EMAIL: bool = False
     SECURITY_SEND_PASSWORD_RESET_EMAIL: bool = False
     SECURITY_SEND_PASSWORD_RESET_NOTICE_EMAIL: bool = False
-    JWT_SECRET_KEY: str = ''
+    JWT_SECRET_KEY: str = Field(..., min_length=8)
     JWT_ACCESS_TOKEN_EXPIRES: timedelta
     JWT_REFRESH_TOKEN_EXPIRES: timedelta
 
