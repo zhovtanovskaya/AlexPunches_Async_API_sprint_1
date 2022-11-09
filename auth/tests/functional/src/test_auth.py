@@ -13,7 +13,7 @@ faker_data = get_faker_data()
     [
         (
          # все OK
-         {'username': 'zzzz@zzzz.zz', 'password': '1111'},
+         {'username': 'zzzz@zzzz.zz', 'password': 'asfhasdf6asdfJJHHJsd7676w'},
          {'status_code': HTTPStatus.CREATED, 'count_users_after_reg': 1},
         ),
         (
@@ -27,8 +27,13 @@ faker_data = get_faker_data()
          {'status_code': HTTPStatus.BAD_REQUEST, 'count_users_after_reg': 0},
         ),
         (
+         # плохой пароль
+         {'username': 'zzzz@zzz.zz', 'password': '       '},
+         {'status_code': HTTPStatus.BAD_REQUEST, 'count_users_after_reg': 0},
+        ),
+        (
          # email занят
-         {'username': faker_data.users[0].email, 'password': '1111'},
+         {'username': faker_data.users[0].email, 'password': '---111---'},
          {'status_code': HTTPStatus.BAD_REQUEST, 'count_users_after_reg': 1},
         ),
     ],

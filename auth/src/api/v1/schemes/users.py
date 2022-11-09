@@ -2,7 +2,7 @@
 
 from uuid import UUID
 
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, Field
 
 import api.v1.schemes.roles as role_schemes
 
@@ -45,7 +45,10 @@ class UserCreateScheme(UserBaseScheme):
     """Использовать при создании пользователя и регистрации."""
 
     email: EmailStr
-    password: str
+    password: str = Field(..., min_length=6)
+
+    class Config:  # noqa
+        anystr_strip_whitespace = True
 
 
 class UserEditScheme(UserBaseScheme):

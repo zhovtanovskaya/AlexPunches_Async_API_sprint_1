@@ -44,7 +44,6 @@ class FakerData:
             login=fake.user_name(),
             active=fake.pybool(),
             password=fake.password(length=10),
-            fs_uniquifier=fake.pystr(),
         ) for _ in range(self.COUNT_USERS)]
 
     def make_roles(self) -> list[Role]:

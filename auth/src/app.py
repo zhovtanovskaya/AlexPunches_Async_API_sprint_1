@@ -20,7 +20,6 @@ def create_app():
 
     app.register_blueprint(roles, url_prefix='/api/v1')
 
-
     db.app = app
     db.init_app(app)
     app.jwt = JWTManager(app)
