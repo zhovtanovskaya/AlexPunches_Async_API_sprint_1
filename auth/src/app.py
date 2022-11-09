@@ -1,6 +1,6 @@
 """Создать фабрику для приложения."""
-
 from flask import Flask
+from flask_jwt_extended import JWTManager
 
 from core.config import config
 from core.db import db
@@ -23,5 +23,6 @@ def create_app():
 
     db.app = app
     db.init_app(app)
+    app.jwt = JWTManager(app)
 
     return app
