@@ -1,70 +1,70 @@
 """Сервис управления ролями в БД."""
+from functools import lru_cache
+from typing import Type
 
-from flask_sqlalchemy.extension import SQLAlchemy
-from sqlalchemy.exc import IntegrityError
-
-import models.role as orm_models
-import services.models.role as services_models
+import services.models.roles as service_models
+from core.db import db
+from models import Role, User
 
 
 class RoleService:
     """Сервис для доступа и редактирования ролей в БД."""
 
-    def __init__(self, rdb: SQLAlchemy):
-        """Проинициализировать подключение к БД."""
-        self.rdb = rdb
+    user_model: Type[db.Model] = User
+    role_model: Type[db.Model] = Role
 
-    def create_role(
-            self,
-            role: services_models.Role,
-            ) -> services_models.Role | None:
+    def get_role_by_id(self, id: int) -> service_models.RoleModel:
+        """Получить Роль."""
+        role = self.role_model.get_or_404(id=id)
+        return service_models.RoleModel.from_orm(role)
+
+    def create_role(self, role: service_models.RoleCreateModel,
+                    ) -> service_models.RoleModel:
         """Создать роль в базе данных.
 
         Returns:
-            Новый объект, представляющий запись в БД.  Или None
-            в случае ошибки.
+            Новый объект, представляющий запись в БД.
         """
-        orm_role = orm_models.Role(
-            name=role.name,
-            description=role.description,
-        )
-        self.rdb.session.add(orm_role)
-        try:
-            self.rdb.session.commit()
-        except IntegrityError:
-            self.rdb.session.rollback()
-            return None
-        return services_models.Role.from_orm(orm_role)
+        new_role = self.role_model(**role.dict())
+        new_role.create()
+        return service_models.RoleModel.from_orm(new_role)
 
-    @staticmethod
-    def get_roles_list() -> list[services_models.Role]:
+    def find_or_create_role(self, name: str) -> service_models.RoleModel:
+        """Вернуть Роль по названию. Если несуществует -- создать и вернуть."""
+        if role := self._get_role_by_rolename(rolename=name):
+            return service_models.RoleModel.from_orm(role)
+        return self.create_role(service_models.RoleCreateModel(name=name))
+
+    def _get_role_by_rolename(self, rolename: str) -> Type[db.Model]:
+        """Получить Роль по названию."""
+        return self.role_model.query.filter(
+            self.role_model.name == rolename,
+        ).first()
+
+    def get_roles_list(self) -> list[service_models.RoleModel]:
         """Получить список всех ролей в БД."""
-        roles = orm_models.Role.query.all()
-        return [services_models.Role.from_orm(r) for r in roles]
+        roles = self.role_model.query.all()
+        return [service_models.RoleModel.from_orm(role) for role in roles]
 
-    def delete_role(self, role_id: int):
+    def delete_role(self, role_id: int) -> None:
         """Удалить роль из базы данных, если существует."""
-        orm_role = orm_models.Role.query.get(role_id)
-        if orm_role:
-            self.rdb.session.delete(orm_role)
-            self.rdb.session.commit()
+        orm_role = self.role_model.get_or_404(id=role_id)
+        orm_role.remove()
 
-    def update_role(
-            self,
-            role: services_models.Role,
-            ) -> services_models.Role | None:
+    def edit_role(self, role: service_models.RoleEditModel,
+                  ) -> service_models.RoleModel | None:
         """Обновить роль в базе данных.
 
         Returns:
             Новый объект, представляющий обновленную запись в БД.
-            Или None, если записи с role.id в БД не существует.
         """
-        if role.id is None:
-            return
-        orm_role = orm_models.Role.query.get(role.id)
-        if orm_role:
-            for field, value in role.dict().items():
-                setattr(orm_role, field, value)
-            self.rdb.session.add(orm_role)
-            self.rdb.session.commit()
-            return services_models.Role.from_orm(orm_role)
+        orm_role = self.role_model.get_or_404(role.id)
+        orm_role.edit(scheme_in=role)
+        orm_role.save()
+        return service_models.RoleModel.from_orm(orm_role)
+
+
+@lru_cache()
+def get_role_service() -> RoleService:
+    """Создать и/или вернуть синглтон RoleService."""
+    return RoleService()
