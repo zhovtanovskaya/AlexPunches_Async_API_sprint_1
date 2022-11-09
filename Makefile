@@ -27,4 +27,4 @@ api-pytest:
 	docker-compose -f ./fastapi/tests/functional/docker-compose.yml logs -f pytests
 auth-pytest:
 	docker-compose -f ./auth/tests/functional/docker-compose.yml --env-file .env.pytests up -d --build
-	docker-compose -f ./auth/tests/functional/docker-compose.yml logs -f auth-pytests
+	docker-compose -f ./auth/tests/functional/docker-compose.yml logs -f

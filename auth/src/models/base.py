@@ -57,7 +57,7 @@ class BaseModel(db.Model):
             self.save()
         except BasicExceptionError as e:
             raise BasicExceptionError(msg.not_created,
-                                      HTTPStatus.INTERNAL_SERVER_ERROR,
+                                      HTTPStatus.BAD_REQUEST,
                                       ) from e
 
     @classmethod
@@ -69,7 +69,7 @@ class BaseModel(db.Model):
             db.session.rollback()
             raise BasicExceptionError(
                 f'{cls.__name__} {msg.not_saved}: {e}',
-                HTTPStatus.INTERNAL_SERVER_ERROR,
+                HTTPStatus.BAD_REQUEST,
             ) from e
 
     def edit(self,
@@ -90,7 +90,7 @@ class BaseModel(db.Model):
         except Exception as e:
             db.session.rollback()
             raise BasicExceptionError(
-                f'{msg.not_removed}: {e}', HTTPStatus.INTERNAL_SERVER_ERROR,
+                f'{msg.not_removed}: {e}', HTTPStatus.BAD_REQUEST,
             ) from e
 
     @classmethod

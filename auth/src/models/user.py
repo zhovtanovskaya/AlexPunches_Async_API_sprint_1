@@ -20,7 +20,7 @@ class User(BaseModel):
 
     id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4,
                    unique=True, nullable=False)
-    email = db.Column(db.String, nullable=False)
+    email = db.Column(db.String, nullable=False, unique=True)
     login = db.Column(db.String, unique=True, nullable=True)
     active = db.Column(db.Boolean, default=True, nullable=False)
     password = db.Column(db.String, nullable=False)
