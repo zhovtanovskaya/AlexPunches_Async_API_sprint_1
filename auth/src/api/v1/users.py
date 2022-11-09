@@ -6,92 +6,80 @@ from http import HTTPStatus
 from flask import Blueprint, Response
 from flask_pydantic import validate
 
-from api.v1.schemes.transform_schemes import (
-    user_create_scheme_to_user_create_model,
-    user_edit_scheme_to_user_edit_model)
-from api.v1.schemes.user_roles import (ListUserRolesScheme, RoleScheme,
-                                       UserRoleCreateScheme)
-from api.v1.schemes.users import UserCreateScheme, UserEditScheme, UserScheme
-from core.exceptions import ResourceNotFoundError
-from models import Role, User
+import api.v1.schemes.transform_schemes as transform
+import api.v1.schemes.user_roles as user_role_schemes
+import api.v1.schemes.users as user_schemes
 from services.user import get_user_service
-from services.user_role import get_user_role_service
-from utils import messages as msg
 
 users = Blueprint('users', __name__)
 user_service = get_user_service()
-user_role_service = get_user_role_service()
 
 
 @users.route('/signup', methods=['POST'])
 @validate(on_success_status=HTTPStatus.CREATED)
-def create_user(body: UserCreateScheme) -> UserScheme:
+def create_user(
+          body: user_schemes.UserCreateScheme,
+) -> user_schemes.UserScheme:
     """Создать пользователя."""
-    user_model = user_create_scheme_to_user_create_model(user_scheme=body)
+    user_model = transform.user_scheme_to_user_model(user_scheme=body)
     user = user_service.register_user(user_in=user_model)
-    user.save()
-    return UserScheme.parse_obj(user.as_dict)
+    return transform.user_model_to_user_scheme(user_model=user)
 
 
 @users.route('/users/<user_id>/', methods=['GET'])
 @validate()
-def get_one_user(user_id: uuid.UUID) -> UserScheme:
+def get_one_user(user_id: uuid.UUID) -> user_schemes.UserScheme:
     """Подробная информация о пользователе."""
-    user_obj = User.get_or_404(id=user_id)
-    return UserScheme.parse_obj(user_obj.as_dict)
+    user = user_service.get_user_by_id(id=user_id)
+    return transform.user_model_to_user_scheme(user_model=user)
 
 
 @users.route('/users/<user_id>/', methods=['PATCH'])
 @validate()
-def edit_user(user_id: uuid.UUID, body: UserEditScheme) -> UserScheme:
+def edit_user(user_id: uuid.UUID,
+              body: user_schemes.UserEditScheme,
+              ) -> user_schemes.UserScheme:
     """Редактировать информацию о пользователе."""
-    user_obj = User.get_or_404(id=user_id)
-    user_model = user_edit_scheme_to_user_edit_model(user_scheme=body)
-    user_service.edit_user(user_obj=user_obj, user_in=user_model)
-    user_obj.save()
-    return UserScheme.parse_obj(user_obj.as_dict)
+    user_model = transform.user_scheme_to_user_model(user_scheme=body)
+    user_model.id = user_id
+    updated_user = user_service.edit(user_in=user_model)
+    return transform.user_model_to_user_scheme(user_model=updated_user)
 
 
 @users.route('/users/<user_id>/roles/', methods=['POST'])
 @validate(on_success_status=HTTPStatus.CREATED)
 def create_user_role(user_id: uuid.UUID,
-                     body: UserRoleCreateScheme,
-                     ) -> ListUserRolesScheme:
+                     body: user_role_schemes.UserRoleCreateScheme,
+                     ) -> user_role_schemes.ListUserRolesScheme:
     """Добавить роль пользователю."""
-    user_obj = User.get_or_404(id=user_id)
-    user_role_service.create_user_role_by_rolename(
-        user=user_obj, rolename=body.name,
-    )
-    user_obj.save()
-    user_roles = [
-        RoleScheme.parse_obj(role.as_dict) for role in user_obj.roles
+    user_service.add_role_to_user_by_rolename(user_id=user_id,
+                                              rolename=body.name,
+                                              )
+    user_roles = user_service.get_user_roles_by_user_id(user_id=user_id)
+    user_roles_scheme = [
+        transform.role_model_to_role_scheme(role_model=role) for role in user_roles  # noqa
     ]
-    return ListUserRolesScheme(user_roles=user_roles)
+    return user_role_schemes.ListUserRolesScheme(user_roles=user_roles_scheme)
 
 
 @users.route('/users/<user_id>/roles/', methods=['GET'])
 @validate()
-def user_role_list(user_id: uuid.UUID) -> ListUserRolesScheme:
+def user_role_list(
+          user_id: uuid.UUID,
+) -> user_role_schemes.ListUserRolesScheme:
     """Список Ролей пользователя."""
-    user_obj = User.get_or_404(id=user_id)
-    user_roles = [
-        RoleScheme.parse_obj(role.as_dict) for role in user_obj.roles
+    user_roles = user_service.get_user_roles_by_user_id(user_id=user_id)
+    user_roles_scheme = [
+        transform.role_model_to_role_scheme(role_model=role) for role in user_roles  # noqa
     ]
-    return ListUserRolesScheme(user_roles=user_roles)
+    return user_role_schemes.ListUserRolesScheme(user_roles=user_roles_scheme)
 
 
 @users.route('/users/<user_id>/roles/<role_id>/', methods=['DELETE'])
 @validate()
 def remove_user_role(user_id: uuid.UUID,
                      role_id: int,
-                     ) -> tuple[Response, HTTPStatus]:
+                     ) -> Response:
     """Удалить Роль у пользователя."""
-    user_obj = User.get_or_404(id=user_id)
-    role_obj = Role.get_or_404(id=role_id)
-    if user_role_service.remove_user_role(user_obj=user_obj,
-                                          role_obj=role_obj,
-                                          ):
-        user_obj.save()
-    else:
-        raise ResourceNotFoundError(msg.not_found_user_role_error)
-    return Response(), HTTPStatus.NO_CONTENT
+    user_service.remove_role_from_user(user_id=user_id, role_id=role_id)
+    return Response('', HTTPStatus.NO_CONTENT)

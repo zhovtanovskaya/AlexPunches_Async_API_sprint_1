@@ -1,4 +1,8 @@
-"""Трансформация из пидантик-схем АПИ в пидантик-модели сервисов."""
+"""Трансформация из пидантик-схем АПИ в пидантик-модели сервисов.
+
+В трансформациях аннотированы Родительские пидантик схемы и модели,
+т.к. в них все возможные поля и они необязательные.
+"""
 
 import api.v1.schemes.roles as role_schemes
 import api.v1.schemes.users as user_schemes
@@ -9,7 +13,11 @@ import services.models.users as service_user_models
 def user_scheme_to_user_model(
           user_scheme: user_schemes.UserBaseScheme,
 ) -> service_user_models.UserBaseModel:
-    """Трансформитровать UserScheme -> UserModel."""
+    """Трансформитровать UserScheme -> UserModel.
+
+    Поисходит через dict() схемы,
+    чтобы сделать exclude_unset и не добавлять unset в итоговую модель.
+    """
     exc_unset_dict = user_scheme.dict(exclude_unset=True)
     user_model = service_user_models.UserBaseModel()
     if 'id' in exc_unset_dict:
@@ -43,6 +51,7 @@ def user_model_to_user_scheme(
 def role_scheme_to_role_model(
           role_scheme: role_schemes.RoleBaseScheme,
 ) -> service_role_models.RoleBaseModel:
+    """Трансформировать RoleScheme -> RoleModel."""
     return service_role_models.RoleBaseModel(
         id=role_scheme.id,
         name=role_scheme.name,
@@ -53,6 +62,7 @@ def role_scheme_to_role_model(
 def role_model_to_role_scheme(
           role_model: service_role_models.RoleBaseModel,
 ) -> role_schemes.RoleBaseScheme:
+    """Трансформировать RoleModel -> RoleScheme."""
     return role_schemes.RoleBaseScheme(
         id=role_model.id,
         name=role_model.name,

@@ -7,7 +7,8 @@ class RoleBaseModel(BaseModel):
 
     В ней все поля необязательные.
     От нее наследуются все остальные, поэтому они используется
-        в трансформерах api.v1.schemes.transform_schemes.
+    в трансформерах api.v1.schemes.transform_schemes.
+
     Дочерние модели переопределяют поля как им нужно.
     """
 
@@ -22,7 +23,7 @@ class RoleModel(RoleBaseModel):
     id: int
     name: str = Field(..., max_length=80)
 
-    class Config:
+    class Config:  # noqa
         orm_mode = True
 
 

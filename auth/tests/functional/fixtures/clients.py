@@ -1,11 +1,11 @@
 """Фикстуры клиентов."""
-import psycopg2
-from psycopg2.extras import DictCursor
 from typing import Generator
 
 import aioredis
+import psycopg2
 import pytest
 from functional.settings import test_settings
+from psycopg2.extras import DictCursor
 from redis.client import Redis
 
 

@@ -2,14 +2,13 @@
 
 import uuid
 
-from flask_security import UserMixin
 from sqlalchemy.dialects.postgresql import UUID
 
 from core.db import db
 from models import BaseModel, roles_users
 
 
-class User(BaseModel, UserMixin):
+class User(BaseModel):
     """Модель пользователя.
 
     В проекте используем библиотеку flask-security-too
@@ -27,8 +26,6 @@ class User(BaseModel, UserMixin):
     password = db.Column(db.String, nullable=False)
     roles = db.relationship('Role', secondary=roles_users, lazy='subquery',
                             backref=db.backref('users', lazy='subquery'))
-
-    fs_uniquifier = db.Column(db.String(255), unique=True, nullable=False)
 
     def __str__(self):
         """Вернуть в виде строки."""
