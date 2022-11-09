@@ -14,7 +14,7 @@ class BasicExceptionError(Exception):
     Чтобы сообщать отдавать клиету jsonify в API.
     """
 
-    status_code = HTTPStatus.BAD_REQUEST
+    status_code: HTTPStatus = HTTPStatus.BAD_REQUEST
 
     def __init__(self,
                  message: str,
@@ -41,6 +41,22 @@ class ResourceNotFoundError(BasicExceptionError):
     pass
 
 
+class ResourceNotAddedError(BasicExceptionError):
+    """Exception, когда что-то не добавилось."""
+
+    pass
+
+
+class AuthenticateRequriedError(BasicExceptionError):
+    """Exception, когда авторизация нужна обязательно."""
+
+    status_code: HTTPStatus = HTTPStatus.UNAUTHORIZED
+
+    def to_dict(self):
+        """Вернуть в виде дикта."""
+        return {'message': self.message}
+
+
 @exceptions.app_errorhandler(BasicExceptionError)
 def exception(error: BasicExceptionError) -> Response:
     """Вернуть jsonify, чтобы для API хорошо."""
@@ -54,4 +70,23 @@ def resource_not_found(error: ResourceNotFoundError) -> Response:
     """Вернуть jsonify, чтобы для API хорошо."""
     response = jsonify(error.to_dict())
     response.status_code = error.status_code
+    return response
+
+
+@exceptions.app_errorhandler(ResourceNotAddedError)
+def resource_not_added(error: ResourceNotAddedError) -> Response:
+    """Вернуть jsonify, чтобы для API хорошо."""
+    response = jsonify(error.to_dict())
+    response.status_code = error.status_code
+    return response
+
+
+@exceptions.app_errorhandler(AuthenticateRequriedError)
+def authenticate_requried(error):
+    """Вернуть jsonify, а в заголовки записать payload."""
+    response = jsonify(error.to_dict())
+    response.status_code = error.status_code
+    if type(error.payload) is dict:
+        for header, value in error.payload.items():
+            response.headers[header] = value
     return response
