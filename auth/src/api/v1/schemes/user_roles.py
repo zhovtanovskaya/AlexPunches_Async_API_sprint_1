@@ -2,8 +2,10 @@
 
 from pydantic import BaseModel
 
+import api.v1.schemes.roles as roles_schemes
 
-class RoleScheme(BaseModel):
+
+class UserRoleScheme(BaseModel):
     """Роль."""
 
     id: int
@@ -23,4 +25,4 @@ class UserRoleCreateScheme(BaseModel):
 class ListUserRolesScheme(BaseModel):
     """Список Ролей."""
 
-    user_roles: list[RoleScheme] = []
+    user_roles: list[roles_schemes.RoleScheme] = []

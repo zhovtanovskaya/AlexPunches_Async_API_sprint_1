@@ -1,11 +1,11 @@
 """Фикстуры клиентов."""
-import psycopg2
-from psycopg2.extras import DictCursor
 from typing import Generator
 
 import aioredis
+import psycopg2
 import pytest
 from functional.settings import test_settings
+from psycopg2.extras import DictCursor
 from redis.client import Redis
 
 
@@ -41,3 +41,9 @@ def pg_cursor(pg_conn):
     """Получить курсор."""
     pg_cursor = pg_conn.cursor()
     yield pg_cursor
+
+
+@pytest.fixture(scope='session')
+def user_action():
+    """Получить класс-эмулятор действий пользователя."""
+    return UserActions()
