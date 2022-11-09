@@ -7,9 +7,7 @@ from logging import config as logging_config
 from dotenv import load_dotenv
 from pydantic import BaseSettings, Field, PostgresDsn
 
-from core.db import db
 from core.logger import LOGGING
-from models import Role, User
 
 load_dotenv('.env.dev')
 logging_config.dictConfig(LOGGING)
@@ -63,8 +61,6 @@ class ApiSettings(BaseSettings):
     paginator_per_page: int = 20
     paginator_start_page: int = 1
 
-    user_model: db.Model = User
-    role_model: db.Model = Role
     admin_role_name: str = 'admin'
 
 

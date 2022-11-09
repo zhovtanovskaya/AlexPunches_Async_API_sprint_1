@@ -5,7 +5,6 @@ import aioredis
 import psycopg2
 import pytest
 from functional.settings import test_settings
-from functional.utils.user_action import UserActions
 from psycopg2.extras import DictCursor
 from redis.client import Redis
 
