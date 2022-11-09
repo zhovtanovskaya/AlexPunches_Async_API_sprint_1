@@ -1,6 +1,7 @@
 """Сервис для управления JWT-токенами."""
 
-from flask_jwt_extended import create_access_token, create_refresh_token
+from flask_jwt_extended import (create_access_token, create_refresh_token,
+                                get_jti)
 
 from core.config import config
 from core.redis import jwt_redis_blocklist
@@ -13,9 +14,17 @@ class TokenService:
 
     @staticmethod
     def create_tokens(username: str) -> tuple[str, str]:
-        """Создать пару JWT-токенов для доступа и обновления."""
+        """Создать пару JWT-токенов для доступа и обновления.
+
+        Созданный refresh JWT содержит собственный уникальный
+        идентификатор 'jti', и уникальный идентификатор access JWT
+        в поле 'ajti'.  Благодаря чему можно отзывать оба токена
+        за один запрос при доступе по refresh-токену.
+        """
         access_token = create_access_token(identity=username)
-        refresh_token = create_refresh_token(identity=username)
+        claims = {'ajti': get_jti(access_token)}
+        refresh_token = create_refresh_token(
+            identity=username, additional_claims=claims)
         return access_token, refresh_token
 
     @staticmethod
