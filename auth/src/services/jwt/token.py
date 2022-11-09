@@ -18,7 +18,8 @@ class TokenService:
         refresh_token = create_refresh_token(identity=username)
         return access_token, refresh_token
 
-    def revoke_tokens(self, token: dict):
+    @staticmethod
+    def revoke_tokens(jwt_payload: dict):
         """Отозвать JWT-токен доступа или обновления."""
-        jti = token['jti']
+        jti = jwt_payload['jti']
         jwt_redis_blocklist.set(jti, '', ex=ACCESS_EXPIRES)

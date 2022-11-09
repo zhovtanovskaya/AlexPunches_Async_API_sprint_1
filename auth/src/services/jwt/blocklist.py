@@ -5,7 +5,7 @@ from manage import app
 
 
 @app.jwt.token_in_blocklist_loader
-def check_if_token_is_revoked(jwt_header, jwt_payload: dict):
+def check_if_token_is_revoked(jwt_header, jwt_payload: dict) -> True:
     """Проверить, что JWT существует в черном списке Redis."""
     jti = jwt_payload['jti']
     token_in_redis = jwt_redis_blocklist.get(jti)
