@@ -1,12 +1,10 @@
 """SQLAlchemy-модель Роли для БД."""
 
-from flask_security import RoleMixin
-
 from core.db import db
 from models import BaseModel
 
 
-class Role(BaseModel, RoleMixin):
+class Role(BaseModel):
     """Роли пользователей.
 
     В проекте используем библиотеку flask-security-too
