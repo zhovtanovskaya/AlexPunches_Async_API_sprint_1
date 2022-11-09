@@ -29,7 +29,7 @@ def create_tables(pg_conn: _connection,
     pg_cursor.execute(ddl_tables.drop_user)
 
 
-@pytest.fixture
+@pytest.fixture(scope='function')
 def db_insert_fake_data(pg_conn: _connection,
                         pg_cursor: DictCursor,
                         create_tables: None,

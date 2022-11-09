@@ -15,7 +15,7 @@ def construct_query(table_name: str,
                     data_class: Type[BaseDt],
                     data: list[BaseDt],
                     ):
-    """Сформировать данные и SQL-запрос к ним в видет строки."""
+    """Сформировать интсерт-данные и SQL-запрос к ним в видет строки."""
     columns = data_class.get_fields()
     stmt = 'INSERT INTO {table_name}'.format(table_name=table_name)
     stmt += ' ({col_str}) '.format(col_str=','.join(columns))

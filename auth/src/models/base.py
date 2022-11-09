@@ -79,7 +79,8 @@ class BaseModel(db.Model):
         """Редактировать объект."""
         _values = scheme_in.dict(exclude=exclude, exclude_unset=True)
         for key in _values:
-            setattr(self, key, _values[key])
+            if _values[key] is not None:
+                setattr(self, key, _values[key])
 
     def remove(self):
         """Удалить объект из БД."""

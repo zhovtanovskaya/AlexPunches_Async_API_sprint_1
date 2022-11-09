@@ -41,3 +41,9 @@ def pg_cursor(pg_conn):
     """Получить курсор."""
     pg_cursor = pg_conn.cursor()
     yield pg_cursor
+
+
+@pytest.fixture(scope='session')
+def user_action():
+    """Получить класс-эмулятор действий пользователя."""
+    return UserActions()

@@ -17,7 +17,9 @@ def create_app():
 
     app.register_blueprint(exceptions)
     app.register_blueprint(users, url_prefix='/api/v1')
+
     app.register_blueprint(roles, url_prefix='/api/v1')
+
 
     db.app = app
     db.init_app(app)
