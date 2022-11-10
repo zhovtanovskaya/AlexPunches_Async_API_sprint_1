@@ -1,12 +1,16 @@
 """Конфиги для тестов."""
 
 import logging
+import os
 
+from dotenv import load_dotenv
 from functional.testdata.models import Role, RoleUser, User
 from pydantic import BaseSettings, Field
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+REPOSITORY_ROOT = os.path.abspath(os.path.dirname(__file__) + '/../../..')
+load_dotenv(REPOSITORY_ROOT + '/.env.pytests')
 
 
 class GetUrlMixin:
@@ -23,14 +27,14 @@ class GetUrlMixin:
 class RedisBaseUrl(BaseSettings, GetUrlMixin):
     """Переменные для Редиса."""
 
-    host: str = Field(..., env='redis_host')
+    host: str = Field('localhost', env='redis_host')
     port: str = Field('6379', env='redis_port')
 
 
 class AuthBaseUrl(BaseSettings, GetUrlMixin):
     """Хост приложения."""
 
-    host: str = Field(..., env='auth_host')
+    host: str = Field('localhost', env='auth_host')
     port: str = Field('5000', env='auth_port')
 
 
