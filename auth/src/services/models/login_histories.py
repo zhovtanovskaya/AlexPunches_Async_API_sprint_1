@@ -10,5 +10,4 @@ class LoginHistoryCreateModel(BaseModel):
 
     username: str
     email: EmailStr
-    data_create: datetime
-    data_login: datetime
+    date_login: datetime

@@ -68,9 +68,8 @@ class FakerData:
             id=fake.uuid4(),
             username=fake.user_name(),
             email=fake.email(),
-            data_create=fake.date_time(),
-            data_login=fake.date_time(),
-        ) for _ in range(self.COUNT_LOGIN_HISTORIES)]
+            date_login=fake.date_time(),
+        ) for _ in range(self.COUNT_USERS)]
 
 
 @lru_cache()

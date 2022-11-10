@@ -55,5 +55,4 @@ class LoginHistory(BaseDt):
     id: str
     username: str
     email: str
-    data_create: datetime
-    data_login: datetime
+    date_login: datetime

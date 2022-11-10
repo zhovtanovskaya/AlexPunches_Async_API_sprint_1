@@ -41,8 +41,7 @@ create_login_history = """create table if not exists
     id            uuid         not null,
     username      varchar,
     email         varchar      not null,
-    data_create   varchar      not null,
-    data_login    varchar      not null,
+    date_login    varchar      not null,
     primary key (id),
     unique (username)
 );

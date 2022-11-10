@@ -16,8 +16,7 @@ class LoginHistory(BaseModel):
                    unique=True, nullable=False)
     username = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String, nullable=False)
-    data_create = db.Column(db.DateTime(), default=datetime.utcnow)
-    data_login = db.Column(db.DateTime(), default=datetime.utcnow)
+    date_login = db.Column(db.DateTime(), default=datetime.utcnow)
     # не решил нужна ли перекрестая ссылка на пользователя
     # user = db.relationship(
     #   'User', secondary=users_login_histories, lazy="subquery",

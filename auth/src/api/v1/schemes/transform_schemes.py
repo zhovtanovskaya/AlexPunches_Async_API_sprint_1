@@ -33,5 +33,4 @@ def login_history_create_scheme_to_login_history_create_model(
     return LoginHistoryCreateModel(
         username=login_history_scheme.username,
         email=login_history_scheme.email,
-        data_create=login_history_scheme.data_create,
-        data_login=login_history_scheme.data_login,)
+        date_login=login_history_scheme.date_login,)
