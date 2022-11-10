@@ -63,7 +63,7 @@ def test_user_registration(db_insert_fake_data,
     'credentials, expected_response',
     [
         (
-         {'username': faker_data.users[0].login, 'password': 'pwd'},
+         {'email': faker_data.users[0].email, 'password': 'pwd'},
          {'status': HTTPStatus.OK, 'count_users_after_reg': 1},
         ),
     ],
@@ -75,9 +75,36 @@ def test_signin(
         credentials,
         expected_response,
         ):
+    """Тест получения JWT к API."""
     response = http_client.post(
         url=test_settings.signin_endpoint,
         payload=credentials,
     )
     response_json = response.json()
-    assert tuple(response_json.keys()) == ('access_token', 'refresh_token')
+    # import base64
+    # raise Exception(response_json['refresh_token'])
+    # access_jwt = response_json['access_token']
+    # jwt_header, jwt_payload, jwt_signature = access_jwt.split('.')
+    # raise Exception(base64.b64decode(jwt_payload))
+    assert tuple(response_json.keys()) == ('access_token', 'refresh_token'), response_json
+
+
+def test_signout(
+        http_client,
+        ):
+    """Тест отзыва JWT."""
+    refresh_token = (
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'
+        'eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2ODA4NzIxNywianRpIjoiMDEzZDc3OGEtOGI0'
+        'Yi00NzBmLWJiMDUtZWE5NDcxOTJjMTM5IiwidHlwZSI6InJlZnJlc2giLCJzdWIiOiJn'
+        'd2lsbGlhbXNAZXhhbXBsZS5jb20iLCJuYmYiOjE2NjgwODcyMTcsImV4cCI6MTY3MDY3'
+        'OTIxNywiYWp0aSI6IjhkYjhjN2UzLTdkYzYtNGEwNy1iOTg0LTkyNzc1OTc0OWY4YSJ9'
+        '.UOrX2wU__i5YMLd22ykKHxa1tyHU6EVIlg-2y39q3sw'
+    )
+    response = http_client.post(
+        url=test_settings.signout_endpoint,
+        headers={'Authorization': f'Bearer {refresh_token}'},
+    )
+    # 401 {'msg': 'Missing Authorization Header'}
+    # 422 {'msg': 'Not enough segments'}
+    assert response.status_code == HTTPStatus.NO_CONTENT
