@@ -2,6 +2,7 @@
 from http import HTTPStatus
 
 import pytest
+
 from functional.settings import test_settings
 from functional.testdata.faker_data import get_faker_data
 
@@ -56,3 +57,28 @@ def test_user_registration(db_insert_fake_data,
 
     assert response.status_code == expected_answer['status_code']
     assert count_obj == expected_answer['count_users_after_reg']
+
+
+@pytest.mark.parametrize(
+    'credentials, expected_response',
+    [
+        (
+         {'username': faker_data.users[0].login, 'password': 'pwd'},
+         {'status': HTTPStatus.OK, 'count_users_after_reg': 1},
+        ),
+    ],
+)
+def test_signin(
+        db_insert_fake_data,
+        pg_cursor,
+        http_client,
+        credentials,
+        expected_response,
+        ):
+    # raise Exception(credentials)
+    response = http_client.post(
+        url=test_settings.signin_endpoint,
+        payload=credentials,
+    )
+    response_json = response.json()
+    assert response_json['access_token'] is None
