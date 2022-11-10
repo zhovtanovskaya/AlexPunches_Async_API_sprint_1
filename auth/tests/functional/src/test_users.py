@@ -30,7 +30,7 @@ def test_user_after_edit_response(db_insert_fake_data,
     new_login = 'aaaaaa'
     payload = {'email': new_email, 'login': new_login}
 
-    response = user_action.edit(user_id=user.id, payload=payload)
+    response = user_action.edit_user(user_id=user.id, payload=payload)
     r_user = response.json()
 
     assert response.status_code == HTTPStatus.OK
@@ -45,7 +45,7 @@ def test_user_edit(db_insert_fake_data, user_action, pg_cursor, user):
     new_email = 'aaa@aaa.aa'
     payload = {'email': new_email, 'login': new_login}
 
-    response = user_action.edit(user_id=user.id, payload=payload)
+    response = user_action.edit_user(user_id=user.id, payload=payload)
     pg_stmt = f'SELECT * FROM {test_settings.users_tablename} '
     pg_stmt += f"WHERE id = '{faker_data.users[10].id}';"
     pg_cursor.execute(pg_stmt)
