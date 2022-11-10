@@ -1,17 +1,18 @@
 """Все конфиги для Auth-приложения."""
 
 import logging
+import os
+from datetime import timedelta
 from functools import lru_cache
 from logging import config as logging_config
 
 from dotenv import load_dotenv
 from pydantic import BaseSettings, Field, PostgresDsn
 
-from core.db import db
 from core.logger import LOGGING
-from models import Role, User
 
-load_dotenv('.env.dev')
+REPOSITORY_ROOT = os.path.abspath(os.path.dirname(__file__) + '/../../..')
+load_dotenv(REPOSITORY_ROOT + '/.env.dev')
 logging_config.dictConfig(LOGGING)
 
 
@@ -46,6 +47,9 @@ class FlaskConfig(BaseSettings):
     SECURITY_SEND_PASSWORD_CHANGE_EMAIL: bool = False
     SECURITY_SEND_PASSWORD_RESET_EMAIL: bool = False
     SECURITY_SEND_PASSWORD_RESET_NOTICE_EMAIL: bool = False
+    JWT_SECRET_KEY: str = Field(..., min_length=8)
+    JWT_ACCESS_TOKEN_EXPIRES: timedelta
+    JWT_REFRESH_TOKEN_EXPIRES: timedelta
 
 
 class ApiSettings(BaseSettings):
@@ -59,12 +63,10 @@ class ApiSettings(BaseSettings):
     redis_maxsize: int = 20
     redis_expire_in_seconds: int = 60 * 5
 
-    flask_config: BaseSettings = FlaskConfig()
+    flask_config: FlaskConfig = FlaskConfig()
     paginator_per_page: int = 20
     paginator_start_page: int = 1
 
-    user_model: db.Model = User
-    role_model: db.Model = Role
     admin_role_name: str = 'admin'
 
 

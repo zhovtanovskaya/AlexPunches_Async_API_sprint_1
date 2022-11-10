@@ -28,7 +28,6 @@ class User(BaseDt):
     login: str
     active: str
     password: str
-    fs_uniquifier: str
 
 
 @dataclass(slots=True)

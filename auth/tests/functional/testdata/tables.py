@@ -9,10 +9,9 @@ create_user = """create table if not exists {users_tablename}
     login         varchar,
     active        boolean      not null,
     password      varchar      not null,
-    fs_uniquifier varchar(255) not null,
     primary key (id),
     unique (login),
-    unique (fs_uniquifier)
+    unique (email)
 );
 """.format(users_tablename=test_settings.users_tablename)
 

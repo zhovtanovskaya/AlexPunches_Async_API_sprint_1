@@ -1,3 +1,4 @@
+"""Генератор фейковых данных."""
 from functools import lru_cache
 
 from faker import Faker
@@ -10,8 +11,9 @@ Faker.seed(0)
 
 
 class FakerData:
-    """Фейковые данные для тестов.
+    """Класс Фейкомёт.
 
+    Фейковые данные для тестов.
     !Изменение COUNT_* констант может неожиданно повлиять на значения в данных.
     """
 
@@ -47,7 +49,6 @@ class FakerData:
             login=fake.user_name(),
             active=fake.pybool(),
             password=fake.password(length=10),
-            fs_uniquifier=fake.pystr(),
         ) for _ in range(self.COUNT_USERS)]
 
     def make_roles(self) -> list[Role]:
