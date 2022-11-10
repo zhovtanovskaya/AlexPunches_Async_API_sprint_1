@@ -1,3 +1,4 @@
+"""Модель истории логинов для БД."""
 import uuid
 from datetime import datetime
 
@@ -8,8 +9,8 @@ from models import BaseModel
 
 
 class LoginHistory(BaseModel):
-    """Модель LoginHistory.
-    """
+    """Модель LoginHistory."""
+
     __tablename__ = 'login_history'
 
     id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4,
@@ -23,6 +24,7 @@ class LoginHistory(BaseModel):
     #   backref=db.backref('login_histories', lazy='subquery'))
 
     def __repr__(self):
+        """Вернуть repr()."""
         return (
             f'Login history (id={self.id!r}, '
             f'name={self.username!r},'

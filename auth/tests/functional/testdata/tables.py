@@ -41,8 +41,7 @@ create_login_history = """create table if not exists
     username      varchar,
     email         varchar      not null,
     date_login    varchar      not null,
-    primary key (id),
-    unique (username)
+    primary key (id)
 );
 """.format(login_histories_tablename=test_settings.login_histories_tablename)
 

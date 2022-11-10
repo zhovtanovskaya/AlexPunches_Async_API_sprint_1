@@ -4,10 +4,8 @@
 т.к. в них все возможные поля и они необязательные.
 """
 
-import api.v1.schemes.login_histories as lh_scheme
 import api.v1.schemes.roles as role_schemes
 import api.v1.schemes.users as user_schemes
-import services.models.login_histories as lh_models
 import services.models.roles as service_role_models
 import services.models.users as service_user_models
 
@@ -70,14 +68,3 @@ def role_model_to_role_scheme(
         name=role_model.name,
         description=role_model.description,
     )
-
-
-def login_history_create_scheme_to_login_history_create_model(
-        login_history_scheme: lh_scheme.LoginHistoryCreateScheme,
-        ) -> lh_models.LoginHistoryCreateModel:
-    """Трансформитровать LoginHistoryCreateScheme ->
-        LoginHistoryCreateModel."""
-    return lh_models.LoginHistoryCreateModel(
-        username=login_history_scheme.username,
-        email=login_history_scheme.email,
-        date_login=login_history_scheme.date_login,)

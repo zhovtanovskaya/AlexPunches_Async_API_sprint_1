@@ -62,6 +62,6 @@ def db_insert_fake_data(pg_conn: _connection,
     pg_cursor.execute(
         'truncate table {login_histories_tablename} cascade;'.format(
             login_histories_tablename=test_settings.login_histories_tablename,
-        )
+        ),
     )
     pg_conn.commit()

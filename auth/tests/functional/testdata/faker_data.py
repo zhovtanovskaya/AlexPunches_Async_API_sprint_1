@@ -64,13 +64,21 @@ class FakerData:
         pass
 
     def make_histories(self) -> list[LoginHistory]:
-        """Создать тестовых данных для таблицы login_histories."""
+        """Создать тестовых данных для таблицы login_histories.
+
+        В которой у Юзера[0] будет 10 записей в LoginHistory.
+        """
+        list_ints = []
+        for _ in range(self.COUNT_LOGIN_HISTORIES):
+            list_ints.append(fake.random_int(min=1, max=self.COUNT_USERS - 1))
+        list_ints.extend([0] * 10)
+
         return [LoginHistory(
             id=fake.uuid4(),
-            username=fake.user_name(),
-            email=fake.email(),
+            username=self.users[x].login,
+            email=self.users[x].email,
             date_login=fake.date_time(),
-        ) for _ in range(self.COUNT_USERS)]
+        ) for x in list_ints]
 
 
 @lru_cache()

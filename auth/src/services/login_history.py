@@ -1,28 +1,28 @@
+"""Модуль уравления историей входов пользователей."""
 from functools import lru_cache
-from typing import Type
 
-from core.db import db
+import services.models.login_histories as service_models
+from models import LoginHistory
 
 
-class LoginHistoryManagerService:
+class LoginHistoryService:
     """Класс управления историей пользователей.
 
     Создавать, получать полный список, получить по конкретному id.
     """
 
-    def __init__(self, login_history_model: Type[db.Model]):
-        self.login_history_model = login_history_model
+    login_history_model = LoginHistory
 
-    def create_history(self, **kwargs) -> db.Model:
-        """Создать историю пользователя."""
-        login_history = self.login_history_model(**kwargs)
-        db.session.add(login_history)
-        login_history.save()
-
-        return login_history
+    def create_history(self,
+                       login_history: service_models.LoginHistoryCreateModel,
+                       ) -> service_models.LoginHistoryModel:
+        """Добавить запись в историю пользователя."""
+        singin = LoginHistory(**login_history.dict())
+        singin.create()
+        return service_models.LoginHistoryModel.from_orm(singin)
 
 
 @lru_cache()
-def get_login_history_manager_service(login_history_model: Type[db.Model],
-                                      ) -> LoginHistoryManagerService:
-    return LoginHistoryManagerService(login_history_model=login_history_model)
+def get_login_history_service() -> LoginHistoryService:
+    """Синглтон."""
+    return LoginHistoryService()

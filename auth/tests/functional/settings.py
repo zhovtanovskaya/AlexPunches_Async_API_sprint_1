@@ -64,7 +64,7 @@ class TestSettings(BaseSettings):
     users_tablename = 'users'
     roles_tablename = 'roles'
     roles_users_tablename = 'roles_users'
-    login_histories_tablename = 'login_histories'
+    login_histories_tablename = 'login_history'
     fake_data_map = {
         users_tablename: User,
         roles_tablename: Role,
