@@ -89,9 +89,7 @@ def test_signin(
     assert tuple(response_json.keys()) == ('access_token', 'refresh_token'), response_json
 
 
-def test_signout(
-        http_client,
-        ):
+def test_signout(http_client):
     """Тест отзыва JWT."""
     refresh_token = (
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'
@@ -108,3 +106,22 @@ def test_signout(
     # 401 {'msg': 'Missing Authorization Header'}
     # 422 {'msg': 'Not enough segments'}
     assert response.status_code == HTTPStatus.NO_CONTENT
+
+
+def test_refresh(http_client):
+    """Тест обновления пары JWT."""
+    refresh_token = (
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'
+        'eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2ODA4NzIxNywianRpIjoiMDEzZDc3OGEtOGI0'
+        'Yi00NzBmLWJiMDUtZWE5NDcxOTJjMTM5IiwidHlwZSI6InJlZnJlc2giLCJzdWIiOiJn'
+        'd2lsbGlhbXNAZXhhbXBsZS5jb20iLCJuYmYiOjE2NjgwODcyMTcsImV4cCI6MTY3MDY3'
+        'OTIxNywiYWp0aSI6IjhkYjhjN2UzLTdkYzYtNGEwNy1iOTg0LTkyNzc1OTc0OWY4YSJ9'
+        '.UOrX2wU__i5YMLd22ykKHxa1tyHU6EVIlg-2y39q3sw'
+    )
+    response = http_client.post(
+        url=test_settings.refresh_endpoint,
+        headers={'Authorization': f'Bearer {refresh_token}'},
+    )
+    response_json = response.json()
+    assert tuple(response_json.keys()) == ('access_token', 'refresh_token'), response_json
+
