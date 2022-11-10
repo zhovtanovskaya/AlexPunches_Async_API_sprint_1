@@ -4,7 +4,7 @@ repos:
     -   id: isort
         name: isort
         description: ordering imports
-        entry: isort --settings-path setup.cfg --src auth/src
+        entry: isort --settings-path setup.cfg --src auth/src --src auth/tests/functional
         verbose: true
         language: python
         types: [python]
