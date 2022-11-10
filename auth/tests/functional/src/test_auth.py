@@ -1,4 +1,4 @@
-"""Тесты механизмов аутенитификации."""
+"""Тесты аутентификации."""
 from http import HTTPStatus
 
 import pytest
@@ -75,10 +75,9 @@ def test_signin(
         credentials,
         expected_response,
         ):
-    # raise Exception(credentials)
     response = http_client.post(
         url=test_settings.signin_endpoint,
         payload=credentials,
     )
     response_json = response.json()
-    assert response_json['access_token'] is None
+    assert tuple(response_json.keys()) == ('access_token', 'refresh_token')
