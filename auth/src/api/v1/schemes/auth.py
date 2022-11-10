@@ -2,7 +2,7 @@ from pydantic import BaseModel, EmailStr
 
 
 class UserSigninScheme(BaseModel):
-    """Использовать при создании пользователя и регистрации."""
+    """Схема JSON для логина."""
 
     email: EmailStr
     password: str
