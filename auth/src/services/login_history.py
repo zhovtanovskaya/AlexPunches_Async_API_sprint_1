@@ -1,22 +1,28 @@
-"""Сервис для управления пользвателями."""
-
 from functools import lru_cache
+from typing import Type
 
-from core.config import config
-from services.login_history import get_login_history_manager_service
+from core.db import db
 
 
-class LoginHistoryService:
-    """Класс управления пользователя."""
+class LoginHistoryManagerService:
+    """Класс управления историей пользователей.
 
-    def __init__(self):
-        """Подключить LoginHistoryService."""
-        self.manager = get_login_history_manager_service(
-            login_history_model=config.login_history_model,
-        )
+    Создавать, получать полный список, получить по конкретному id.
+    """
+
+    def __init__(self, login_history_model: Type[db.Model]):
+        self.login_history_model = login_history_model
+
+    def create_history(self, **kwargs) -> db.Model:
+        """Создать историю пользователя."""
+        login_history = self.login_history_model(**kwargs)
+        db.session.add(login_history)
+        login_history.save()
+
+        return login_history
 
 
 @lru_cache()
-def get_login_history_service() -> LoginHistoryService:
-    """Создать и/или вернуть синглтон LoginHistoryService."""
-    return LoginHistoryService()
+def get_login_history_manager_service(login_history_model: Type[db.Model],
+                                      ) -> LoginHistoryManagerService:
+    return LoginHistoryManagerService(login_history_model=login_history_model)
