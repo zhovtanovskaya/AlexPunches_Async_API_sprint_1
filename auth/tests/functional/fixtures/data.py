@@ -20,11 +20,13 @@ def create_tables(pg_conn: _connection,
                   ) -> Generator[None, None, None]:
     """Создать таблицы БД."""
     pg_cursor.execute(ddl_tables.create_user)
+    pg_cursor.execute(ddl_tables.create_login_history)
     pg_cursor.execute(ddl_tables.create_roles)
     pg_cursor.execute(ddl_tables.create_roles_users)
     pg_conn.commit()
     yield
     pg_cursor.execute(ddl_tables.drop_roles_users)
+    pg_cursor.execute(ddl_tables.drop_login_histories)
     pg_cursor.execute(ddl_tables.drop_roles)
     pg_cursor.execute(ddl_tables.drop_user)
 
@@ -57,4 +59,9 @@ def db_insert_fake_data(pg_conn: _connection,
     pg_cursor.execute('truncate table {roles_users_tablename} cascade;'.format(
         roles_users_tablename=test_settings.roles_users_tablename,
     ))
+    pg_cursor.execute(
+        'truncate table {login_histories_tablename} cascade;'.format(
+            login_histories_tablename=test_settings.login_histories_tablename,
+        ),
+    )
     pg_conn.commit()

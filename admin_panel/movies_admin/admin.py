@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
+
 from movies_admin.models import (Filmwork, Genre, GenreFilmwork, Person,
                                  PersonFilmwork)
 
