@@ -1,13 +1,13 @@
 from functools import lru_cache
 from typing import Mapping
 
-from api.v1.shemes.person import Person as PersonScheme
 from db.elastic import get_elastic
-from fastapi import Depends
 from pydantic import BaseModel
 
 from api.v1 import SearchEngineSortedPaginate
+from api.v1.shemes.person import Person as PersonScheme
 from core.config import config
+from fastapi import Depends
 from models.film import Film
 from models.person import Person
 from services import BaseSearchEngineService, NotFoundSearchEngineError

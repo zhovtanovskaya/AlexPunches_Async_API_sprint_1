@@ -3,6 +3,7 @@ from flask import Flask
 from flask_jwt_extended import JWTManager
 
 from api.v1.auth import auth
+from api.v1.login_histories import login_histories
 from api.v1.roles import roles
 from api.v1.users import users
 from core.config import config
@@ -19,6 +20,7 @@ def create_app():
     app.register_blueprint(users, url_prefix='/api/v1')
     app.register_blueprint(roles, url_prefix='/api/v1')
     app.register_blueprint(auth, url_prefix='/api/v1')
+    app.register_blueprint(login_histories, url_prefix='/api/v1')
 
     db.app = app
     db.init_app(app)

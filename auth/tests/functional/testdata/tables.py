@@ -34,6 +34,17 @@ create_roles_users = """create table if not exists {roles_users_tablename}
 );
 """.format(roles_users_tablename=test_settings.roles_users_tablename)
 
+create_login_history = """create table if not exists
+{login_histories_tablename}
+(
+    id            uuid         not null,
+    username      varchar,
+    email         varchar      not null,
+    date_login    varchar      not null,
+    primary key (id)
+);
+""".format(login_histories_tablename=test_settings.login_histories_tablename)
+
 drop_user = 'drop table if exists {users_tablename};'.format(
     users_tablename=test_settings.users_tablename,
 )
@@ -42,4 +53,9 @@ drop_roles = 'drop table if exists  {roles_tablename};'.format(
 )
 drop_roles_users = 'drop table if exists  {roles_users_tablename};'.format(
     roles_users_tablename=test_settings.roles_users_tablename,
+)
+drop_login_histories = (
+    'drop table if exists {login_histories_tablename};'.format(
+        login_histories_tablename=test_settings.login_histories_tablename,
+    )
 )
