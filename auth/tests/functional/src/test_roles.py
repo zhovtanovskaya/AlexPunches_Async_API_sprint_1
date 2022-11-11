@@ -68,7 +68,7 @@ def test_list_roles(db_insert_fake_data, user_action, pg_cursor, roles):
     assert len(r_roles.get('list_roles')) == len(roles)
 
 
-@pytest.mark.skip(reason='решить проблему с psycopg2.errors.UniqueViolation')
+# @pytest.mark.skip(reason='решить проблему с psycopg2.errors.UniqueViolation')
 @pytest.mark.parametrize(
     'new_role, expected_answer',
     [

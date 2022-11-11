@@ -7,15 +7,6 @@ from functional.settings import test_settings
 from functional.testdata.faker_data import get_faker_data
 
 faker_data = get_faker_data()
-# Срок жизни этого refresh-токена до 2032 года.
-refresh_token = (
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'
-    'eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2ODE3NzcxNCwianRpIjoiNWM5Y2ZiNzYtZGFjMS00'
-    'ZDdlLThiOWItYmJmM2FlY2VmYmM2IiwidHlwZSI6InJlZnJlc2giLCJzdWIiOiJnd2lsbGlh'
-    'bXNAZXhhbXBsZS5jb20iLCJuYmYiOjE2NjgxNzc3MTQsImV4cCI6MTk3OTIxNzcxNCwiYWp0'
-    'aSI6Ijc2MWJmNjRjLTlhOTMtNGViOC05NTI1LWU2OGQwYTNjNjIyNyIsInJvbGVzIjpbXX0.'
-    '3YWcKtGH7ETAu3S3rheCogTg4KfUZMoW8cNLbi3g6yg'
-)
 
 
 @pytest.mark.parametrize(
@@ -69,11 +60,11 @@ def test_user_registration(db_insert_fake_data,
 
 
 @pytest.mark.parametrize(
-    'credentials, expected_response',
+    'user, expected_response',
     [
         (
-         {'email': faker_data.users[0].email, 'password': 'password'},
-         {'status': HTTPStatus.OK, 'count_users_after_reg': 1},
+         faker_data.users[0],
+         {'status': HTTPStatus.OK},
         ),
     ],
 )
@@ -81,33 +72,51 @@ def test_signin(
         db_insert_fake_data,
         pg_cursor,
         http_client,
-        credentials,
+        user,
         expected_response,
         ):
     """Тест получения JWT к API."""
     response = http_client.post(
         url=test_settings.signin_endpoint,
-        payload=credentials,
+        payload={'email': user.email, 'password': user.password},
     )
-    assert response.status_code == expected_response['status'], response.json()
     response_json = response.json()
-    assert tuple(response_json.keys()) == ('access_token', 'refresh_token'), response_json  # noqa
+
+    assert response.status_code == expected_response['status']
+    assert tuple(response_json.keys()) == ('access_token', 'refresh_token')
 
 
-def test_signout(http_client):
-    """Тест отзыва JWT."""
+@pytest.mark.parametrize('user', [faker_data.users[0], faker_data.users[50]])
+def test_signout(db_insert_fake_data, http_client, user):
+    """Тест отзыва JWT.
+
+    Сначала получаем рефреш-токен через АПИ, потом тестируем его отзыв отзыв.
+    Получение токена проверяется в другом тесте -- test_signin().
+    """
+    # получить
+    response_json = http_client.post(
+        url=test_settings.signin_endpoint,
+        payload={'email': user.email, 'password': user.password},
+    ).json()
+    r_refresh_token = response_json.get('refresh_token')
+
+    # отозвать
     response = http_client.post(
         url=test_settings.signout_endpoint,
-        headers={'Authorization': f'Bearer {refresh_token}'},
+        headers={'Authorization': f'Bearer {r_refresh_token}'},
     )
+
     assert response.status_code == HTTPStatus.NO_CONTENT
+    # assert TODO чекнуть Редис
 
 
-def test_refresh(http_client):
+@pytest.mark.parametrize('user', [faker_data.users[20], faker_data.users[40]])
+def test_refresh(db_insert_fake_data, user_action, user):
     """Тест обновления пары JWT."""
-    response = http_client.post(
-        url=test_settings.refresh_endpoint,
-        headers={'Authorization': f'Bearer {refresh_token}'},
-    )
-    response_json = response.json()
-    assert tuple(response_json.keys()) == ('access_token', 'refresh_token'), response_json  # noqa
+    response = user_action.login(email=user.email, password=user.password)
+    r_refresh_token = response.json().get('refresh_token')
+    headers = {'Authorization': f'Bearer {r_refresh_token}'}
+
+    response_json = user_action.refresh(headers=headers).json()
+
+    assert tuple(response_json.keys()) == ('access_token', 'refresh_token')

@@ -21,11 +21,11 @@ class UserActions(object):
                                      payload=payload,
                                      )
 
-    def login(self, username: str, password: str) -> Response:
+    def login(self, email: str, password: str) -> Response:
         """Аутентифицировать пользователя."""
-        return self.http_client.auth(url=test_settings.signin_endpoint,
-                                     username=username,
-                                     password=password,
+        payload = {'email': email, 'password': password}
+        return self.http_client.post(url=test_settings.signin_endpoint,
+                                     payload=payload,
                                      )
 
     def logout(self) -> Response:
