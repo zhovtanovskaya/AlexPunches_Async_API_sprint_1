@@ -14,7 +14,7 @@ auth = Blueprint('auth', __name__)
 
 @auth.route('/signin', methods=['POST'])
 @validate()
-def signin(body: UserSigninScheme):
+def signin(body: UserSigninScheme) -> Response:
     """Проверить, что пользователь существует и выдать пару JWT."""
     services_auth.authenticate(body.email, body.password)
     access_token, refresh_token = services_jwt_token.create_tokens(body.email)
@@ -23,7 +23,7 @@ def signin(body: UserSigninScheme):
 
 @auth.route('/signout', methods=['POST'])
 @jwt_required(refresh=True)
-def signout():
+def signout() -> Response:
     """Отозвать JWT доступа и обновления.
 
     Ожидает заголовок Authorization: Bearer <refresh_token>
@@ -35,7 +35,7 @@ def signout():
 
 @auth.route('refresh/', methods=['POST'])
 @jwt_required(refresh=True)
-def refresh():
+def refresh() -> Response:
     """Получить новую пару JWT, и отозвать текущую пару JWT.
 
     Ожидает заголовок Authorization: Bearer <refresh_token>
