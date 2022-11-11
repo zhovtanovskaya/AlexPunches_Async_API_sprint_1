@@ -28,6 +28,16 @@ class User(BaseDt):
     active: str
     password: str
 
+    def __post_init__(self):
+        """Установить хэш пароля по умолчанию всем тестовым пользователям."""
+        # Хэш пароля вычислен так:
+        # werkzeug.security.generate_password_hash('password', method='sha256')
+        self.password = (
+            'sha256$'
+            '5Q531DSL7FIi8aVB$'
+            'eb5264e16a2bff7676f841877113f9f8f3c37c6694e6f731817a26d126f7e6ef'
+        )
+
 
 @dataclass(slots=True)
 class Role(BaseDt):
