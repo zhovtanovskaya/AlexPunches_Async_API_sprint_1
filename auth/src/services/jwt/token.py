@@ -8,6 +8,7 @@ from pydantic import BaseModel, Field, PositiveInt
 
 from core.config import config
 from core.redis import jwt_redis_blocklist
+from models import User
 
 ACCESS_EXPIRES = config.flask_config.JWT_ACCESS_TOKEN_EXPIRES
 
@@ -31,43 +32,45 @@ class RefreshPayload(BaseModel):
         description='Уникальный идентификатор access-токена.')
 
 
-class TokenService:
-    """Сервис для создания и отзыва JWT доступа и обновления."""
+def create_tokens(email: str) -> tuple[str, str]:
+    """Создать пару JWT для доступа и обновления.
 
-    @staticmethod
-    def create_tokens(username: str) -> tuple[str, str]:
-        """Создать пару JWT для доступа и обновления.
+    Созданный refresh JWT содержит собственный уникальный
+    идентификатор 'jti', и уникальный идентификатор access JWT
+    в поле 'ajti'.  Благодаря чему можно отзывать оба токена
+    за один запрос при предъявлении одного лишь refresh-токена.
+    """
+    access_token = create_access_token(identity=email)
+    # Получить список ролей пользователя для токена.
+    user = User.query.filter_by(email=email).first()
+    roles = [r.name for r in user.roles] if user else []
+    claims = {
+        'ajti': get_jti(access_token),
+        'roles': roles,
+    }
+    refresh_token = create_refresh_token(
+        identity=email, additional_claims=claims)
+    return access_token, refresh_token
 
-        Созданный refresh JWT содержит собственный уникальный
-        идентификатор 'jti', и уникальный идентификатор access JWT
-        в поле 'ajti'.  Благодаря чему можно отзывать оба токена
-        за один запрос при предъявлении одного лишь refresh-токена.
-        """
-        access_token = create_access_token(identity=username)
-        claims = {'ajti': get_jti(access_token)}
-        refresh_token = create_refresh_token(
-            identity=username, additional_claims=claims)
-        return access_token, refresh_token
 
-    @staticmethod
-    def revoke_tokens(refresh_payload: dict):
-        """Отозвать JWT доступа и обновления.
+def revoke_tokens(refresh_payload: dict):
+    """Отозвать JWT доступа и обновления.
 
-        Добавить в Redis уникальный идентификатор refresh-токена,
-        и уникальный идентификатор access-токена.  Таким образом
-        обозначить, что до конца срока действия эти токены считать
-        не действующими.
+    Добавить в Redis уникальный идентификатор refresh-токена,
+    и уникальный идентификатор access-токена.  Таким образом
+    обозначить, что до конца срока действия эти токены считать
+    не действующими.
 
-        Arguments:
-            refresh_payload -- декодированное содержимое (payload) JWT.
-        """
-        refresh = RefreshPayload(
-            type=refresh_payload['type'],
-            jti=refresh_payload['jti'],
-            eol=refresh_payload['exp'],
-            access_jti=refresh_payload['ajti'],
-        )
-        # Сохранить refresh-токен в Redis до тех пор,
-        # пока не истечет его срок с момента создания.
-        jwt_redis_blocklist.set(str(refresh.jti), '', exat=refresh.eol)
-        jwt_redis_blocklist.set(str(refresh.access_jti), '', ex=ACCESS_EXPIRES)
+    Arguments:
+        refresh_payload -- декодированное содержимое (payload) JWT.
+    """
+    refresh = RefreshPayload(
+        type=refresh_payload['type'],
+        jti=refresh_payload['jti'],
+        eol=refresh_payload['exp'],
+        access_jti=refresh_payload['ajti'],
+    )
+    # Сохранить refresh-токен в Redis до тех пор,
+    # пока не истечет его срок с момента создания.
+    jwt_redis_blocklist.set(str(refresh.jti), '', exat=refresh.eol)
+    jwt_redis_blocklist.set(str(refresh.access_jti), '', ex=ACCESS_EXPIRES)
