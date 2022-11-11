@@ -2,7 +2,7 @@
 
 import logging
 
-from functional.testdata.models import Role, RoleUser, User
+from functional.testdata.models import LoginHistory, Role, RoleUser, User
 from pydantic import BaseSettings, Field
 
 logging.basicConfig(level=logging.INFO)
@@ -64,10 +64,12 @@ class TestSettings(BaseSettings):
     users_tablename = 'users'
     roles_tablename = 'roles'
     roles_users_tablename = 'roles_users'
+    login_histories_tablename = 'login_history'
     fake_data_map = {
         users_tablename: User,
         roles_tablename: Role,
         roles_users_tablename: RoleUser,
+        login_histories_tablename: LoginHistory,
     }
 
     # TODO сделать при помощи urllib3
@@ -78,6 +80,7 @@ class TestSettings(BaseSettings):
     refresh_endpoint: str = service_url + api_version_url + '/refresh'
     users_endpoint: str = api_version_url + '/users'
     roles_endpoint: str = api_version_url + '/roles'
+    login_histories_endpoint: str = api_version_url + '/login_histories'
 
 
 test_settings = TestSettings()

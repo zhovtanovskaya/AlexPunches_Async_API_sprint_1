@@ -1,6 +1,7 @@
 """Дата-классы для данных для тестовой БД."""
 
 from dataclasses import dataclass, fields
+from datetime import datetime
 
 
 @dataclass(slots=True)
@@ -44,3 +45,13 @@ class RoleUser(BaseDt):
 
     user_id: str
     role_id: str
+
+
+@dataclass(slots=True)
+class LoginHistory(BaseDt):
+    """Дата-класс истории логинов."""
+
+    id: str
+    username: str
+    email: str
+    date_login: datetime

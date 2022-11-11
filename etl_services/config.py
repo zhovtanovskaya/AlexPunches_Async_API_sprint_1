@@ -1,11 +1,12 @@
 import logging
 from typing import Any
 
+from pydantic import BaseSettings, DirectoryPath, Field, FilePath
+
 from postgres_to_es.data_scheme import (GenreEsModel, MovieEsModel,
                                         PersonEsModel)
 from postgres_to_es.sqls.pg_2_es_sql import (film_work_2_es, genre_2_es,
                                              person_2_es)
-from pydantic import BaseSettings, DirectoryPath, Field, FilePath
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

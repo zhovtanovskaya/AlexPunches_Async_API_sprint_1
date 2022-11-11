@@ -3,7 +3,8 @@ from functools import lru_cache
 
 from faker import Faker
 from functional.settings import test_settings
-from functional.testdata.models import BaseDt, Role, RoleUser, User
+from functional.testdata.models import (BaseDt, LoginHistory, Role, RoleUser,
+                                        User)
 
 fake = Faker()
 Faker.seed(0)
@@ -19,12 +20,14 @@ class FakerData:
     COUNT_USERS = 100
     COUNT_ROLES = 10
     COUNT_ROLES_USERS = 250
+    COUNT_LOGIN_HISTORIES = 100
 
     def __init__(self):
         """Создать фейковые данные для таблиц."""
         self.users = self.make_users()
         self.roles = self.make_roles()
         self.roles_users = self.make_roles_users(self.COUNT_ROLES_USERS)
+        self.login_histories = self.make_histories()
 
     def get_data_by_table_name(self, table_name: str) -> list[BaseDt] | None:
         """Получить фейковые данные по названию таблицы."""
@@ -34,6 +37,8 @@ class FakerData:
             return self.roles
         if table_name == test_settings.roles_users_tablename:
             return self.roles_users
+        if table_name == test_settings.login_histories_tablename:
+            return self.login_histories
         return None
 
     def make_users(self) -> list[User]:
@@ -57,6 +62,23 @@ class FakerData:
     def make_roles_users(self, count) -> list[RoleUser]:
         """Создать тестовых данных для таблицы roles_users."""
         pass
+
+    def make_histories(self) -> list[LoginHistory]:
+        """Создать тестовых данных для таблицы login_histories.
+
+        В которой у Юзера[0] будет 10 записей в LoginHistory.
+        """
+        list_ints = []
+        for _ in range(self.COUNT_LOGIN_HISTORIES):
+            list_ints.append(fake.random_int(min=1, max=self.COUNT_USERS - 1))
+        list_ints.extend([0] * 10)
+
+        return [LoginHistory(
+            id=fake.uuid4(),
+            username=self.users[x].login,
+            email=self.users[x].email,
+            date_login=fake.date_time(),
+        ) for x in list_ints]
 
 
 @lru_cache()
