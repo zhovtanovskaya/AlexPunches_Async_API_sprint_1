@@ -9,11 +9,11 @@ from functional.testdata.faker_data import get_faker_data
 faker_data = get_faker_data()
 refresh_token = (
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'
-    'eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2ODA4NzIxNywianRpIjoiMDEzZDc3OGEtOGI0'
-    'Yi00NzBmLWJiMDUtZWE5NDcxOTJjMTM5IiwidHlwZSI6InJlZnJlc2giLCJzdWIiOiJn'
-    'd2lsbGlhbXNAZXhhbXBsZS5jb20iLCJuYmYiOjE2NjgwODcyMTcsImV4cCI6MTY3MDY3'
-    'OTIxNywiYWp0aSI6IjhkYjhjN2UzLTdkYzYtNGEwNy1iOTg0LTkyNzc1OTc0OWY4YSJ9'
-    '.UOrX2wU__i5YMLd22ykKHxa1tyHU6EVIlg-2y39q3sw'
+    'eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2ODE3NzcxNCwianRpIjoiNWM5Y2ZiNzYtZGFjMS00'
+    'ZDdlLThiOWItYmJmM2FlY2VmYmM2IiwidHlwZSI6InJlZnJlc2giLCJzdWIiOiJnd2lsbGlh'
+    'bXNAZXhhbXBsZS5jb20iLCJuYmYiOjE2NjgxNzc3MTQsImV4cCI6MTk3OTIxNzcxNCwiYWp0'
+    'aSI6Ijc2MWJmNjRjLTlhOTMtNGViOC05NTI1LWU2OGQwYTNjNjIyNyIsInJvbGVzIjpbXX0.'
+    '3YWcKtGH7ETAu3S3rheCogTg4KfUZMoW8cNLbi3g6yg'
 )
 
 
