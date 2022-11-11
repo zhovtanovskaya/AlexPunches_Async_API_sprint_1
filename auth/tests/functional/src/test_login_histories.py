@@ -3,6 +3,7 @@ from http import HTTPStatus
 
 import pytest
 import requests
+
 from functional.settings import test_settings
 from functional.testdata.faker_data import get_faker_data
 

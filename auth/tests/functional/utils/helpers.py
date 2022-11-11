@@ -3,6 +3,7 @@
 from typing import Any, Type
 
 import orjson
+
 from functional.testdata.models import BaseDt
 
 

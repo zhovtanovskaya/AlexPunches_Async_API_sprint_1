@@ -45,6 +45,10 @@ ETL Тесты
 ```bash
 make etl-pytest
 ```
+Auth Тесты
+```bash
+make auth-pytest
+```
 
 Остановить контейнеры
 ```bash

@@ -1,9 +1,10 @@
 """Действия пользователя. Выполняются в тестах."""
 from typing import Any, Mapping, MutableMapping
 
+from requests import Response
+
 from functional.settings import test_settings
 from functional.utils.http_client import HttpClient
-from requests import Response
 
 
 class UserActions(object):
