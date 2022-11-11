@@ -7,6 +7,7 @@ from functional.settings import test_settings
 from functional.testdata.faker_data import get_faker_data
 
 faker_data = get_faker_data()
+# Срок жизни этого refresh-токена до 2032 года.
 refresh_token = (
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'
     'eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2ODE3NzcxNCwianRpIjoiNWM5Y2ZiNzYtZGFjMS00'
