@@ -91,7 +91,7 @@ def test_signin(
     )
     assert response.status_code == expected_response['status'], response.json()
     response_json = response.json()
-    assert tuple(response_json.keys()) == ('access_token', 'refresh_token'), response_json
+    assert tuple(response_json.keys()) == ('access_token', 'refresh_token'), response_json  # noqa
 
 
 def test_signout(http_client):
@@ -110,5 +110,4 @@ def test_refresh(http_client):
         headers={'Authorization': f'Bearer {refresh_token}'},
     )
     response_json = response.json()
-    assert tuple(response_json.keys()) == ('access_token', 'refresh_token'), response_json
-
+    assert tuple(response_json.keys()) == ('access_token', 'refresh_token'), response_json  # noqa

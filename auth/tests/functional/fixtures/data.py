@@ -1,14 +1,15 @@
 """Фикстуры с данными."""
 from typing import Generator
 
-import functional.testdata.tables as ddl_tables
 import pytest
 from faker import Faker
+from psycopg2.extensions import connection as _connection
+from psycopg2.extras import DictCursor, execute_batch
+
+import functional.testdata.tables as ddl_tables
 from functional.settings import test_settings
 from functional.testdata.faker_data import get_faker_data
 from functional.utils.helpers import construct_query
-from psycopg2.extensions import connection as _connection
-from psycopg2.extras import DictCursor, execute_batch
 
 fake = Faker()
 Faker.seed(0)
