@@ -55,18 +55,8 @@ def db_insert_fake_data(pg_conn: _connection,
 
     pg_conn.commit()
     yield
-    pg_cursor.execute('truncate table {users_tablename} cascade;'.format(
-        users_tablename=test_settings.users_tablename,
-    ))
-    pg_cursor.execute('truncate table {roles_tablename} cascade;'.format(
-        roles_tablename=test_settings.roles_tablename,
-    ))
-    pg_cursor.execute('truncate table {roles_users_tablename} cascade;'.format(
-        roles_users_tablename=test_settings.roles_users_tablename,
-    ))
-    pg_cursor.execute(
-        'truncate table {login_histories_tablename} cascade;'.format(
-            login_histories_tablename=test_settings.login_histories_tablename,
-        ),
-    )
+    pg_cursor.execute(f'truncate table {test_settings.users_tablename} restart identity cascade;')  # noqa
+    pg_cursor.execute(f'truncate table {test_settings.roles_tablename} restart identity cascade;')  # noqa
+    pg_cursor.execute(f'truncate table {test_settings.roles_users_tablename} restart identity cascade;')  # noqa
+    pg_cursor.execute(f'truncate table {test_settings.login_histories_tablename} restart identity cascade;')  # noqa
     pg_conn.commit()

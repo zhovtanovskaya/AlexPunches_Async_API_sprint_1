@@ -2,6 +2,9 @@
 
 from dataclasses import dataclass, fields
 from datetime import datetime
+from typing import Sequence
+
+from werkzeug.security import generate_password_hash
 
 
 @dataclass(slots=True)
@@ -11,12 +14,19 @@ class BaseDt:
     @classmethod
     def get_fields(cls) -> list[str]:
         """Получить список полей дата-класса."""
-        return [column.name for column in fields(cls)]
+        return [column.name for column in fields(cls) if column.type != Sequence]  # noqa
 
     @property
     def as_tuple(self) -> tuple[str, ...]:
         """Получить в виде tuple."""
-        return tuple([self.__getattribute__(col) for col in self.get_fields()])
+        list_values = []
+        for col in self.get_fields():
+            value = self.__getattribute__(col)
+            # хешировать пароль
+            if col == 'password':
+                value = generate_password_hash(password=value, method='sha256')
+            list_values.append(value)
+        return tuple(list_values)
 
 
 @dataclass(slots=True)
@@ -29,16 +39,6 @@ class User(BaseDt):
     active: str
     password: str
 
-    def __post_init__(self):
-        """Установить хэш пароля по умолчанию всем тестовым пользователям."""
-        # Хэш пароля вычислен так:
-        # werkzeug.security.generate_password_hash('password', method='sha256')
-        self.password = (
-            'sha256$'
-            '5Q531DSL7FIi8aVB$'
-            'eb5264e16a2bff7676f841877113f9f8f3c37c6694e6f731817a26d126f7e6ef'
-        )
-
 
 @dataclass(slots=True)
 class Role(BaseDt):
@@ -46,7 +46,7 @@ class Role(BaseDt):
 
     name: str
     description: str
-    id: str | None = None
+    id: Sequence
 
 
 @dataclass(slots=True)

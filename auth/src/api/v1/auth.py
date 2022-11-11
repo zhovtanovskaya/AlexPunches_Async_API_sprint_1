@@ -33,7 +33,7 @@ def signout() -> Response:
     return Response('', HTTPStatus.NO_CONTENT)
 
 
-@auth.route('refresh/', methods=['POST'])
+@auth.route('/refresh', methods=['POST'])
 @jwt_required(refresh=True)
 def refresh() -> Response:
     """Получить новую пару JWT, и отозвать текущую пару JWT.
