@@ -19,6 +19,10 @@ def create_tables(pg_conn: _connection,
                   pg_cursor: DictCursor,
                   ) -> Generator[None, None, None]:
     """Создать таблицы БД."""
+    pg_cursor.execute(ddl_tables.drop_roles_users)
+    pg_cursor.execute(ddl_tables.drop_roles)
+    pg_cursor.execute(ddl_tables.drop_user)
+    pg_cursor.execute(ddl_tables.drop_login_histories)
     pg_cursor.execute(ddl_tables.create_user)
     pg_cursor.execute(ddl_tables.create_login_history)
     pg_cursor.execute(ddl_tables.create_roles)

@@ -15,6 +15,18 @@ class FakerData:
 
     Фейковые данные для тестов.
     !Изменение COUNT_* констант может неожиданно повлиять на значения в данных.
+    Несмотря на то, что все данные детерменированы, все равно будем стараться
+     избегать хардкода в тестах.
+
+    Для Юзра[0](
+        id='e3e70682-c209-4cac-a29f-6fbed82c07cd',
+        email='gwilliams@example.com',
+        login='thull',
+        active=True,
+        password='_9*lzGeq^*',
+    )
+    - создадим ровно 10 записей в истории логинов,
+    - добавим ровно все 10 ролей
     """
 
     COUNT_USERS = 100
@@ -60,7 +72,11 @@ class FakerData:
         ) for x in range(self.COUNT_ROLES)]
 
     def make_roles_users(self, count) -> list[RoleUser]:
-        """Создать тестовых данных для таблицы roles_users."""
+        """Создать тестовых данных для таблицы roles_users.
+
+        В которых у Юзера[0] будут все Роли. Всего COUNT_ROLES (10) штук.
+        """
+
         pass
 
     def make_histories(self) -> list[LoginHistory]:

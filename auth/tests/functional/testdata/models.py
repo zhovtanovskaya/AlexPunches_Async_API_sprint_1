@@ -44,9 +44,9 @@ class User(BaseDt):
 class Role(BaseDt):
     """Дата-класс Роль."""
 
-    id: str
     name: str
     description: str
+    id: str | None = None
 
 
 @dataclass(slots=True)

@@ -30,13 +30,16 @@ class RoleScheme(RoleBaseScheme):
 class RoleCreateScheme(RoleBaseScheme):
     """Схема для создания Роли."""
 
-    name: str = Field(..., max_length=80)
+    name: str = Field(..., min_length=2, max_length=80)
+
+    class Config:  # noqa
+        anystr_strip_whitespace = True
 
 
 class RoleEditScheme(RoleBaseScheme):
     """Схема редактирования Роли."""
 
-    id: int
+    pass
 
 
 class ListRolesScheme(BaseModel):

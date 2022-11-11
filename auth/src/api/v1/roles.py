@@ -26,7 +26,7 @@ def create_role(
 
 @roles.route('/roles/', methods=['GET'])
 @validate()
-def get_all_roles() -> list[role_schemes.RoleScheme]:
+def get_all_roles() -> role_schemes.ListRolesScheme:
     """Получить список Ролей."""
     _roles = role_service.get_roles_list()
     list_roles = [transform.role_model_to_role_scheme(role) for role in _roles]
@@ -39,6 +39,18 @@ def get_role_detail(role_id: int) -> role_schemes.RoleScheme:
     """Подробная информация о Роли."""
     role = role_service.get_role_by_id(id=role_id)
     return role_schemes.RoleScheme.from_orm(role)
+
+
+@roles.route('/roles/<role_id>/', methods=['PATCH'])
+@validate()
+def edit_role(role_id: int,
+              body: role_schemes.RoleEditScheme,
+              ) -> role_schemes.RoleScheme:
+    """Редактировать Роль."""
+    role_model = transform.role_scheme_to_role_model(role_scheme=body)
+    role_model.id = role_id
+    updated_role = role_service.edit_role(role=role_model)
+    return transform.role_model_to_role_scheme(role_model=updated_role)
 
 
 @roles.route('/roles/<role_id>/', methods=['DELETE'])

@@ -39,10 +39,10 @@ class UserActions(object):
                                      headers=headers,
                                      )
 
-    def edit(self,
-             user_id: str,
-             payload: Mapping[str, Any] | None = None,
-             ) -> Response:
+    def edit_user(self,
+                  user_id: str,
+                  payload: Mapping[str, Any] | None = None,
+                  ) -> Response:
         """Редактировать данные пользователя, частями. PATCH."""
         url = test_settings.service_url + test_settings.users_endpoint + f'/{user_id}/'  # noqa
         return self.http_client.patch(url=url, payload=payload)
@@ -51,3 +51,28 @@ class UserActions(object):
         """Получить детальные данные о пользователе."""
         url = test_settings.service_url + test_settings.users_endpoint + f'/{user_id}/'  # noqa
         return self.http_client.get(url=url)
+
+    def get_roles(self) -> Response:
+        """Получить список Ролей."""
+        url = test_settings.service_url + test_settings.roles_endpoint + '/'
+        return self.http_client.get(url=url)
+
+    def get_role_detail(self, role_id: int) -> Response:
+        """Получить Роль."""
+        url = test_settings.service_url + test_settings.roles_endpoint + f'/{role_id}/'  # noqa
+        return self.http_client.get(url=url)
+
+    def edit_role(self,
+                  role_id: str,
+                  payload: Mapping[str, Any] | None = None,
+                  ) -> Response:
+        """Редактировать данные пользователя, частями. PATCH."""
+        url = test_settings.service_url + test_settings.roles_endpoint + f'/{role_id}/'  # noqa
+        return self.http_client.patch(url=url, payload=payload)
+
+    def add_role(self,
+                 payload: Mapping[str, Any] | None = None,
+                 ) -> Response:
+        """Добавить Роль."""
+        url = test_settings.service_url + test_settings.roles_endpoint + '/'
+        return self.http_client.post(url=url, payload=payload)

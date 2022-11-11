@@ -56,9 +56,7 @@ def create_user_role(user_id: uuid.UUID,
                                               rolename=body.name,
                                               )
     user_roles = user_service.get_user_roles_by_user_id(user_id=user_id)
-    user_roles_scheme = [
-        transform.role_model_to_role_scheme(role_model=role) for role in user_roles  # noqa
-    ]
+    user_roles_scheme = [transform.role_model_to_role_scheme(role_model=role) for role in user_roles]  # noqa
     return user_role_schemes.ListUserRolesScheme(user_roles=user_roles_scheme)
 
 
@@ -69,9 +67,7 @@ def user_role_list(
 ) -> user_role_schemes.ListUserRolesScheme:
     """Список Ролей пользователя."""
     user_roles = user_service.get_user_roles_by_user_id(user_id=user_id)
-    user_roles_scheme = [
-        transform.role_model_to_role_scheme(role_model=role) for role in user_roles  # noqa
-    ]
+    user_roles_scheme = [transform.role_model_to_role_scheme(role_model=role) for role in user_roles]  # noqa
     return user_role_schemes.ListUserRolesScheme(user_roles=user_roles_scheme)
 
 
