@@ -8,6 +8,7 @@ from pydantic import BaseModel, Field, PositiveInt
 
 from core.config import config
 from core.redis import jwt_redis_blocklist
+from models import User
 
 ACCESS_EXPIRES = config.flask_config.JWT_ACCESS_TOKEN_EXPIRES
 
@@ -31,7 +32,7 @@ class RefreshPayload(BaseModel):
         description='Уникальный идентификатор access-токена.')
 
 
-def create_tokens(username: str) -> tuple[str, str]:
+def create_tokens(email: str) -> tuple[str, str]:
     """Создать пару JWT для доступа и обновления.
 
     Созданный refresh JWT содержит собственный уникальный
@@ -39,10 +40,16 @@ def create_tokens(username: str) -> tuple[str, str]:
     в поле 'ajti'.  Благодаря чему можно отзывать оба токена
     за один запрос при предъявлении одного лишь refresh-токена.
     """
-    access_token = create_access_token(identity=username)
-    claims = {'ajti': get_jti(access_token)}
+    access_token = create_access_token(identity=email)
+    # Получить список ролей пользователя для токена.
+    user = User.query.filter_by(email=email).first()
+    roles = [r.name for r in user.roles] if user else []
+    claims = {
+        'ajti': get_jti(access_token),
+        'roles': roles,
+    }
     refresh_token = create_refresh_token(
-        identity=username, additional_claims=claims)
+        identity=email, additional_claims=claims)
     return access_token, refresh_token
 
 
