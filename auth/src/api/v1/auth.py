@@ -43,5 +43,6 @@ def refresh():
     jwt_payload = get_jwt()
     services_jwt_token.revoke_tokens(jwt_payload)
     access_token, refresh_token = services_jwt_token.create_tokens(
-        jwt_payload['sub'])
+        jwt_payload['sub'],     # Содержит email пользователя.
+    )
     return jsonify(access_token=access_token, refresh_token=refresh_token)
