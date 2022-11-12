@@ -1,6 +1,7 @@
 """Создать фабрику для приложения."""
 from flask import Flask
 from flask_jwt_extended import JWTManager
+from flask_migrate import Migrate
 
 from api.v1.auth import auth
 from api.v1.login_histories import login_histories
@@ -25,5 +26,8 @@ def create_app():
     db.app = app
     db.init_app(app)
     app.jwt = JWTManager(app)
+
+    migrate = Migrate()
+    migrate.init_app(app, db)
 
     return app

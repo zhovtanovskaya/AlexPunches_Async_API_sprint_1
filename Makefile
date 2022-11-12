@@ -28,3 +28,5 @@ api-pytest:
 auth-pytest:
 	docker-compose -f ./auth/tests/functional/docker-compose.yml --env-file .env.pytests up -d --build
 	docker-compose -f ./auth/tests/functional/docker-compose.yml logs -f auth-pytests
+auth-migrate:
+	docker-compose -f ./docker-compose.yml exec auth_flask python src/manage.py db upgrade
