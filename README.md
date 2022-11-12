@@ -28,28 +28,6 @@ make up
 make load-data
 ```
 
-### Кеширование в Redis
-Кешируем все GET-запросы по ключу `url`. Кешируемся на уровне `Middleware`.  
-Кешируем с заголовками, в тч `date`. ¯\_(ツ)_/¯  
-Если есть кеш, то ответ будет из кеша, и будет обозначее заголовком  `X-From-Redis-Cache: True`.  
-Чтобы получить ответ минуя кеш, нужно передать заголовок `X-Not-Cache: True`  
-
-### Потрогать
-Админка  
-[http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)  
-OAS3  
-[http://127.0.0.1:8000/api/openapi](http://127.0.0.1:8000/api/openapi)  
-
-
-ETL Тесты
-```bash
-make etl-pytest
-```
-Auth Тесты
-```bash
-make auth-pytest
-```
-
 Остановить контейнеры
 ```bash
 make stop
@@ -60,13 +38,47 @@ make stop
 make down
 ```
 
+
+## Тесты
+
+ETL Тесты
+```bash
+make etl-pytest
+```
+Async. FastAPI Тесты
+```bash
+make api-pytest
+```
+Auth Тесты
+```bash
+make auth-pytest
+```
+
+----
+
 ### На всякий случай
 Запустить ETL из Postgres в Elasticsearch
 ```bash
 make load-es-movies
 ```
+Миграции для Auth
+```bash
+make auth-migrate
+```
 
 В Makefile есть еще несколько полезных поманд, их можно подсмотреть в самом [Makefile](Makefile)
+
+### Кеширование FastAPI в Redis
+Кешируем все GET-запросы по ключу `url`. Кешируемся на уровне `Middleware`.  
+Кешируем с заголовками, в тч `date`. ¯\_(ツ)_/¯  
+Если есть кеш, то ответ будет из кеша, и будет обозначее заголовком  `X-From-Redis-Cache: True`.  
+Чтобы получить ответ минуя кеш, нужно передать заголовок `X-Not-Cache: True`  
+
+### Потрогать
+Админка  
+[http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)  
+OAS3  
+[http://127.0.0.1:8000/api/openapi](http://127.0.0.1:8000/api/openapi)  
 
 # Режим разработки 
 
@@ -99,3 +111,25 @@ pre-commit install
 
 Вариант подключения [flake8 к PyCharm](https://melevir.medium.com/pycharm-loves-flake-671c7fac4f52).
 Плагин [mypy для PyCharm](https://plugins.jetbrains.com/plugin/11086-mypy).
+
+
+
+
+____
+# Миграции для Auth
+При изменении структуры базы Auth не забыть создать и применить миграции.
+Внутри контейнера или в виртуальном окружении:  
+в контейнере:
+```bash
+# собрать миграции:
+docker exec auth_flask python src/manage.py db revision --message="NAME_MIGRATION" --autogenerate
+# применить миграции:
+docker exec auth_flask python src/manage.py db upgrade head
+```
+в окружении:
+```bash
+# собрать миграции:
+python src/manage.py db revision --message="NAME_MIGRATION" --autogenerate
+# применить миграции:
+python src/manage.py db upgrade head
+```
