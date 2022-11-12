@@ -15,7 +15,6 @@ class LoginHistory(BaseModel):
 
     id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4,
                    unique=True, nullable=False)
-    username = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String, nullable=False)
     date_login = db.Column(db.DateTime(), default=datetime.utcnow)
     # не решил нужна ли перекрестая ссылка на пользователя
@@ -27,6 +26,5 @@ class LoginHistory(BaseModel):
         """Вернуть repr()."""
         return (
             f'Login history (id={self.id!r}, '
-            f'name={self.username!r},'
             f'mail={self.email!r})'
         )

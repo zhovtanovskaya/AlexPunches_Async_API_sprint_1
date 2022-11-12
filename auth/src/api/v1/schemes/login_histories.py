@@ -10,7 +10,6 @@ class LoginHistoryScheme(BaseModel):
     """Основная схема истории."""
 
     id: UUID
-    username: str
     email: EmailStr
     date_login: datetime
 

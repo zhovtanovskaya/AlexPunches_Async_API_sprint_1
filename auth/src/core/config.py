@@ -41,12 +41,6 @@ class FlaskConfig(BaseSettings):
     SQLALCHEMY_DATABASE_URI: PostgresDsn = PgBaseUrl().get_url()
     SECRET_KEY: str = Field(..., env='flask_secret_key')
     WTF_CSRF_ENABLED: bool = False
-    SECURITY_PASSWORD_HASH: str = 'bcrypt'
-    SECURITY_PASSWORD_SALT: str = Field(..., env='security_password_salt')
-    SECURITY_SEND_REGISTER_EMAIL: bool = False
-    SECURITY_SEND_PASSWORD_CHANGE_EMAIL: bool = False
-    SECURITY_SEND_PASSWORD_RESET_EMAIL: bool = False
-    SECURITY_SEND_PASSWORD_RESET_NOTICE_EMAIL: bool = False
     JWT_SECRET_KEY: str = Field(..., min_length=8)
     JWT_ACCESS_TOKEN_EXPIRES: timedelta
     JWT_REFRESH_TOKEN_EXPIRES: timedelta

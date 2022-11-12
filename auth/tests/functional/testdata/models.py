@@ -35,7 +35,6 @@ class User(BaseDt):
 
     id: str
     email: str
-    login: str
     active: str
     password: str
 
@@ -62,6 +61,5 @@ class LoginHistory(BaseDt):
     """Дата-класс истории логинов."""
 
     id: str
-    username: str
     email: str
     date_login: datetime

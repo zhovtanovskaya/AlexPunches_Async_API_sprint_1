@@ -59,7 +59,6 @@ class FakerData:
         return [User(
             id=fake.uuid4(),
             email=fake.email(),
-            login=fake.user_name(),
             active=fake.pybool(),
             password=fake.password(length=10),
         ) for _ in range(self.COUNT_USERS)]
@@ -91,7 +90,6 @@ class FakerData:
 
         return [LoginHistory(
             id=fake.uuid4(),
-            username=self.users[x].login,
             email=self.users[x].email,
             date_login=fake.date_time(),
         ) for x in list_ints]

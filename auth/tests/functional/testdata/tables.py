@@ -6,11 +6,9 @@ create_user = """create table if not exists {users_tablename}
 (
     id            uuid         not null,
     email         varchar      not null,
-    login         varchar,
     active        boolean      not null,
     password      varchar      not null,
     primary key (id),
-    unique (login),
     unique (email)
 );
 """.format(users_tablename=test_settings.users_tablename)
@@ -38,7 +36,6 @@ create_login_history = """create table if not exists
 {login_histories_tablename}
 (
     id            uuid         not null,
-    username      varchar,
     email         varchar      not null,
     date_login    varchar      not null,
     primary key (id)
