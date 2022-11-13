@@ -10,9 +10,9 @@ faker_data = get_faker_data()
 
 
 @pytest.mark.parametrize('role', [faker_data.roles[0]])
-def test_role_detail(db_insert_fake_data, user_action, pg_cursor, role):
+def test_role_detail(db_insert_fake_data, admin_action, pg_cursor, role):
     """Детальная информация о Роли корректная."""
-    response = user_action.get_role_detail(role_id=role.id)
+    response = admin_action.get_role_detail(role_id=role.id)
     r_role = response.json()
 
     assert response.status_code == HTTPStatus.OK
@@ -22,7 +22,7 @@ def test_role_detail(db_insert_fake_data, user_action, pg_cursor, role):
 
 @pytest.mark.parametrize('role', [faker_data.roles[5]])
 def test_role_after_edit_response(db_insert_fake_data,
-                                  user_action,
+                                  admin_action,
                                   pg_cursor,
                                   role,
                                   ):
@@ -31,7 +31,7 @@ def test_role_after_edit_response(db_insert_fake_data,
     new_description = 'Role descriptionRole descriptionRole description'
     payload = {'name': new_name, 'description': new_description}
 
-    response = user_action.edit_role(role_id=role.id, payload=payload)
+    response = admin_action.edit_role(role_id=role.id, payload=payload)
     r_role = response.json()
 
     assert response.status_code == HTTPStatus.OK
@@ -40,13 +40,13 @@ def test_role_after_edit_response(db_insert_fake_data,
 
 
 @pytest.mark.parametrize('role', [faker_data.roles[4]])
-def test_role_edit(db_insert_fake_data, user_action, pg_cursor, role):
+def test_role_edit(db_insert_fake_data, admin_action, pg_cursor, role):
     """Данные Роли редактируются корректно."""
     new_name = 'rrroooollleee'
     new_description = 'Role descriptionRole descriptionRole description'
     payload = {'name': new_name, 'description': new_description}
 
-    response = user_action.edit_role(role_id=role.id, payload=payload)
+    response = admin_action.edit_role(role_id=role.id, payload=payload)
     pg_stmt = f'SELECT * FROM {test_settings.roles_tablename} '
     pg_stmt += f"WHERE id = '{faker_data.roles[4].id}';"
     pg_cursor.execute(pg_stmt)
@@ -59,9 +59,9 @@ def test_role_edit(db_insert_fake_data, user_action, pg_cursor, role):
 
 
 @pytest.mark.parametrize('roles', [faker_data.roles])
-def test_list_roles(db_insert_fake_data, user_action, pg_cursor, roles):
+def test_list_roles(db_insert_fake_data, admin_action, pg_cursor, roles):
     """Список Ролей корректныый."""
-    response = user_action.get_roles()
+    response = admin_action.get_roles()
     r_roles = response.json()
 
     assert response.status_code == HTTPStatus.OK
@@ -91,13 +91,13 @@ def test_list_roles(db_insert_fake_data, user_action, pg_cursor, roles):
 def test_add_role(
                   db_insert_fake_data,
                   pg_conn,
-                  user_action,
+                  admin_action,
                   new_role,
                   expected_answer,
                   ):
     """Регистрация пользователя работает корректно."""
     pg_cursor = pg_conn.cursor()
-    response = user_action.add_role(payload=new_role)
+    response = admin_action.add_role(payload=new_role)
     pg_stmt = f'SELECT COUNT(*) FROM {test_settings.roles_tablename} '
     pg_stmt += f"WHERE name = '{new_role['name']}' ;"
     pg_cursor.execute(pg_stmt)

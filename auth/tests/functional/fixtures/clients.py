@@ -53,6 +53,20 @@ def user_action():
 
 
 @pytest.fixture(scope='session')
+def admin_action() -> UserActions:
+    """Объект для обращений к Auth API от лица админа."""
+    admin_access_token = (
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'
+        'eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2ODMyNDk5NSwianRpIjoiOGFkMWZlNDgtNDMz'
+        'MC00MmI0LTlmNWYtNzZmM2YwZWU2MzZlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFk'
+        'bWluQG1haWwuY29tIiwibmJmIjoxNjY4MzI0OTk1LCJleHAiOjE5ODM2ODQ5OTUsInJv'
+        'bGVzIjpbImFkbWluIl19.'
+        'NhzdXB3_UEffeRC2gzOGjgYWDkQuJdV7nuI-YrZXKEg'
+    )
+    return UserActions(bearer=admin_access_token)
+
+
+@pytest.fixture(scope='session')
 def http_client():
     """HTTP-клиент для тестов."""
     return HttpClient()
