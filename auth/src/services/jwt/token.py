@@ -1,4 +1,5 @@
 """Сервис для управления JWT-токенами."""
+
 import uuid
 from enum import Enum
 
@@ -47,16 +48,14 @@ def create_tokens(email: str) -> tuple[str, str]:
     # Получить список ролей пользователя для токена.
     user = User.query.filter_by(email=email).first()
     roles = [r.name for r in user.roles] if user else []
-    access_claims = {
-        'roles': roles,
-    }
     access_token = create_access_token(
-        identity=email, additional_claims=access_claims)
-    refresh_claims = {
-        'ajti': get_jti(access_token),
-    }
+        identity=email,
+        additional_claims={'roles': roles},
+    )
     refresh_token = create_refresh_token(
-        identity=email, additional_claims=refresh_claims)
+        identity=email,
+        additional_claims={'ajti': get_jti(access_token)},
+    )
     return access_token, refresh_token
 
 
