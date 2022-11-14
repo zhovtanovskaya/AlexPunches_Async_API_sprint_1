@@ -55,6 +55,13 @@ def user_action():
 @pytest.fixture(scope='session')
 def admin_action() -> UserActions:
     """Объект для обращений к Auth API от лица админа."""
+    # Токен доступа для админа cо следующими значениями ключей
+    # в payload:
+    #   jit: 8ad1fe48-4330-42b4-9f5f-76f3f0ee636e,
+    #   sub: admin@mail.com,
+    #   roles: ['admin]
+    #   nbf: 13 ноября 2022,
+    #   exp: 10 ноября 2032,
     admin_access_token = (
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'
         'eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2ODMyNDk5NSwianRpIjoiOGFkMWZlNDgtNDMz'
