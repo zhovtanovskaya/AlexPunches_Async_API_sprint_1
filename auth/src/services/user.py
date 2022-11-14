@@ -38,6 +38,10 @@ class UserService:
         user = self.user_model.get_or_404(id=id)
         return service_user_models.UserModel.from_orm(user)
 
+    def get_user_by_email(self, email: str) -> service_user_models.UserModel:
+        user = self.user_model.get_by_filter_or_404(email=email)
+        return service_user_models.UserModel.from_orm(user)
+
     def edit(self,
              user_in: service_user_models.UserEditModel,
              ) -> service_user_models.UserModel:

@@ -86,6 +86,7 @@ class TestSettings(BaseSettings):
     users_endpoint: str = api_version_url + '/users'
     roles_endpoint: str = api_version_url + '/roles'
     login_histories_endpoint: str = api_version_url + '/login_histories'
+    profile_endpoint: str = api_version_url + '/profile'
 
 
 test_settings = TestSettings()

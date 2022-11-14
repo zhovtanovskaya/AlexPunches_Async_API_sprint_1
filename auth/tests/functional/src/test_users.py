@@ -27,8 +27,7 @@ def test_user_after_edit_response(db_insert_fake_data,
                                   ):
     """После редактирования получаем корректный ответ с новыми данными."""
     new_email = 'aaa@aaa.aa'
-    new_login = 'aaaaaa'
-    payload = {'email': new_email, 'login': new_login}
+    payload = {'email': new_email}
 
     response = admin_action.edit_user(user_id=user.id, payload=payload)
     r_user = response.json()
@@ -40,9 +39,8 @@ def test_user_after_edit_response(db_insert_fake_data,
 @pytest.mark.parametrize('user', [faker_data.users[10]])
 def test_user_edit(db_insert_fake_data, admin_action, pg_cursor, user):
     """Данные ползователя редактируются корректно."""
-    new_login = 'aaaaaa'
     new_email = 'aaa@aaa.aa'
-    payload = {'email': new_email, 'login': new_login}
+    payload = {'email': new_email}
 
     response = admin_action.edit_user(user_id=user.id, payload=payload)
     pg_stmt = f'SELECT * FROM {test_settings.users_tablename} '

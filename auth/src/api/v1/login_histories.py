@@ -3,6 +3,7 @@
 import uuid
 
 from flask import Blueprint
+from flask_jwt_extended import get_jwt, jwt_required
 from flask_pydantic import validate
 
 from api.v1.schemes.login_histories import (ListLoginHistoryScheme,
@@ -26,3 +27,12 @@ def get_login_history(user_id: uuid.UUID) -> ListLoginHistoryScheme:
         LoginHistoryScheme.from_orm(login) for login in login_history
     ]
     return ListLoginHistoryScheme(login_histories=list_schemes)
+
+
+@login_histories.route('/profile/singins/', methods=['GET'])
+@validate()
+@jwt_required()
+def get_profile_history() -> ListLoginHistoryScheme:
+    """История входов авторизованного пользователя в систему."""
+    email = get_jwt().get('sub')
+    # TODO продолжить копипастой предыдущего енпоинта

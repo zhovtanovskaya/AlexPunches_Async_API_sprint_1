@@ -85,3 +85,15 @@ class UserActions(object):
         """Добавить Роль."""
         url = test_settings.service_url + test_settings.roles_endpoint + '/'
         return self.http_client.post(url=url, payload=payload)
+
+    def get_profile(self) -> Response:
+        """Получить детальные данные профиля для авторизованного юзера."""
+        url = test_settings.service_url + test_settings.profile_endpoint
+        return self.http_client.get(url=url)
+
+    def edit_profile(self,
+                     payload: Mapping[str, Any] | None = None,
+                     ) -> Response:
+        """Редактировать свои данные авторизованного юзера, частями. PATCH."""
+        url = test_settings.service_url + test_settings.profile_endpoint
+        return self.http_client.patch(url=url, payload=payload)
