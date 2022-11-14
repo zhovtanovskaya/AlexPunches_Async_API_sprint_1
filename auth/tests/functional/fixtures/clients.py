@@ -55,6 +55,7 @@ def user_action():
 @pytest.fixture(scope='session')
 def admin_action() -> UserActions:
     """Объект для обращений к Auth API от лица админа."""
+    # В env JWT_SECRET_KEY=jwt_secret_key
     # Токен доступа для админа cо следующими значениями ключей
     # в payload:
     #   jit: 8ad1fe48-4330-42b4-9f5f-76f3f0ee636e,  # Уникальный ID токена.
