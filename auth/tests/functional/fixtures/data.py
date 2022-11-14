@@ -19,6 +19,11 @@ def db_insert_fake_data(pg_conn: _connection,
                         pg_cursor: DictCursor,
                         ) -> Generator[None, None, None]:
     """Заполнить таблицы фейковыми данными."""
+    pg_cursor.execute(f'truncate table {test_settings.users_tablename} restart identity cascade;')  # noqa
+    pg_cursor.execute(f'truncate table {test_settings.roles_tablename} restart identity cascade;')  # noqa
+    pg_cursor.execute(f'truncate table {test_settings.roles_users_tablename} restart identity cascade;')  # noqa
+    pg_cursor.execute(f'truncate table {test_settings.login_histories_tablename} restart identity cascade;')  # noqa
+    pg_conn.commit()
     faker_data = get_faker_data()
 
     for _table_name, _data_class in test_settings.fake_data_map.items():

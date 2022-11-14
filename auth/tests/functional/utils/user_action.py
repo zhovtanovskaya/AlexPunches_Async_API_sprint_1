@@ -100,3 +100,17 @@ class UserActions(object):
         """Редактировать свои данные авторизованного юзера, частями. PATCH."""
         url = test_settings.service_url + test_settings.profile_endpoint
         return self.http_client.patch(url=url, payload=payload)
+
+    def get_profile_login_histories(
+            self, page_number: int | None = None, per_page: int | None = None,
+            ) -> Response:
+        url = (
+               test_settings.service_url +
+               test_settings.profile_endpoint + '/singins?'
+        )
+        if page_number:
+            url += f'page_number={page_number}'
+        if per_page:
+            url += f'&per_page={per_page}'
+
+        return self.http_client.get(url=url)

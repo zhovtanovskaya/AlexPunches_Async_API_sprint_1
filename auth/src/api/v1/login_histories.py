@@ -5,7 +5,6 @@ import uuid
 from flask import Blueprint
 from flask_jwt_extended import get_jwt, jwt_required
 from flask_pydantic import validate
-from flask_sqlalchemy.pagination import QueryPagination
 
 from api.v1.schemes.login_histories import (ListLoginHistoryScheme,
                                             LoginHistoryScheme)
@@ -43,10 +42,24 @@ def get_login_history(
     )
 
 
-@login_histories.route('/profile/singins/', methods=['GET'])
+@login_histories.route('/profile/singins', methods=['GET'])
 @validate()
 @jwt_required()
-def get_profile_history() -> ListLoginHistoryScheme:
+def get_profile_history(query: Page) -> ListLoginHistoryScheme:
     """История входов авторизованного пользователя в систему."""
     email = get_jwt().get('sub')
-    # TODO продолжить копипастой предыдущего енпоинта
+    login_history = db.session.query(LoginHistory).filter_by(
+        email=email,
+    ).order_by(LoginHistory.date_login.desc()).paginate(
+        page=query.page_number,
+        per_page=query.per_page,
+        error_out=False,
+        count=True,
+    )
+    list_schemes = [LoginHistoryScheme.from_orm(l) for l in login_history]
+    return ListLoginHistoryScheme(
+        login_histories=list_schemes,
+        page_number=login_history.page,
+        per_page=login_history.per_page,
+        total_items=login_history.total,
+    )
