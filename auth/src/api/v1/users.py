@@ -29,6 +29,7 @@ def create_user(
 
 @users.route('/users/<user_id>/', methods=['GET'])
 @validate()
+@admin_required()
 def get_one_user(user_id: uuid.UUID) -> user_schemes.UserScheme:
     """Подробная информация о пользователе."""
     user = user_service.get_user_by_id(id=user_id)
@@ -37,6 +38,7 @@ def get_one_user(user_id: uuid.UUID) -> user_schemes.UserScheme:
 
 @users.route('/users/<user_id>/', methods=['PATCH'])
 @validate()
+@admin_required()
 def edit_user(user_id: uuid.UUID,
               body: user_schemes.UserEditScheme,
               ) -> user_schemes.UserScheme:

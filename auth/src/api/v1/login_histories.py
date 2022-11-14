@@ -9,12 +9,14 @@ from api.v1.schemes.login_histories import (ListLoginHistoryScheme,
                                             LoginHistoryScheme)
 from core.db import db
 from models import LoginHistory, User
+from services.jwt.request import admin_required
 
 login_histories = Blueprint('login_histories', __name__)
 
 
 @login_histories.route('/users/<user_id>/singins/', methods=['GET'])
 @validate()
+@admin_required()
 def get_login_history(user_id: uuid.UUID) -> ListLoginHistoryScheme:
     """История входов пользователя в систему."""
     user_obj = User.get_or_404(id=user_id)
