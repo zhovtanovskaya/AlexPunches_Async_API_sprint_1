@@ -11,7 +11,7 @@ from core.config import config
 
 __all__ = ['get_jwt', 'jwt_required', 'admin_required']
 
-C = Callable[..., Union[Response, tuple[Response, int]]]
+C = Callable[..., Union[Response, tuple[Response, HTTPStatus]]]
 
 
 def admin_required():
@@ -20,7 +20,7 @@ def admin_required():
         @wraps(controller)
         def wrapper(
                 *args: Any, **kwargs: Any,
-                ) -> Union[Response, tuple[Response, int]]:
+                ) -> Union[Response, tuple[Response, HTTPStatus]]:
             verify_jwt_in_request()
             claims = get_jwt()
             if config.admin_role_name in claims.get('roles', ()):
