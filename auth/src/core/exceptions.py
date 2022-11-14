@@ -47,6 +47,12 @@ class ResourceNotAddedError(BasicExceptionError):
     pass
 
 
+class ResourceNotAllowedError(BasicExceptionError):
+    """Exception, когда что-то не добавилось."""
+
+    pass
+
+
 @exceptions.app_errorhandler(BasicExceptionError)
 def exception(error: BasicExceptionError) -> Response:
     """Вернуть jsonify, чтобы для API хорошо."""
@@ -65,6 +71,14 @@ def resource_not_found(error: ResourceNotFoundError) -> Response:
 
 @exceptions.app_errorhandler(ResourceNotAddedError)
 def resource_not_added(error: ResourceNotAddedError) -> Response:
+    """Вернуть jsonify, чтобы для API хорошо."""
+    response = jsonify(error.to_dict())
+    response.status_code = error.status_code
+    return response
+
+
+@exceptions.app_errorhandler(ResourceNotAllowedError)
+def resource_not_allowed(error: ResourceNotAllowedError) -> Response:
     """Вернуть jsonify, чтобы для API хорошо."""
     response = jsonify(error.to_dict())
     response.status_code = error.status_code

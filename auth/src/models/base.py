@@ -106,6 +106,19 @@ class BaseModel(db.Model):
                 HTTPStatus.NOT_FOUND,
             )
 
+    @classmethod
+    def get_by_filter_or_404(cls, **kwargs):
+        """Получить ОДИН объект класса по фильтру. Если нет -- отдать 404."""
+        try:
+            return db.session.query(cls).filter_by_or_404(
+                **kwargs).first()
+        except ResourceNotFoundError:
+            db.session.rollback()
+            raise ResourceNotFoundError(
+                f'{cls.__name__} {msg.not_found_error}',
+                HTTPStatus.NOT_FOUND,
+            )
+
     @property
     def as_dict(self):
         """Представить объект в виде словаря. Атребуты и проперти."""
