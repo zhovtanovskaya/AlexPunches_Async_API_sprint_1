@@ -7,6 +7,7 @@ from flask_pydantic import validate
 
 import api.v1.schemes.roles as role_schemes
 import api.v1.schemes.transform_schemes as transform
+from services.jwt.request import admin_required
 from services.role import get_role_service
 
 roles = Blueprint('roles', __name__)
@@ -15,6 +16,7 @@ role_service = get_role_service()
 
 @roles.route('/roles/', methods=['POST'])
 @validate(on_success_status=HTTPStatus.CREATED)
+@admin_required()
 def create_role(
           body: role_schemes.RoleCreateScheme,
 ) -> role_schemes.RoleScheme:
@@ -26,6 +28,7 @@ def create_role(
 
 @roles.route('/roles/', methods=['GET'])
 @validate()
+@admin_required()
 def get_all_roles() -> role_schemes.ListRolesScheme:
     """Получить список Ролей."""
     _roles = role_service.get_roles_list()
@@ -35,6 +38,7 @@ def get_all_roles() -> role_schemes.ListRolesScheme:
 
 @roles.route('/roles/<role_id>/', methods=['GET'])
 @validate()
+@admin_required()
 def get_role_detail(role_id: int) -> role_schemes.RoleScheme:
     """Подробная информация о Роли."""
     role = role_service.get_role_by_id(id=role_id)
@@ -43,6 +47,7 @@ def get_role_detail(role_id: int) -> role_schemes.RoleScheme:
 
 @roles.route('/roles/<role_id>/', methods=['PATCH'])
 @validate()
+@admin_required()
 def edit_role(role_id: int,
               body: role_schemes.RoleEditScheme,
               ) -> role_schemes.RoleScheme:
@@ -55,6 +60,7 @@ def edit_role(role_id: int,
 
 @roles.route('/roles/<role_id>/', methods=['DELETE'])
 @validate()
+@admin_required()
 def remove_role(role_id: int) -> Response:
     """Удалить Роль."""
     role_service.delete_role(role_id=role_id)

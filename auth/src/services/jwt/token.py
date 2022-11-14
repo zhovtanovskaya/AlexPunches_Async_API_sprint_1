@@ -1,4 +1,5 @@
 """Сервис для управления JWT-токенами."""
+
 import uuid
 from enum import Enum
 
@@ -35,21 +36,26 @@ class RefreshPayload(BaseModel):
 def create_tokens(email: str) -> tuple[str, str]:
     """Создать пару JWT для доступа и обновления.
 
+    Созданный access JWT содержит список ролей пользователя.
+    Благодаря чему может использоваться для разграничения
+    доступа к Auth API по ролям.
+
     Созданный refresh JWT содержит собственный уникальный
     идентификатор 'jti', и уникальный идентификатор access JWT
     в поле 'ajti'.  Благодаря чему можно отзывать оба токена
     за один запрос при предъявлении одного лишь refresh-токена.
     """
-    access_token = create_access_token(identity=email)
     # Получить список ролей пользователя для токена.
     user = User.query.filter_by(email=email).first()
     roles = [r.name for r in user.roles] if user else []
-    claims = {
-        'ajti': get_jti(access_token),
-        'roles': roles,
-    }
+    access_token = create_access_token(
+        identity=email,
+        additional_claims={'roles': roles},
+    )
     refresh_token = create_refresh_token(
-        identity=email, additional_claims=claims)
+        identity=email,
+        additional_claims={'ajti': get_jti(access_token)},
+    )
     return access_token, refresh_token
 
 

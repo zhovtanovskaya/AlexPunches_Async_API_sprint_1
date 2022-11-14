@@ -53,6 +53,14 @@ class UserActions(object):
         url = test_settings.service_url + test_settings.users_endpoint + f'/{user_id}/'  # noqa
         return self.http_client.get(url=url)
 
+    def get_user_login_histories(self, user_id: str) -> Response:
+        url = (
+                test_settings.service_url +
+                test_settings.users_endpoint +
+                f'/{user_id}/singins/'
+        )
+        return self.http_client.get(url=url)
+
     def get_roles(self) -> Response:
         """Получить список Ролей."""
         url = test_settings.service_url + test_settings.roles_endpoint + '/'

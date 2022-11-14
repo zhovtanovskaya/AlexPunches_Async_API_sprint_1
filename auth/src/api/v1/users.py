@@ -9,6 +9,7 @@ from flask_pydantic import validate
 import api.v1.schemes.transform_schemes as transform
 import api.v1.schemes.user_roles as user_role_schemes
 import api.v1.schemes.users as user_schemes
+from services.jwt.request import admin_required
 from services.user import get_user_service
 
 users = Blueprint('users', __name__)
@@ -28,6 +29,7 @@ def create_user(
 
 @users.route('/users/<user_id>/', methods=['GET'])
 @validate()
+@admin_required()
 def get_one_user(user_id: uuid.UUID) -> user_schemes.UserScheme:
     """Подробная информация о пользователе."""
     user = user_service.get_user_by_id(id=user_id)
@@ -36,6 +38,7 @@ def get_one_user(user_id: uuid.UUID) -> user_schemes.UserScheme:
 
 @users.route('/users/<user_id>/', methods=['PATCH'])
 @validate()
+@admin_required()
 def edit_user(user_id: uuid.UUID,
               body: user_schemes.UserEditScheme,
               ) -> user_schemes.UserScheme:
@@ -48,6 +51,7 @@ def edit_user(user_id: uuid.UUID,
 
 @users.route('/users/<user_id>/roles/', methods=['POST'])
 @validate(on_success_status=HTTPStatus.CREATED)
+@admin_required()
 def create_user_role(user_id: uuid.UUID,
                      body: user_role_schemes.UserRoleCreateScheme,
                      ) -> user_role_schemes.ListUserRolesScheme:
@@ -62,6 +66,7 @@ def create_user_role(user_id: uuid.UUID,
 
 @users.route('/users/<user_id>/roles/', methods=['GET'])
 @validate()
+@admin_required()
 def user_role_list(
           user_id: uuid.UUID,
 ) -> user_role_schemes.ListUserRolesScheme:
@@ -73,6 +78,7 @@ def user_role_list(
 
 @users.route('/users/<user_id>/roles/<role_id>/', methods=['DELETE'])
 @validate()
+@admin_required()
 def remove_user_role(user_id: uuid.UUID,
                      role_id: int,
                      ) -> Response:
