@@ -15,7 +15,7 @@ def test_role_detail(db_insert_fake_data, admin_action, pg_cursor, role):
     response = admin_action.get_role_detail(role_id=role.id)
     r_role = response.json()
 
-    assert response.status_code == HTTPStatus.OK
+    assert response.status_code == HTTPStatus.OK, response.json()
     assert r_role.get('name') == role.name
     assert r_role.get('description') == role.description
 

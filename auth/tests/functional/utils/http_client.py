@@ -10,10 +10,9 @@ from requests.auth import HTTPBasicAuth
 class HttpClient:
     """Клиент, который оправляет  http-запросы к API."""
 
-    headers: MutableMapping = {'accept': 'application/json'}
-
     def __init__(self, bearer: str | None = None) -> None:
         """Подключить requests и Добавить заголовок авторизации."""
+        self.headers = {'accept': 'application/json'}
         self._client = requests
         if bearer:
             self.headers['Authorization'] = f'Bearer {bearer}'
