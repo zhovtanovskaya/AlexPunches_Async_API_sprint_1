@@ -53,11 +53,14 @@ class UserActions(object):
         url = test_settings.service_url + test_settings.users_endpoint + f'/{user_id}/'  # noqa
         return self.http_client.get(url=url)
 
-    def get_user_login_histories(self, user_id: str) -> Response:
+    def get_user_login_histories(
+            self, user_id: str, page_number: int, per_page: int,
+            ) -> Response:
         url = (
                 test_settings.service_url +
                 test_settings.users_endpoint +
-                f'/{user_id}/singins/'
+                f'/{user_id}/singins' +
+                f'?page_number={page_number}&per_page={per_page}'
         )
         return self.http_client.get(url=url)
 
