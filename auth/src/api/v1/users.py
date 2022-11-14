@@ -9,6 +9,7 @@ from flask_pydantic import validate
 import api.v1.schemes.transform_schemes as transform
 import api.v1.schemes.user_roles as user_role_schemes
 import api.v1.schemes.users as user_schemes
+from services.jwt.request import admin_required
 from services.user import get_user_service
 
 users = Blueprint('users', __name__)
@@ -48,6 +49,7 @@ def edit_user(user_id: uuid.UUID,
 
 @users.route('/users/<user_id>/roles/', methods=['POST'])
 @validate(on_success_status=HTTPStatus.CREATED)
+@admin_required()
 def create_user_role(user_id: uuid.UUID,
                      body: user_role_schemes.UserRoleCreateScheme,
                      ) -> user_role_schemes.ListUserRolesScheme:
@@ -62,6 +64,7 @@ def create_user_role(user_id: uuid.UUID,
 
 @users.route('/users/<user_id>/roles/', methods=['GET'])
 @validate()
+@admin_required()
 def user_role_list(
           user_id: uuid.UUID,
 ) -> user_role_schemes.ListUserRolesScheme:
@@ -73,6 +76,7 @@ def user_role_list(
 
 @users.route('/users/<user_id>/roles/<role_id>/', methods=['DELETE'])
 @validate()
+@admin_required()
 def remove_user_role(user_id: uuid.UUID,
                      role_id: int,
                      ) -> Response:
