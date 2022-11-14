@@ -17,7 +17,6 @@ def test_user_detail(db_insert_fake_data, user_action, pg_cursor, user):
 
     assert response.status_code == HTTPStatus.OK
     assert r_user.get('email') == user.email
-    assert r_user.get('login') == user.login
 
 
 @pytest.mark.parametrize('user', [faker_data.users[10]])
@@ -28,23 +27,20 @@ def test_user_after_edit_response(db_insert_fake_data,
                                   ):
     """После редактирования получаем корректный ответ с новыми данными."""
     new_email = 'aaa@aaa.aa'
-    new_login = 'aaaaaa'
-    payload = {'email': new_email, 'login': new_login}
+    payload = {'email': new_email}
 
     response = user_action.edit_user(user_id=user.id, payload=payload)
     r_user = response.json()
 
     assert response.status_code == HTTPStatus.OK
-    assert r_user.get('login') == new_login
     assert r_user.get('email') == new_email
 
 
 @pytest.mark.parametrize('user', [faker_data.users[10]])
 def test_user_edit(db_insert_fake_data, user_action, pg_cursor, user):
     """Данные ползователя редактируются корректно."""
-    new_login = 'aaaaaa'
     new_email = 'aaa@aaa.aa'
-    payload = {'email': new_email, 'login': new_login}
+    payload = {'email': new_email}
 
     response = user_action.edit_user(user_id=user.id, payload=payload)
     pg_stmt = f'SELECT * FROM {test_settings.users_tablename} '
@@ -55,4 +51,3 @@ def test_user_edit(db_insert_fake_data, user_action, pg_cursor, user):
     assert response.status_code == HTTPStatus.OK
     assert len(count_obj) == 1
     assert count_obj[0]['email'] == new_email
-    assert count_obj[0]['login'] == new_login

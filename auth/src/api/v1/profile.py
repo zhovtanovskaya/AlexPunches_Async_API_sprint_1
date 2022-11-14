@@ -1,9 +1,8 @@
 """Роутеры для АПИ к сущности User."""
 
-import uuid
 from http import HTTPStatus
 
-from flask import Blueprint, Response
+from flask import Blueprint
 from flask_jwt_extended import get_jwt, jwt_required
 from flask_pydantic import validate
 
