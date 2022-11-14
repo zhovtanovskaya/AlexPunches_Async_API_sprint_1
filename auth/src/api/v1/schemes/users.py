@@ -19,7 +19,6 @@ class UserBaseScheme(BaseModel):
 
     id: UUID | None = None
     email: EmailStr | None = None
-    login: str | None = None
     password: str | None = None
     roles: list[role_schemes.RoleScheme] = []
     active: bool | None = None
@@ -34,7 +33,6 @@ class UserScheme(BaseModel):
     id: UUID
     email: EmailStr
     active: bool
-    login: str | None = None
     roles: list[role_schemes.RoleScheme] = []
 
     class Config:  # noqa

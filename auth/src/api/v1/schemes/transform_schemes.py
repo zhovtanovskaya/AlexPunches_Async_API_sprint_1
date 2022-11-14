@@ -24,8 +24,6 @@ def user_scheme_to_user_model(
         user_model.id = exc_unset_dict['id']
     if 'email' in exc_unset_dict:
         user_model.email = exc_unset_dict['email']
-    if 'login' in exc_unset_dict:
-        user_model.login = exc_unset_dict['login']
     if 'active' in exc_unset_dict:
         user_model.active = exc_unset_dict['active']
     if 'roles' in exc_unset_dict:
@@ -42,7 +40,6 @@ def user_model_to_user_scheme(
     return user_schemes.UserScheme(
         id=user_model.id,
         email=user_model.email,
-        login=user_model.login,
         active=user_model.active,
         roles=user_model.roles,
     )

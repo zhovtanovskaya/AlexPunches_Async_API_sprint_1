@@ -11,7 +11,6 @@ class UserBaseModel(BaseModel):
 
     id: UUID | None = None
     email: EmailStr | None = None
-    login: str | None = None
     password: str | None = None
     roles: list[service_role_models.RoleModel] = []
     active: bool | None = None
