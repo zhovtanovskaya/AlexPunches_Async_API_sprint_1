@@ -3,7 +3,7 @@
 from datetime import datetime
 from uuid import UUID
 
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, PositiveInt
 
 
 class LoginHistoryScheme(BaseModel):
@@ -18,6 +18,9 @@ class LoginHistoryScheme(BaseModel):
 
 
 class ListLoginHistoryScheme(BaseModel):
-    """Список историй логинов пользователей."""
+    """Страница историй логинов пользователей."""
 
     login_histories: list[LoginHistoryScheme] = []
+    page_number: PositiveInt
+    per_page: PositiveInt
+    total_items: PositiveInt

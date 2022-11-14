@@ -45,7 +45,7 @@ def test_profile_after_edit_response(db_insert_fake_data,
 
 
 @pytest.mark.parametrize('user', [faker_data.users[10]])
-def test_user_edit(db_insert_fake_data, user_action, pg_cursor, user):
+def test_profile_edit(db_insert_fake_data, user_action, pg_cursor, user):
     """Данные ползователя редактируются корректно."""
     response = user_action.login(email=user.email, password=user.password)
     r_access_token = response.json().get('access_token')
@@ -62,3 +62,18 @@ def test_user_edit(db_insert_fake_data, user_action, pg_cursor, user):
     assert response.status_code == HTTPStatus.OK
     assert len(count_obj) == 1
     assert count_obj[0]['email'] == new_email
+
+
+@pytest.mark.parametrize('user', [faker_data.users[0]])
+def test_profile_singins(db_insert_fake_data, user_action, pg_cursor, user):
+    """Данные ползователя редактируются корректно."""
+    response = user_action.login(email=user.email, password=user.password)
+    r_access_token = response.json().get('access_token')
+    auth_user_action = UserActions(bearer=r_access_token)
+
+    response = auth_user_action.get_profile_login_histories(per_page=4)
+    login_history = response.json()
+
+    assert response.status_code == HTTPStatus.OK
+    assert len(login_history.get('login_histories')) == 4
+    assert login_history.get('total_items') == 10
