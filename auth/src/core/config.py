@@ -46,6 +46,31 @@ class FlaskConfig(BaseSettings):
     JWT_REFRESH_TOKEN_EXPIRES: timedelta
 
 
+class GoogleClientSecret(BaseSettings):
+    """Настройки OAuth 2.0 от Гугла."""
+
+    project_id: str = 'sprint-7'
+    type_application: str = 'web'
+    client_id: str = Field(..., env='google_oauth_client_id')
+    auth_uri: str = 'https://accounts.google.com/o/oauth2/auth'
+    token_uri: str = 'https://oauth2.googleapis.com/token'
+    x509_cert_url: str = 'https://www.googleapis.com/oauth2/v1/certs'
+    client_secret: str = Field(..., env='google_oauth_client_secret')
+    redirect_uris: list[str] = ['http://localhost:5000/api/v1/ggauth/']
+
+    def as_dict(self):
+        """В виде дикта, удобно пригодится в либе."""
+        return {self.type_application: {
+            'client_id': self.client_id,
+            'project_id': self.project_id,
+            'auth_uri': self.auth_uri,
+            'token_uri': self.token_uri,
+            'auth_provider_x509_cert_url': self.x509_cert_url,
+            'client_secret': self.client_secret,
+            'redirect_uris': self.redirect_uris,
+        }}
+
+
 class ApiSettings(BaseSettings):
     """Настройки сервиса Auth."""
 
@@ -60,8 +85,9 @@ class ApiSettings(BaseSettings):
     flask_config: FlaskConfig = FlaskConfig()
     paginator_per_page: int = 20
     paginator_start_page: int = 1
-
     admin_role_name: str = 'admin'
+
+    google_oauth = GoogleClientSecret().as_dict()
 
 
 @lru_cache()
