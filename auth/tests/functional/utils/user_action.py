@@ -56,6 +56,7 @@ class UserActions(object):
     def get_user_login_histories(
             self, user_id: str, page_number: int, per_page: int,
             ) -> Response:
+        """Получить историю логинов пользователя."""
         url = (
                 test_settings.service_url +
                 test_settings.users_endpoint +
@@ -104,6 +105,7 @@ class UserActions(object):
     def get_profile_login_histories(
             self, page_number: int | None = None, per_page: int | None = None,
             ) -> Response:
+        """Получить историю логинов авторизованного юзера."""
         url = (
                test_settings.service_url +
                test_settings.profile_endpoint + '/singins?'
