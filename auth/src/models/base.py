@@ -1,5 +1,4 @@
 """Базовая SQLAlchemy-модель для БД."""
-
 from http import HTTPStatus
 from typing import AbstractSet, Any, Mapping
 
