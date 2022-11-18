@@ -1,3 +1,4 @@
+"""Сервис авторизации Google OAuth 2.0."""
 from typing import Type
 from uuid import UUID
 
@@ -22,9 +23,11 @@ class GoogleOAuthService:
 
     @staticmethod
     def get_authorization_url() -> tuple[str, str]:
+        """Получить урл гугла, на котором юзер даст разрешения."""
         flow = google_auth_oauthlib.flow.Flow.from_client_config(
             client_config=config.google_oauth,
-            scopes=['openid', 'https://www.googleapis.com/auth/userinfo.email'],
+            scopes=[
+                'openid', 'https://www.googleapis.com/auth/userinfo.email'],
         )
         flow.redirect_uri = config.google_oauth_endpoint
         return flow.authorization_url(
@@ -37,7 +40,8 @@ class GoogleOAuthService:
         """Авторизовать пользователя по колбеку от Гугла."""
         flow = google_auth_oauthlib.flow.Flow.from_client_config(
             client_config=config.google_oauth,
-            scopes=['openid', 'https://www.googleapis.com/auth/userinfo.email'],
+            scopes=[
+                'openid', 'https://www.googleapis.com/auth/userinfo.email'],
         )
         flow.redirect_uri = config.google_oauth_endpoint
         flow.fetch_token(authorization_response=request_url)
@@ -57,7 +61,8 @@ class GoogleOAuthService:
                                social_id: str,
                                social_name: str,
                                user_id: UUID,
-                               ) -> Type[db.Model]:
+                               ) -> SocialAccount:
+        """Получить SocialAccount, если нет, создать."""
         soc_acc = self.soc_acc_model.query.filter_by(social_id=social_id,
                                                      social_name=social_name,
                                                      ).first()

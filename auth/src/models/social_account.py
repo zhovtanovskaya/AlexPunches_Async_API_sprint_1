@@ -26,4 +26,5 @@ class SocialAccount(BaseModel):
                                           name='social_pk'), )
 
     def __repr__(self):
+        """repr()."""
         return f'<SocialAccount {self.social_name}:{self.user_id}>'
