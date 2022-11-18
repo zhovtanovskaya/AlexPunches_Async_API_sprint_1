@@ -63,3 +63,6 @@ class LoginHistory(BaseDt):
     id: str
     email: str
     date_login: datetime
+    user_id: str
+    user_agent: str
+    user_device_type: str
