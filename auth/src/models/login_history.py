@@ -1,6 +1,6 @@
 import uuid
-
 from datetime import datetime
+
 from sqlalchemy import UniqueConstraint
 from sqlalchemy.dialects.postgresql import UUID
 
