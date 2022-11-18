@@ -61,5 +61,8 @@ class LoginHistory(BaseDt):
     """Дата-класс истории логинов."""
 
     id: str
+    user_id: str
     email: str
     date_login: datetime
+    user_agent: str
+    user_device_type: str

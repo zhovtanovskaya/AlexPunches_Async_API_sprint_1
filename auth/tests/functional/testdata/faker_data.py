@@ -92,6 +92,8 @@ class FakerData:
             id=fake.uuid4(),
             email=self.users[x].email,
             date_login=fake.date_time(),
+            user_agent=fake.user_agent(),
+            user_device_type=fake.text(max_nb_chars=50),
         ) for x in list_ints]
 
 

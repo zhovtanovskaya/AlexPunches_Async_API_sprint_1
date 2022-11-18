@@ -11,6 +11,7 @@ class LoginHistoryCreateModel(BaseModel):
 
     email: EmailStr
     date_login: datetime
+    user_agent: str
 
 
 class LoginHistoryModel(BaseModel):
