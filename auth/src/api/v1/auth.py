@@ -52,7 +52,6 @@ def refresh() -> Response:
 
 
 @auth.route('/google-signin', methods=['GET'])
-@validate()
 def google_signin() -> Response:
     """Получить ссылку на OAuth гугла."""
     authorization_url, state = google_oauth.get_authorization_url()
@@ -60,9 +59,8 @@ def google_signin() -> Response:
 
 
 @auth.route('/google-auth', methods=['GET'])
-@validate()
 def google_auth():
-    """Авторизовать."""
+    """Авторизовать пользователя, вкрнувшегося от гугла с разрешениями."""
     request_url = flask.request.url
     soc_acc = google_oauth.auth_by_request_url(request_url=request_url)
     email = soc_acc.user.email

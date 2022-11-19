@@ -25,7 +25,13 @@ class GoogleOAuthService:
 
     @staticmethod
     def get_authorization_url() -> tuple[str, str]:
-        """Получить урл гугла, на котором юзер даст разрешения."""
+        """Получить урл гугла, на котором юзер даст разрешения.
+
+        В query параметрах будет список необходимых для нас разрешений,
+        и другие полезные параметры, в том числе урл, куда юзер вернется
+        с разрешениями. Подробнее:
+        https://developers.google.com/identity/protocols/oauth2/web-server#python_1
+        """
         flow = google_auth_oauthlib.flow.Flow.from_client_config(
             client_config=config.google_oauth,
             scopes=[
@@ -39,7 +45,14 @@ class GoogleOAuthService:
     def auth_by_request_url(self,
                             request_url: str,
                             ) -> SocialAccount:
-        """Авторизовать пользователя по колбеку от Гугла."""
+        """Авторизовать пользователя по колбеку от Гугла.
+
+        Вместе в пользователем, гугл передает query-параметры, в которых всякое
+        необходимое: код авторизации, разрешения, токены и т.д.
+        Эти данные мы какбы конвертируем в credentials, которые уже позволят
+        забрать у гугла инфу о пользователе и т.п.
+        https://developers.google.com/identity/protocols/oauth2/web-server#handlingresponse
+        """
         flow = google_auth_oauthlib.flow.Flow.from_client_config(
             client_config=config.google_oauth,
             scopes=[
