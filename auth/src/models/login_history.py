@@ -7,34 +7,44 @@ from sqlalchemy.dialects.postgresql import UUID
 from core.db import db
 from models import BaseModel
 
-
-def create_partition(target, connection, **kw) -> None:
-    """ creating partition by user_sign_in """
-    connection.execute(
-        """CREATE TABLE IF NOT EXISTS "user_sign_in_smart" PARTITION OF "login_history" FOR VALUES IN ('smart')"""
-    )
-    connection.execute(
-        """CREATE TABLE IF NOT EXISTS "user_sign_in_mobile" PARTITION OF "login_history" FOR VALUES IN ('mobile')"""
-    )
-    connection.execute(
-        """CREATE TABLE IF NOT EXISTS "user_sign_in_web" PARTITION OF "login_history" FOR VALUES IN ('web')"""
-    )
+PARTITION_TABLES_REGISTRY = (
+    (LoginHistorySmartphone, 'smart'),
+    (LoginHistoryMobile, 'mobile'),
+    (LoginHistoryWeb, 'web'),    
+)
 
 
-class LoginHistory(BaseModel):
-    """Модель LoginHistory.
-    """
-    __tablename__ = 'login_history'
-    __table_args__ = (
-        UniqueConstraint('id', 'user_device_type'),
-        {
-            'postgresql_partition_by': 'LIST (user_device_type)',
-            'listeners': [('after_create', create_partition)],
-        }
-    )
+def attach_event_listeners() -> None:
+    for class_, device_type in PARTITION_TABLES_REGISTRY:
+        class_.__table__.add_is_dependent_on(LoginHistory.__table__)
+        event.listen(
+            class_.__table__,
+            "after_create",
+            create_table_login_history_partition_ddl(
+                class_.__table__, device_type
+            ),
+        )
 
+
+def create_table_login_history_partition_ddl(
+    table: str, device_type: DeviceType
+) -> None:
+    return DDL(
+        """
+        ALTER TABLE login_history ATTACH PARTITION %s FOR VALUES IN ('%s');"""
+        % (table, device_type.name)
+    ).execute_if(dialect="postgresql")
+
+
+class LoginHistoryMixin:
     id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4,
                    unique=True, nullable=False)
+    @declared_attr
+    def user_id(self):
+        return db.Column(
+            UUID(as_uuid=True), db.ForeignKey("users.id", ondelete="CASCADE")
+        )
+
     user_id = db.Column(UUID(as_uuid=True), db.ForeignKey('users.id'))
     email = db.Column(db.String, nullable=False)
     date_login = db.Column(db.DateTime(), default=datetime.utcnow)
@@ -47,3 +57,41 @@ class LoginHistory(BaseModel):
             f'Login history (id={self.id!r}, '
             f'mail={self.email!r})'
         )
+
+    def as_value(self) -> str:
+        return self.event_type.value
+
+
+class LoginHistory(LoginHistoryMixin, BaseModel):
+    """Модель LoginHistory.
+    """
+    __tablename__ = 'login_history'
+    __table_args__ = (
+        UniqueConstraint('id', 'user_device_type'),
+        {
+            'postgresql_partition_by': 'LIST (user_device_type)',
+            #'listeners': [('after_create', create_partition)],
+        }
+    )
+
+
+
+
+class LoginHistorySmartphone(LoginHistoryMixin, BaseModel):
+    """User login history model for partition table for smartphone devices."""
+
+    __tablename__ = "login_history_smart"
+
+
+class LoginHistoryMobile(LoginHistoryMixin, BaseModel):
+    """User login history model for partition table for mobile devices."""
+
+    __tablename__ = "login_history_mobile"
+
+
+class LoginHistoryWeb(LoginHistoryMixin, BaseModel):
+    """User login history model for partition table for web devices."""
+
+    __tablename__ = "login_history_web"
+
+attach_event_listeners()        
