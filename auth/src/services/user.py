@@ -1,4 +1,6 @@
 """Сервис для управления пользвателями."""
+import secrets
+import string
 from functools import lru_cache
 from typing import Type
 from uuid import UUID
@@ -8,6 +10,7 @@ from werkzeug.security import generate_password_hash
 import services.models.roles as service_role_models
 import services.models.users as service_user_models
 from core.db import db
+from core.exceptions import ResourceNotFoundError
 from models.role import Role
 from models.user import User
 
@@ -89,6 +92,25 @@ class UserService:
         user.roles.append(role)
         user.save()
         return True
+
+    @staticmethod
+    def _password_generator(count: int = 10) -> str:
+        """Генератор случайной строки из count=10 символов."""
+        alphabet = string.ascii_letters + string.digits
+        return ''.join(secrets.choice(alphabet) for _ in range(count))
+
+    def get_or_create_user_by_email(self,
+                                    email: str,
+                                    ) -> service_user_models.UserModel:
+        """Получить пользователя по email."""
+        try:
+            return self.user_model.get_by_filter_or_404(email=email)
+        except ResourceNotFoundError:
+            password = self._password_generator()
+            return self.register_user(
+                user_in=service_user_models.UserCreateModel(
+                    email=email, password=password,
+                ))
 
 
 @lru_cache()
