@@ -17,7 +17,10 @@ cli = FlaskGroup(app)
 
 @app.before_request
 def before_request():
-    """Не пускать запроссы без заголовка X-Request-Id."""
+    """Не пускать запроссы без заголовка X-Request-Id.
+
+    Чтобы ни кто не прошел мимо Jaeger.
+    """
     request_id = request.headers.get('X-Request-Id')
     if not request_id:
         raise RuntimeError('request id is required')
