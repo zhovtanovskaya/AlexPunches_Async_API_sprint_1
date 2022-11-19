@@ -102,6 +102,17 @@ services:
       - .env
 #    command: ["gunicorn", "-b", "0.0.0.0:5000", "--workers", "4", "src.pywsgi:app"]
 
+  jaeger:
+    image: jaegertracing/all-in-one:1.39.0
+    depends_on:
+      - auth_flask
+    expose:
+      - "16686"
+      - "6831"
+    ports:
+      - "16686:16686"
+      - "6831:6831/udp"
+
 volumes:
   service_static_value:
   service_media_value:
