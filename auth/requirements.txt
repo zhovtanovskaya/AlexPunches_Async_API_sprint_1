@@ -18,3 +18,8 @@ opentelemetry-api==1.14.0
 opentelemetry-sdk==1.14.0
 opentelemetry-instrumentation-flask==0.35b0
 opentelemetry-exporter-jaeger==1.14.0
+google-api-python-client==2.65.0
+google-auth-oauthlib==0.7.1
+google-auth==2.14.1
+google-auth-httplib2==0.1.0
+Flask_Limiter==2.8.1

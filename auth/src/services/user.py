@@ -39,6 +39,7 @@ class UserService:
         return service_user_models.UserModel.from_orm(user)
 
     def get_user_by_email(self, email: str) -> service_user_models.UserModel:
+        """Получить пользователя по email."""
         user = self.user_model.get_by_filter_or_404(email=email)
         return service_user_models.UserModel.from_orm(user)
 
