@@ -1,6 +1,7 @@
 """Запустить приложение и cli-команды."""
 
 import click
+from flask import request
 from flask.cli import FlaskGroup
 
 import services.models.users as us_models
@@ -12,6 +13,14 @@ from utils import messages as msg
 
 app = create_app()
 cli = FlaskGroup(app)
+
+
+@app.before_request
+def before_request():
+    """Не пускать запроссы без заголовка X-Request-Id."""
+    request_id = request.headers.get('X-Request-Id')
+    if not request_id:
+        raise RuntimeError('request id is required')
 
 
 @cli.command('create_superuser')
