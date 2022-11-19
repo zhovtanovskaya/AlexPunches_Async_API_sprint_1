@@ -5,11 +5,13 @@ from uuid import UUID
 import google_auth_oauthlib.flow
 from googleapiclient.discovery import build
 
-from core.config import config
+from core.config import config, logger
 from core.db import db
 from models.social_account import SocialAccount
 from models.user import User
+from services.auth.exceptions import AuthenticationFailed
 from services.user import get_user_service
+from utils import messages as msg
 
 user_service = get_user_service()
 
@@ -44,7 +46,11 @@ class GoogleOAuthService:
                 'openid', 'https://www.googleapis.com/auth/userinfo.email'],
         )
         flow.redirect_uri = config.google_oauth_endpoint
-        flow.fetch_token(authorization_response=request_url)
+        try:
+            flow.fetch_token(authorization_response=request_url)
+        except Exception as e:
+            logger.error(msg.authentication_failed, exc_info=True)
+            raise AuthenticationFailed(msg.authentication_failed) from e
         credentials = flow.credentials
 
         user_info_service = build('oauth2', 'v2', credentials=credentials)
