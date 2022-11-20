@@ -11,9 +11,9 @@ from models import BaseModel
 
 
 class DeviceType(Enum):
-    mobile = "mobile"
-    smart = "smart"
-    web = "web"
+    mobile = 'mobile'
+    smart = 'smart'
+    web = 'web'
 
 
 def create_table_login_history_partition_ddl(
@@ -23,7 +23,7 @@ def create_table_login_history_partition_ddl(
         """
         ALTER TABLE login_history ATTACH PARTITION %s FOR VALUES IN ('%s');"""
         % (table, device_type)
-    ).execute_if(dialect="postgresql")
+    ).execute_if(dialect='postgresql')
 
 
 class LoginHistoryMixin:
@@ -33,7 +33,7 @@ class LoginHistoryMixin:
     @declared_attr
     def user_id(self):
         return db.Column(
-            UUID(as_uuid=True), db.ForeignKey("users.id", ondelete="CASCADE")
+            UUID(as_uuid=True), db.ForeignKey('users.id', ondelete='CASCADE')
         )
 
     email = db.Column(db.String, nullable=False)
@@ -47,9 +47,6 @@ class LoginHistoryMixin:
             f'Login history (id={self.id!r}, '
             f'mail={self.email!r})'
         )
-
-    def as_value(self) -> str:
-        return self.event_type.value
 
 
 class LoginHistory(LoginHistoryMixin, BaseModel):
@@ -67,23 +64,25 @@ class LoginHistory(LoginHistoryMixin, BaseModel):
 class LoginHistorySmartphone(LoginHistoryMixin, BaseModel):
     """User login history model for partition table for smartphone devices."""
 
-    __tablename__ = "login_history_smart"
+    __tablename__ = 'login_history_smart'
 
 
 class LoginHistoryWeb(LoginHistoryMixin, BaseModel):
     """User login history model for partition table for web devices."""
 
-    __tablename__ = "login_history_web"
+    __tablename__ = 'login_history_web'
 
 
 class LoginHistoryMobile(LoginHistoryMixin, BaseModel):
     """User login history model for partition table for mobile devices."""
 
-    __tablename__ = "login_history_mobile"
+    __tablename__ = 'login_history_mobile'
 
 
 PARTITION_TABLES_REGISTRY = (
-    (LoginHistorySmartphone, 'smart'),
+    (LoginHistorySmartphone, DeviceType.smart),
+    (LoginHistoryWeb, DeviceType.web),
+    (LoginHistoryMobile, DeviceType.mobile),
 )
 
 
@@ -92,7 +91,7 @@ def attach_event_listeners() -> None:
         class_.__table__.add_is_dependent_on(LoginHistory.__table__)
         event.listen(
             class_.__table__,
-            "after_create",
+            'after_create',
             create_table_login_history_partition_ddl(
                 class_.__table__, device_type
             ),
