@@ -56,7 +56,7 @@ class GoogleClientSecret(BaseSettings):
     token_uri: str = 'https://oauth2.googleapis.com/token'
     x509_cert_url: str = 'https://www.googleapis.com/oauth2/v1/certs'
     client_secret: str = Field(..., env='google_oauth_client_secret')
-    redirect_uris: list[str] = ['http://localhost:5000/api/v1/ggauth/']
+    redirect_uris: list[str] = ['http://localhost:5000/api/v1/google-auth']
 
     def as_dict(self):
         """В виде дикта, удобно пригодится в либе."""
@@ -88,6 +88,7 @@ class ApiSettings(BaseSettings):
     admin_role_name: str = 'admin'
 
     google_oauth = GoogleClientSecret().as_dict()
+    google_oauth_endpoint = 'http://localhost:5000/api/v1/google-auth'
 
 
 @lru_cache()
