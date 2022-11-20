@@ -14,6 +14,7 @@ from core.config import config
 class AuthErrors:
     """Тексты ошибок авторизации."""
 
+    NO_SUBSCRIPTION: str = 'У пользователя нет подписки на сервис.'
     NO_TOKEN: str = 'Нет токена авторизации.'
     INVALID_SCHEME: str = 'Схема авторизации не "Bearer".'
     INVALID_TOKEN: str = 'Токен авторизации не валиден.'
@@ -55,7 +56,7 @@ class JWTBearer(HTTPBearer):
         self.secret = secret
         self.algorithm = algorithm
 
-    async def __call__(self, request: Request) -> HTTPAuthorizationCredentials:
+    async def __call__(self, request: Request) -> AccessTokenPayload:
         """Убедиться, что в запросе присутствует валидный JWT-токен."""
         credentials: HTTPAuthorizationCredentials = await super().__call__(
             request)
@@ -64,12 +65,11 @@ class JWTBearer(HTTPBearer):
         if not credentials.scheme == 'Bearer':
             raise AuthorizationException(AuthErrors.INVALID_SCHEME)
         try:
-            token = self.decode_jwt(token=credentials.credentials)
+            return self.decode_jwt(token=credentials.credentials)
         except (DecodeError, InvalidSignatureError) as e:
             raise AuthorizationException(AuthErrors.INVALID_TOKEN) from e
         except ValidationError as e:
             raise AuthorizationException(AuthErrors.INVALID_FORMAT) from e
-        return credentials
 
     def decode_jwt(self, token: str) -> AccessTokenPayload:
         """Декодировать и провалидировать полезную нагрузку JWT."""
@@ -80,7 +80,16 @@ class JWTBearer(HTTPBearer):
 jwt_bearer = JWTBearer()
 
 
-async def verify_jwt_token(
-        token: HTTPAuthorizationCredentials = Security(jwt_bearer),
+async def subscription_required(
+        token: AccessTokenPayload = Security(jwt_bearer),
 ):
-    print(token)
+    """Убедиться, что пользователь подписан на сервис.
+
+    Подписка дает пользователю возможность просматривать
+    подробности фильмы.
+
+    - **token**: Токен доступа, в котором указаны роли пользователя.
+    """
+    SUBSCRIPTION_ROLE = 'subscriber'
+    if SUBSCRIPTION_ROLE not in token.roles:
+        raise AuthorizationException(AuthErrors.NO_SUBSCRIPTION)

@@ -9,7 +9,7 @@ from api.v1 import SearchEngineSortedPaginate
 from api.v1.shemes.film import Film, FilmShort
 from api.v1.shemes.transform_schemes import (es_film_to_film_scheme,
                                              es_film_to_film_short_scheme)
-from auth.jwt import verify_jwt_token
+from auth.request import subscription_required
 from services.film import FilmService, get_film_service
 from utils import messages as msg
 
@@ -76,7 +76,7 @@ class FilmCBV:
 
 @router.get(
     '/{film_id}',
-    dependencies=[Depends(verify_jwt_token)],
+    dependencies=[Depends(subscription_required)],
     response_model=Film,
     summary='Подробно о фильме',
 )
