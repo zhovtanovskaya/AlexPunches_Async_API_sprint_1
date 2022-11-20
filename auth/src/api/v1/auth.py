@@ -1,15 +1,18 @@
 """API для аутентификации пользователя."""
 from http import HTTPStatus
 
+import flask
 from flask import Blueprint, Response, jsonify
 from flask_pydantic import validate
 
 import services.auth.auth as services_auth
 import services.jwt.token as services_jwt_token
 from api.v1.schemes.auth import UserSigninScheme
+from services.auth.google_oauth import GoogleOAuthService
 from services.jwt.request import get_jwt, jwt_required
 
 auth = Blueprint('auth', __name__)
+google_oauth = GoogleOAuthService()
 
 
 @auth.route('/signin', methods=['POST'])
@@ -45,4 +48,23 @@ def refresh() -> Response:
     access_token, refresh_token = services_jwt_token.create_tokens(
         jwt_payload['sub'],     # Содержит email пользователя.
     )
+    return jsonify(access_token=access_token, refresh_token=refresh_token)
+
+
+@auth.route('/google-signin', methods=['GET'])
+def google_signin() -> Response:
+    """Получить ссылку на OAuth гугла."""
+    authorization_url, state = google_oauth.get_authorization_url()
+    return jsonify(authorization_url=authorization_url)
+
+
+@auth.route('/google-auth', methods=['GET'])
+def google_auth():
+    """Авторизовать пользователя, вкрнувшегося от гугла с разрешениями."""
+    request_url = flask.request.url
+    soc_acc = google_oauth.auth_by_request_url(request_url=request_url)
+    email = soc_acc.user.email
+
+    # вернуть наши токены
+    access_token, refresh_token = services_jwt_token.create_tokens(email)
     return jsonify(access_token=access_token, refresh_token=refresh_token)
