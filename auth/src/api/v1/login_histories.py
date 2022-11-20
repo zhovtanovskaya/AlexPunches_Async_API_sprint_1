@@ -33,7 +33,8 @@ def get_login_history(
         error_out=False,
         count=True,
     )
-    list_schemes = [LoginHistoryScheme.from_orm(l) for l in login_history]
+    list_schemes = [
+        LoginHistoryScheme.from_orm(elem) for elem in login_history]
     return ListLoginHistoryScheme(
         login_histories=list_schemes,
         page_number=login_history.page,
@@ -56,7 +57,8 @@ def get_profile_history(query: Page) -> ListLoginHistoryScheme:
         error_out=False,
         count=True,
     )
-    list_schemes = [LoginHistoryScheme.from_orm(l) for l in login_history]
+    list_schemes = [
+        LoginHistoryScheme.from_orm(elem) for elem in login_history]
     return ListLoginHistoryScheme(
         login_histories=list_schemes,
         page_number=login_history.page,

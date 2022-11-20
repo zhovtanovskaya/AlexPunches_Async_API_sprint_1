@@ -4,6 +4,7 @@ import aiohttp
 import aioredis
 import pytest_asyncio
 from elasticsearch import AsyncElasticsearch
+
 from functional.settings import test_settings
 
 

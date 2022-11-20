@@ -1,6 +1,7 @@
 import asyncio
 
 import pytest
+
 from functional.settings import EsIndex
 from functional.utils.helpers import orjson_dumps
 

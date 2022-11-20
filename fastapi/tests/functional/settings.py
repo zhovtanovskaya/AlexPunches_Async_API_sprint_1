@@ -1,7 +1,8 @@
 import logging
 
-from functional.testdata import es_mapping, es_setting
 from pydantic import BaseSettings, Field
+
+from functional.testdata import es_mapping, es_setting
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
