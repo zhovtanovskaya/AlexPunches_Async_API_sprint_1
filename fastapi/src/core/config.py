@@ -35,6 +35,12 @@ class ApiSettings(BaseSettings):
     base_dir: str = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     use_cache: bool = Field(True, env='use_cache')
 
+    # Настройки JWT-авторизации для путей API,
+    # которые должны быть доступны только аутентифицированным
+    # пользователям с указанными ролями.
+    jwt_secret_key: str = Field('')
+    jwt_algorithm: str = 'HS256'
+
     redis_host: str = Field('127.0.0.1', env='redis_host')
     redis_port: str = Field('6379', env='redis_port')
     redis_minsize: int = 10

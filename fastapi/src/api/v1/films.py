@@ -1,6 +1,7 @@
 from http import HTTPStatus
 
 from elasticsearch import BadRequestError
+from fastapi import Depends, HTTPException, Query
 from fastapi_utils.cbv import cbv
 from fastapi_utils.inferring_router import InferringRouter
 
@@ -8,7 +9,7 @@ from api.v1 import SearchEngineSortedPaginate
 from api.v1.shemes.film import Film, FilmShort
 from api.v1.shemes.transform_schemes import (es_film_to_film_scheme,
                                              es_film_to_film_short_scheme)
-from fastapi import Depends, HTTPException, Query
+from auth.request import subscription_required
 from services.film import FilmService, get_film_service
 from utils import messages as msg
 
@@ -73,12 +74,21 @@ class FilmCBV:
         return [es_film_to_film_short_scheme(film) for film in films]
 
 
-@router.get('/{film_id}', response_model=Film, summary='Подробно о фильме')
+@router.get(
+    '/{film_id}',
+    dependencies=[Depends(subscription_required)],
+    response_model=Film,
+    summary='Подробно о фильме',
+)
 async def film_details(
-          film_id: str,
-          film_service: FilmService = Depends(get_film_service),
+        film_id: str,
+        film_service: FilmService = Depends(get_film_service),
 ) -> Film:
-    """
+    """Получить подробности о фильме.
+
+    Подробности о фильме доступны только зарегистрированным
+    пользователям.
+
     **film_id**: uuid фильма.
     """
     if film := await film_service.get_by_id(film_id):
