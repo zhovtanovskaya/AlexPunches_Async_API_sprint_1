@@ -1,3 +1,5 @@
+"""Модели истории входов на сервис."""
+
 import uuid
 from datetime import datetime
 from enum import Enum
@@ -11,29 +13,38 @@ from models import BaseModel
 
 
 class DeviceType(Enum):
+    """Типы устройтв пользователей, с которых они могут логиниться."""
+
     mobile = 'mobile'
     smart = 'smart'
     web = 'web'
 
 
 def create_table_login_history_partition_ddl(
-    table: str, device_type: DeviceType
+    table: str, device_type: DeviceType,
 ) -> None:
     return DDL(
-        """
-        ALTER TABLE login_history ATTACH PARTITION %s FOR VALUES IN ('%s');"""
-        % (table, device_type)
+        (
+            'ALTER TABLE login_history '
+            'ATTACH PARTITION %s FOR VALUES IN ("%s");'
+        ) % (table, device_type),
     ).execute_if(dialect='postgresql')
 
 
 class LoginHistoryMixin:
-    id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4,
-                   unique=True, nullable=False)
+    id = db.Column(
+        UUID(as_uuid=True),
+        primary_key=True,
+        default=uuid.uuid4,
+        unique=True,
+        nullable=False,
+    )
 
     @declared_attr
     def user_id(self):
         return db.Column(
-            UUID(as_uuid=True), db.ForeignKey('users.id', ondelete='CASCADE')
+            UUID(as_uuid=True),
+            db.ForeignKey('users.id', ondelete='CASCADE'),
         )
 
     email = db.Column(db.String, nullable=False)
@@ -50,31 +61,31 @@ class LoginHistoryMixin:
 
 
 class LoginHistory(LoginHistoryMixin, BaseModel):
-    """Модель LoginHistory.
-    """
+    """История входов на сервис."""
+
     __tablename__ = 'login_history'
     __table_args__ = (
         UniqueConstraint('id', 'user_device_type'),
         {
             'postgresql_partition_by': 'LIST (user_device_type)',
-        }
+        },
     )
 
 
 class LoginHistorySmartphone(LoginHistoryMixin, BaseModel):
-    """User login history model for partition table for smartphone devices."""
+    """История входов со смартфонов."""
 
     __tablename__ = 'login_history_smart'
 
 
 class LoginHistoryWeb(LoginHistoryMixin, BaseModel):
-    """User login history model for partition table for web devices."""
+    """История входов из браузеров."""
 
     __tablename__ = 'login_history_web'
 
 
 class LoginHistoryMobile(LoginHistoryMixin, BaseModel):
-    """User login history model for partition table for mobile devices."""
+    """История входов с мобильных устройств."""
 
     __tablename__ = 'login_history_mobile'
 
@@ -93,7 +104,8 @@ def attach_event_listeners() -> None:
             class_.__table__,
             'after_create',
             create_table_login_history_partition_ddl(
-                class_.__table__, device_type
+                class_.__table__,
+                device_type,
             ),
         )
 
