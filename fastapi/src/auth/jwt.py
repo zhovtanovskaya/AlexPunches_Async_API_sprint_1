@@ -1,7 +1,7 @@
 """Модуль для JWT-авторизации."""
 
 import jwt
-from fastapi import HTTPException, Request
+from fastapi import HTTPException, Request, Security
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
 
@@ -32,3 +32,10 @@ class JWTBearer(HTTPBearer):
         # jwt.exceptions.DecodeError: Not enough segments
         # except (JWTError, ValidationError):
         return True
+
+
+jwt_bearer = JWTBearer()
+
+
+async def verify_jwt_token(token: HTTPAuthorizationCredentials = Security(jwt_bearer)):
+    print(token)
