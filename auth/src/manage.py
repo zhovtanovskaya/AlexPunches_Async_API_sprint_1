@@ -22,7 +22,7 @@ def before_request():
     Чтобы ни кто не прошел мимо Jaeger.
     """
     request_id = request.headers.get('X-Request-Id')
-    if not request_id:
+    if config.enable_tracer and not request_id:
         raise RuntimeError('request id is required')
 
 

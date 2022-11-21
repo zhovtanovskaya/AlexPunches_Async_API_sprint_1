@@ -87,6 +87,8 @@ class ApiSettings(BaseSettings):
     paginator_start_page: int = 1
     admin_role_name: str = 'admin'
     enable_tracer: bool = True
+    jaeger_host: str = '127.0.0.1'
+    jaeger_port: str = '6831'
 
     google_oauth = GoogleClientSecret().as_dict()
     google_oauth_endpoint = 'http://localhost:5000/api/v1/google-auth'
