@@ -53,7 +53,8 @@ def create_app():
     app.register_blueprint(profile, url_prefix='/api/v1')
     db.app = app
     db.init_app(app)
-    FlaskInstrumentor().instrument_app(app)
+    if config.enable_tracer:
+        FlaskInstrumentor().instrument_app(app)
 
     migrate = Migrate()
     migrate.init_app(app, db)

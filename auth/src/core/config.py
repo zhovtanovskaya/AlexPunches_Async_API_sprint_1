@@ -86,6 +86,7 @@ class ApiSettings(BaseSettings):
     paginator_per_page: int = 20
     paginator_start_page: int = 1
     admin_role_name: str = 'admin'
+    enable_tracer: bool = True
 
     google_oauth = GoogleClientSecret().as_dict()
     google_oauth_endpoint = 'http://localhost:5000/api/v1/google-auth'
