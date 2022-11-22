@@ -1,6 +1,5 @@
 """Сервис авторизации Google OAuth 2.0."""
-from typing import Type
-from uuid import UUID
+from typing import Any, Mapping, Type
 
 import google_auth_oauthlib.flow
 from googleapiclient.discovery import build
@@ -8,24 +7,40 @@ from googleapiclient.discovery import build
 from core.config import config, logger
 from core.db import db
 from models.social_account import SocialAccount
-from models.user import User
 from services.auth.exceptions import AuthenticationFailed
+from services.social_auth.base_provider import BaseOAuth, SocUser
 from services.user import get_user_service
 from utils import messages as msg
 
 user_service = get_user_service()
 
 
-class GoogleOAuthService:
+class GoogleOAuthService(BaseOAuth):
     """Управление авторизацией Гуловским OAuth."""
 
-    user_model: Type[db.Model] = User
     soc_acc_model: Type[db.Model] = SocialAccount
     social_name: str = 'google_oauth'
 
+    def get_oauth_url(self):
+        """Получить url у Гугла, на который отправим юзера."""
+        authorization_url, state = self._get_authorization_url()
+        return authorization_url
+
+    def auth(self,
+             request_url: str,
+             data: Mapping[str, str] | None = None,
+             ) -> SocUser:
+        """Пытаемся авторизоваться.
+
+        :param request_url: url со всеми query параметрами в строке
+        :param data: POST данные, в гугле их нет
+        :return: SocUser
+        """
+        return self._auth_by_request_url(request_url=request_url)
+
     @staticmethod
-    def get_authorization_url() -> tuple[str, str]:
-        """Получить урл гугла, на котором юзер даст разрешения.
+    def _get_authorization_url() -> tuple[str, str]:
+        """Получить урл Гугла, на котором юзер даст разрешения.
 
         В query параметрах будет список необходимых для нас разрешений,
         и другие полезные параметры, в том числе урл, куда юзер вернется
@@ -42,9 +57,8 @@ class GoogleOAuthService:
             access_type='offline', include_granted_scopes='true',
         )
 
-    def auth_by_request_url(self,
-                            request_url: str,
-                            ) -> SocialAccount:
+    @staticmethod
+    def _auth_by_request_url(request_url: str) -> Mapping[str, Any]:
         """Авторизовать пользователя по колбеку от Гугла.
 
         Вместе в пользователем, гугл передает query-параметры, в которых всякое
@@ -72,23 +86,4 @@ class GoogleOAuthService:
         social_id = user_info['id']
         user = user_service.get_or_create_user_by_email(email)
 
-        return self._get_or_create_soc_acc(
-            social_id=social_id, social_name=self.social_name, user_id=user.id,
-        )
-
-    def _get_or_create_soc_acc(self,
-                               social_id: str,
-                               social_name: str,
-                               user_id: UUID,
-                               ) -> SocialAccount:
-        """Получить SocialAccount, если нет, создать."""
-        soc_acc = self.soc_acc_model.query.filter_by(social_id=social_id,
-                                                     social_name=social_name,
-                                                     ).first()
-        if not soc_acc:
-            soc_acc = self.soc_acc_model(social_id=social_id,
-                                         social_name=social_name,
-                                         user_id=user_id,
-                                         )
-            soc_acc.create()
-        return soc_acc
+        return SocUser(social_id=social_id, user_id=user.id)
