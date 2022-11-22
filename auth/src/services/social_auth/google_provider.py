@@ -1,5 +1,5 @@
 """Сервис авторизации Google OAuth 2.0."""
-from typing import Any, Mapping, Type
+from typing import Mapping, Type
 
 import google_auth_oauthlib.flow
 from googleapiclient.discovery import build

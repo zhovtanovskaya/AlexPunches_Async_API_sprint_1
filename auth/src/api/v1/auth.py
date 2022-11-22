@@ -63,9 +63,8 @@ def social_auth(service_name: str) -> Response:
     oauth_service = social_auth_service.get_oauth_service(service=service_name)
     request_url = flask.request.url
     request_data = flask.request.form
-    soc_acc = oauth_service.auth(request_url=request_url, data=request_data)
-    email = soc_acc.user.email
+    user = oauth_service.auth(request_url=request_url, data=request_data)
 
     # вернуть наши токены
-    access_token, refresh_token = services_jwt_token.create_tokens(email)
+    access_token, refresh_token = services_jwt_token.create_tokens(user.email)
     return jsonify(access_token=access_token, refresh_token=refresh_token)

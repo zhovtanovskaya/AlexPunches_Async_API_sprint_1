@@ -1,11 +1,10 @@
 """Сервис авторизации через провайдеров OAuth 2.0."""
-from typing import Mapping, Type
-from uuid import UUID
+from typing import Mapping
 
 import services.social_auth as social_auth
 from core.db import db
 from core.exceptions import ResourceNotFoundError
-from models.social_account import SocialAccount
+from services.social_account import SocialAccountService
 from utils import messages as msg
 
 maper_oauth_providers = {
@@ -16,7 +15,7 @@ maper_oauth_providers = {
 class OAuthService:
     """Управление авторизацией OAuth."""
 
-    soc_acc_model: Type[db.Model] = SocialAccount
+    soc_acc_service: SocialAccountService = SocialAccountService()
     oauth_service: social_auth.BaseOAuth
 
     def __init__(self, service: str):
@@ -39,28 +38,15 @@ class OAuthService:
     def auth(self,
              request_url: str | None = None,
              data: Mapping[str, str] | None = None,
-             ) -> SocialAccount:
+             ) -> db.Model:
         """Пытаемся авторизоваться."""
         auth_data = self.oauth_service.auth(request_url=request_url, data=data)
-        return self._get_or_create_soc_acc(
+        soc_acc = self.soc_acc_service.get_or_create_soc_acc(
             social_name=self.oauth_service.social_name,
             social_id=auth_data.social_id,
             user_id=auth_data.user_id,
         )
-
-    def _get_or_create_soc_acc(self,
-                               social_id: str,
-                               social_name: str,
-                               user_id: UUID,
-                               ) -> SocialAccount:
-        """Получить SocialAccount, если нет, создать."""
-        soc_acc = self.soc_acc_model.query.filter_by(
-            social_id=social_id, social_name=social_name).first()
-        if not soc_acc:
-            soc_acc = self.soc_acc_model(
-                social_id=social_id, social_name=social_name, user_id=user_id)
-            soc_acc.create()
-        return soc_acc
+        return soc_acc.user
 
 
 def get_oauth_service(service: str):
