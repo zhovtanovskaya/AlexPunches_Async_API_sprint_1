@@ -1,4 +1,5 @@
 """Генератор фейковых данных."""
+from enum import Enum
 from functools import lru_cache
 
 from faker import Faker
@@ -9,6 +10,12 @@ from functional.testdata.models import (BaseDt, LoginHistory, Role, RoleUser,
 
 fake = Faker()
 Faker.seed(0)
+
+
+class DeviceType(Enum):
+    mobile = 'mobile'
+    smart = 'smart'
+    web = 'web'
 
 
 class FakerData:
@@ -94,7 +101,7 @@ class FakerData:
             date_login=fake.date_time(),
             user_id=self.users[x].id,
             user_agent=fake.user_agent(),
-            user_device_type=fake.random_element(elements=('smart', 'mobile', 'web')),  # noqa
+            user_device_type=fake.random_element(elements=('smart', 'mobile', 'web')),  # noqa 
         ) for x in list_ints]
 
 
