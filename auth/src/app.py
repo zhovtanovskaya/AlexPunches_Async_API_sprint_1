@@ -25,7 +25,7 @@ from core.exceptions import exceptions
 def configure_tracer() -> None:
     """Настроить трасировщик."""
     resource = Resource(attributes={
-         SERVICE_NAME: config.project_name
+         SERVICE_NAME: config.project_name,
     })
     tracer_provider = TracerProvider(resource=resource)
     trace.set_tracer_provider(tracer_provider)

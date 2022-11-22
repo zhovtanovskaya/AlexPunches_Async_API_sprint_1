@@ -7,12 +7,11 @@ from flask_pydantic import validate
 
 import services.auth.auth as services_auth
 import services.jwt.token as services_jwt_token
+import services.social_auth as social_auth_service
 from api.v1.schemes.auth import UserSigninScheme
-from services.auth.google_oauth import GoogleOAuthService
 from services.jwt.request import get_jwt, jwt_required
 
 auth = Blueprint('auth', __name__)
-google_oauth = GoogleOAuthService()
 
 
 @auth.route('/signin', methods=['POST'])
@@ -51,20 +50,21 @@ def refresh() -> Response:
     return jsonify(access_token=access_token, refresh_token=refresh_token)
 
 
-@auth.route('/google-signin', methods=['GET'])
-def google_signin() -> Response:
-    """Получить ссылку на OAuth гугла."""
-    authorization_url, state = google_oauth.get_authorization_url()
-    return jsonify(authorization_url=authorization_url)
+@auth.route('/social-signin/<service_name>', methods=['GET'])
+def social_signin(service_name: str) -> Response:
+    """Получить ссылку на OAuth сервис."""
+    oauth_service = social_auth_service.get_oauth_service(service=service_name)
+    return jsonify(authorization_url=oauth_service.get_oauth_url())
 
 
-@auth.route('/google-auth', methods=['GET'])
-def google_auth():
-    """Авторизовать пользователя, вкрнувшегося от гугла с разрешениями."""
+@auth.route('/social-auth/<service_name>', methods=['GET', 'POST'])
+def social_auth(service_name: str) -> Response:
+    """Авторизовать пользователя, вернувшегося от гугла с разрешениями."""
+    oauth_service = social_auth_service.get_oauth_service(service=service_name)
     request_url = flask.request.url
-    soc_acc = google_oauth.auth_by_request_url(request_url=request_url)
-    email = soc_acc.user.email
+    request_data = flask.request.form
+    user = oauth_service.auth(request_url=request_url, data=request_data)
 
     # вернуть наши токены
-    access_token, refresh_token = services_jwt_token.create_tokens(email)
+    access_token, refresh_token = services_jwt_token.create_tokens(user.email)
     return jsonify(access_token=access_token, refresh_token=refresh_token)
