@@ -52,6 +52,7 @@ async def test_film_detail(
           path_param,
           expected_answer,
           aiohttp_get,
+          access_token,
 ):
     """
     Получаем конкретный фильм по ID.
@@ -69,7 +70,10 @@ async def test_film_detail(
         es_index=test_settings.es_indexes['movies']
     )
 
-    headers = {'X-Not-Cache': 'True'}
+    headers = {
+        'X-Not-Cache': 'True',
+        'Authorization': f'Bearer {access_token}',
+    }
     url = '{}/api/v1/films/{}'.format(
         test_settings.service_url, path_param['film_uuid'])
     response = await aiohttp_get(url=url, headers=headers)

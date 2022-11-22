@@ -42,9 +42,17 @@ class TestSettings(BaseSettings):
     es_url: str = EsBaseUrl().get_url()
     redis_host: str = RedisBaseUrl().host
     redis_port: str = RedisBaseUrl().port
-
     redis_url: str = RedisBaseUrl().get_url()
     service_url: str = ApiBaseUrl().get_url()
+    # Настройки авторизации пользователей. Нужны для
+    # доступа к деталям о фильмах через REST API.
+    # Должны совпадать с настройками тестируемого сервиса.
+    jwt_secret_key: str = Field('')
+    jwt_algorithm: str = 'HS256'
+    jwt_access_payload = {
+        'type': 'access',
+        'roles': ['subscriber'],
+    }
 
     es_indexes: dict = {
         'movies': EsIndex(name='movies', mapping=es_mapping.movie_mappings),
