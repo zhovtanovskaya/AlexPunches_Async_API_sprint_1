@@ -7,9 +7,9 @@ from flask_pydantic import validate
 
 import services.auth.auth as services_auth
 import services.jwt.token as services_jwt_token
+import services.social_auth as social_auth
 from api.v1.schemes.auth import UserSigninScheme
 from services.jwt.request import get_jwt, jwt_required
-from services.social_auth.oauth import get_oauth_service
 
 auth = Blueprint('auth', __name__)
 
@@ -53,14 +53,14 @@ def refresh() -> Response:
 @auth.route('/social-signin/<service_name>', methods=['GET'])
 def social_signin(service_name: str) -> Response:
     """Получить ссылку на OAuth сервис."""
-    oauth_service = get_oauth_service(service=service_name)
+    oauth_service = social_auth.get_oauth_service(service=service_name)
     return jsonify(authorization_url=oauth_service.get_oauth_url())
 
 
 @auth.route('/social-auth/<service_name>', methods=['GET', 'POST'])
 def google_auth(service_name: str) -> Response:
     """Авторизовать пользователя, вернувшегося от гугла с разрешениями."""
-    oauth_service = get_oauth_service(service=service_name)
+    oauth_service = social_auth.get_oauth_service(service=service_name)
     request_url = flask.request.url
     request_data = flask.request.form
     soc_acc = oauth_service.auth(request_url=request_url, data=request_data)

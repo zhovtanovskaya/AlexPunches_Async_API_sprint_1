@@ -15,7 +15,7 @@ from utils import messages as msg
 user_service = get_user_service()
 
 
-class GoogleOAuthService(BaseOAuth):
+class GoogleOAuthProvider(BaseOAuth):
     """Управление авторизацией Гуловским OAuth."""
 
     soc_acc_model: Type[db.Model] = SocialAccount
@@ -58,7 +58,7 @@ class GoogleOAuthService(BaseOAuth):
         )
 
     @staticmethod
-    def _auth_by_request_url(request_url: str) -> Mapping[str, Any]:
+    def _auth_by_request_url(request_url: str) -> SocUser:
         """Авторизовать пользователя по колбеку от Гугла.
 
         Вместе в пользователем, гугл передает query-параметры, в которых всякое

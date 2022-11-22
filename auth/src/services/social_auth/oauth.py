@@ -6,7 +6,7 @@ from core.db import db
 from core.exceptions import ResourceNotFoundError
 from models.social_account import SocialAccount
 from services.social_auth.base_provider import BaseOAuth
-from services.social_auth.google_provider import GoogleOAuthService
+from services.social_auth.google_provider import GoogleOAuthProvider
 from utils import messages as msg
 
 
@@ -22,7 +22,7 @@ class OAuthService:
         Если название для нас неизвестно, вернуть ошибку.
         """
         if service == 'google':
-            self.oauth_service = GoogleOAuthService()
+            self.oauth_service = GoogleOAuthProvider()
         else:
             raise ResourceNotFoundError(msg.authentication_service_not_found)
 
