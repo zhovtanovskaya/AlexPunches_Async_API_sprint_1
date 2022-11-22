@@ -1,3 +1,5 @@
+"""Модели истории входов на сервис."""
+
 import uuid
 from datetime import datetime
 
@@ -34,12 +36,12 @@ class LoginHistoryMixin:
 
 
 class LoginHistory(LoginHistoryMixin, BaseModel):
-    """Модель LoginHistory.
-    """
+    """История входов на сервис."""
+
     __tablename__ = 'login_history'
     __table_args__ = (
         UniqueConstraint('id', 'user_device_type'),
         {
             'postgresql_partition_by': 'LIST (user_device_type)',
-        }
+        },
     )
