@@ -2,28 +2,31 @@
 from typing import Mapping, Type
 from uuid import UUID
 
+import services.social_auth as social_auth
 from core.db import db
 from core.exceptions import ResourceNotFoundError
 from models.social_account import SocialAccount
-from services.social_auth.base_provider import BaseOAuth
-from services.social_auth.google_provider import GoogleOAuthProvider
 from utils import messages as msg
+
+maper_oauth_providers = {
+    'google': social_auth.GoogleOAuthProvider(),
+}
 
 
 class OAuthService:
     """Управление авторизацией OAuth."""
 
     soc_acc_model: Type[db.Model] = SocialAccount
-    oauth_service: BaseOAuth
+    oauth_service: social_auth.BaseOAuth
 
     def __init__(self, service: str):
         """Активировать OAuth провайдера.
 
         Если название для нас неизвестно, вернуть ошибку.
         """
-        if service == 'google':
-            self.oauth_service = GoogleOAuthProvider()
-        else:
+        try:
+            self.oauth_service = maper_oauth_providers[service]
+        except KeyError:
             raise ResourceNotFoundError(msg.authentication_service_not_found)
 
     def get_oauth_url(self):
