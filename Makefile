@@ -36,27 +36,3 @@ auth-pytest:
 	docker-compose -f ./auth/tests/functional/docker-compose.yml logs -f auth-pytests
 auth-migrate:
 	docker-compose -f ./docker-compose.yml exec auth_flask python src/manage.py db upgrade head
-
-env:
-	cp .env.sample .env
-	cp .env.sample .env.dev
-	sed -i "s/DB_HOST_ADMIN=.*/DB_HOST_ADMIN=localhost/"  .env.dev
-	sed -i "s/DB_PORT_ADMIN=.*/DB_PORT_ADMIN=15432/"  .env.dev
-	sed -i "s/ES_HOST=.*/ES_HOST=localhost/"  .env.dev
-	sed -i "s/USE_CACHE=.*/USE_CACHE=False/"  .env.dev
-	sed -i "s/REDIS_HOST=.*/REDIS_HOST=localhost/"  .env.dev
-	sed -i "s/API_HOST=.*/API_HOST=localhost/"  .env.dev
-	sed -i "s/API_PORT=.*/API_PORT=8001/"  .env.dev
-	sed -i "s/OAUTHLIB_INSECURE_TRANSPORT=.*/OAUTHLIB_INSECURE_TRANSPORT=1/"  .env.dev
-	sed -i "s/GOOGLE_OAUTH_ENDPOINT=.*/GOOGLE_OAUTH_ENDPOINT=http\:\/\/localhost\:5000\/api\/v1\/social-auth\/google/"  .env.dev
-	sed -i "s/ENABLE_TRACER=.*/ENABLE_TRACER=False/"  .env.dev
-	sed -i "s/JAEGER_HOST=.*/JAEGER_HOST=localhost/"  .env.dev
-	sed -i "s/DB_HOST_AUTH=.*/DB_HOST_AUTH=localhost/"  .env.dev
-	cp .env.sample .env.pytests
-	sed -i "s/ES_HOST=.*/ES_HOST=test-elastic/" .env.pytests
-	sed -i "s/REDIS_HOST=.*/REDIS_HOST=test-redis/" .env.pytests
-	sed -i "s/API_HOST=.*/API_HOST=test-fastapi/" .env.pytests
-	sed -i "s/ENABLE_TRACER=.*/ENABLE_TRACER=False/" .env.pytests
-	sed -i "s/OAUTHLIB_INSECURE_TRANSPORT=.*/OAUTHLIB_INSECURE_TRANSPORT=1/"  .env.pytests
-	sed -i "s/JAEGER_HOST=.*/JAEGER_HOST=jaeger/" .env.pytests
-	sed -i "s/DB_HOST_AUTH=.*/DB_HOST_AUTH=test-auth-postgres/" .env.pytests
