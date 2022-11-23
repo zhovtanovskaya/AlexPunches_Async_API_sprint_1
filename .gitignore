@@ -102,8 +102,8 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
-.env.*
+#.env
+#.env.*
 .venv
 env/
 venv/
@@ -141,5 +141,3 @@ dmypy.json
 admin_panel/static/
 
 # Other
-.env.dev
-.env.pytests
