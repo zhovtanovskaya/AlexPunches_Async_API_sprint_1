@@ -100,7 +100,9 @@ services:
       - "5000"
     env_file:
       - .env
-#    command: ["gunicorn", "-b", "0.0.0.0:5000", "--workers", "4", "src.pywsgi:app"]
+    entrypoint: >
+      sh -c "python /opt/app/src/manage.py db upgrade head
+      && gunicorn -b 0.0.0.0:5000 --workers 4 src.pywsgi:app"
 
   jaeger:
     image: jaegertracing/all-in-one:1.39.0

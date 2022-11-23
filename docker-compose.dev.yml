@@ -6,7 +6,7 @@ services:
     volumes:
       - pg_data_admin:/var/lib/postgresql/data/
     ports:
-      - "5432:5432"
+      - "15432:5432"
     environment:
       POSTGRES_DB: ${POSTGRES_DB_ADMIN}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_ADMIN}
@@ -64,7 +64,7 @@ services:
     volumes:
       - pg_data_auth:/var/lib/postgresql/data/
     ports:
-      - "15432:5432"
+      - "5432:5432"
     environment:
       POSTGRES_DB: ${POSTGRES_DB_AUTH}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_AUTH}

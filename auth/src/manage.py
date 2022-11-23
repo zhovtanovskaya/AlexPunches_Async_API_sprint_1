@@ -7,6 +7,7 @@ from flask.cli import FlaskGroup
 import services.models.users as us_models
 from app import create_app
 from core.config import config
+from core.db import db
 from services.role import get_role_service
 from services.user import get_user_service
 from utils import messages as msg
@@ -24,6 +25,14 @@ def before_request():
     request_id = request.headers.get('X-Request-Id')
     if config.enable_tracer and not request_id:
         raise RuntimeError('request id is required')
+
+
+@cli.command('create_db')
+def create_db() -> None:
+    """Пересоздать всю БД."""
+    db.drop_all()
+    db.create_all()
+    db.session.commit()
 
 
 @cli.command('create_superuser')
