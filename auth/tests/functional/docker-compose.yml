@@ -30,6 +30,8 @@ services:
       - ../../../.env.pytests
     ports:
       - "5000:5000"
+    entrypoint:
+      ["gunicorn", "-b", "0.0.0.0:5000", "--workers", "4", "src.pywsgi:app"]
 
 
   auth-pytests:
