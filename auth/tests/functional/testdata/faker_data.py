@@ -13,6 +13,8 @@ Faker.seed(0)
 
 
 class DeviceType(Enum):
+    """Типы девайсов."""
+
     mobile = 'mobile'
     smart = 'smart'
     web = 'web'
@@ -101,7 +103,7 @@ class FakerData:
             date_login=fake.date_time(),
             user_id=self.users[x].id,
             user_agent=fake.user_agent(),
-            user_device_type=fake.random_element(elements=('smart', 'mobile', 'web')),  # noqa 
+            user_device_type=fake.random_element(elements=('smart', 'mobile', 'web')),  # noqa
         ) for x in list_ints]
 
 

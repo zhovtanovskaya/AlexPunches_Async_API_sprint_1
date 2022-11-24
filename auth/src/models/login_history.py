@@ -12,14 +12,17 @@ from models import BaseModel
 
 
 class LoginHistoryMixin:
+    """Микшин чтобы в партициях использовать."""
+
     id = db.Column(
         UUID(as_uuid=True), primary_key=True, default=uuid.uuid4,
         nullable=False)
 
     @declared_attr
     def user_id(self):
+        """ИД юзера."""
         return db.Column(
-            UUID(as_uuid=True), db.ForeignKey('users.id')
+            UUID(as_uuid=True), db.ForeignKey('users.id'),
         )
 
     email = db.Column(db.String, nullable=False)
