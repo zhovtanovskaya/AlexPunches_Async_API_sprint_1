@@ -1,3 +1,4 @@
+"""Схемы для аутенификации."""
 from pydantic import BaseModel, EmailStr
 
 

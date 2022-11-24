@@ -5,15 +5,8 @@
 # Подготовка
 
 В проекте используются переменные окружения. Они определяются несколькими  `.env`-файлами  
-`.env` —   
-`.env.dev` —   
-`.env.pytests` —   
+`.env`, `.env.dev`, `.env.pytests`  
 
-```bash
-cp .env.sample .env
-cp .env.sample .env.dev
-cp .env.sample .env.pytests
-```
 
 # Запуск
 
@@ -27,6 +20,12 @@ make up
 ```bash
 make load-data
 ```
+
+### Потрогать
+Админка  
+[http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)  
+OAS3  
+[http://127.0.0.1:8000/api/openapi](http://127.0.0.1:8000/api/openapi)  
 
 Остановить контейнеры
 ```bash
@@ -74,15 +73,10 @@ make auth-migrate
 Если есть кеш, то ответ будет из кеша, и будет обозначее заголовком  `X-From-Redis-Cache: True`.  
 Чтобы получить ответ минуя кеш, нужно передать заголовок `X-Not-Cache: True`  
 
-### Потрогать
-Админка  
-[http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)  
-OAS3  
-[http://127.0.0.1:8000/api/openapi](http://127.0.0.1:8000/api/openapi)  
 
 # Режим разработки 
 
-Для сервисов `fastapi` или `etl`.  
+Для сервисов `etl`, `fastapi` или `Auth`.  
 Чтобы было удобно разрабатывать и дебажить будем запускать их в локальном виртуальном окружении.
 А остальные через специальный `docker-compose.dev.yml`. В нем проброшены порты.  
 Делается это просто:
@@ -90,14 +84,39 @@ OAS3
 make up-dev
 ```
 При этом нужно проследить, чтобы у запускаемого сервиса были нужные переменные окружения.  
-Например в Пайчарме это удобно сделать:  
-в "Run/Debag Configurations -> EnvFile" указаваем предварительно созданный `.env.dev`,  
-который нужным образом отличается от боевого, например, в нем хосты будут `localhost`, а `DEBUG` можно сделать `'True'`.  
-Используем заготовочку
-```bash
-cp .env.sample .env.dev
-```
 
+*. например в Пайчарме это удобно сделать:
+в "Run/Debag Configurations -> EnvFile" указаваем предварительно созданный `.env.dev`  
+*. в терминале `export $(grep -v '^#' .env.dev | xargs)`  
+или что-то типо
+```bash
+set -a
+. .env.dev
+```
+и запускаем, 
+```bash
+python3.10 -m venv venv
+source venv/bin/activate
+pip install -r ./auth/requirements.dev.txt
+```
+Auth:
+```bash
+pip install -r ./auth/requirements.txt
+python ./auth/src/manage.py db upgrade head  # если нужно накатить миграции
+python ./auth/src/manage.py run
+```
+fastapi:
+```bash
+pip install -r ./fastapi/requirements.txt
+python ./fastapi/src/main.py --reload --port 8001
+```
+etl:
+```bash
+pip install -r ./etl_services/requirements.txt
+cd ./etl_services
+python sqlite_to_postgres/load_data.py
+python postgres_to_es/load_indexes.py
+```
 
 _Для `admin_panel` режим разработки уже, наверно, неактуален._  
 _Но если потребуется, нужно будет подкорректировать `docker-compose.dev.yml`_  
@@ -122,14 +141,14 @@ ____
 в контейнере:
 ```bash
 # собрать миграции:
-docker exec auth_flask python src/manage.py db revision --message="NAME_MIGRATION" --autogenerate
+docker exec <CONTAINER_NAME_AUTH_FLASK> python src/manage.py db revision --message="<NAME_MIGRATION>" --autogenerate
 # применить миграции:
-docker exec auth_flask python src/manage.py db upgrade head
+docker exec <CONTAINER_NAME_AUTH_FLASK> python src/manage.py db upgrade head
 ```
 в окружении:
 ```bash
 # собрать миграции:
-python src/manage.py db revision --message="NAME_MIGRATION" --autogenerate
+python src/manage.py db revision --message="<NAME_MIGRATION>" --autogenerate
 # применить миграции:
 python src/manage.py db upgrade head
 ```

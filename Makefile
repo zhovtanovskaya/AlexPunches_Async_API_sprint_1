@@ -14,8 +14,14 @@ etl-pytest:
 	docker-compose -f ./docker-compose.yml run etl pytest -v
 stop:
 	docker-compose -f ./docker-compose.yml stop
+	docker-compose -f ./docker-compose.dev.yml stop
+	docker-compose -f ./fastapi/tests/functional/docker-compose.yml stop
+	docker-compose -f ./auth/tests/functional/docker-compose.yml stop
 down:
 	docker-compose -f ./docker-compose.yml down -v
+	docker-compose -f ./docker-compose.dev.yml down -v
+	docker-compose -f ./fastapi/tests/functional/docker-compose.yml down -v
+	docker-compose -f ./auth/tests/functional/docker-compose.yml down -v
 logs:
 	docker-compose -f ./docker-compose.yml logs -f
 load-es-movies:
@@ -29,4 +35,4 @@ auth-pytest:
 	docker-compose -f ./auth/tests/functional/docker-compose.yml --env-file .env.pytests up -d --build
 	docker-compose -f ./auth/tests/functional/docker-compose.yml logs -f auth-pytests
 auth-migrate:
-	docker-compose -f ./docker-compose.yml exec auth_flask python src/manage.py db upgrade
+	docker-compose -f ./docker-compose.yml exec auth_flask python src/manage.py db upgrade head

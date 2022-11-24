@@ -56,7 +56,10 @@ class GoogleClientSecret(BaseSettings):
     token_uri: str = 'https://oauth2.googleapis.com/token'
     x509_cert_url: str = 'https://www.googleapis.com/oauth2/v1/certs'
     client_secret: str = Field(..., env='google_oauth_client_secret')
-    redirect_uris: list[str] = ['http://localhost:5000/api/v1/social-auth/google'] # noqa
+    redirect_uris: list[str] = [
+        'http://localhost:5000/api/v1/social-auth/google',
+        'http://localhost:8000/api/v1/social-auth/google',
+    ]
 
     def as_dict(self):
         """В виде дикта, удобно пригодится в либе."""

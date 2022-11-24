@@ -9,5 +9,3 @@ RUN  pip install --no-cache-dir --upgrade pip \
      && pip install --no-cache-dir -r requirements.txt
 
 COPY . .
-
-CMD ["gunicorn", "-b", "0.0.0.0:5000", "--workers", "4", "src.pywsgi:app"]
