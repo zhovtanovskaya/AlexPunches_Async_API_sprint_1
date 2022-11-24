@@ -1,4 +1,5 @@
 """Генератор фейковых данных."""
+from enum import Enum
 from functools import lru_cache
 
 from faker import Faker
@@ -9,6 +10,14 @@ from functional.testdata.models import (BaseDt, LoginHistory, Role, RoleUser,
 
 fake = Faker()
 Faker.seed(0)
+
+
+class DeviceType(Enum):
+    """Типы девайсов."""
+
+    mobile = 'mobile'
+    smart = 'smart'
+    web = 'web'
 
 
 class FakerData:

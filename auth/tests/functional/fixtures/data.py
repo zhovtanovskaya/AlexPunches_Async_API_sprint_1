@@ -34,7 +34,6 @@ def db_insert_fake_data(pg_conn: _connection,
                                          data=_data,
                                          )
             execute_batch(pg_cursor, stmt, data)
-
     pg_conn.commit()
     yield
     pg_cursor.execute(f'truncate table {test_settings.users_tablename} restart identity cascade;')  # noqa

@@ -70,6 +70,9 @@ class TestSettings(BaseSettings):
     roles_tablename = 'roles'
     roles_users_tablename = 'roles_users'
     login_histories_tablename = 'login_history'
+    login_histories_tablename_smart = 'login_history_smart'
+    login_histories_tablename_web = 'login_history_web'
+    login_histories_tablename_mobile = 'login_history_mobile'
     fake_data_map = {
         users_tablename: User,
         roles_tablename: Role,
