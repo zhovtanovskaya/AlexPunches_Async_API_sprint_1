@@ -67,7 +67,7 @@ def create_app():
     Limiter(
         app,
         key_func=get_remote_address,
-        default_limits=['3 per second'],
+        default_limits=['30 per second'],
         storage_uri=f'redis://{config.redis_host}:{config.redis_port}',
     )
     return app
