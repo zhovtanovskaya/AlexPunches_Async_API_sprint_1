@@ -59,6 +59,8 @@ class ApiSettings(BaseSettings):
         'persons': EsIndex(name='persons', search_field='name'),
     }
 
+    api_port: str = '8000'
+
 
 @lru_cache()
 def get_settings() -> ApiSettings:

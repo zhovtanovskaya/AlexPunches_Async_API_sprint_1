@@ -4,19 +4,17 @@ import sys
 import aioredis
 import uvicorn as uvicorn
 from elasticsearch import AsyncElasticsearch
+from fastapi import FastAPI
 from fastapi.responses import ORJSONResponse
 from starlette.middleware.base import BaseHTTPMiddleware
-
-from fastapi import FastAPI
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(BASE_DIR)
 
-from db import elastic, redis
-
 from api.v1 import films, genres, persons
 from core.cache_middleware import RedisCacheMiddleware
 from core.config import config
+from db import elastic, redis
 
 app = FastAPI(
     title=config.project_name,
@@ -55,5 +53,5 @@ if __name__ == '__main__':
     uvicorn.run(
         'main:app',
         host='0.0.0.0',
-        port=8000,
+        port=int(config.api_port),
     )
