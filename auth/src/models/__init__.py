@@ -12,5 +12,5 @@ __all__ = [
     'roles_users',
     'User',
     'LoginHistory',
-    'LoginHistoryMixin'
+    'LoginHistoryMixin',
 ]

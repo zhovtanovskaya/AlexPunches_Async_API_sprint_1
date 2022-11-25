@@ -23,11 +23,6 @@ def db_insert_fake_data(pg_conn: _connection,
     pg_cursor.execute(f'truncate table {test_settings.roles_tablename} restart identity cascade;')  # noqa
     pg_cursor.execute(f'truncate table {test_settings.roles_users_tablename} restart identity cascade;')  # noqa
     pg_cursor.execute(f'truncate table {test_settings.login_histories_tablename} restart identity cascade;')  # noqa
-
-    pg_cursor.execute(f'CREATE TABLE IF NOT EXISTS {test_settings.login_histories_tablename_smart} PARTITION OF {test_settings.login_histories_tablename} FOR VALUES IN (\'smart\');')  # noqa
-    pg_cursor.execute(f'CREATE TABLE IF NOT EXISTS {test_settings.login_histories_tablename_mobile} PARTITION OF {test_settings.login_histories_tablename} FOR VALUES IN (\'mobile\');')  # noqa
-    pg_cursor.execute(f'CREATE TABLE IF NOT EXISTS {test_settings.login_histories_tablename_web} PARTITION OF {test_settings.login_histories_tablename} FOR VALUES IN (\'web\');')  # noqa
-
     pg_conn.commit()
     faker_data = get_faker_data()
 
@@ -39,12 +34,10 @@ def db_insert_fake_data(pg_conn: _connection,
                                          data=_data,
                                          )
             execute_batch(pg_cursor, stmt, data)
-
     pg_conn.commit()
     yield
     pg_cursor.execute(f'truncate table {test_settings.users_tablename} restart identity cascade;')  # noqa
     pg_cursor.execute(f'truncate table {test_settings.roles_tablename} restart identity cascade;')  # noqa
     pg_cursor.execute(f'truncate table {test_settings.roles_users_tablename} restart identity cascade;')  # noqa
     pg_cursor.execute(f'truncate table {test_settings.login_histories_tablename} restart identity cascade;')  # noqa
-
     pg_conn.commit()
