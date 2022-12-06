@@ -23,7 +23,7 @@ class ApiSettings(BaseSettings):
     jwt_secret_key: str = Field('')
     jwt_algorithm: str = 'HS256'
 
-    api_port: str = '8000'
+    activity_api_port: str = '8000'
 
     event_store_host: str = 'localhost'
     event_store_port: str = '9092'
