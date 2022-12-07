@@ -4,7 +4,7 @@ from typing import Optional
 import jwt
 from fastapi import Request, Security
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
-from jwt import DecodeError, InvalidSignatureError
+from jwt import DecodeError, ExpiredSignatureError, InvalidSignatureError
 from pydantic import BaseModel, Field, ValidationError
 
 from auth.exceptions import AuthorizationException
@@ -18,6 +18,7 @@ class AuthErrors:
     NO_TOKEN: str = 'Нет токена авторизации.'
     INVALID_SCHEME: str = 'Схема авторизации не "Bearer".'
     INVALID_TOKEN: str = 'Токен авторизации не валиден.'
+    EXPIRED_TOCKEN: str = 'Срок действия токен истек.'
     INVALID_FORMAT: str = (
         'Не знакомый формат полезной нагрузки токена авторизации.'
     )
@@ -71,6 +72,8 @@ class JWTBearer(HTTPBearer):
             raise AuthorizationException(AuthErrors.INVALID_TOKEN) from e
         except ValidationError as e:
             raise AuthorizationException(AuthErrors.INVALID_FORMAT) from e
+        except ExpiredSignatureError as e:
+            raise AuthorizationException(AuthErrors.EXPIRED_TOCKEN) from e
 
     def decode_jwt(self, token: str) -> AccessTokenPayload:
         """Декодировать и провалидировать полезную нагрузку JWT."""
