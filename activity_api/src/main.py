@@ -1,16 +1,17 @@
 """Точка входа в приложение."""
+import asyncio
 import os
 import sys
 
-import uvicorn as uvicorn
+import uvicorn
+from aiokafka import AIOKafkaProducer
 from fastapi import FastAPI
 from fastapi.responses import ORJSONResponse
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(BASE_DIR)
 
-
-from producer import aioproducer
+import producer
 
 from api.v1 import activity
 from core.config import config
@@ -26,13 +27,19 @@ app = FastAPI(
 @app.on_event('startup')
 async def startup():
     """Запустить продюсера для Кафки."""
-    await aioproducer.start()
+    loop = asyncio.get_event_loop()
+    producer.aioproducer = AIOKafkaProducer(
+        loop=loop,
+        client_id=config.project_name,
+        bootstrap_servers=f'{config.event_store_host}:{config.event_store_port}', # noqa
+    )
+    await producer.aioproducer.start()
 
 
 @app.on_event('shutdown')
 async def shutdown():
     """Остановить продюсера для Кафки."""
-    await aioproducer.stop()
+    await producer.aioproducer.stop()
 
 
 app.include_router(
