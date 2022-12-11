@@ -13,13 +13,13 @@ sys.path.append(BASE_DIR)
 
 import producer
 
-from api.v1 import activity
+from api.v1 import activities
 from core.config import config
 
 app = FastAPI(
     title=config.project_name,
-    docs_url='/api/v1/activity/openapi',
-    openapi_url='/api/v1/activity/openapi.json',
+    docs_url='/api/v1/activities/openapi',
+    openapi_url='/api/v1/activities/openapi.json',
     default_response_class=ORJSONResponse,
 )
 
@@ -43,7 +43,7 @@ async def shutdown():
 
 
 app.include_router(
-    activity.router, prefix='/api/v1/activity', tags=['activity'],
+    activities.router, prefix='/api/v1/activities', tags=['activity'],
 )
 
 if __name__ == '__main__':

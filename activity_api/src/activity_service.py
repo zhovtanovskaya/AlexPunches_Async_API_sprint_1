@@ -6,7 +6,7 @@ from fastapi import Depends
 from producer import get_producer
 
 from core.config import config
-from models import ActivityModel
+from models import SpawnPointModel
 
 loop = asyncio.get_event_loop()
 
@@ -20,10 +20,10 @@ class ActivityService:
         """Сервис зависит от Продюсера Кафки."""
         self.producer = producer
 
-    async def send(self, activity: ActivityModel):
+    async def send_spawn_point(self, point: SpawnPointModel):
         """Отправить событие в хранилище."""
-        key = f'{activity.user_id}+{activity.film_id}'.encode('utf8')
-        value = b'%d' % activity.time
+        key = f'{point.user_id}+{point.film_id}'.encode('utf8')
+        value = b'%d' % point.time
         await self.producer.send_and_wait(topic=config.film_progress_topic,
                                           value=value,
                                           key=key,
