@@ -15,11 +15,12 @@ from typing import Generator
 
 import more_itertools
 from clickhouse_driver import Client
-from generator_fakes import generate_points
-from timer import timed
+from config import logger, settings
 
-CHUNK_SIZE: int = 10 ** 4
-print(f'CHUNK_SIZE: {CHUNK_SIZE}')
+from utils.generator_fakes import generate_points
+from utils.timer import timed
+
+logger.info(f'chunk_size: {settings.chunk_size}')
 
 
 @timed
@@ -29,20 +30,24 @@ def load_data(data: Generator):
     Каждая пачка на случайный шард.
     """
     clients = (
-        Client(host='localhost', port='9000'),
-        Client(host='localhost', port='9003'),
-        Client(host='localhost', port='9005'),
+        Client(host=settings.ch_host, port=settings.ch_port_1),
+        Client(host=settings.ch_host, port=settings.ch_port_2),
+        Client(host=settings.ch_host, port=settings.ch_port_3),
     )
-    for points in more_itertools.ichunked(data, CHUNK_SIZE):
+    for points in more_itertools.ichunked(data, settings.chunk_size):
         client = random.choice(clients)
         client.execute(
-             'INSERT INTO shard.test (user_id, film_id, event_time, spawn_point) VALUES',  # noqa
-             ((point.user_id, point.film_id, point.created_at, point.value) for point in points),  # noqa
+             'INSERT INTO '
+             'shard.test (user_id, film_id, event_time, spawn_point) VALUES',
+             ((point.user_id, point.film_id, point.created_at, point.value)
+                 for point in points),
          )
 
 
 def run() -> None:
-    data = generate_points(users_count=1000, films_count=1000)
+    data = generate_points(users_count=settings.fake_users_count,
+                           films_count=settings.fake_films_count,
+                           )
     load_data(data)
 
 
