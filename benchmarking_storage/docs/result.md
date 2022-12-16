@@ -76,11 +76,35 @@ load_data:
 ---------------------------------------------------------------------------------------------------
 
 ## АСинхронно
+points: 111_168_000
 
 ### CHUNK_SIZE: 10 ** 4
+async_2
+
 ### CHUNK_SIZE: 10 ** 5
 CHUNK_SIZE: 100000
-готово points: 111_168_000
-finished in 959.1712 second(s)
+finished in 959 second(s)
+
+async_2
+2 попытка
+369, 862.14
+372, 863.66
+371, 857.18
+in 1040 second(s)
 ### CHUNK_SIZE: 10 ** 6
 ### CHUNK_SIZE: 10 ** 7
+
+
+10 ** 3
+1. finished in 5814.80 sec
+
+10 ** 4
+1. finished in 1103.55 sec
+
+10 ** 5
+1. finished in 994.21 sec
+2.
+
+10 ** 5 * 2
+1. finished in 997.72 sec
+2. 

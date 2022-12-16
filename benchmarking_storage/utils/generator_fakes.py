@@ -6,10 +6,12 @@
 import datetime
 import random
 import string
+import time
 from dataclasses import dataclass
 from typing import Generator, List
 from uuid import UUID
 
+from config import logger
 from faker import Faker
 
 fake = Faker()
@@ -66,11 +68,9 @@ def generate_points(users_count: int, films_count: int) -> Generator:
     films = create_films(films_count)
 
     for user in users:
+        start_user = datetime.datetime(2022, 1, 1, 0, 0, 1)
+        start_film = int(time.mktime(start_user.timetuple()))
         for film in films:
-            start_film = fake.unix_time(
-                end_datetime=datetime.datetime(2022, 12, 31, 19, 59, 59),
-                start_datetime=datetime.date(2022, 1, 1),
-                )
             for minute in range(film.duration):
                 duration += 1
                 yield Point(
@@ -78,7 +78,8 @@ def generate_points(users_count: int, films_count: int) -> Generator:
                     film_id=film.id,
                     value=minute,
                     created_at=start_film + ((minute + 1) * 60),
-                    randon_str=''.join(random.choices(string.ascii_letters + string.digits, k=16))
+                    randon_str=''.join(random.choices(string.ascii_letters + string.digits, k=16)),
                     )
+            start_film += film.duration
 
-    print(f'готово points: {duration}')
+    logger.info(f'готово points: {duration}')

@@ -13,6 +13,8 @@ logger.info(f'chunk_size: {settings.chunk_size}')
 
 
 async def load_data(connection: Any, data: Generator):
+    timer = 0
+    count_insert = 0
     async with connection.cursor(cursor=DictCursor) as cursor:
         for points in more_itertools.ichunked(data, settings.chunk_size):
             await cursor.execute(
@@ -21,6 +23,9 @@ async def load_data(connection: Any, data: Generator):
                  [(point.user_id, point.film_id, point.created_at, point.value)
                      for point in points]
             )
+            timer += cursor.connection._connection.last_query.elapsed
+            count_insert += 1
+    logger.info(f'{connection.port}: {count_insert}, {timer:.3f}')
 
 
 @async_timed()

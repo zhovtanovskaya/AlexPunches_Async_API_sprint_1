@@ -44,11 +44,11 @@ def main():
                 actual_data.all_data,
                 f'+{how_much_added}',
             ])
-            logger.info(f'{actual_data.shard_1} | '
-                        f'{actual_data.shard_2} | '
-                        f'{actual_data.shard_3} || '
-                        f'{actual_data.all_data} '
-                        f'+{how_much_added}'
+            logger.info(f'{actual_data.shard_1:_} | '
+                        f'{actual_data.shard_2:_} | '
+                        f'{actual_data.shard_3:_} || '
+                        f'{actual_data.all_data:_} '
+                        f'+{how_much_added:_}'
                         )
 
             sleep(settings.cheker_interval)
