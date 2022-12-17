@@ -1,4 +1,4 @@
-""""Скрипт можно запустить и наблюдать как данные добавляются в кликхаус."""
+"""Скрипт можно запустить и наблюдать как данные добавляются в кликхаус."""
 import csv
 from dataclasses import dataclass
 from time import sleep
@@ -9,14 +9,17 @@ from config import logger, settings
 
 @dataclass
 class ActualData:
+    """Класс количества данных в Кликхаусе."""
+
     shard_1: int
     shard_2: int
     shard_3: int
     all_data: int
 
 
-def get_data(client_1: Client, client_2: Client, client_3: Client
+def get_data(client_1: Client, client_2: Client, client_3: Client,
              ) -> ActualData:
+    """Получить информацию о количестве данных в Кликхаусе."""
     return ActualData(
         all_data=client_1.execute('SELECT COUNT(*) FROM default.test')[0][0],
         shard_1=client_1.execute('SELECT COUNT(*) FROM shard.test')[0][0],
@@ -26,6 +29,7 @@ def get_data(client_1: Client, client_2: Client, client_3: Client
 
 
 def main():
+    """Получить данные из Кликхауса и вывести в лог."""
     client_1 = Client(host=settings.ch_host, port=settings.ch_port_1)
     client_2 = Client(host=settings.ch_host, port=settings.ch_port_2)
     client_3 = Client(host=settings.ch_host, port=settings.ch_port_3)
@@ -48,7 +52,7 @@ def main():
                         f'{actual_data.shard_2:_} | '
                         f'{actual_data.shard_3:_} || '
                         f'{actual_data.all_data:_} '
-                        f'+{how_much_added:_}'
+                        f'+{how_much_added:_}',
                         )
 
             sleep(settings.cheker_interval)

@@ -35,7 +35,7 @@ def load_data(data: Generator):
         Client(host=settings.ch_host, port=settings.ch_port_3),
     )
     for points in more_itertools.ichunked(data, settings.chunk_size):
-        client = random.choice(clients)
+        client = random.choice(clients) # noqa
         client.execute(
              'INSERT INTO '
              'shard.test (user_id, film_id, event_time, spawn_point) VALUES',
@@ -45,11 +45,12 @@ def load_data(data: Generator):
 
 
 def run() -> None:
+    """Запуск."""
     data = generate_points(users_count=settings.fake_users_count,
                            films_count=settings.fake_films_count,
                            )
     load_data(data)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     run()

@@ -100,11 +100,28 @@ in 1040 second(s)
 
 10 ** 4
 1. finished in 1103.55 sec
+2. finished in 1145.47 sec
+shard_1: 5412, 873.970
+shard_2: 5404, 871.791
 
 10 ** 5
 1. finished in 994.21 sec
-2.
+2. finished in 1006.90 sec
+shard_1: 371, 831.971
+shard_2: 371, 831.730
+shard_3: 370, 829.163
 
 10 ** 5 * 2
 1. finished in 997.72 sec
-2. 
+2. finished in 1001.72 sec
+shard_1: 186, 828.575
+shard_2: 185, 828.651
+shard_3: 185, 826.042
+
+
+# Vertica
+
+
+points: 11_066_000
+exec time: 5917.92 sec
+

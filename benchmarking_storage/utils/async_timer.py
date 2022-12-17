@@ -1,3 +1,4 @@
+"""Ассинхронный таймер."""
 import functools
 import time
 from typing import Any, Callable
@@ -6,6 +7,7 @@ from config import logger
 
 
 def async_timed():
+    """Засечь, сколько времени будет выполняться функция."""
     def wrapper(func: Callable) -> Callable:
         @functools.wraps(func)
         async def wrapped(*args, **kwargs) -> Any:

@@ -4,8 +4,6 @@
 получаем 111_168_000 штук.
 """
 import datetime
-import random
-import string
 import time
 from dataclasses import dataclass
 from typing import Generator, List
@@ -41,7 +39,6 @@ class Point:
     film_id: UUID
     value: int
     created_at: int
-    randon_str: str
 
 
 def create_users(count: int) -> List[User]:
@@ -78,7 +75,6 @@ def generate_points(users_count: int, films_count: int) -> Generator:
                     film_id=film.id,
                     value=minute,
                     created_at=start_film + ((minute + 1) * 60),
-                    randon_str=''.join(random.choices(string.ascii_letters + string.digits, k=16)),
                     )
             start_film += film.duration
 
