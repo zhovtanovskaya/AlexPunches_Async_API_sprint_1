@@ -1,9 +1,16 @@
 """Скрипт можно запустить и наблюдать как данные добавляются в кликхаус."""
 import csv
+import os
+import sys
 from dataclasses import dataclass
 from time import sleep
 
 from clickhouse_driver import Client
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(
+    __file__)))
+sys.path.append(BASE_DIR)
+
 from config import logger, settings
 
 

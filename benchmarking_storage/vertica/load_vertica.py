@@ -1,8 +1,15 @@
 """Загрузка данных в вертику."""
+import os
+import sys
 from typing import Generator
 
 import more_itertools
 import vertica_python
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(
+    __file__)))
+sys.path.append(BASE_DIR)
+
 from config import settings
 
 from utils.generator_fakes import generate_points

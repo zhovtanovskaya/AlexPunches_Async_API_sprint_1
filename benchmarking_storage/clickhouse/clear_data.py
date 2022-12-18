@@ -1,5 +1,13 @@
 """Очистить все шарды кликхауса."""
+import os
+import sys
+
 from clickhouse_driver import Client
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(
+    __file__)))
+sys.path.append(BASE_DIR)
+
 from config import settings
 
 

@@ -1,11 +1,18 @@
 """Скрипт можно запустить и наблюдать как данные добавляются в Вертику."""
 import csv
+import os
+import sys
 from dataclasses import dataclass
 from time import sleep
 
 import vertica_python
-from config import logger, settings
 from vertica_python import Connection
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(
+    __file__)))
+sys.path.append(BASE_DIR)
+
+from config import logger, settings
 
 
 @dataclass

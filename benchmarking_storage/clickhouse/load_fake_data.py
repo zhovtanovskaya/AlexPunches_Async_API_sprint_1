@@ -10,11 +10,18 @@ RAM 16 ГБ
 
 Все 3 шарда в докерах на одной машине.
 """
+import os
 import random
+import sys
 from typing import Generator
 
 import more_itertools
 from clickhouse_driver import Client
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(
+    __file__)))
+sys.path.append(BASE_DIR)
+
 from config import logger, settings
 
 from utils.generator_fakes import generate_points

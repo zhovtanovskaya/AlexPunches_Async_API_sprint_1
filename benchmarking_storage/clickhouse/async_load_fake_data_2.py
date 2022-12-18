@@ -1,10 +1,17 @@
 """Ассинхронное добавление жанных на разные шарды."""
 import asyncio
+import os
+import sys
 from typing import Any, Generator
 
 import more_itertools
 from asynch import connect
 from asynch.cursors import DictCursor
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(
+    __file__)))
+sys.path.append(BASE_DIR)
+
 from config import logger, settings
 
 from utils.async_timer import async_timed
