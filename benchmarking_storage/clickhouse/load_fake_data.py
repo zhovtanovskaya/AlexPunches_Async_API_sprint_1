@@ -10,39 +10,21 @@ RAM 16 ГБ
 
 Все 3 шарда в докерах на одной машине.
 """
-import os
-import random
-import sys
 from typing import Generator
 
 import more_itertools
 from clickhouse_driver import Client
-
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(
-    __file__)))
-sys.path.append(BASE_DIR)
-
 from config import logger, settings
 
 from utils.generator_fakes import generate_points
 from utils.timer import timed
 
-logger.info(f'chunk_size: {settings.chunk_size}')
-
 
 @timed
-def load_data(data: Generator):
-    """Загрузить данные в кликхаус.
-
-    Каждая пачка на случайный шард.
-    """
-    clients = (
-        Client(host=settings.ch_host, port=settings.ch_port_1),
-        Client(host=settings.ch_host, port=settings.ch_port_2),
-        Client(host=settings.ch_host, port=settings.ch_port_3),
-    )
-    for points in more_itertools.ichunked(data, settings.chunk_size):
-        client = random.choice(clients) # noqa
+def load_data(chunk_size: int, data: Generator):
+    """Загрузить данные в кликхаус на первый шард."""
+    for points in more_itertools.ichunked(data, chunk_size):
+        client = Client(host=settings.ch_host, port=settings.ch_ports[0])
         client.execute(
              'INSERT INTO '
              'shard.test (user_id, film_id, event_time, spawn_point) VALUES',
@@ -51,13 +33,7 @@ def load_data(data: Generator):
          )
 
 
-def run() -> None:
+def run(users_count: int, films_count: int, chunk_size: int) -> None:
     """Запуск."""
-    data = generate_points(users_count=settings.fake_users_count,
-                           films_count=settings.fake_films_count,
-                           )
-    load_data(data)
-
-
-if __name__ == '__main__':
-    run()
+    logger.info(f'chunk_size: {chunk_size}')
+    load_data(chunk_size, generate_points(users_count, films_count))

@@ -37,9 +37,9 @@ def get_data(client_1: Client, client_2: Client, client_3: Client,
 
 def main():
     """Получить данные из Кликхауса и вывести в лог."""
-    client_1 = Client(host=settings.ch_host, port=settings.ch_port_1)
-    client_2 = Client(host=settings.ch_host, port=settings.ch_port_2)
-    client_3 = Client(host=settings.ch_host, port=settings.ch_port_3)
+    client_1 = Client(host=settings.ch_host, port=settings.ch_ports[0])
+    client_2 = Client(host=settings.ch_host, port=settings.ch_ports[1])
+    client_3 = Client(host=settings.ch_host, port=settings.ch_ports[2])
     last_all_data = 0
     log_file = open('./lods.csv', 'a', newline='')
     writer = csv.writer(log_file)

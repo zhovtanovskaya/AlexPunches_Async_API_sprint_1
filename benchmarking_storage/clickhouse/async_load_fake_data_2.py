@@ -17,15 +17,13 @@ from config import logger, settings
 from utils.async_timer import async_timed
 from utils.generator_fakes import generate_points
 
-logger.info(f'chunk_size: {settings.chunk_size}')
 
-
-async def load_data(connection: Any, data: Generator):
+async def load_data(connection: Any, data: Generator, chunk_size: int) -> None:
     """Загрузить данные в Кликхаус."""
     timer = 0
     count_insert = 0
     async with connection.cursor(cursor=DictCursor) as cursor:
-        for points in more_itertools.ichunked(data, settings.chunk_size):
+        for points in more_itertools.ichunked(data, chunk_size):
             await cursor.execute(
                  'INSERT INTO '
                  'shard.test (user_id, film_id, event_time, spawn_point) VALUES', # noqa
@@ -38,18 +36,15 @@ async def load_data(connection: Any, data: Generator):
 
 
 @async_timed()
-async def run() -> None:
+async def run(users_count: int, films_count: int, chunk_size: int) -> None:
     """Запуск."""
-    data = generate_points(users_count=settings.fake_users_count,
-                           films_count=settings.fake_films_count,
-                           )
+    logger.info(f'chunk_size: {chunk_size}')
+    data = generate_points(users_count, films_count)
     tasks = [
         load_data(connection=await connect(host=settings.ch_host, port=port),
-                  data=data)
+                  data=data,
+                  chunk_size=chunk_size,
+                  )
         for port in settings.ch_ports
     ]
     await asyncio.gather(*tasks)
-
-
-if __name__ == '__main__':
-    asyncio.run(run())
