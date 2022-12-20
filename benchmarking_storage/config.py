@@ -10,8 +10,8 @@ logger = logging.getLogger('Benchmarking')
 class BaseConfig(BaseSettings):
     """Основной конфиаг."""
 
-    # ch_host: str = 'localhost'   # noqa
-    ch_host: str = '158.160.54.14'  # noqa
+    ch_host: str = 'localhost'   # noqa
+    # ch_host: str = '158.160.54.14'  # noqa
     ch_ports: list = ['9000', '9003', '9005']
     chunk_size: int = 10 ** 3
 
