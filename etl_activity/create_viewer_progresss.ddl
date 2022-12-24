@@ -17,7 +17,7 @@ CREATE TABLE viewer_progress
 ORDER BY user_id;
 
 
-CREATE MATERIALIZED VIEW d TO viewer_progress
+CREATE MATERIALIZED VIEW viewer_progress_materialized_view TO viewer_progress
     AS SELECT
         splitByChar('+', _key)[1] as user_id,
         splitByChar('+', _key)[2] as film_id,
