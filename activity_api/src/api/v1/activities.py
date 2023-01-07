@@ -1,6 +1,6 @@
 """Эндпоинты обработки событий."""
 from activity_service import ActivityService
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, status
 
 from api.v1.schemes.spawn_point import SpawnPointScheme
 from api.v1.schemes.transform_schemes import transform_point_scheme_to_model
@@ -11,7 +11,7 @@ router = APIRouter()
 
 @router.post('/spawn-point',
              dependencies=[Depends(subscription_required)],
-             status_code=201,
+             status_code=status.HTTP_201_CREATED,
              )
 async def send_activity(spawn_point: SpawnPointScheme,
                         activity_service: ActivityService = Depends(),
