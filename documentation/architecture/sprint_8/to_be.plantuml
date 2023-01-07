@@ -1,0 +1,103 @@
+@startuml to_be
+!theme materia
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+
+title TO BE
+
+
+package clients{
+    actor Analityc#White
+    actor User#White
+    actor Manager#White
+}
+
+database admin_postgres[
+    <b> admin_postgres
+    ____
+    Фильмы, Жанры, Актеры
+]
+database auth_postgres [
+    <b> auth_postgres 
+    ____
+    Пользователи, Роли 
+]
+database elastic[
+    <b> elastic
+    ____
+    Фильмы, Жанры, Актеры
+]
+database Redis[
+    <b> Redis
+]
+
+note "Кэширование фильмов, жанров и персон." as N1
+note "Кэширование token jwt." as N2
+note "Дублирование фильмов, жанров и персон." as N3
+note "request [фильмы, жанры и персоны]." as N4
+note "request [получение jwt]." as N5
+note "request [добавление фильмы, персоны, жанры]." as N6
+note "request [получение фильмов]." as N7
+note "request [валидация JSON]." as N8
+
+User -- N5#blue 
+N5 --> auth#blue
+
+User -- N8#blue 
+N8 --> ActivityAPI#blue
+
+Manager -- N6#red
+N6 --> Admin_panel#red
+
+User -- N7#blue
+N7 --> AsyncAPI#blue
+
+Admin_panel --> admin_postgres
+auth --> auth_postgres
+ETL --> admin_postgres
+
+
+AsyncAPI -- N1
+N1 --> Redis
+
+auth -- N2
+N2 --> Redis
+
+ETL --N3
+N3 --> elastic
+
+AsyncAPI -- N4
+N4 --> elastic
+
+frame auth{
+}
+
+frame Admin_panel {             
+}
+
+frame ETL {    
+}
+frame AsyncAPI {    
+}
+
+frame UGC_service {
+    database Kafka
+    database ClickHouse[
+        <b> ClickHouse 
+        ____
+        LoadActivity 
+    ]
+
+    Analityc --> ClickHouse#green
+    ETL2 --> ClickHouse
+    Kafka --> ETL2
+    ActivityAPI --> Kafka:events
+
+    frame ActivityAPI{
+
+    }
+    frame ETL2 {    
+    }
+}
+
+@enduml
