@@ -4,14 +4,10 @@
 
 # Спринт 8
 
-Структура проекта в .plantuml  
-`/documentation`  
-API добавления событий в Кафку  
-`/activity_api`  
-ETL из Кафки в Кликхаус  
-`/etl_activity`  
-Бенчмаркинг Кликхауса и Вертики  
-`/benchmarking_storage`
+- [Структура проекта .plantuml](https://github.com/AlexPunches/Async_API_sprint_1/tree/main/documentation/architecture/sprint_8)
+- [API добавления событий в Кафку](https://github.com/AlexPunches/Async_API_sprint_1/tree/main/activity_api)
+- [ETL из Кафки в Кликхаус](https://github.com/AlexPunches/Async_API_sprint_1/tree/main/etl_activity)
+- [Бенчмаркинг Кликхауса и Вертики](https://github.com/AlexPunches/Async_API_sprint_1/blob/main/benchmarking_storage)
 
 # Подготовка проекта
 
