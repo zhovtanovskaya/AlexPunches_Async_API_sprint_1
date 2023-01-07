@@ -5,10 +5,7 @@ from uuid import UUID
 import orjson
 from pydantic import BaseModel
 
-
-def orjson_dumps(v, *, default):
-    """Декодировать."""
-    return orjson.dumps(v, default=default).decode()
+from utils import orjson_dumps
 
 
 class SpawnPointModel(BaseModel):
