@@ -2,7 +2,18 @@
 # Репозиторий
 [https://github.com/AlexPunches/Async_API_sprint_1](https://github.com/AlexPunches/Async_API_sprint_1)
 
-# Подготовка
+# Спринт 8
+
+Структура проекта в .plantuml  
+`/documentation`  
+API добавления событий в Кафку  
+`/activity_api`  
+ETL из Кафки в Кликхаус  
+`/etl_activity`  
+Бенчмаркинг Кликхауса и Вертики  
+`/benchmarking_storage`
+
+# Подготовка проекта
 
 В проекте используются переменные окружения. Они определяются несколькими  `.env`-файлами  
 `.env`, `.env.dev`, `.env.pytests`  
