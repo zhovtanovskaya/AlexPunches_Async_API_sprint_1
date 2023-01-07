@@ -81,6 +81,11 @@ services:
     stdin_open: true
     tty: true
 
+  activity_api:
+    image: alpine
+    stdin_open: true
+    tty: true
+
   jaeger:
     image: jaegertracing/all-in-one:1.39.0
     depends_on:

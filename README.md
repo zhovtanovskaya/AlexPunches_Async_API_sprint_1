@@ -97,7 +97,6 @@ set -a
 ```bash
 python3.10 -m venv venv
 source venv/bin/activate
-pip install -r ./auth/requirements.dev.txt
 ```
 Auth:
 ```bash
@@ -108,7 +107,12 @@ python ./auth/src/manage.py run
 fastapi:
 ```bash
 pip install -r ./fastapi/requirements.txt
-python ./fastapi/src/main.py --reload --port 8001
+python -m uvicorn main:app --reload --port $API_PORT --app-dir=./fastapi/src/
+```
+activity_api:
+```bash
+pip install -r ./activity_api/requirements.txt
+python -m uvicorn main:app --reload --port $ACTIVITY_API_PORT --app-dir=./activity_api/src/
 ```
 etl:
 ```bash
