@@ -48,9 +48,10 @@ def create_tokens(email: str) -> tuple[str, str]:
     # Получить список ролей пользователя для токена.
     user = User.query.filter_by(email=email).first()
     roles = [r.name for r in user.roles] if user else []
+    user_id = user.id if user else None
     access_token = create_access_token(
         identity=email,
-        additional_claims={'roles': roles},
+        additional_claims={'roles': roles, 'user_id': user_id},
     )
     refresh_token = create_refresh_token(
         identity=email,

@@ -1,6 +1,4 @@
 """Пидантик-схемы активностей."""
-from uuid import UUID
-
 import orjson
 from pydantic import BaseModel
 
@@ -15,7 +13,6 @@ class SpawnPointScheme(BaseModel):
     Если пользователь аутентифицирован, то передается и юзер-ид.
     """
 
-    user_id: UUID | None = None
     film_id: str
     time: int
 

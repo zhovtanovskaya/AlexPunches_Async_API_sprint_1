@@ -1,5 +1,6 @@
 """Модуль для JWT-авторизации HTTP-запроса."""
 from typing import Optional
+from uuid import UUID
 
 import jwt
 from fastapi import Request, Security
@@ -27,6 +28,7 @@ class AuthErrors:
 class AccessTokenPayload(BaseModel):
     """Ожидаемый формат данных в токене авторизации JWT."""
 
+    user_id: Optional[UUID] = None
     roles: list[str]
     type: str = Field('access', const=True)
 
@@ -85,6 +87,7 @@ jwt_bearer = JWTBearer()
 
 
 async def subscription_required(
+        request: Request,
         token: AccessTokenPayload = Security(jwt_bearer),
 ):
     """Убедиться, что пользователь подписан на сервис.
@@ -95,5 +98,6 @@ async def subscription_required(
     - **token**: Токен доступа, в котором указаны роли пользователя.
     """
     SUBSCRIPTION_ROLE = 'subscriber'
+    request.state.user_id = token.user_id
     if SUBSCRIPTION_ROLE not in token.roles:
         raise AuthorizationException(AuthErrors.NO_SUBSCRIPTION)
