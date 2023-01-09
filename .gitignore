@@ -141,3 +141,6 @@ dmypy.json
 admin_panel/static/
 
 # Other
+.env
+.env.dev
+.env.pytests
