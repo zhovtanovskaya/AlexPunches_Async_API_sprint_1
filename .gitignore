@@ -144,3 +144,8 @@ admin_panel/static/
 .env
 .env.dev
 .env.pytests
+.envrc
+snippets
+dotenvs
+auth/src/tests/
+docker-compose.local*
