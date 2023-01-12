@@ -17,20 +17,25 @@ LOGGING = {
             '()': 'uvicorn.logging.AccessFormatter',
             'fmt': "%(levelprefix)s %(client_addr)s - '%(request_line)s' %(status_code)s",
         },
+        "json": {
+            "format": "%(asctime)s %(name)s %(levelname)s %(message)s",
+            "datefmt": "%Y-%m-%dT%H:%M:%S%z",
+            "class": "pythonjsonlogger.jsonlogger.JsonFormatter",
+        },
     },
     'handlers': {
         'console': {
+            'formatter': 'json',
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
-            'formatter': 'verbose',
         },
         'default': {
-            'formatter': 'default',
+            'formatter': 'json',
             'class': 'logging.StreamHandler',
             'stream': 'ext://sys.stdout',
         },
         'access': {
-            'formatter': 'access',
+            'formatter': 'json',
             'class': 'logging.StreamHandler',
             'stream': 'ext://sys.stdout',
         },
@@ -51,7 +56,7 @@ LOGGING = {
     },
     'root': {
         'level': 'INFO',
-        'formatter': 'verbose',
+        'formatter': 'json',
         'handlers': LOG_DEFAULT_HANDLERS,
     },
 }
