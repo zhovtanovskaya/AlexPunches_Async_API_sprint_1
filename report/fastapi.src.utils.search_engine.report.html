@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>flake8 violations: fastapi/src/utils/search_engine.py</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+<script>
+function bindHandler(link) {
+   var code = link.getAttribute('data-code');
+   var key = location.pathname + '#' + code;
+
+   var ul = link.parentNode.querySelector('.details');
+   if (sessionStorage[key] != 'open') {
+      ul.style.display = 'none';
+   }
+   link.addEventListener('click', function (event) {
+      if (!ul.style.display || ul.style.display == 'none') {
+         ul.style.display = 'block';
+         sessionStorage[key] = 'open';
+      } else {
+         ul.style.display = 'none';
+         sessionStorage[key] = 'closed';
+      }
+   });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+   var links = document.querySelectorAll('#index > li > a');
+   for (var i = 0; i < links.length; i++) {
+      bindHandler(links[i]);
+   }
+});
+</script>
+   </head>
+   <body>
+      <div id="masthead" class="sev-2"></div>
+      <div id="page">
+         <p id="srclink">
+            <a title="View full annotated source"
+               href="fastapi.src.utils.search_engine.source.html">
+               <img src="file.svg" alt="&#x2261;">
+            </a></p>
+         <h1>
+            <a href="index.html">
+               <img src="back.svg" alt="&#x2B05;">
+               fastapi/src/utils/search_engine.py
+            </a>
+         </h1>
+
+         <ul id="index">
+         
+         <li>
+            <a data-code="WPS121">
+               <span class="count sev-2">
+                  5
+               </span>
+               <strong>WPS121:</strong> Found usage of a variable marked as unused: _pit
+               
+                  (and 1 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Found usage of a variable marked as unused: _pit:</p>
+               
+               <a href="fastapi.src.utils.search_engine.source.html#l25">
+                  <tt><i>25</i>     <span class="n">page</span> <span class="o">=</span> <span class="k">await</span> <span class="n">search_engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pit</span><span class="o">=</span><span class="n">_pit</span><span class="o">.</span><span class="n">raw</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="n">dsl</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="n">sort</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found usage of a variable marked as unused: _search_after:</p>
+               
+               <a href="fastapi.src.utils.search_engine.source.html#l26">
+                  <tt><i>26</i>                                       <span class="n">search_after</span><span class="o">=</span><span class="n">_search_after</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found usage of a variable marked as unused: _search_after:</p>
+               
+               <a href="fastapi.src.utils.search_engine.source.html#l29">
+                  <tt><i>29</i>         <span class="n">_search_after</span> <span class="o">=</span> <span class="n">page</span><span class="p">[</span><span class="s1">&#39;hits&#39;</span><span class="p">][</span><span class="s1">&#39;hits&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;sort&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found usage of a variable marked as unused: _pit:</p>
+               
+               <a href="fastapi.src.utils.search_engine.source.html#l30">
+                  <tt><i>30</i>         <span class="n">page</span> <span class="o">=</span> <span class="k">await</span> <span class="n">search_engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pit</span><span class="o">=</span><span class="n">_pit</span><span class="o">.</span><span class="n">raw</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="n">dsl</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="n">sort</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found usage of a variable marked as unused: _search_after:</p>
+               
+               <a href="fastapi.src.utils.search_engine.source.html#l31">
+                  <tt><i>31</i>                                           <span class="n">search_after</span><span class="o">=</span><span class="n">_search_after</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS318">
+               <span class="count sev-2">
+                  4
+               </span>
+               <strong>WPS318:</strong> Found extra indentation
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.src.utils.search_engine.source.html#l23">
+                  <tt><i>23</i>                                                   <span class="n">keep_alive</span><span class="o">=</span><span class="n">keep_alive</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.src.utils.search_engine.source.html#l26">
+                  <tt><i>26</i>                                       <span class="n">search_after</span><span class="o">=</span><span class="n">_search_after</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.src.utils.search_engine.source.html#l31">
+                  <tt><i>31</i>                                           <span class="n">search_after</span><span class="o">=</span><span class="n">_search_after</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.src.utils.search_engine.source.html#l35">
+                  <tt><i>35</i>           <span class="n">search_engine</span><span class="p">:</span> <span class="n">AsyncSearchEngine</span><span class="p">,</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS122">
+               <span class="count sev-2">
+                  3
+               </span>
+               <strong>WPS122:</strong> Found all unused variables definition: _pit
+               
+                  (and 1 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Found all unused variables definition: _pit:</p>
+               
+               <a href="fastapi.src.utils.search_engine.source.html#l22">
+                  <tt><i>22</i>     <span class="n">_pit</span> <span class="o">=</span> <span class="k">await</span> <span class="n">search_engine</span><span class="o">.</span><span class="n">open_point_in_time</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found all unused variables definition: _search_after:</p>
+               
+               <a href="fastapi.src.utils.search_engine.source.html#l24">
+                  <tt><i>24</i>     <span class="n">_search_after</span> <span class="o">=</span> <span class="kc">None</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found all unused variables definition: _search_after:</p>
+               
+               <a href="fastapi.src.utils.search_engine.source.html#l29">
+                  <tt><i>29</i>         <span class="n">_search_after</span> <span class="o">=</span> <span class="n">page</span><span class="p">[</span><span class="s1">&#39;hits&#39;</span><span class="p">][</span><span class="s1">&#39;hits&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;sort&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS317">
+               <span class="count sev-2">
+                  3
+               </span>
+               <strong>WPS317:</strong> Found incorrect multi-line parameters
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.src.utils.search_engine.source.html#l22">
+                  <tt><i>22</i>     <span class="n">_pit</span> <span class="o">=</span> <span class="k">await</span> <span class="n">search_engine</span><span class="o">.</span><span class="n">open_point_in_time</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.src.utils.search_engine.source.html#l25">
+                  <tt><i>25</i>     <span class="n">page</span> <span class="o">=</span> <span class="k">await</span> <span class="n">search_engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pit</span><span class="o">=</span><span class="n">_pit</span><span class="o">.</span><span class="n">raw</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="n">dsl</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="n">sort</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.src.utils.search_engine.source.html#l30">
+                  <tt><i>30</i>         <span class="n">page</span> <span class="o">=</span> <span class="k">await</span> <span class="n">search_engine</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pit</span><span class="o">=</span><span class="n">_pit</span><span class="o">.</span><span class="n">raw</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="n">dsl</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="n">sort</span><span class="p">,</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS319">
+               <span class="count sev-2">
+                  3
+               </span>
+               <strong>WPS319:</strong> Found bracket in wrong position
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.src.utils.search_engine.source.html#l23">
+                  <tt><i>23</i>                                                   <span class="n">keep_alive</span><span class="o">=</span><span class="n">keep_alive</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.src.utils.search_engine.source.html#l26">
+                  <tt><i>26</i>                                       <span class="n">search_after</span><span class="o">=</span><span class="n">_search_after</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.src.utils.search_engine.source.html#l31">
+                  <tt><i>31</i>                                           <span class="n">search_after</span><span class="o">=</span><span class="n">_search_after</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS305">
+               <span class="count sev-2">
+                  2
+               </span>
+               <strong>WPS305:</strong> Found `f` string
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Found `f` string (in 2 places):</p>
+               
+               <a href="fastapi.src.utils.search_engine.source.html#l11">
+                  <tt><i>11</i>     <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">sort</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="si">}</span><span class="s1">:desc&#39;</span> <span class="k">if</span> <span class="n">sort</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;-&#39;</span> <span class="k">else</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">sort</span><span class="si">}</span><span class="s1">:asc&#39;</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS221">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS221:</strong> Found line with high Jones Complexity: 17 > 14
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.src.utils.search_engine.source.html#l11">
+                  <tt><i>11</i>     <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">sort</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="si">}</span><span class="s1">:desc&#39;</span> <span class="k">if</span> <span class="n">sort</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;-&#39;</span> <span class="k">else</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">sort</span><span class="si">}</span><span class="s1">:asc&#39;</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS226">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS226:</strong> Found string literal over-use: hits > 3
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.src.utils.search_engine.source.html#l0">
+                  <tt><i>0</i>     <span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS237">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS237:</strong> Found a too complex `f` string
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.src.utils.search_engine.source.html#l11">
+                  <tt><i>11</i>     <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">sort</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="si">}</span><span class="s1">:desc&#39;</span> <span class="k">if</span> <span class="n">sort</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;-&#39;</span> <span class="k">else</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">sort</span><span class="si">}</span><span class="s1">:asc&#39;</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS404">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS404:</strong> Found complex default value
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.src.utils.search_engine.source.html#l38">
+                  <tt><i>38</i>           <span class="n">sorted_paginate</span><span class="p">:</span> <span class="n">SearchEngineSortedPaginate</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(),</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="Q000">
+               <span class="count sev-3">
+                  8
+               </span>
+               <strong>Q000:</strong> Single quotes found but double quotes preferred
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Single quotes found but double quotes preferred (in 3 places):</p>
+               
+               <a href="fastapi.src.utils.search_engine.source.html#l11">
+                  <tt><i>11</i>     <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">sort</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="si">}</span><span class="s1">:desc&#39;</span> <span class="k">if</span> <span class="n">sort</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;-&#39;</span> <span class="k">else</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">sort</span><span class="si">}</span><span class="s1">:asc&#39;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="fastapi.src.utils.search_engine.source.html#l27">
+                  <tt><i>27</i>     <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">page</span><span class="p">[</span><span class="s1">&#39;hits&#39;</span><span class="p">][</span><span class="s1">&#39;hits&#39;</span><span class="p">]):</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 3 places):</p>
+               
+               <a href="fastapi.src.utils.search_engine.source.html#l29">
+                  <tt><i>29</i>         <span class="n">_search_after</span> <span class="o">=</span> <span class="n">page</span><span class="p">[</span><span class="s1">&#39;hits&#39;</span><span class="p">][</span><span class="s1">&#39;hits&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;sort&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="D103">
+               <span class="count sev-3">
+                  3
+               </span>
+               <strong>D103:</strong> Missing docstring in public function
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.src.utils.search_engine.source.html#l10">
+                  <tt><i>10</i> <span class="k">def</span> <span class="nf">make_es_sort_name</span><span class="p">(</span><span class="n">sort</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.src.utils.search_engine.source.html#l14">
+                  <tt><i>14</i> <span class="k">async</span> <span class="k">def</span> <span class="nf">es_scroll_all_pages</span><span class="p">(</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.src.utils.search_engine.source.html#l34">
+                  <tt><i>34</i> <span class="k">async</span> <span class="k">def</span> <span class="nf">get_one_page_from_search_engine</span><span class="p">(</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="B008">
+               <span class="count sev-3">
+                  1
+               </span>
+               <strong>B008:</strong> Do not perform function calls in argument defaults.  The call is performed only once at function definition time. All calls to your function will reuse the result of that definition-time function call.  If this is intended, assign the function call to a module-level variable and use that variable as a default value.
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.src.utils.search_engine.source.html#l38">
+                  <tt><i>38</i>           <span class="n">sorted_paginate</span><span class="p">:</span> <span class="n">SearchEngineSortedPaginate</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(),</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="D100">
+               <span class="count sev-3">
+                  1
+               </span>
+               <strong>D100:</strong> Missing docstring in public module
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.src.utils.search_engine.source.html#l1">
+                  <tt><i>1</i> <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">AsyncGenerator</span><span class="p">,</span> <span class="n">Mapping</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="I001">
+               <span class="count sev-3">
+                  1
+               </span>
+               <strong>I001:</strong> isort found an import in the wrong position
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.src.utils.search_engine.source.html#l6">
+                  <tt><i>6</i> <span class="kn">from</span> <span class="nn">fastapi</span> <span class="kn">import</span> <span class="n">Depends</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         </ul>
+      </div>
+   </body>
+</html>

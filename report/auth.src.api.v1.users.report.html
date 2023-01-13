@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>flake8 violations: auth/src/api/v1/users.py</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+<script>
+function bindHandler(link) {
+   var code = link.getAttribute('data-code');
+   var key = location.pathname + '#' + code;
+
+   var ul = link.parentNode.querySelector('.details');
+   if (sessionStorage[key] != 'open') {
+      ul.style.display = 'none';
+   }
+   link.addEventListener('click', function (event) {
+      if (!ul.style.display || ul.style.display == 'none') {
+         ul.style.display = 'block';
+         sessionStorage[key] = 'open';
+      } else {
+         ul.style.display = 'none';
+         sessionStorage[key] = 'closed';
+      }
+   });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+   var links = document.querySelectorAll('#index > li > a');
+   for (var i = 0; i < links.length; i++) {
+      bindHandler(links[i]);
+   }
+});
+</script>
+   </head>
+   <body>
+      <div id="masthead" class="sev-2"></div>
+      <div id="page">
+         <p id="srclink">
+            <a title="View full annotated source"
+               href="auth.src.api.v1.users.source.html">
+               <img src="file.svg" alt="&#x2261;">
+            </a></p>
+         <h1>
+            <a href="index.html">
+               <img src="back.svg" alt="&#x2B05;">
+               auth/src/api/v1/users.py
+            </a>
+         </h1>
+
+         <ul id="index">
+         
+         <li>
+            <a data-code="WPS318">
+               <span class="count sev-2">
+                  6
+               </span>
+               <strong>WPS318:</strong> Found extra indentation
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="auth.src.api.v1.users.source.html#l22">
+                  <tt><i>22</i>           <span class="n">body</span><span class="p">:</span> <span class="n">user_schemes</span><span class="o">.</span><span class="n">UserCreateScheme</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.src.api.v1.users.source.html#l43">
+                  <tt><i>43</i>               <span class="n">body</span><span class="p">:</span> <span class="n">user_schemes</span><span class="o">.</span><span class="n">UserEditScheme</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.src.api.v1.users.source.html#l56">
+                  <tt><i>56</i>                      <span class="n">body</span><span class="p">:</span> <span class="n">user_role_schemes</span><span class="o">.</span><span class="n">UserRoleCreateScheme</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.src.api.v1.users.source.html#l60">
+                  <tt><i>60</i>                                               <span class="n">rolename</span><span class="o">=</span><span class="n">body</span><span class="o">.</span><span class="n">name</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.src.api.v1.users.source.html#l71">
+                  <tt><i>71</i>           <span class="n">user_id</span><span class="p">:</span> <span class="n">uuid</span><span class="o">.</span><span class="n">UUID</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.src.api.v1.users.source.html#l83">
+                  <tt><i>83</i>                      <span class="n">role_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS317">
+               <span class="count sev-2">
+                  4
+               </span>
+               <strong>WPS317:</strong> Found incorrect multi-line parameters
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="auth.src.api.v1.users.source.html#l42">
+                  <tt><i>42</i> <span class="k">def</span> <span class="nf">edit_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="n">uuid</span><span class="o">.</span><span class="n">UUID</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.src.api.v1.users.source.html#l55">
+                  <tt><i>55</i> <span class="k">def</span> <span class="nf">create_user_role</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="n">uuid</span><span class="o">.</span><span class="n">UUID</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.src.api.v1.users.source.html#l59">
+                  <tt><i>59</i>     <span class="n">user_service</span><span class="o">.</span><span class="n">add_role_to_user_by_rolename</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="n">user_id</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.src.api.v1.users.source.html#l82">
+                  <tt><i>82</i> <span class="k">def</span> <span class="nf">remove_user_role</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="n">uuid</span><span class="o">.</span><span class="n">UUID</span><span class="p">,</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS301">
+               <span class="count sev-2">
+                  3
+               </span>
+               <strong>WPS301:</strong> Found dotted raw import: api.v1.schemes.transform_schemes
+               
+                  (and 2 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Found dotted raw import: api.v1.schemes.transform_schemes:</p>
+               
+               <a href="auth.src.api.v1.users.source.html#l9">
+                  <tt><i>9</i> <span class="kn">import</span> <span class="nn">api.v1.schemes.transform_schemes</span> <span class="k">as</span> <span class="nn">transform</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found dotted raw import: api.v1.schemes.user_roles:</p>
+               
+               <a href="auth.src.api.v1.users.source.html#l10">
+                  <tt><i>10</i> <span class="kn">import</span> <span class="nn">api.v1.schemes.user_roles</span> <span class="k">as</span> <span class="nn">user_role_schemes</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found dotted raw import: api.v1.schemes.users:</p>
+               
+               <a href="auth.src.api.v1.users.source.html#l11">
+                  <tt><i>11</i> <span class="kn">import</span> <span class="nn">api.v1.schemes.users</span> <span class="k">as</span> <span class="nn">user_schemes</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS400">
+               <span class="count sev-2">
+                  2
+               </span>
+               <strong>WPS400:</strong> Found wrong magic comment: noqa
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Found wrong magic comment: noqa (in 2 places):</p>
+               
+               <a href="auth.src.api.v1.users.source.html#l0">
+                  <tt><i>0</i>     <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">NO_CONTENT</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="Q000">
+               <span class="count sev-3">
+                  14
+               </span>
+               <strong>Q000:</strong> Single quotes found but double quotes preferred
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="auth.src.api.v1.users.source.html#l15">
+                  <tt><i>15</i> <span class="n">users</span> <span class="o">=</span> <span class="n">Blueprint</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">,</span> <span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="auth.src.api.v1.users.source.html#l19">
+                  <tt><i>19</i> <span class="nd">@users</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/signup&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="auth.src.api.v1.users.source.html#l30">
+                  <tt><i>30</i> <span class="nd">@users</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/users/&lt;user_id&gt;/&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="auth.src.api.v1.users.source.html#l39">
+                  <tt><i>39</i> <span class="nd">@users</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/users/&lt;user_id&gt;/&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;PATCH&#39;</span><span class="p">])</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="auth.src.api.v1.users.source.html#l52">
+                  <tt><i>52</i> <span class="nd">@users</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/users/&lt;user_id&gt;/roles/&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="auth.src.api.v1.users.source.html#l67">
+                  <tt><i>67</i> <span class="nd">@users</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/users/&lt;user_id&gt;/roles/&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="auth.src.api.v1.users.source.html#l79">
+                  <tt><i>79</i> <span class="nd">@users</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/users/&lt;user_id&gt;/roles/&lt;role_id&gt;/&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;DELETE&#39;</span><span class="p">])</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="auth.src.api.v1.users.source.html#l87">
+                  <tt><i>87</i>     <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">NO_CONTENT</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="DAR101">
+               <span class="count sev-3">
+                  8
+               </span>
+               <strong>DAR101:</strong> Missing parameter(s) in Docstring: - body
+               
+                  (and 2 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Missing parameter(s) in Docstring: - body:</p>
+               
+               <a href="auth.src.api.v1.users.source.html#l25">
+                  <tt><i>25</i>     <span class="n">user_model</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">user_scheme_to_user_model</span><span class="p">(</span><span class="n">user_scheme</span><span class="o">=</span><span class="n">body</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - user_id:</p>
+               
+               <a href="auth.src.api.v1.users.source.html#l37">
+                  <tt><i>37</i> &nbsp;</tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - body:</p>
+               
+               <a href="auth.src.api.v1.users.source.html#l47">
+                  <tt><i>47</i>     <span class="n">user_model</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">user_id</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - user_id:</p>
+               
+               <a href="auth.src.api.v1.users.source.html#l47">
+                  <tt><i>47</i>     <span class="n">user_model</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">user_id</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - body:</p>
+               
+               <a href="auth.src.api.v1.users.source.html#l60">
+                  <tt><i>60</i>                                               <span class="n">rolename</span><span class="o">=</span><span class="n">body</span><span class="o">.</span><span class="n">name</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - user_id:</p>
+               
+               <a href="auth.src.api.v1.users.source.html#l60">
+                  <tt><i>60</i>                                               <span class="n">rolename</span><span class="o">=</span><span class="n">body</span><span class="o">.</span><span class="n">name</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - role_id:</p>
+               
+               <a href="auth.src.api.v1.users.source.html#l87">
+                  <tt><i>87</i>     <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">NO_CONTENT</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - user_id:</p>
+               
+               <a href="auth.src.api.v1.users.source.html#l87">
+                  <tt><i>87</i>     <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">NO_CONTENT</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="DAR201">
+               <span class="count sev-3">
+                  5
+               </span>
+               <strong>DAR201:</strong> Missing "Returns" in Docstring: - return
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="auth.src.api.v1.users.source.html#l25">
+                  <tt><i>25</i>     <span class="n">user_model</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">user_scheme_to_user_model</span><span class="p">(</span><span class="n">user_scheme</span><span class="o">=</span><span class="n">body</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.src.api.v1.users.source.html#l37">
+                  <tt><i>37</i> &nbsp;</tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.src.api.v1.users.source.html#l47">
+                  <tt><i>47</i>     <span class="n">user_model</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">user_id</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.src.api.v1.users.source.html#l60">
+                  <tt><i>60</i>                                               <span class="n">rolename</span><span class="o">=</span><span class="n">body</span><span class="o">.</span><span class="n">name</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.src.api.v1.users.source.html#l87">
+                  <tt><i>87</i>     <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">NO_CONTENT</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         </ul>
+      </div>
+   </body>
+</html>

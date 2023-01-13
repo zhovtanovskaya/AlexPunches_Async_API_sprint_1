@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>flake8 violations: auth/src/api/v1/roles.py</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+<script>
+function bindHandler(link) {
+   var code = link.getAttribute('data-code');
+   var key = location.pathname + '#' + code;
+
+   var ul = link.parentNode.querySelector('.details');
+   if (sessionStorage[key] != 'open') {
+      ul.style.display = 'none';
+   }
+   link.addEventListener('click', function (event) {
+      if (!ul.style.display || ul.style.display == 'none') {
+         ul.style.display = 'block';
+         sessionStorage[key] = 'open';
+      } else {
+         ul.style.display = 'none';
+         sessionStorage[key] = 'closed';
+      }
+   });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+   var links = document.querySelectorAll('#index > li > a');
+   for (var i = 0; i < links.length; i++) {
+      bindHandler(links[i]);
+   }
+});
+</script>
+   </head>
+   <body>
+      <div id="masthead" class="sev-2"></div>
+      <div id="page">
+         <p id="srclink">
+            <a title="View full annotated source"
+               href="auth.src.api.v1.roles.source.html">
+               <img src="file.svg" alt="&#x2261;">
+            </a></p>
+         <h1>
+            <a href="index.html">
+               <img src="back.svg" alt="&#x2B05;">
+               auth/src/api/v1/roles.py
+            </a>
+         </h1>
+
+         <ul id="index">
+         
+         <li>
+            <a data-code="WPS301">
+               <span class="count sev-2">
+                  2
+               </span>
+               <strong>WPS301:</strong> Found dotted raw import: api.v1.schemes.roles
+               
+                  (and 1 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Found dotted raw import: api.v1.schemes.roles:</p>
+               
+               <a href="auth.src.api.v1.roles.source.html#l8">
+                  <tt><i>8</i> <span class="kn">import</span> <span class="nn">api.v1.schemes.roles</span> <span class="k">as</span> <span class="nn">role_schemes</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found dotted raw import: api.v1.schemes.transform_schemes:</p>
+               
+               <a href="auth.src.api.v1.roles.source.html#l9">
+                  <tt><i>9</i> <span class="kn">import</span> <span class="nn">api.v1.schemes.transform_schemes</span> <span class="k">as</span> <span class="nn">transform</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS318">
+               <span class="count sev-2">
+                  2
+               </span>
+               <strong>WPS318:</strong> Found extra indentation
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="auth.src.api.v1.roles.source.html#l21">
+                  <tt><i>21</i>           <span class="n">body</span><span class="p">:</span> <span class="n">role_schemes</span><span class="o">.</span><span class="n">RoleCreateScheme</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.src.api.v1.roles.source.html#l52">
+                  <tt><i>52</i>               <span class="n">body</span><span class="p">:</span> <span class="n">role_schemes</span><span class="o">.</span><span class="n">RoleEditScheme</span><span class="p">,</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS121">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS121:</strong> Found usage of a variable marked as unused: _roles
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="auth.src.api.v1.roles.source.html#l35">
+                  <tt><i>35</i>     <span class="n">list_roles</span> <span class="o">=</span> <span class="p">[</span><span class="n">transform</span><span class="o">.</span><span class="n">role_model_to_role_scheme</span><span class="p">(</span><span class="n">role</span><span class="p">)</span> <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="n">_roles</span><span class="p">]</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS122">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS122:</strong> Found all unused variables definition: _roles
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="auth.src.api.v1.roles.source.html#l34">
+                  <tt><i>34</i>     <span class="n">_roles</span> <span class="o">=</span> <span class="n">role_service</span><span class="o">.</span><span class="n">get_roles_list</span><span class="p">()</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS317">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS317:</strong> Found incorrect multi-line parameters
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="auth.src.api.v1.roles.source.html#l51">
+                  <tt><i>51</i> <span class="k">def</span> <span class="nf">edit_role</span><span class="p">(</span><span class="n">role_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="Q000">
+               <span class="count sev-3">
+                  12
+               </span>
+               <strong>Q000:</strong> Single quotes found but double quotes preferred
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="auth.src.api.v1.roles.source.html#l13">
+                  <tt><i>13</i> <span class="n">roles</span> <span class="o">=</span> <span class="n">Blueprint</span><span class="p">(</span><span class="s1">&#39;roles&#39;</span><span class="p">,</span> <span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="auth.src.api.v1.roles.source.html#l17">
+                  <tt><i>17</i> <span class="nd">@roles</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/roles/&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="auth.src.api.v1.roles.source.html#l29">
+                  <tt><i>29</i> <span class="nd">@roles</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/roles/&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="auth.src.api.v1.roles.source.html#l39">
+                  <tt><i>39</i> <span class="nd">@roles</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/roles/&lt;role_id&gt;/&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="auth.src.api.v1.roles.source.html#l48">
+                  <tt><i>48</i> <span class="nd">@roles</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/roles/&lt;role_id&gt;/&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;PATCH&#39;</span><span class="p">])</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="auth.src.api.v1.roles.source.html#l61">
+                  <tt><i>61</i> <span class="nd">@roles</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/roles/&lt;role_id&gt;/&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;DELETE&#39;</span><span class="p">])</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="auth.src.api.v1.roles.source.html#l67">
+                  <tt><i>67</i>     <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">NO_CONTENT</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="DAR101">
+               <span class="count sev-3">
+                  5
+               </span>
+               <strong>DAR101:</strong> Missing parameter(s) in Docstring: - body
+               
+                  (and 1 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Missing parameter(s) in Docstring: - body:</p>
+               
+               <a href="auth.src.api.v1.roles.source.html#l25">
+                  <tt><i>25</i>     <span class="n">new_role_model</span> <span class="o">=</span> <span class="n">role_service</span><span class="o">.</span><span class="n">create_role</span><span class="p">(</span><span class="n">role</span><span class="o">=</span><span class="n">role_model</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - role_id:</p>
+               
+               <a href="auth.src.api.v1.roles.source.html#l46">
+                  <tt><i>46</i> &nbsp;</tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - body:</p>
+               
+               <a href="auth.src.api.v1.roles.source.html#l56">
+                  <tt><i>56</i>     <span class="n">role_model</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">role_id</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - role_id:</p>
+               
+               <a href="auth.src.api.v1.roles.source.html#l56">
+                  <tt><i>56</i>     <span class="n">role_model</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">role_id</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - role_id:</p>
+               
+               <a href="auth.src.api.v1.roles.source.html#l68">
+                  <tt><i>68</i> &nbsp;</tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="DAR201">
+               <span class="count sev-3">
+                  5
+               </span>
+               <strong>DAR201:</strong> Missing "Returns" in Docstring: - return
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="auth.src.api.v1.roles.source.html#l25">
+                  <tt><i>25</i>     <span class="n">new_role_model</span> <span class="o">=</span> <span class="n">role_service</span><span class="o">.</span><span class="n">create_role</span><span class="p">(</span><span class="n">role</span><span class="o">=</span><span class="n">role_model</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.src.api.v1.roles.source.html#l36">
+                  <tt><i>36</i>     <span class="k">return</span> <span class="n">role_schemes</span><span class="o">.</span><span class="n">ListRolesScheme</span><span class="p">(</span><span class="n">list_roles</span><span class="o">=</span><span class="n">list_roles</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.src.api.v1.roles.source.html#l46">
+                  <tt><i>46</i> &nbsp;</tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.src.api.v1.roles.source.html#l56">
+                  <tt><i>56</i>     <span class="n">role_model</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">role_id</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.src.api.v1.roles.source.html#l68">
+                  <tt><i>68</i> &nbsp;</tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         </ul>
+      </div>
+   </body>
+</html>

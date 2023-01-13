@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>flake8 violations: auth/tests/functional/src/test_profile.py</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+<script>
+function bindHandler(link) {
+   var code = link.getAttribute('data-code');
+   var key = location.pathname + '#' + code;
+
+   var ul = link.parentNode.querySelector('.details');
+   if (sessionStorage[key] != 'open') {
+      ul.style.display = 'none';
+   }
+   link.addEventListener('click', function (event) {
+      if (!ul.style.display || ul.style.display == 'none') {
+         ul.style.display = 'block';
+         sessionStorage[key] = 'open';
+      } else {
+         ul.style.display = 'none';
+         sessionStorage[key] = 'closed';
+      }
+   });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+   var links = document.querySelectorAll('#index > li > a');
+   for (var i = 0; i < links.length; i++) {
+      bindHandler(links[i]);
+   }
+});
+</script>
+   </head>
+   <body>
+      <div id="masthead" class="sev-2"></div>
+      <div id="page">
+         <p id="srclink">
+            <a title="View full annotated source"
+               href="auth.tests.functional.src.test_profile.source.html">
+               <img src="file.svg" alt="&#x2261;">
+            </a></p>
+         <h1>
+            <a href="index.html">
+               <img src="back.svg" alt="&#x2B05;">
+               auth/tests/functional/src/test_profile.py
+            </a>
+         </h1>
+
+         <ul id="index">
+         
+         <li>
+            <a data-code="WPS226">
+               <span class="count sev-2">
+                  3
+               </span>
+               <strong>WPS226:</strong> Found string literal over-use: access_token > 3
+               
+                  (and 2 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Found string literal over-use: access_token > 3:</p>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l0">
+                  <tt><i>0</i>     <span class="k">assert</span> <span class="n">login_history</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;total_items&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">10</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found string literal over-use: email > 3:</p>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l0">
+                  <tt><i>0</i>     <span class="k">assert</span> <span class="n">login_history</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;total_items&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">10</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found string literal over-use: user > 3:</p>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l0">
+                  <tt><i>0</i>     <span class="k">assert</span> <span class="n">login_history</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;total_items&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">10</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS210">
+               <span class="count sev-2">
+                  2
+               </span>
+               <strong>WPS210:</strong> Found too many local variables: 6 > 5
+               
+                  (and 1 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Found too many local variables: 6 > 5:</p>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l28">
+                  <tt><i>28</i> <span class="k">def</span> <span class="nf">test_profile_after_edit_response</span><span class="p">(</span><span class="n">db_insert_fake_data</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found too many local variables: 7 > 5:</p>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l48">
+                  <tt><i>48</i> <span class="k">def</span> <span class="nf">test_profile_edit</span><span class="p">(</span><span class="n">db_insert_fake_data</span><span class="p">,</span> <span class="n">user_action</span><span class="p">,</span> <span class="n">pg_cursor</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS305">
+               <span class="count sev-2">
+                  2
+               </span>
+               <strong>WPS305:</strong> Found `f` string
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l57">
+                  <tt><i>57</i>     <span class="n">pg_stmt</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;SELECT * FROM </span><span class="si">{</span><span class="n">test_settings</span><span class="o">.</span><span class="n">users_tablename</span><span class="si">}</span><span class="s1"> &#39;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l58">
+                  <tt><i>58</i>     <span class="n">pg_stmt</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;WHERE id = &#39;</span><span class="si">{</span><span class="n">faker_data</span><span class="o">.</span><span class="n">users</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&#39;;&quot;</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS237">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS237:</strong> Found a too complex `f` string
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l58">
+                  <tt><i>58</i>     <span class="n">pg_stmt</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;WHERE id = &#39;</span><span class="si">{</span><span class="n">faker_data</span><span class="o">.</span><span class="n">users</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&#39;;&quot;</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS317">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS317:</strong> Found incorrect multi-line parameters
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l28">
+                  <tt><i>28</i> <span class="k">def</span> <span class="nf">test_profile_after_edit_response</span><span class="p">(</span><span class="n">db_insert_fake_data</span><span class="p">,</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS318">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS318:</strong> Found extra indentation
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l29">
+                  <tt><i>29</i>                                      <span class="n">user_action</span><span class="p">,</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS336">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS336:</strong> Found explicit string concatenation
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l58">
+                  <tt><i>58</i>     <span class="n">pg_stmt</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;WHERE id = &#39;</span><span class="si">{</span><span class="n">faker_data</span><span class="o">.</span><span class="n">users</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&#39;;&quot;</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="Q000">
+               <span class="count sev-3">
+                  18
+               </span>
+               <strong>Q000:</strong> Single quotes found but double quotes preferred
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l13">
+                  <tt><i>13</i> <span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">faker_data</span><span class="o">.</span><span class="n">users</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">faker_data</span><span class="o">.</span><span class="n">users</span><span class="p">[</span><span class="mi">10</span><span class="p">]])</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l17">
+                  <tt><i>17</i>     <span class="n">r_access_token</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;access_token&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l24">
+                  <tt><i>24</i>     <span class="k">assert</span> <span class="n">r_user</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l27">
+                  <tt><i>27</i> <span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">faker_data</span><span class="o">.</span><span class="n">users</span><span class="p">[</span><span class="mi">10</span><span class="p">]])</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l35">
+                  <tt><i>35</i>     <span class="n">r_access_token</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;access_token&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l37">
+                  <tt><i>37</i>     <span class="n">new_email</span> <span class="o">=</span> <span class="s1">&#39;aaa@aaa.aa&#39;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l38">
+                  <tt><i>38</i>     <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="n">new_email</span><span class="p">}</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l44">
+                  <tt><i>44</i>     <span class="k">assert</span> <span class="n">r_user</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">new_email</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l47">
+                  <tt><i>47</i> <span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">faker_data</span><span class="o">.</span><span class="n">users</span><span class="p">[</span><span class="mi">10</span><span class="p">]])</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l51">
+                  <tt><i>51</i>     <span class="n">r_access_token</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;access_token&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l53">
+                  <tt><i>53</i>     <span class="n">new_email</span> <span class="o">=</span> <span class="s1">&#39;aaa@aaa.aa&#39;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l54">
+                  <tt><i>54</i>     <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="n">new_email</span><span class="p">}</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l57">
+                  <tt><i>57</i>     <span class="n">pg_stmt</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;SELECT * FROM </span><span class="si">{</span><span class="n">test_settings</span><span class="o">.</span><span class="n">users_tablename</span><span class="si">}</span><span class="s1"> &#39;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l64">
+                  <tt><i>64</i>     <span class="k">assert</span> <span class="n">count_obj</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;email&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">new_email</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l67">
+                  <tt><i>67</i> <span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">faker_data</span><span class="o">.</span><span class="n">users</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l71">
+                  <tt><i>71</i>     <span class="n">r_access_token</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;access_token&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l78">
+                  <tt><i>78</i>     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">login_history</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;login_histories&#39;</span><span class="p">))</span> <span class="o">==</span> <span class="mi">4</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l79">
+                  <tt><i>79</i>     <span class="k">assert</span> <span class="n">login_history</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;total_items&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">10</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="DAR101">
+               <span class="count sev-3">
+                  16
+               </span>
+               <strong>DAR101:</strong> Missing parameter(s) in Docstring: - db_insert_fake_data
+               
+                  (and 3 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Missing parameter(s) in Docstring: - db_insert_fake_data:</p>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l16">
+                  <tt><i>16</i>     <span class="n">response</span> <span class="o">=</span> <span class="n">user_action</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">user</span><span class="o">.</span><span class="n">password</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - pg_cursor:</p>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l16">
+                  <tt><i>16</i>     <span class="n">response</span> <span class="o">=</span> <span class="n">user_action</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">user</span><span class="o">.</span><span class="n">password</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - user:</p>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l16">
+                  <tt><i>16</i>     <span class="n">response</span> <span class="o">=</span> <span class="n">user_action</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">user</span><span class="o">.</span><span class="n">password</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - user_action:</p>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l16">
+                  <tt><i>16</i>     <span class="n">response</span> <span class="o">=</span> <span class="n">user_action</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">user</span><span class="o">.</span><span class="n">password</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - db_insert_fake_data:</p>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l33">
+                  <tt><i>33</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;После редактирования получаем корректный ответ с новыми данными.&quot;&quot;&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - pg_cursor:</p>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l33">
+                  <tt><i>33</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;После редактирования получаем корректный ответ с новыми данными.&quot;&quot;&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - user:</p>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l33">
+                  <tt><i>33</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;После редактирования получаем корректный ответ с новыми данными.&quot;&quot;&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - user_action:</p>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l33">
+                  <tt><i>33</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;После редактирования получаем корректный ответ с новыми данными.&quot;&quot;&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - db_insert_fake_data:</p>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l50">
+                  <tt><i>50</i>     <span class="n">response</span> <span class="o">=</span> <span class="n">user_action</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">user</span><span class="o">.</span><span class="n">password</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - pg_cursor:</p>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l50">
+                  <tt><i>50</i>     <span class="n">response</span> <span class="o">=</span> <span class="n">user_action</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">user</span><span class="o">.</span><span class="n">password</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - user:</p>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l50">
+                  <tt><i>50</i>     <span class="n">response</span> <span class="o">=</span> <span class="n">user_action</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">user</span><span class="o">.</span><span class="n">password</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - user_action:</p>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l50">
+                  <tt><i>50</i>     <span class="n">response</span> <span class="o">=</span> <span class="n">user_action</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">user</span><span class="o">.</span><span class="n">password</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - db_insert_fake_data:</p>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l70">
+                  <tt><i>70</i>     <span class="n">response</span> <span class="o">=</span> <span class="n">user_action</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">user</span><span class="o">.</span><span class="n">password</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - pg_cursor:</p>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l70">
+                  <tt><i>70</i>     <span class="n">response</span> <span class="o">=</span> <span class="n">user_action</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">user</span><span class="o">.</span><span class="n">password</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - user:</p>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l70">
+                  <tt><i>70</i>     <span class="n">response</span> <span class="o">=</span> <span class="n">user_action</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">user</span><span class="o">.</span><span class="n">password</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - user_action:</p>
+               
+               <a href="auth.tests.functional.src.test_profile.source.html#l70">
+                  <tt><i>70</i>     <span class="n">response</span> <span class="o">=</span> <span class="n">user_action</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">user</span><span class="o">.</span><span class="n">password</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         </ul>
+      </div>
+   </body>
+</html>

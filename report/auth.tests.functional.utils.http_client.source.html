@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>auth/tests/functional/utils/http_client.py - flake8 annotated source</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+   </head>
+   <body>
+      <div id="masthead" class="sev-2"></div>
+      <div id="page">
+         <h1>
+            <a href="auth.tests.functional.utils.http_client.report.html">
+               <img src="back.svg" alt="&#x2B05;">
+               auth/tests/functional/utils/http_client.py source
+            </a>
+         </h1>
+
+         <div id="doc">
+            <div id="l1"
+               class="code sev- "><tt><i>1</i> <span class="sd">&quot;&quot;&quot;Вспомогательные полезные действия. Выполняются в тестах.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l2"
+               class="code sev- "><tt><i>2</i> <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">lru_cache</span></tt>
+            </div>
+            <div id="l3"
+               class="code sev- "><tt><i>3</i> <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">MutableMapping</span></tt>
+            </div>
+            <div id="l4"
+               class="code sev- "><tt><i>4</i> &nbsp;</tt>
+            </div>
+            <div id="l5"
+               class="code sev- "><tt><i>5</i> <span class="kn">import</span> <span class="nn">requests</span></tt>
+            </div>
+            <div id="l6"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS458
+                     </span>
+                     Found imports collision: requests</li>
+               
+               </ul><tt><i>6</i> <span class="kn">from</span> <span class="nn">requests</span> <span class="kn">import</span> <span class="n">Response</span></tt>
+            </div>
+            <div id="l7"
+               class="code sev- "><tt><i>7</i> <span class="kn">from</span> <span class="nn">requests.auth</span> <span class="kn">import</span> <span class="n">HTTPBasicAuth</span></tt>
+            </div>
+            <div id="l8"
+               class="code sev- "><tt><i>8</i> &nbsp;</tt>
+            </div>
+            <div id="l9"
+               class="code sev- "><tt><i>9</i> &nbsp;</tt>
+            </div>
+            <div id="l10"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS306
+                     </span>
+                     Found class without a base class: HttpClient</li>
+               
+               </ul><tt><i>10</i> <span class="k">class</span> <span class="nc">HttpClient</span><span class="p">:</span></tt>
+            </div>
+            <div id="l11"
+               class="code sev- "><tt><i>11</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Клиент, который оправляет  http-запросы к API.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l12"
+               class="code sev- "><tt><i>12</i> &nbsp;</tt>
+            </div>
+            <div id="l13"
+               class="code sev- "><tt><i>13</i>     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bearer</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span></tt>
+            </div>
+            <div id="l14"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - bearer</li>
+               
+               </ul><tt><i>14</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;Подключить requests и Добавить заголовок авторизации.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l15"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred (in 2 places)</li>
+               
+               </ul><tt><i>15</i>         <span class="bp">self</span><span class="o">.</span><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;accept&#39;</span><span class="p">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">}</span></tt>
+            </div>
+            <div id="l16"
+               class="code sev- "><tt><i>16</i>         <span class="bp">self</span><span class="o">.</span><span class="n">_client</span> <span class="o">=</span> <span class="n">requests</span></tt>
+            </div>
+            <div id="l17"
+               class="code sev- "><tt><i>17</i>         <span class="k">if</span> <span class="n">bearer</span><span class="p">:</span></tt>
+            </div>
+            <div id="l18"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred (in 2 places)</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS305
+                     </span>
+                     Found `f` string</li>
+               
+               </ul><tt><i>18</i>             <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Authorization&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Bearer </span><span class="si">{</span><span class="n">bearer</span><span class="si">}</span><span class="s1">&#39;</span></tt>
+            </div>
+            <div id="l19"
+               class="code sev- "><tt><i>19</i> &nbsp;</tt>
+            </div>
+            <div id="l20"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS317
+                     </span>
+                     Found incorrect multi-line parameters</li>
+               
+               </ul><tt><i>20</i>     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span></tt>
+            </div>
+            <div id="l21"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS318
+                     </span>
+                     Found extra indentation</li>
+               
+               </ul><tt><i>21</i>             <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span></tt>
+            </div>
+            <div id="l22"
+               class="code sev- "><tt><i>22</i>             <span class="n">headers</span><span class="p">:</span> <span class="n">MutableMapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span></tt>
+            </div>
+            <div id="l23"
+               class="code sev- "><tt><i>23</i>             <span class="n">payload</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span></tt>
+            </div>
+            <div id="l24"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - headers</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - payload</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR201
+                     </span>
+                     Missing "Returns" in Docstring: - return</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - url</li>
+               
+               </ul><tt><i>24</i>             <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span></tt>
+            </div>
+            <div id="l25"
+               class="code sev- "><tt><i>25</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;Отправить GET-запрос и получить ответ.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l26"
+               class="code sev- "><tt><i>26</i>         <span class="k">if</span> <span class="n">headers</span><span class="p">:</span></tt>
+            </div>
+            <div id="l27"
+               class="code sev- "><tt><i>27</i>             <span class="bp">self</span><span class="o">.</span><span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span></tt>
+            </div>
+            <div id="l28"
+               class="code sev- "><tt><i>28</i>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span></tt>
+            </div>
+            <div id="l29"
+               class="code sev- "><tt><i>29</i> &nbsp;</tt>
+            </div>
+            <div id="l30"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS317
+                     </span>
+                     Found incorrect multi-line parameters</li>
+               
+               </ul><tt><i>30</i>     <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span></tt>
+            </div>
+            <div id="l31"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS318
+                     </span>
+                     Found extra indentation</li>
+               
+               </ul><tt><i>31</i>              <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span></tt>
+            </div>
+            <div id="l32"
+               class="code sev- "><tt><i>32</i>              <span class="n">headers</span><span class="p">:</span> <span class="n">MutableMapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span></tt>
+            </div>
+            <div id="l33"
+               class="code sev- "><tt><i>33</i>              <span class="n">payload</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span></tt>
+            </div>
+            <div id="l34"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - headers</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - payload</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR201
+                     </span>
+                     Missing "Returns" in Docstring: - return</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - url</li>
+               
+               </ul><tt><i>34</i>              <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span></tt>
+            </div>
+            <div id="l35"
+               class="code sev- "><tt><i>35</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;Отправить POST-запрос и получить ответ.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l36"
+               class="code sev- "><tt><i>36</i>         <span class="k">if</span> <span class="n">headers</span><span class="p">:</span></tt>
+            </div>
+            <div id="l37"
+               class="code sev- "><tt><i>37</i>             <span class="bp">self</span><span class="o">.</span><span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span></tt>
+            </div>
+            <div id="l38"
+               class="code sev- "><tt><i>38</i>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span></tt>
+            </div>
+            <div id="l39"
+               class="code sev- "><tt><i>39</i> &nbsp;</tt>
+            </div>
+            <div id="l40"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS317
+                     </span>
+                     Found incorrect multi-line parameters</li>
+               
+               </ul><tt><i>40</i>     <span class="k">def</span> <span class="nf">patch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span></tt>
+            </div>
+            <div id="l41"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS318
+                     </span>
+                     Found extra indentation</li>
+               
+               </ul><tt><i>41</i>               <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span></tt>
+            </div>
+            <div id="l42"
+               class="code sev- "><tt><i>42</i>               <span class="n">headers</span><span class="p">:</span> <span class="n">MutableMapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span></tt>
+            </div>
+            <div id="l43"
+               class="code sev- "><tt><i>43</i>               <span class="n">payload</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span></tt>
+            </div>
+            <div id="l44"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - headers</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - payload</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR201
+                     </span>
+                     Missing "Returns" in Docstring: - return</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - url</li>
+               
+               </ul><tt><i>44</i>               <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span></tt>
+            </div>
+            <div id="l45"
+               class="code sev- "><tt><i>45</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;Отправить PATCH-запрос и получить ответ.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l46"
+               class="code sev- "><tt><i>46</i>         <span class="k">if</span> <span class="n">headers</span><span class="p">:</span></tt>
+            </div>
+            <div id="l47"
+               class="code sev- "><tt><i>47</i>             <span class="bp">self</span><span class="o">.</span><span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span></tt>
+            </div>
+            <div id="l48"
+               class="code sev- "><tt><i>48</i>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span></tt>
+            </div>
+            <div id="l49"
+               class="code sev- "><tt><i>49</i> &nbsp;</tt>
+            </div>
+            <div id="l50"
+               class="code sev- "><tt><i>50</i>     <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span></tt>
+            </div>
+            <div id="l51"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR201
+                     </span>
+                     Missing "Returns" in Docstring: - return</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - url</li>
+               
+               </ul><tt><i>51</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;Отправить DELETE-запрос и получить ответ.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l52"
+               class="code sev- "><tt><i>52</i>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span></tt>
+            </div>
+            <div id="l53"
+               class="code sev- "><tt><i>53</i> &nbsp;</tt>
+            </div>
+            <div id="l54"
+               class="code sev- "><tt><i>54</i>     <span class="k">def</span> <span class="nf">auth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span></tt>
+            </div>
+            <div id="l55"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - password</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR201
+                     </span>
+                     Missing "Returns" in Docstring: - return</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - url</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - username</li>
+               
+               </ul><tt><i>55</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;Аутентифицироваться через HTTPBasic и получить ответ.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l56"
+               class="code sev- "><tt><i>56</i>         <span class="n">basic</span> <span class="o">=</span> <span class="n">HTTPBasicAuth</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span></tt>
+            </div>
+            <div id="l57"
+               class="code sev- "><tt><i>57</i>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">basic</span><span class="p">)</span></tt>
+            </div>
+            <div id="l58"
+               class="code sev- "><tt><i>58</i> &nbsp;</tt>
+            </div>
+            <div id="l59"
+               class="code sev- "><tt><i>59</i> &nbsp;</tt>
+            </div>
+            <div id="l60"
+               class="code sev- "><tt><i>60</i> <span class="nd">@lru_cache</span><span class="p">()</span></tt>
+            </div>
+            <div id="l61"
+               class="code sev- "><tt><i>61</i> <span class="k">def</span> <span class="nf">get_http_client</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">HttpClient</span><span class="p">:</span></tt>
+            </div>
+            <div id="l62"
+               class="code sev- "><tt><i>62</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Сделать синглтоном.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l63"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR201
+                     </span>
+                     Missing "Returns" in Docstring: - return</li>
+               
+               </ul><tt><i>63</i>     <span class="k">return</span> <span class="n">HttpClient</span><span class="p">()</span></tt>
+            </div>
+            
+         </div>
+      </div>
+   </body>
+</html>

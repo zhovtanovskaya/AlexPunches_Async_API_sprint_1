@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>flake8 violations: fastapi/src/api/v1/films.py</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+<script>
+function bindHandler(link) {
+   var code = link.getAttribute('data-code');
+   var key = location.pathname + '#' + code;
+
+   var ul = link.parentNode.querySelector('.details');
+   if (sessionStorage[key] != 'open') {
+      ul.style.display = 'none';
+   }
+   link.addEventListener('click', function (event) {
+      if (!ul.style.display || ul.style.display == 'none') {
+         ul.style.display = 'block';
+         sessionStorage[key] = 'open';
+      } else {
+         ul.style.display = 'none';
+         sessionStorage[key] = 'closed';
+      }
+   });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+   var links = document.querySelectorAll('#index > li > a');
+   for (var i = 0; i < links.length; i++) {
+      bindHandler(links[i]);
+   }
+});
+</script>
+   </head>
+   <body>
+      <div id="masthead" class="sev-2"></div>
+      <div id="page">
+         <p id="srclink">
+            <a title="View full annotated source"
+               href="fastapi.src.api.v1.films.source.html">
+               <img src="file.svg" alt="&#x2261;">
+            </a></p>
+         <h1>
+            <a href="index.html">
+               <img src="back.svg" alt="&#x2B05;">
+               fastapi/src/api/v1/films.py
+            </a>
+         </h1>
+
+         <ul id="index">
+         
+         <li>
+            <a data-code="WPS318">
+               <span class="count sev-2">
+                  5
+               </span>
+               <strong>WPS318:</strong> Found extra indentation
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l11">
+                  <tt><i>11</i>                                              <span class="n">es_film_to_film_short_scheme</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l48">
+                  <tt><i>48</i>                 <span class="n">summary</span><span class="o">=</span><span class="s1">&#39;Поиск фильмов&#39;</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l73">
+                  <tt><i>73</i>                                 <span class="n">detail</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">msg</span><span class="o">.</span><span class="n">bad_request_error</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">error</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l84">
+                  <tt><i>84</i>         <span class="n">film_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l97">
+                  <tt><i>97</i>                         <span class="n">detail</span><span class="o">=</span><span class="n">msg</span><span class="o">.</span><span class="n">film_not_found_error</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS317">
+               <span class="count sev-2">
+                  3
+               </span>
+               <strong>WPS317:</strong> Found incorrect multi-line parameters
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l47">
+                  <tt><i>47</i>     <span class="nd">@router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/search&#39;</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l72">
+                  <tt><i>72</i>             <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="n">e</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l96">
+                  <tt><i>96</i>     <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="n">HTTPStatus</span><span class="o">.</span><span class="n">NOT_FOUND</span><span class="p">,</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS319">
+               <span class="count sev-2">
+                  3
+               </span>
+               <strong>WPS319:</strong> Found bracket in wrong position
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l11">
+                  <tt><i>11</i>                                              <span class="n">es_film_to_film_short_scheme</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l73">
+                  <tt><i>73</i>                                 <span class="n">detail</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">msg</span><span class="o">.</span><span class="n">bad_request_error</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">error</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l97">
+                  <tt><i>97</i>                         <span class="n">detail</span><span class="o">=</span><span class="n">msg</span><span class="o">.</span><span class="n">film_not_found_error</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS404">
+               <span class="count sev-2">
+                  3
+               </span>
+               <strong>WPS404:</strong> Found complex default value
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l27">
+                  <tt><i>27</i>         <span class="n">filter_genre</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">alias</span><span class="o">=</span><span class="s1">&#39;filter[genre]&#39;</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l53">
+                  <tt><i>53</i>         <span class="n">query</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l85">
+                  <tt><i>85</i>         <span class="n">film_service</span><span class="p">:</span> <span class="n">FilmService</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_film_service</span><span class="p">),</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="C812">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>C812:</strong> missing trailing comma
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l53">
+                  <tt><i>53</i>         <span class="n">query</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS111">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS111:</strong> Found too short name: e < 2
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l71">
+                  <tt><i>71</i>         <span class="k">except</span> <span class="n">BadRequestError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS305">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS305:</strong> Found `f` string
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l73">
+                  <tt><i>73</i>                                 <span class="n">detail</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">msg</span><span class="o">.</span><span class="n">bad_request_error</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">error</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS306">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS306:</strong> Found class without a base class: FilmCBV
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l20">
+                  <tt><i>20</i> <span class="k">class</span> <span class="nc">FilmCBV</span><span class="p">:</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS332">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS332:</strong> Found walrus operator
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l94">
+                  <tt><i>94</i>     <span class="k">if</span> <span class="n">film</span> <span class="o">:=</span> <span class="k">await</span> <span class="n">film_service</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">film_id</span><span class="p">):</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="Q000">
+               <span class="count sev-3">
+                  11
+               </span>
+               <strong>Q000:</strong> Single quotes found but double quotes preferred
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l24">
+                  <tt><i>24</i>     <span class="nd">@router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">summary</span><span class="o">=</span><span class="s1">&#39;Фильтрация по жанру&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l27">
+                  <tt><i>27</i>         <span class="n">filter_genre</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">alias</span><span class="o">=</span><span class="s1">&#39;filter[genre]&#39;</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l42">
+                  <tt><i>42</i>             <span class="n">nested_fields</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;genres&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">)],</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l47">
+                  <tt><i>47</i>     <span class="nd">@router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/search&#39;</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l48">
+                  <tt><i>48</i>                 <span class="n">summary</span><span class="o">=</span><span class="s1">&#39;Поиск фильмов&#39;</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l49">
+                  <tt><i>49</i>                 <span class="n">response_description</span><span class="o">=</span><span class="s1">&#39;Список фильмов с краткой информацией.&#39;</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l73">
+                  <tt><i>73</i>                                 <span class="n">detail</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">msg</span><span class="o">.</span><span class="n">bad_request_error</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">error</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l78">
+                  <tt><i>78</i>     <span class="s1">&#39;/</span><span class="si">{film_id}</span><span class="s1">&#39;</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l81">
+                  <tt><i>81</i>     <span class="n">summary</span><span class="o">=</span><span class="s1">&#39;Подробно о фильме&#39;</span><span class="p">,</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="DAR101">
+               <span class="count sev-3">
+                  4
+               </span>
+               <strong>DAR101:</strong> Missing parameter(s) in Docstring: - filter_genre
+               
+                  (and 3 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Missing parameter(s) in Docstring: - filter_genre:</p>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l29">
+                  <tt><i>29</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - query:</p>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l55">
+                  <tt><i>55</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - film_id:</p>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l87">
+                  <tt><i>87</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Получить подробности о фильме.</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - film_service:</p>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l87">
+                  <tt><i>87</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Получить подробности о фильме.</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="B008">
+               <span class="count sev-3">
+                  3
+               </span>
+               <strong>B008:</strong> Do not perform function calls in argument defaults.  The call is performed only once at function definition time. All calls to your function will reuse the result of that definition-time function call.  If this is intended, assign the function call to a module-level variable and use that variable as a default value.
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l27">
+                  <tt><i>27</i>         <span class="n">filter_genre</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">alias</span><span class="o">=</span><span class="s1">&#39;filter[genre]&#39;</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l53">
+                  <tt><i>53</i>         <span class="n">query</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l85">
+                  <tt><i>85</i>         <span class="n">film_service</span><span class="p">:</span> <span class="n">FilmService</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_film_service</span><span class="p">),</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="DAR201">
+               <span class="count sev-3">
+                  3
+               </span>
+               <strong>DAR201:</strong> Missing "Returns" in Docstring: - return
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l29">
+                  <tt><i>29</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l55">
+                  <tt><i>55</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l87">
+                  <tt><i>87</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Получить подробности о фильме.</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="DAR401">
+               <span class="count sev-3">
+                  2
+               </span>
+               <strong>DAR401:</strong> Missing exception(s) in Raises section: -r HTTPException
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l55">
+                  <tt><i>55</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l87">
+                  <tt><i>87</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Получить подробности о фильме.</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="D100">
+               <span class="count sev-3">
+                  1
+               </span>
+               <strong>D100:</strong> Missing docstring in public module
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l1">
+                  <tt><i>1</i> <span class="kn">from</span> <span class="nn">http</span> <span class="kn">import</span> <span class="n">HTTPStatus</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="D101">
+               <span class="count sev-3">
+                  1
+               </span>
+               <strong>D101:</strong> Missing docstring in public class
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l20">
+                  <tt><i>20</i> <span class="k">class</span> <span class="nc">FilmCBV</span><span class="p">:</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="D400">
+               <span class="count sev-3">
+                  1
+               </span>
+               <strong>D400:</strong> First line should end with a period
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.src.api.v1.films.source.html#l29">
+                  <tt><i>29</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         </ul>
+      </div>
+   </body>
+</html>

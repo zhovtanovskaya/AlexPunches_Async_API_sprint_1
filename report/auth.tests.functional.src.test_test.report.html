@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>flake8 violations: auth/tests/functional/src/test_test.py</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+<script>
+function bindHandler(link) {
+   var code = link.getAttribute('data-code');
+   var key = location.pathname + '#' + code;
+
+   var ul = link.parentNode.querySelector('.details');
+   if (sessionStorage[key] != 'open') {
+      ul.style.display = 'none';
+   }
+   link.addEventListener('click', function (event) {
+      if (!ul.style.display || ul.style.display == 'none') {
+         ul.style.display = 'block';
+         sessionStorage[key] = 'open';
+      } else {
+         ul.style.display = 'none';
+         sessionStorage[key] = 'closed';
+      }
+   });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+   var links = document.querySelectorAll('#index > li > a');
+   for (var i = 0; i < links.length; i++) {
+      bindHandler(links[i]);
+   }
+});
+</script>
+   </head>
+   <body>
+      <div id="masthead" class="sev-3"></div>
+      <div id="page">
+         <p id="srclink">
+            <a title="View full annotated source"
+               href="auth.tests.functional.src.test_test.source.html">
+               <img src="file.svg" alt="&#x2261;">
+            </a></p>
+         <h1>
+            <a href="index.html">
+               <img src="back.svg" alt="&#x2B05;">
+               auth/tests/functional/src/test_test.py
+            </a>
+         </h1>
+
+         <ul id="index">
+         
+         <li>
+            <a data-code="DAR101">
+               <span class="count sev-3">
+                  4
+               </span>
+               <strong>DAR101:</strong> Missing parameter(s) in Docstring: - count
+               
+                  (and 3 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Missing parameter(s) in Docstring: - count:</p>
+               
+               <a href="auth.tests.functional.src.test_test.source.html#l21">
+                  <tt><i>21</i>     <span class="n">pg_stmt</span> <span class="o">=</span> <span class="s1">&#39;SELECT COUNT(*) FROM </span><span class="si">{table}</span><span class="s1"> ;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table</span><span class="o">=</span><span class="n">table</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - db_insert_fake_data:</p>
+               
+               <a href="auth.tests.functional.src.test_test.source.html#l21">
+                  <tt><i>21</i>     <span class="n">pg_stmt</span> <span class="o">=</span> <span class="s1">&#39;SELECT COUNT(*) FROM </span><span class="si">{table}</span><span class="s1"> ;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table</span><span class="o">=</span><span class="n">table</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - pg_cursor:</p>
+               
+               <a href="auth.tests.functional.src.test_test.source.html#l21">
+                  <tt><i>21</i>     <span class="n">pg_stmt</span> <span class="o">=</span> <span class="s1">&#39;SELECT COUNT(*) FROM </span><span class="si">{table}</span><span class="s1"> ;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table</span><span class="o">=</span><span class="n">table</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - table:</p>
+               
+               <a href="auth.tests.functional.src.test_test.source.html#l21">
+                  <tt><i>21</i>     <span class="n">pg_stmt</span> <span class="o">=</span> <span class="s1">&#39;SELECT COUNT(*) FROM </span><span class="si">{table}</span><span class="s1"> ;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table</span><span class="o">=</span><span class="n">table</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="Q000">
+               <span class="count sev-3">
+                  2
+               </span>
+               <strong>Q000:</strong> Single quotes found but double quotes preferred
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="auth.tests.functional.src.test_test.source.html#l13">
+                  <tt><i>13</i>     <span class="s1">&#39;table, count&#39;</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="auth.tests.functional.src.test_test.source.html#l21">
+                  <tt><i>21</i>     <span class="n">pg_stmt</span> <span class="o">=</span> <span class="s1">&#39;SELECT COUNT(*) FROM </span><span class="si">{table}</span><span class="s1"> ;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table</span><span class="o">=</span><span class="n">table</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         </ul>
+      </div>
+   </body>
+</html>

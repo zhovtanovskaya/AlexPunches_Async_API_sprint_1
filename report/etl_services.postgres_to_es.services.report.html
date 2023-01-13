@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>flake8 violations: etl_services/postgres_to_es/services.py</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+<script>
+function bindHandler(link) {
+   var code = link.getAttribute('data-code');
+   var key = location.pathname + '#' + code;
+
+   var ul = link.parentNode.querySelector('.details');
+   if (sessionStorage[key] != 'open') {
+      ul.style.display = 'none';
+   }
+   link.addEventListener('click', function (event) {
+      if (!ul.style.display || ul.style.display == 'none') {
+         ul.style.display = 'block';
+         sessionStorage[key] = 'open';
+      } else {
+         ul.style.display = 'none';
+         sessionStorage[key] = 'closed';
+      }
+   });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+   var links = document.querySelectorAll('#index > li > a');
+   for (var i = 0; i < links.length; i++) {
+      bindHandler(links[i]);
+   }
+});
+</script>
+   </head>
+   <body>
+      <div id="masthead" class="sev-2"></div>
+      <div id="page">
+         <p id="srclink">
+            <a title="View full annotated source"
+               href="etl_services.postgres_to_es.services.source.html">
+               <img src="file.svg" alt="&#x2261;">
+            </a></p>
+         <h1>
+            <a href="index.html">
+               <img src="back.svg" alt="&#x2B05;">
+               etl_services/postgres_to_es/services.py
+            </a>
+         </h1>
+
+         <ul id="index">
+         
+         <li>
+            <a data-code="WPS231">
+               <span class="count sev-2">
+                  2
+               </span>
+               <strong>WPS231:</strong> Found function with too much cognitive complexity: 17 > 12
+               
+                  (and 1 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Found function with too much cognitive complexity: 17 > 12:</p>
+               
+               <a href="etl_services.postgres_to_es.services.source.html#l9">
+                  <tt><i>9</i> <span class="k">def</span> <span class="nf">backoff</span><span class="p">(</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found function with too much cognitive complexity: 13 > 12:</p>
+               
+               <a href="etl_services.postgres_to_es.services.source.html#l17">
+                  <tt><i>17</i>     <span class="k">def</span> <span class="nf">func_wrapper</span><span class="p">(</span><span class="n">func</span><span class="p">):</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS318">
+               <span class="count sev-2">
+                  2
+               </span>
+               <strong>WPS318:</strong> Found extra indentation
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="etl_services.postgres_to_es.services.source.html#l10">
+                  <tt><i>10</i>           <span class="o">*</span><span class="n">exceptions</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="etl_services.postgres_to_es.services.source.html#l26">
+                  <tt><i>26</i>                                    <span class="n">sleep_time</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="n">e</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS430">
+               <span class="count sev-2">
+                  2
+               </span>
+               <strong>WPS430:</strong> Found nested function: func_wrapper
+               
+                  (and 1 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Found nested function: func_wrapper:</p>
+               
+               <a href="etl_services.postgres_to_es.services.source.html#l17">
+                  <tt><i>17</i>     <span class="k">def</span> <span class="nf">func_wrapper</span><span class="p">(</span><span class="n">func</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found nested function: inner:</p>
+               
+               <a href="etl_services.postgres_to_es.services.source.html#l19">
+                  <tt><i>19</i>         <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS111">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS111:</strong> Found too short name: e < 2
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="etl_services.postgres_to_es.services.source.html#l24">
+                  <tt><i>24</i>                 <span class="k">except</span> <span class="n">exceptions</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS220">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS220:</strong> Found too deep nesting: 24 > 20
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="etl_services.postgres_to_es.services.source.html#l31">
+                  <tt><i>31</i>                         <span class="n">sleep_time</span> <span class="o">=</span> <span class="n">border_sleep_time</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS232">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS232:</strong> Found module cognitive complexity that is too high: 13.0 > 8
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="etl_services.postgres_to_es.services.source.html#l0">
+                  <tt><i>0</i>     <span class="k">return</span> <span class="n">func_wrapper</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS317">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS317:</strong> Found incorrect multi-line parameters
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="etl_services.postgres_to_es.services.source.html#l25">
+                  <tt><i>25</i>                     <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Error. I&#39;ll try again in </span><span class="si">%s</span><span class="s2"> seconds.&quot;</span><span class="p">,</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS319">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS319:</strong> Found bracket in wrong position
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="etl_services.postgres_to_es.services.source.html#l26">
+                  <tt><i>26</i>                                    <span class="n">sleep_time</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="n">e</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS323">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS323:</strong> Found `%` string formatting
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="etl_services.postgres_to_es.services.source.html#l25">
+                  <tt><i>25</i>                     <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Error. I&#39;ll try again in </span><span class="si">%s</span><span class="s2"> seconds.&quot;</span><span class="p">,</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS428">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS428:</strong> Found statement that has no effect
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="etl_services.postgres_to_es.services.source.html#l6">
+                  <tt><i>6</i>     <span class="o">...</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS604">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS604:</strong> Found incorrect node inside `class` body
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="etl_services.postgres_to_es.services.source.html#l6">
+                  <tt><i>6</i>     <span class="o">...</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="DAR101">
+               <span class="count sev-3">
+                  5
+               </span>
+               <strong>DAR101:</strong> Missing parameter(s) in Docstring: - *exceptions
+               
+                  (and 4 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Missing parameter(s) in Docstring: - *exceptions:</p>
+               
+               <a href="etl_services.postgres_to_es.services.source.html#l10">
+                  <tt><i>10</i>           <span class="o">*</span><span class="n">exceptions</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - border_sleep_time:</p>
+               
+               <a href="etl_services.postgres_to_es.services.source.html#l10">
+                  <tt><i>10</i>           <span class="o">*</span><span class="n">exceptions</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - factor:</p>
+               
+               <a href="etl_services.postgres_to_es.services.source.html#l10">
+                  <tt><i>10</i>           <span class="o">*</span><span class="n">exceptions</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - logger:</p>
+               
+               <a href="etl_services.postgres_to_es.services.source.html#l10">
+                  <tt><i>10</i>           <span class="o">*</span><span class="n">exceptions</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - start_sleep_time:</p>
+               
+               <a href="etl_services.postgres_to_es.services.source.html#l10">
+                  <tt><i>10</i>           <span class="o">*</span><span class="n">exceptions</span><span class="p">,</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="D100">
+               <span class="count sev-3">
+                  1
+               </span>
+               <strong>D100:</strong> Missing docstring in public module
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="etl_services.postgres_to_es.services.source.html#l1">
+                  <tt><i>1</i> <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="D101">
+               <span class="count sev-3">
+                  1
+               </span>
+               <strong>D101:</strong> Missing docstring in public class
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="etl_services.postgres_to_es.services.source.html#l5">
+                  <tt><i>5</i> <span class="k">class</span> <span class="nc">ElasticInsertError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="DAR201">
+               <span class="count sev-3">
+                  1
+               </span>
+               <strong>DAR201:</strong> Missing "Returns" in Docstring: - return
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="etl_services.postgres_to_es.services.source.html#l10">
+                  <tt><i>10</i>           <span class="o">*</span><span class="n">exceptions</span><span class="p">,</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         </ul>
+      </div>
+   </body>
+</html>

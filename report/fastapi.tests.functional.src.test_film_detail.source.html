@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>fastapi/tests/functional/src/test_film_detail.py - flake8 annotated source</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+   </head>
+   <body>
+      <div id="masthead" class="sev-2"></div>
+      <div id="page">
+         <h1>
+            <a href="fastapi.tests.functional.src.test_film_detail.report.html">
+               <img src="back.svg" alt="&#x2B05;">
+               fastapi/tests/functional/src/test_film_detail.py source
+            </a>
+         </h1>
+
+         <div id="doc">
+            <div id="l1"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        D100
+                     </span>
+                     Missing docstring in public module</li>
+               
+               </ul><tt><i>1</i> <span class="kn">from</span> <span class="nn">http</span> <span class="kn">import</span> <span class="n">HTTPStatus</span></tt>
+            </div>
+            <div id="l2"
+               class="code sev- "><tt><i>2</i> &nbsp;</tt>
+            </div>
+            <div id="l3"
+               class="code sev- "><tt><i>3</i> <span class="kn">import</span> <span class="nn">pytest</span></tt>
+            </div>
+            <div id="l4"
+               class="code sev- "><tt><i>4</i> &nbsp;</tt>
+            </div>
+            <div id="l5"
+               class="code sev- "><tt><i>5</i> <span class="kn">from</span> <span class="nn">functional.settings</span> <span class="kn">import</span> <span class="n">test_settings</span></tt>
+            </div>
+            <div id="l6"
+               class="code sev- "><tt><i>6</i> &nbsp;</tt>
+            </div>
+            <div id="l7"
+               class="code sev- "><tt><i>7</i> <span class="n">pytestmark</span> <span class="o">=</span> <span class="n">pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">asyncio</span></tt>
+            </div>
+            <div id="l8"
+               class="code sev- "><tt><i>8</i> &nbsp;</tt>
+            </div>
+            <div id="l9"
+               class="code sev- "><tt><i>9</i> &nbsp;</tt>
+            </div>
+            <div id="l10"
+               class="code sev- "><tt><i>10</i> <span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span></tt>
+            </div>
+            <div id="l11"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred</li>
+               
+               </ul><tt><i>11</i>     <span class="s1">&#39;path_param, expected_answer&#39;</span><span class="p">,</span></tt>
+            </div>
+            <div id="l12"
+               class="code sev- "><tt><i>12</i>     <span class="p">[</span></tt>
+            </div>
+            <div id="l13"
+               class="code sev- "><tt><i>13</i>         <span class="p">(</span></tt>
+            </div>
+            <div id="l14"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred (in 2 places)</li>
+               
+               </ul><tt><i>14</i>             <span class="p">{</span><span class="s1">&#39;film_uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;1a42b629-14af-4646-be32-16bd97d01e70&#39;</span><span class="p">},</span></tt>
+            </div>
+            <div id="l15"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred</li>
+               
+               </ul><tt><i>15</i>             <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">OK</span><span class="p">,</span></tt>
+            </div>
+            <div id="l16"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred (in 2 places)</li>
+               
+               </ul><tt><i>16</i>                 <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Film heavy chair by development wikipedia amazon&#39;</span><span class="p">,</span></tt>
+            </div>
+            <div id="l17"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred (in 5 places)</li>
+               
+               </ul><tt><i>17</i>                 <span class="s1">&#39;genre&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;9c91a5b2-eb70-4889-8581-ebe427370edd&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Musical&#39;</span><span class="p">}],</span></tt>
+            </div>
+            <div id="l18"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred (in 9 places)</li>
+               
+               </ul><tt><i>18</i>                 <span class="s1">&#39;actors&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;3acaaf82-374a-4cc9-a039-7e67926146de&#39;</span><span class="p">,</span> <span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Robert Oneal&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;a8b56f85-346d-4b7e-80d3-d1af353e0c86&#39;</span><span class="p">,</span> <span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Teresa Martinez&#39;</span><span class="p">}],</span></tt>
+            </div>
+            <div id="l19"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred (in 17 places)</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS221
+                     </span>
+                     Found line with high Jones Complexity: 22 > 14</li>
+               
+               </ul><tt><i>19</i>                 <span class="s1">&#39;writers&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;3acaaf82-374a-4cc9-a039-7e67926146de&#39;</span><span class="p">,</span> <span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Robert Oneal&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;a8b56f85-346d-4b7e-80d3-d1af353e0c86&#39;</span><span class="p">,</span> <span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Teresa Martinez&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;3b019fcb-f96d-4403-948c-93f3028d042b&#39;</span><span class="p">,</span> <span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Andrea Barry&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;30c32323-c1b1-49c4-9f1f-f97c71cff814&#39;</span><span class="p">,</span> <span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Richard Jones&#39;</span><span class="p">}],</span></tt>
+            </div>
+            <div id="l20"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred (in 17 places)</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS221
+                     </span>
+                     Found line with high Jones Complexity: 22 > 14</li>
+               
+               </ul><tt><i>20</i>                 <span class="s1">&#39;directors&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;3acaaf82-374a-4cc9-a039-7e67926146de&#39;</span><span class="p">,</span> <span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Robert Oneal&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;a8b56f85-346d-4b7e-80d3-d1af353e0c86&#39;</span><span class="p">,</span> <span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Teresa Martinez&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;8611f583-b2d1-4e3d-809e-2109c7867a38&#39;</span><span class="p">,</span> <span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Eric Wilson&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;30c32323-c1b1-49c4-9f1f-f97c71cff814&#39;</span><span class="p">,</span> <span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Richard Jones&#39;</span><span class="p">}],</span></tt>
+            </div>
+            <div id="l21"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        C812
+                     </span>
+                     Missing trailing comma</li>
+               
+               </ul><tt><i>21</i>             <span class="p">}</span></tt>
+            </div>
+            <div id="l22"
+               class="code sev- "><tt><i>22</i>         <span class="p">),</span></tt>
+            </div>
+            <div id="l23"
+               class="code sev- "><tt><i>23</i>         <span class="p">(</span></tt>
+            </div>
+            <div id="l24"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred (in 2 places)</li>
+               
+               </ul><tt><i>24</i>             <span class="p">{</span><span class="s1">&#39;film_uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;50852f4f-0b09-4c41-b89a-28298a663359&#39;</span><span class="p">},</span></tt>
+            </div>
+            <div id="l25"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred</li>
+               
+               </ul><tt><i>25</i>             <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">OK</span><span class="p">,</span></tt>
+            </div>
+            <div id="l26"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred (in 2 places)</li>
+               
+               </ul><tt><i>26</i>                 <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Hotel by year player&#39;</span><span class="p">,</span></tt>
+            </div>
+            <div id="l27"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred (in 33 places)</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS221
+                     </span>
+                     Found line with high Jones Complexity: 42 > 14</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        C819
+                     </span>
+                     Trailing comma prohibited (in 8 places)</li>
+               
+               </ul><tt><i>27</i>                 <span class="s1">&#39;genre&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;ca88141b-a6b4-450d-bbc3-efa940e4953f&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Mystery&#39;</span><span class="p">,</span> <span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;f39d7b6d-aef2-40b1-aaf0-cf05e7048011&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Horror&#39;</span><span class="p">,</span> <span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;9c91a5b2-eb70-4889-8581-ebe427370edd&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Musical&#39;</span><span class="p">,</span> <span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;237fd1e4-c98e-454e-aa13-8a13fb7547b5&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Romance&#39;</span><span class="p">,</span> <span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;fb58fd7f-7afd-447f-b833-e51e45e2a778&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Game-Show&#39;</span><span class="p">,</span> <span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;56b541ab-4d66-4021-8708-397762bff2d4&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Music&#39;</span><span class="p">,</span> <span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;e508c1c8-24c0-4136-80b4-340c4befb190&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Reality-TV&#39;</span><span class="p">,</span> <span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;f24fd632-b1a5-4273-a835-0119bd12f829&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;News&#39;</span><span class="p">,</span> <span class="p">}],</span></tt>
+            </div>
+            <div id="l28"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred</li>
+               
+               </ul><tt><i>28</i>                 <span class="s1">&#39;actors&#39;</span><span class="p">:</span> <span class="p">[],</span></tt>
+            </div>
+            <div id="l29"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred (in 5 places)</li>
+               
+               </ul><tt><i>29</i>                 <span class="s1">&#39;writers&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;27f9e728-c618-4c1e-aa48-05421965e435&#39;</span><span class="p">,</span> <span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Amanda Griffin&#39;</span><span class="p">}],</span></tt>
+            </div>
+            <div id="l30"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred</li>
+               
+               </ul><tt><i>30</i>                 <span class="s1">&#39;directors&#39;</span><span class="p">:</span> <span class="p">[],</span></tt>
+            </div>
+            <div id="l31"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        C812
+                     </span>
+                     Missing trailing comma</li>
+               
+               </ul><tt><i>31</i>             <span class="p">}</span></tt>
+            </div>
+            <div id="l32"
+               class="code sev- "><tt><i>32</i>         <span class="p">),</span></tt>
+            </div>
+            <div id="l33"
+               class="code sev- "><tt><i>33</i>         <span class="p">(</span></tt>
+            </div>
+            <div id="l34"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred (in 2 places)</li>
+               
+               </ul><tt><i>34</i>             <span class="p">{</span><span class="s1">&#39;film_uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;6480fdc0-f1c5-4f44-be08-3c1bcda6a326&#39;</span><span class="p">},</span></tt>
+            </div>
+            <div id="l35"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred</li>
+               
+               </ul><tt><i>35</i>             <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">OK</span><span class="p">,</span></tt>
+            </div>
+            <div id="l36"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred (in 2 places)</li>
+               
+               </ul><tt><i>36</i>                 <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Morning explain light&#39;</span><span class="p">,</span></tt>
+            </div>
+            <div id="l37"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred (in 5 places)</li>
+               
+               </ul><tt><i>37</i>                 <span class="s1">&#39;genre&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;f39d7b6d-aef2-40b1-aaf0-cf05e7048011&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Horror&#39;</span><span class="p">}],</span></tt>
+            </div>
+            <div id="l38"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred</li>
+               
+               </ul><tt><i>38</i>                 <span class="s1">&#39;actors&#39;</span><span class="p">:</span> <span class="p">[],</span></tt>
+            </div>
+            <div id="l39"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred</li>
+               
+               </ul><tt><i>39</i>                 <span class="s1">&#39;writers&#39;</span><span class="p">:</span> <span class="p">[],</span></tt>
+            </div>
+            <div id="l40"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred (in 9 places)</li>
+               
+               </ul><tt><i>40</i>                 <span class="s1">&#39;directors&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;8611f583-b2d1-4e3d-809e-2109c7867a38&#39;</span><span class="p">,</span> <span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Eric Wilson&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;27f9e728-c618-4c1e-aa48-05421965e435&#39;</span><span class="p">,</span> <span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Amanda Griffin&#39;</span><span class="p">}],</span></tt>
+            </div>
+            <div id="l41"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        C812
+                     </span>
+                     Missing trailing comma</li>
+               
+               </ul><tt><i>41</i>             <span class="p">}</span></tt>
+            </div>
+            <div id="l42"
+               class="code sev- "><tt><i>42</i>         <span class="p">),</span></tt>
+            </div>
+            <div id="l43"
+               class="code sev- "><tt><i>43</i>         <span class="p">(</span></tt>
+            </div>
+            <div id="l44"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS318
+                     </span>
+                     Found extra indentation</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred (in 2 places)</li>
+               
+               </ul><tt><i>44</i>               <span class="p">{</span><span class="s1">&#39;film_uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;00af52ec-9345-4d66-adbe-50eb917f463a&#39;</span><span class="p">},</span></tt>
+            </div>
+            <div id="l45"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        C812
+                     </span>
+                     Missing trailing comma</li>
+               
+               </ul><tt><i>45</i>               <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">NOT_FOUND</span><span class="p">}</span></tt>
+            </div>
+            <div id="l46"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        C812
+                     </span>
+                     Missing trailing comma</li>
+               
+               </ul><tt><i>46</i>         <span class="p">)</span></tt>
+            </div>
+            <div id="l47"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        C812
+                     </span>
+                     Missing trailing comma</li>
+               
+               </ul><tt><i>47</i>     <span class="p">]</span></tt>
+            </div>
+            <div id="l48"
+               class="code sev- "><tt><i>48</i> <span class="p">)</span></tt>
+            </div>
+            <div id="l49"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS211
+                     </span>
+                     Found too many arguments: 6 > 5</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS218
+                     </span>
+                     Found too many `assert` statements: 6 > 5</li>
+               
+               </ul><tt><i>49</i> <span class="k">async</span> <span class="k">def</span> <span class="nf">test_film_detail</span><span class="p">(</span></tt>
+            </div>
+            <div id="l50"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS318
+                     </span>
+                     Found extra indentation</li>
+               
+               </ul><tt><i>50</i>           <span class="n">es_write_data</span><span class="p">,</span></tt>
+            </div>
+            <div id="l51"
+               class="code sev- "><tt><i>51</i>           <span class="n">es_determination_data</span><span class="p">,</span></tt>
+            </div>
+            <div id="l52"
+               class="code sev- "><tt><i>52</i>           <span class="n">path_param</span><span class="p">,</span></tt>
+            </div>
+            <div id="l53"
+               class="code sev- "><tt><i>53</i>           <span class="n">expected_answer</span><span class="p">,</span></tt>
+            </div>
+            <div id="l54"
+               class="code sev- "><tt><i>54</i>           <span class="n">aiohttp_get</span><span class="p">,</span></tt>
+            </div>
+            <div id="l55"
+               class="code sev- "><tt><i>55</i>           <span class="n">access_token</span><span class="p">,</span></tt>
+            </div>
+            <div id="l56"
+               class="code sev- "><tt><i>56</i> <span class="p">):</span></tt>
+            </div>
+            <div id="l57"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        D205
+                     </span>
+                     1 blank line required between summary line and description</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - access_token</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - aiohttp_get</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - es_determination_data</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - es_write_data</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - expected_answer</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - path_param</li>
+               
+               </ul><tt><i>57</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l58"
+               class="code sev- "><tt><i>58</i> <span class="sd">    Получаем конкретный фильм по ID.</span></tt>
+            </div>
+            <div id="l59"
+               class="code sev- "><tt><i>59</i> <span class="sd">    У фильма корректный список genre.</span></tt>
+            </div>
+            <div id="l60"
+               class="code sev- "><tt><i>60</i> <span class="sd">    У фильма корректный список actors.</span></tt>
+            </div>
+            <div id="l61"
+               class="code sev- "><tt><i>61</i> <span class="sd">    У фильма корректный список directors.</span></tt>
+            </div>
+            <div id="l62"
+               class="code sev- "><tt><i>62</i> <span class="sd">    У фильма корректный список writers.</span></tt>
+            </div>
+            <div id="l63"
+               class="code sev- "><tt><i>63</i> <span class="sd">    У фильма корректный пустой список directors, когда у фильма нет directors.</span></tt>
+            </div>
+            <div id="l64"
+               class="code sev- "><tt><i>64</i> <span class="sd">    У фильма корректный пустой список actors, когда у фильма нет actors.</span></tt>
+            </div>
+            <div id="l65"
+               class="code sev- "><tt><i>65</i> <span class="sd">    У фильма корректный пустой список writers, когда у фильма нет writers.</span></tt>
+            </div>
+            <div id="l66"
+               class="code sev- "><tt><i>66</i> <span class="sd">    Получаем 404, когда передаем несуществующий ID.</span></tt>
+            </div>
+            <div id="l67"
+               class="code sev- "><tt><i>67</i> <span class="sd">    &quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l68"
+               class="code sev- "><tt><i>68</i>     <span class="k">await</span> <span class="n">es_write_data</span><span class="p">(</span></tt>
+            </div>
+            <div id="l69"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred</li>
+               
+               </ul><tt><i>69</i>         <span class="n">data</span><span class="o">=</span><span class="n">es_determination_data</span><span class="p">[</span><span class="s1">&#39;films&#39;</span><span class="p">],</span></tt>
+            </div>
+            <div id="l70"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        C812
+                     </span>
+                     Missing trailing comma</li>
+               
+               </ul><tt><i>70</i>         <span class="n">es_index</span><span class="o">=</span><span class="n">test_settings</span><span class="o">.</span><span class="n">es_indexes</span><span class="p">[</span><span class="s1">&#39;movies&#39;</span><span class="p">]</span></tt>
+            </div>
+            <div id="l71"
+               class="code sev- "><tt><i>71</i>     <span class="p">)</span></tt>
+            </div>
+            <div id="l72"
+               class="code sev- "><tt><i>72</i> &nbsp;</tt>
+            </div>
+            <div id="l73"
+               class="code sev- "><tt><i>73</i>     <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span></tt>
+            </div>
+            <div id="l74"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred (in 2 places)</li>
+               
+               </ul><tt><i>74</i>         <span class="s1">&#39;X-Not-Cache&#39;</span><span class="p">:</span> <span class="s1">&#39;True&#39;</span><span class="p">,</span></tt>
+            </div>
+            <div id="l75"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred (in 2 places)</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS305
+                     </span>
+                     Found `f` string</li>
+               
+               </ul><tt><i>75</i>         <span class="s1">&#39;Authorization&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Bearer </span><span class="si">{</span><span class="n">access_token</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span></tt>
+            </div>
+            <div id="l76"
+               class="code sev- "><tt><i>76</i>     <span class="p">}</span></tt>
+            </div>
+            <div id="l77"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        P101
+                     </span>
+                     Format string does contain unindexed parameters</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred</li>
+               
+               </ul><tt><i>77</i>     <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">/api/v1/films/</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span></tt>
+            </div>
+            <div id="l78"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS319
+                     </span>
+                     Found bracket in wrong position</li>
+               
+               </ul><tt><i>78</i>         <span class="n">test_settings</span><span class="o">.</span><span class="n">service_url</span><span class="p">,</span> <span class="n">path_param</span><span class="p">[</span><span class="s1">&#39;film_uuid&#39;</span><span class="p">])</span></tt>
+            </div>
+            <div id="l79"
+               class="code sev- "><tt><i>79</i>     <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">aiohttp_get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span></tt>
+            </div>
+            <div id="l80"
+               class="code sev- "><tt><i>80</i> &nbsp;</tt>
+            </div>
+            <div id="l81"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        S101
+                     </span>
+                     Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred (in 2 places)</li>
+               
+               </ul><tt><i>81</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span></tt>
+            </div>
+            <div id="l82"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        S101
+                     </span>
+                     Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS204
+                     </span>
+                     Found overused expression: response['body']; used 5 > 4</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred (in 3 places)</li>
+               
+               </ul><tt><i>82</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l83"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        S101
+                     </span>
+                     Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred (in 3 places)</li>
+               
+               </ul><tt><i>83</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;genre&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;genre&#39;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l84"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        S101
+                     </span>
+                     Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred (in 3 places)</li>
+               
+               </ul><tt><i>84</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;actors&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;actors&#39;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l85"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        S101
+                     </span>
+                     Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred (in 3 places)</li>
+               
+               </ul><tt><i>85</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;directors&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;directors&#39;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l86"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        S101
+                     </span>
+                     Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred (in 3 places)</li>
+               
+               </ul><tt><i>86</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;writers&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;writers&#39;</span><span class="p">)</span></tt>
+            </div>
+            
+         </div>
+      </div>
+   </body>
+</html>

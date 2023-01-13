@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>flake8 violations: benchmarking_storage/vertica/checker_from_vertica.py</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+<script>
+function bindHandler(link) {
+   var code = link.getAttribute('data-code');
+   var key = location.pathname + '#' + code;
+
+   var ul = link.parentNode.querySelector('.details');
+   if (sessionStorage[key] != 'open') {
+      ul.style.display = 'none';
+   }
+   link.addEventListener('click', function (event) {
+      if (!ul.style.display || ul.style.display == 'none') {
+         ul.style.display = 'block';
+         sessionStorage[key] = 'open';
+      } else {
+         ul.style.display = 'none';
+         sessionStorage[key] = 'closed';
+      }
+   });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+   var links = document.querySelectorAll('#index > li > a');
+   for (var i = 0; i < links.length; i++) {
+      bindHandler(links[i]);
+   }
+});
+</script>
+   </head>
+   <body>
+      <div id="masthead" class="sev-2"></div>
+      <div id="page">
+         <p id="srclink">
+            <a title="View full annotated source"
+               href="benchmarking_storage.vertica.checker_from_vertica.source.html">
+               <img src="file.svg" alt="&#x2261;">
+            </a></p>
+         <h1>
+            <a href="index.html">
+               <img src="back.svg" alt="&#x2B05;">
+               benchmarking_storage/vertica/checker_from_vertica.py
+            </a>
+         </h1>
+
+         <ul id="index">
+         
+         <li>
+            <a data-code="WPS319">
+               <span class="count sev-2">
+                  3
+               </span>
+               <strong>WPS319:</strong> Found bracket in wrong position
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Found bracket in wrong position (in 3 places):</p>
+               
+               <a href="benchmarking_storage.vertica.checker_from_vertica.source.html#l12">
+                  <tt><i>12</i>     <span class="vm">__file__</span><span class="p">)))</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS305">
+               <span class="count sev-2">
+                  2
+               </span>
+               <strong>WPS305:</strong> Found `f` string
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="benchmarking_storage.vertica.checker_from_vertica.source.html#l44">
+                  <tt><i>44</i>             <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span><span class="n">actual_data</span><span class="o">.</span><span class="n">all_data_count</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;+</span><span class="si">{</span><span class="n">how_much_added</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">])</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="benchmarking_storage.vertica.checker_from_vertica.source.html#l45">
+                  <tt><i>45</i>             <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">actual_data</span><span class="o">.</span><span class="n">all_data_count</span><span class="si">:</span><span class="s1">_</span><span class="si">}</span><span class="s1"> +</span><span class="si">{</span><span class="n">how_much_added</span><span class="si">:</span><span class="s1">_</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E402">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E402:</strong> module level import not at top of file
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="benchmarking_storage.vertica.checker_from_vertica.source.html#l15">
+                  <tt><i>15</i> <span class="kn">from</span> <span class="nn">config</span> <span class="kn">import</span> <span class="n">logger</span><span class="p">,</span> <span class="n">settings</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS210">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS210:</strong> Found too many local variables: 6 > 5
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="benchmarking_storage.vertica.checker_from_vertica.source.html#l33">
+                  <tt><i>33</i> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS221">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS221:</strong> Found line with high Jones Complexity: 15 > 14
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="benchmarking_storage.vertica.checker_from_vertica.source.html#l45">
+                  <tt><i>45</i>             <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">actual_data</span><span class="o">.</span><span class="n">all_data_count</span><span class="si">:</span><span class="s1">_</span><span class="si">}</span><span class="s1"> +</span><span class="si">{</span><span class="n">how_much_added</span><span class="si">:</span><span class="s1">_</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS306">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS306:</strong> Found class without a base class: ActualData
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="benchmarking_storage.vertica.checker_from_vertica.source.html#l19">
+                  <tt><i>19</i> <span class="k">class</span> <span class="nc">ActualData</span><span class="p">:</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS458">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS458:</strong> Found imports collision: vertica_python
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="benchmarking_storage.vertica.checker_from_vertica.source.html#l9">
+                  <tt><i>9</i> <span class="kn">from</span> <span class="nn">vertica_python</span> <span class="kn">import</span> <span class="n">Connection</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS515">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS515:</strong> Found `open()` used without a context manager
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="benchmarking_storage.vertica.checker_from_vertica.source.html#l37">
+                  <tt><i>37</i>     <span class="n">log_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;./lods.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="Q000">
+               <span class="count sev-3">
+                  8
+               </span>
+               <strong>Q000:</strong> Single quotes found but double quotes preferred
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="benchmarking_storage.vertica.checker_from_vertica.source.html#l28">
+                  <tt><i>28</i>     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT COUNT(*) FROM views&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 3 places):</p>
+               
+               <a href="benchmarking_storage.vertica.checker_from_vertica.source.html#l37">
+                  <tt><i>37</i>     <span class="n">log_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;./lods.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="benchmarking_storage.vertica.checker_from_vertica.source.html#l44">
+                  <tt><i>44</i>             <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span><span class="n">actual_data</span><span class="o">.</span><span class="n">all_data_count</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;+</span><span class="si">{</span><span class="n">how_much_added</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">])</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="benchmarking_storage.vertica.checker_from_vertica.source.html#l45">
+                  <tt><i>45</i>             <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">actual_data</span><span class="o">.</span><span class="n">all_data_count</span><span class="si">:</span><span class="s1">_</span><span class="si">}</span><span class="s1"> +</span><span class="si">{</span><span class="n">how_much_added</span><span class="si">:</span><span class="s1">_</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="benchmarking_storage.vertica.checker_from_vertica.source.html#l49">
+                  <tt><i>49</i>         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;exit&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="benchmarking_storage.vertica.checker_from_vertica.source.html#l55">
+                  <tt><i>55</i> <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="DAR101">
+               <span class="count sev-3">
+                  1
+               </span>
+               <strong>DAR101:</strong> Missing parameter(s) in Docstring: - connection
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="benchmarking_storage.vertica.checker_from_vertica.source.html#l26">
+                  <tt><i>26</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Получить информацию о количестве данных в Вертике.&quot;&quot;&quot;</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="DAR201">
+               <span class="count sev-3">
+                  1
+               </span>
+               <strong>DAR201:</strong> Missing "Returns" in Docstring: - return
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="benchmarking_storage.vertica.checker_from_vertica.source.html#l26">
+                  <tt><i>26</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Получить информацию о количестве данных в Вертике.&quot;&quot;&quot;</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         </ul>
+      </div>
+   </body>
+</html>

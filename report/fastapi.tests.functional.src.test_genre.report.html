@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>flake8 violations: fastapi/tests/functional/src/test_genre.py</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+<script>
+function bindHandler(link) {
+   var code = link.getAttribute('data-code');
+   var key = location.pathname + '#' + code;
+
+   var ul = link.parentNode.querySelector('.details');
+   if (sessionStorage[key] != 'open') {
+      ul.style.display = 'none';
+   }
+   link.addEventListener('click', function (event) {
+      if (!ul.style.display || ul.style.display == 'none') {
+         ul.style.display = 'block';
+         sessionStorage[key] = 'open';
+      } else {
+         ul.style.display = 'none';
+         sessionStorage[key] = 'closed';
+      }
+   });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+   var links = document.querySelectorAll('#index > li > a');
+   for (var i = 0; i < links.length; i++) {
+      bindHandler(links[i]);
+   }
+});
+</script>
+   </head>
+   <body>
+      <div id="masthead" class="sev-2"></div>
+      <div id="page">
+         <p id="srclink">
+            <a title="View full annotated source"
+               href="fastapi.tests.functional.src.test_genre.source.html">
+               <img src="file.svg" alt="&#x2261;">
+            </a></p>
+         <h1>
+            <a href="index.html">
+               <img src="back.svg" alt="&#x2B05;">
+               fastapi/tests/functional/src/test_genre.py
+            </a>
+         </h1>
+
+         <ul id="index">
+         
+         <li>
+            <a data-code="C812">
+               <span class="count sev-2">
+                  12
+               </span>
+               <strong>C812:</strong> missing trailing comma
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l13">
+                  <tt><i>13</i>         <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">OK</span><span class="p">,</span> <span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;type_body&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">}</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l14">
+                  <tt><i>14</i>     <span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l25">
+                  <tt><i>25</i>         <span class="n">es_index</span><span class="o">=</span><span class="n">test_settings</span><span class="o">.</span><span class="n">es_indexes</span><span class="p">[</span><span class="s1">&#39;genres&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l40">
+                  <tt><i>40</i>         <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">OK</span><span class="p">,</span> <span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;type_body&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">}</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l41">
+                  <tt><i>41</i>     <span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l51">
+                  <tt><i>51</i>         <span class="n">es_index</span><span class="o">=</span><span class="n">test_settings</span><span class="o">.</span><span class="n">es_indexes</span><span class="p">[</span><span class="s1">&#39;genres&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l71">
+                  <tt><i>71</i>             <span class="p">}</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l78">
+                  <tt><i>78</i>             <span class="p">}</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l82">
+                  <tt><i>82</i>               <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">NOT_FOUND</span><span class="p">}</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l83">
+                  <tt><i>83</i>         <span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l84">
+                  <tt><i>84</i>     <span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l102">
+                  <tt><i>102</i>         <span class="n">es_index</span><span class="o">=</span><span class="n">test_settings</span><span class="o">.</span><span class="n">es_indexes</span><span class="p">[</span><span class="s1">&#39;genres&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS226">
+               <span class="count sev-2">
+                  8
+               </span>
+               <strong>WPS226:</strong> Found string literal over-use: genres > 3
+               
+                  (and 7 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Found string literal over-use: body > 3:</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l0">
+                  <tt><i>0</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found string literal over-use: description > 3:</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l0">
+                  <tt><i>0</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found string literal over-use: genre_uuid > 3:</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l0">
+                  <tt><i>0</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found string literal over-use: genres > 3:</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l0">
+                  <tt><i>0</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found string literal over-use: length > 3:</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l0">
+                  <tt><i>0</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found string literal over-use: name > 3:</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l0">
+                  <tt><i>0</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found string literal over-use: status > 3:</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l0">
+                  <tt><i>0</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found string literal over-use: type_body > 3:</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l0">
+                  <tt><i>0</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS318">
+               <span class="count sev-2">
+                  4
+               </span>
+               <strong>WPS318:</strong> Found extra indentation
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l17">
+                  <tt><i>17</i>           <span class="n">es_write_data</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l44">
+                  <tt><i>44</i>           <span class="n">es_write_data</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l81">
+                  <tt><i>81</i>               <span class="p">{</span><span class="s1">&#39;genre_uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;01af52ec-9345-4d66-adbe-50eb917f463e&#39;</span><span class="p">},</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l87">
+                  <tt><i>87</i>           <span class="n">es_write_data</span><span class="p">,</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS336">
+               <span class="count sev-2">
+                  2
+               </span>
+               <strong>WPS336:</strong> Found explicit string concatenation
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l28">
+                  <tt><i>28</i>     <span class="n">url</span> <span class="o">=</span> <span class="n">test_settings</span><span class="o">.</span><span class="n">service_url</span> <span class="o">+</span> <span class="s1">&#39;/api/v1/genres/&#39;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l54">
+                  <tt><i>54</i>     <span class="n">url</span> <span class="o">=</span> <span class="n">test_settings</span><span class="o">.</span><span class="n">service_url</span> <span class="o">+</span> <span class="s1">&#39;/api/v1/genres/&#39;</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS516">
+               <span class="count sev-2">
+                  2
+               </span>
+               <strong>WPS516:</strong> Found `type()` used to compare types
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l33">
+                  <tt><i>33</i>     <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="p">[</span><span class="s1">&#39;type_body&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l59">
+                  <tt><i>59</i>     <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="p">[</span><span class="s1">&#39;type_body&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS305">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS305:</strong> Found `f` string
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l106">
+                  <tt><i>106</i>     <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">test_settings</span><span class="o">.</span><span class="n">service_url</span><span class="si">}</span><span class="s2">/api/v1/genres/</span><span class="si">{</span><span class="n">path_param</span><span class="p">[</span><span class="s1">&#39;genre_uuid&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">/&quot;</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="Q000">
+               <span class="count sev-3">
+                  58
+               </span>
+               <strong>Q000:</strong> Single quotes found but double quotes preferred
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l11">
+                  <tt><i>11</i>     <span class="s1">&#39;expected_answer&#39;</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 3 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l13">
+                  <tt><i>13</i>         <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">OK</span><span class="p">,</span> <span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;type_body&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">}</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l24">
+                  <tt><i>24</i>         <span class="n">data</span><span class="o">=</span><span class="n">es_fake_data_fix_count</span><span class="p">[</span><span class="s1">&#39;genres&#39;</span><span class="p">],</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l25">
+                  <tt><i>25</i>         <span class="n">es_index</span><span class="o">=</span><span class="n">test_settings</span><span class="o">.</span><span class="n">es_indexes</span><span class="p">[</span><span class="s1">&#39;genres&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l27">
+                  <tt><i>27</i>     <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;X-Not-Cache&#39;</span><span class="p">:</span> <span class="s1">&#39;True&#39;</span><span class="p">}</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l28">
+                  <tt><i>28</i>     <span class="n">url</span> <span class="o">=</span> <span class="n">test_settings</span><span class="o">.</span><span class="n">service_url</span> <span class="o">+</span> <span class="s1">&#39;/api/v1/genres/&#39;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l32">
+                  <tt><i>32</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l33">
+                  <tt><i>33</i>     <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="p">[</span><span class="s1">&#39;type_body&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l34">
+                  <tt><i>34</i>     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="p">[</span><span class="s1">&#39;length&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l38">
+                  <tt><i>38</i>     <span class="s1">&#39;expected_answer&#39;</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 3 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l40">
+                  <tt><i>40</i>         <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">OK</span><span class="p">,</span> <span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;type_body&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">}</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l51">
+                  <tt><i>51</i>         <span class="n">es_index</span><span class="o">=</span><span class="n">test_settings</span><span class="o">.</span><span class="n">es_indexes</span><span class="p">[</span><span class="s1">&#39;genres&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l53">
+                  <tt><i>53</i>     <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;X-Not-Cache&#39;</span><span class="p">:</span> <span class="s1">&#39;True&#39;</span><span class="p">}</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l54">
+                  <tt><i>54</i>     <span class="n">url</span> <span class="o">=</span> <span class="n">test_settings</span><span class="o">.</span><span class="n">service_url</span> <span class="o">+</span> <span class="s1">&#39;/api/v1/genres/&#39;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l58">
+                  <tt><i>58</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l59">
+                  <tt><i>59</i>     <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="p">[</span><span class="s1">&#39;type_body&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l60">
+                  <tt><i>60</i>     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="p">[</span><span class="s1">&#39;length&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l64">
+                  <tt><i>64</i>     <span class="s1">&#39;path_param, expected_answer&#39;</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l67">
+                  <tt><i>67</i>             <span class="p">{</span><span class="s1">&#39;genre_uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;fb58fd7f-7afd-447f-b833-e51e45e2a778&#39;</span><span class="p">},</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l68">
+                  <tt><i>68</i>             <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">OK</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l69">
+                  <tt><i>69</i>                 <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Game-Show&#39;</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l70">
+                  <tt><i>70</i>                 <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Have heart cover analysis carry specific media husband.&#39;</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l74">
+                  <tt><i>74</i>             <span class="p">{</span><span class="s1">&#39;genre_uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;f24fd632-b1a5-4273-a835-0119bd12f829&#39;</span><span class="p">},</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l75">
+                  <tt><i>75</i>             <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">OK</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l76">
+                  <tt><i>76</i>                 <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;News&#39;</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l77">
+                  <tt><i>77</i>                 <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l81">
+                  <tt><i>81</i>               <span class="p">{</span><span class="s1">&#39;genre_uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;01af52ec-9345-4d66-adbe-50eb917f463e&#39;</span><span class="p">},</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l82">
+                  <tt><i>82</i>               <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">NOT_FOUND</span><span class="p">}</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l101">
+                  <tt><i>101</i>         <span class="n">data</span><span class="o">=</span><span class="n">es_determination_data</span><span class="p">[</span><span class="s1">&#39;genres&#39;</span><span class="p">],</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l102">
+                  <tt><i>102</i>         <span class="n">es_index</span><span class="o">=</span><span class="n">test_settings</span><span class="o">.</span><span class="n">es_indexes</span><span class="p">[</span><span class="s1">&#39;genres&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l105">
+                  <tt><i>105</i>     <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;X-Not-Cache&#39;</span><span class="p">:</span> <span class="s1">&#39;True&#39;</span><span class="p">}</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l109">
+                  <tt><i>109</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 3 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l110">
+                  <tt><i>110</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 3 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l111">
+                  <tt><i>111</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="DAR101">
+               <span class="count sev-3">
+                  12
+               </span>
+               <strong>DAR101:</strong> Missing parameter(s) in Docstring: - aiohttp_get
+               
+                  (and 5 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Missing parameter(s) in Docstring: - aiohttp_get:</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l22">
+                  <tt><i>22</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Получаем все жанры.&quot;&quot;&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - es_fake_data_fix_count:</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l22">
+                  <tt><i>22</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Получаем все жанры.&quot;&quot;&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - es_write_data:</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l22">
+                  <tt><i>22</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Получаем все жанры.&quot;&quot;&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - expected_answer:</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l22">
+                  <tt><i>22</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Получаем все жанры.&quot;&quot;&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - aiohttp_get:</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l48">
+                  <tt><i>48</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Получаем пустой список, когда нет жанров.&quot;&quot;&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - es_write_data:</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l48">
+                  <tt><i>48</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Получаем пустой список, когда нет жанров.&quot;&quot;&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - expected_answer:</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l48">
+                  <tt><i>48</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Получаем пустой список, когда нет жанров.&quot;&quot;&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - aiohttp_get:</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l93">
+                  <tt><i>93</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - es_determination_data:</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l93">
+                  <tt><i>93</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - es_write_data:</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l93">
+                  <tt><i>93</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - expected_answer:</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l93">
+                  <tt><i>93</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - path_param:</p>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l93">
+                  <tt><i>93</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="S101">
+               <span class="count sev-3">
+                  9
+               </span>
+               <strong>S101:</strong> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l32">
+                  <tt><i>32</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l33">
+                  <tt><i>33</i>     <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="p">[</span><span class="s1">&#39;type_body&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l34">
+                  <tt><i>34</i>     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="p">[</span><span class="s1">&#39;length&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l58">
+                  <tt><i>58</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l59">
+                  <tt><i>59</i>     <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="p">[</span><span class="s1">&#39;type_body&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l60">
+                  <tt><i>60</i>     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="p">[</span><span class="s1">&#39;length&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l109">
+                  <tt><i>109</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l110">
+                  <tt><i>110</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l111">
+                  <tt><i>111</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="D100">
+               <span class="count sev-3">
+                  1
+               </span>
+               <strong>D100:</strong> Missing docstring in public module
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l1">
+                  <tt><i>1</i> <span class="kn">from</span> <span class="nn">http</span> <span class="kn">import</span> <span class="n">HTTPStatus</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="D205">
+               <span class="count sev-3">
+                  1
+               </span>
+               <strong>D205:</strong> 1 blank line required between summary line and description
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.tests.functional.src.test_genre.source.html#l93">
+                  <tt><i>93</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         </ul>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>flake8 violations: activity_api/src/auth/request.py</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+<script>
+function bindHandler(link) {
+   var code = link.getAttribute('data-code');
+   var key = location.pathname + '#' + code;
+
+   var ul = link.parentNode.querySelector('.details');
+   if (sessionStorage[key] != 'open') {
+      ul.style.display = 'none';
+   }
+   link.addEventListener('click', function (event) {
+      if (!ul.style.display || ul.style.display == 'none') {
+         ul.style.display = 'block';
+         sessionStorage[key] = 'open';
+      } else {
+         ul.style.display = 'none';
+         sessionStorage[key] = 'closed';
+      }
+   });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+   var links = document.querySelectorAll('#index > li > a');
+   for (var i = 0; i < links.length; i++) {
+      bindHandler(links[i]);
+   }
+});
+</script>
+   </head>
+   <body>
+      <div id="masthead" class="sev-2"></div>
+      <div id="page">
+         <p id="srclink">
+            <a title="View full annotated source"
+               href="activity_api.src.auth.request.source.html">
+               <img src="file.svg" alt="&#x2261;">
+            </a></p>
+         <h1>
+            <a href="index.html">
+               <img src="back.svg" alt="&#x2B05;">
+               activity_api/src/auth/request.py
+            </a>
+         </h1>
+
+         <ul id="index">
+         
+         <li>
+            <a data-code="WPS115">
+               <span class="count sev-2">
+                  6
+               </span>
+               <strong>WPS115:</strong> Found upper-case constant in a class: NO_SUBSCRIPTION
+               
+                  (and 5 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Found upper-case constant in a class: NO_SUBSCRIPTION:</p>
+               
+               <a href="activity_api.src.auth.request.source.html#l18">
+                  <tt><i>18</i>     <span class="n">NO_SUBSCRIPTION</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;У пользователя нет подписки на сервис.&#39;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found upper-case constant in a class: NO_TOKEN:</p>
+               
+               <a href="activity_api.src.auth.request.source.html#l19">
+                  <tt><i>19</i>     <span class="n">NO_TOKEN</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Нет токена авторизации.&#39;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found upper-case constant in a class: INVALID_SCHEME:</p>
+               
+               <a href="activity_api.src.auth.request.source.html#l20">
+                  <tt><i>20</i>     <span class="n">INVALID_SCHEME</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Схема авторизации не &quot;Bearer&quot;.&#39;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found upper-case constant in a class: INVALID_TOKEN:</p>
+               
+               <a href="activity_api.src.auth.request.source.html#l21">
+                  <tt><i>21</i>     <span class="n">INVALID_TOKEN</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Токен авторизации не валиден.&#39;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found upper-case constant in a class: EXPIRED_TOCKEN:</p>
+               
+               <a href="activity_api.src.auth.request.source.html#l22">
+                  <tt><i>22</i>     <span class="n">EXPIRED_TOCKEN</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Срок действия токен истек.&#39;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found upper-case constant in a class: INVALID_FORMAT:</p>
+               
+               <a href="activity_api.src.auth.request.source.html#l23">
+                  <tt><i>23</i>     <span class="n">INVALID_FORMAT</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="p">(</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS111">
+               <span class="count sev-2">
+                  3
+               </span>
+               <strong>WPS111:</strong> Found too short name: e < 2
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="activity_api.src.auth.request.source.html#l73">
+                  <tt><i>73</i>         <span class="k">except</span> <span class="p">(</span><span class="n">DecodeError</span><span class="p">,</span> <span class="n">InvalidSignatureError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="activity_api.src.auth.request.source.html#l75">
+                  <tt><i>75</i>         <span class="k">except</span> <span class="n">ValidationError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="activity_api.src.auth.request.source.html#l77">
+                  <tt><i>77</i>         <span class="k">except</span> <span class="n">ExpiredSignatureError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS458">
+               <span class="count sev-2">
+                  3
+               </span>
+               <strong>WPS458:</strong> Found imports collision: jwt
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Found imports collision: jwt (in 3 places):</p>
+               
+               <a href="activity_api.src.auth.request.source.html#l8">
+                  <tt><i>8</i> <span class="kn">from</span> <span class="nn">jwt</span> <span class="kn">import</span> <span class="n">DecodeError</span><span class="p">,</span> <span class="n">ExpiredSignatureError</span><span class="p">,</span> <span class="n">InvalidSignatureError</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS318">
+               <span class="count sev-2">
+                  2
+               </span>
+               <strong>WPS318:</strong> Found extra indentation
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="activity_api.src.auth.request.source.html#l44">
+                  <tt><i>44</i>             <span class="bp">self</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="activity_api.src.auth.request.source.html#l90">
+                  <tt><i>90</i>         <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS211">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS211:</strong> Found too many arguments: 7 > 5
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="activity_api.src.auth.request.source.html#l43">
+                  <tt><i>43</i>     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS238">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS238:</strong> Found too many raises in a function: 5 > 3
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="activity_api.src.auth.request.source.html#l63">
+                  <tt><i>63</i>     <span class="k">async</span> <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AccessTokenPayload</span><span class="p">:</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS306">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS306:</strong> Found class without a base class: AuthErrors
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="activity_api.src.auth.request.source.html#l15">
+                  <tt><i>15</i> <span class="k">class</span> <span class="nc">AuthErrors</span><span class="p">:</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS319">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS319:</strong> Found bracket in wrong position
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="activity_api.src.auth.request.source.html#l66">
+                  <tt><i>66</i>             <span class="n">request</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS404">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS404:</strong> Found complex default value
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="activity_api.src.auth.request.source.html#l91">
+                  <tt><i>91</i>         <span class="n">token</span><span class="p">:</span> <span class="n">AccessTokenPayload</span> <span class="o">=</span> <span class="n">Security</span><span class="p">(</span><span class="n">jwt_bearer</span><span class="p">),</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS508">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS508:</strong> Found incorrect `not` with compare usage
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="activity_api.src.auth.request.source.html#l69">
+                  <tt><i>69</i>         <span class="k">if</span> <span class="ow">not</span> <span class="n">credentials</span><span class="o">.</span><span class="n">scheme</span> <span class="o">==</span> <span class="s1">&#39;Bearer&#39;</span><span class="p">:</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="DAR101">
+               <span class="count sev-3">
+                  10
+               </span>
+               <strong>DAR101:</strong> Missing parameter(s) in Docstring: - algorithm
+               
+                  (and 7 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Missing parameter(s) in Docstring: - algorithm:</p>
+               
+               <a href="activity_api.src.auth.request.source.html#l45">
+                  <tt><i>45</i>             <span class="o">*</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - auto_error:</p>
+               
+               <a href="activity_api.src.auth.request.source.html#l45">
+                  <tt><i>45</i>             <span class="o">*</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - bearerFormat:</p>
+               
+               <a href="activity_api.src.auth.request.source.html#l45">
+                  <tt><i>45</i>             <span class="o">*</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - description:</p>
+               
+               <a href="activity_api.src.auth.request.source.html#l45">
+                  <tt><i>45</i>             <span class="o">*</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - scheme_name:</p>
+               
+               <a href="activity_api.src.auth.request.source.html#l45">
+                  <tt><i>45</i>             <span class="o">*</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - secret:</p>
+               
+               <a href="activity_api.src.auth.request.source.html#l45">
+                  <tt><i>45</i>             <span class="o">*</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - request:</p>
+               
+               <a href="activity_api.src.auth.request.source.html#l64">
+                  <tt><i>64</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;Убедиться, что в запросе присутствует валидный JWT-токен.&quot;&quot;&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - token:</p>
+               
+               <a href="activity_api.src.auth.request.source.html#l81">
+                  <tt><i>81</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;Декодировать и провалидировать полезную нагрузку JWT.&quot;&quot;&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - request:</p>
+               
+               <a href="activity_api.src.auth.request.source.html#l92">
+                  <tt><i>92</i> <span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - token:</p>
+               
+               <a href="activity_api.src.auth.request.source.html#l92">
+                  <tt><i>92</i> <span class="p">):</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="Q000">
+               <span class="count sev-3">
+                  8
+               </span>
+               <strong>Q000:</strong> Single quotes found but double quotes preferred
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="activity_api.src.auth.request.source.html#l18">
+                  <tt><i>18</i>     <span class="n">NO_SUBSCRIPTION</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;У пользователя нет подписки на сервис.&#39;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="activity_api.src.auth.request.source.html#l19">
+                  <tt><i>19</i>     <span class="n">NO_TOKEN</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Нет токена авторизации.&#39;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="activity_api.src.auth.request.source.html#l21">
+                  <tt><i>21</i>     <span class="n">INVALID_TOKEN</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Токен авторизации не валиден.&#39;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="activity_api.src.auth.request.source.html#l22">
+                  <tt><i>22</i>     <span class="n">EXPIRED_TOCKEN</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Срок действия токен истек.&#39;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="activity_api.src.auth.request.source.html#l24">
+                  <tt><i>24</i>         <span class="s1">&#39;Не знакомый формат полезной нагрузки токена авторизации.&#39;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="activity_api.src.auth.request.source.html#l33">
+                  <tt><i>33</i>     <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="s1">&#39;access&#39;</span><span class="p">,</span> <span class="n">const</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="activity_api.src.auth.request.source.html#l69">
+                  <tt><i>69</i>         <span class="k">if</span> <span class="ow">not</span> <span class="n">credentials</span><span class="o">.</span><span class="n">scheme</span> <span class="o">==</span> <span class="s1">&#39;Bearer&#39;</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="activity_api.src.auth.request.source.html#l100">
+                  <tt><i>100</i>     <span class="n">SUBSCRIPTION_ROLE</span> <span class="o">=</span> <span class="s1">&#39;subscriber&#39;</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="DAR201">
+               <span class="count sev-3">
+                  2
+               </span>
+               <strong>DAR201:</strong> Missing "Returns" in Docstring: - return
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="activity_api.src.auth.request.source.html#l64">
+                  <tt><i>64</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;Убедиться, что в запросе присутствует валидный JWT-токен.&quot;&quot;&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="activity_api.src.auth.request.source.html#l81">
+                  <tt><i>81</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;Декодировать и провалидировать полезную нагрузку JWT.&quot;&quot;&quot;</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="DAR401">
+               <span class="count sev-3">
+                  2
+               </span>
+               <strong>DAR401:</strong> Missing exception(s) in Raises section: -r AuthorizationException
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="activity_api.src.auth.request.source.html#l64">
+                  <tt><i>64</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;Убедиться, что в запросе присутствует валидный JWT-токен.&quot;&quot;&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="activity_api.src.auth.request.source.html#l92">
+                  <tt><i>92</i> <span class="p">):</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="N803">
+               <span class="count sev-3">
+                  1
+               </span>
+               <strong>N803:</strong> argument name 'bearerFormat' should be lowercase
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="activity_api.src.auth.request.source.html#l46">
+                  <tt><i>46</i>             <span class="n">bearerFormat</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="N806">
+               <span class="count sev-3">
+                  1
+               </span>
+               <strong>N806:</strong> variable 'SUBSCRIPTION_ROLE' in function should be lowercase
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="activity_api.src.auth.request.source.html#l100">
+                  <tt><i>100</i>     <span class="n">SUBSCRIPTION_ROLE</span> <span class="o">=</span> <span class="s1">&#39;subscriber&#39;</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         </ul>
+      </div>
+   </body>
+</html>

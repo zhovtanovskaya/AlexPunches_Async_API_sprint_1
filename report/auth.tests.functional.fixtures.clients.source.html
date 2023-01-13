@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>auth/tests/functional/fixtures/clients.py - flake8 annotated source</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+   </head>
+   <body>
+      <div id="masthead" class="sev-2"></div>
+      <div id="page">
+         <h1>
+            <a href="auth.tests.functional.fixtures.clients.report.html">
+               <img src="back.svg" alt="&#x2B05;">
+               auth/tests/functional/fixtures/clients.py source
+            </a>
+         </h1>
+
+         <div id="doc">
+            <div id="l1"
+               class="code sev- "><tt><i>1</i> <span class="sd">&quot;&quot;&quot;Фикстуры клиентов.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l2"
+               class="code sev- "><tt><i>2</i> <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Generator</span></tt>
+            </div>
+            <div id="l3"
+               class="code sev- "><tt><i>3</i> &nbsp;</tt>
+            </div>
+            <div id="l4"
+               class="code sev- "><tt><i>4</i> <span class="kn">import</span> <span class="nn">aioredis</span></tt>
+            </div>
+            <div id="l5"
+               class="code sev- "><tt><i>5</i> <span class="kn">import</span> <span class="nn">psycopg2</span></tt>
+            </div>
+            <div id="l6"
+               class="code sev- "><tt><i>6</i> <span class="kn">import</span> <span class="nn">pytest</span></tt>
+            </div>
+            <div id="l7"
+               class="code sev- "><tt><i>7</i> <span class="kn">from</span> <span class="nn">psycopg2.extras</span> <span class="kn">import</span> <span class="n">DictCursor</span></tt>
+            </div>
+            <div id="l8"
+               class="code sev- "><tt><i>8</i> <span class="kn">from</span> <span class="nn">redis.client</span> <span class="kn">import</span> <span class="n">Redis</span></tt>
+            </div>
+            <div id="l9"
+               class="code sev- "><tt><i>9</i> &nbsp;</tt>
+            </div>
+            <div id="l10"
+               class="code sev- "><tt><i>10</i> <span class="kn">from</span> <span class="nn">functional.settings</span> <span class="kn">import</span> <span class="n">test_settings</span></tt>
+            </div>
+            <div id="l11"
+               class="code sev- "><tt><i>11</i> <span class="kn">from</span> <span class="nn">functional.utils.http_client</span> <span class="kn">import</span> <span class="n">HttpClient</span></tt>
+            </div>
+            <div id="l12"
+               class="code sev- "><tt><i>12</i> <span class="kn">from</span> <span class="nn">functional.utils.user_action</span> <span class="kn">import</span> <span class="n">UserActions</span></tt>
+            </div>
+            <div id="l13"
+               class="code sev- "><tt><i>13</i> &nbsp;</tt>
+            </div>
+            <div id="l14"
+               class="code sev- "><tt><i>14</i> &nbsp;</tt>
+            </div>
+            <div id="l15"
+               class="code sev- "><tt><i>15</i> <span class="c1"># Фикстура еще не проверялась в действии</span></tt>
+            </div>
+            <div id="l16"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred</li>
+               
+               </ul><tt><i>16</i> <span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s1">&#39;session&#39;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l17"
+               class="code sev- "><tt><i>17</i> <span class="k">def</span> <span class="nf">redis_client</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">Redis</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span></tt>
+            </div>
+            <div id="l18"
+               class="code sev- "><tt><i>18</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Получить клиент Редиса перед сессией и закрыть его в конце сессии.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l19"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR301
+                     </span>
+                     Missing "Yields" in Docstring: - yield</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS122
+                     </span>
+                     Found all unused variables definition: _client</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS317
+                     </span>
+                     Found incorrect multi-line parameters</li>
+               
+               </ul><tt><i>19</i>     <span class="n">_client</span> <span class="o">=</span> <span class="n">aioredis</span><span class="o">.</span><span class="n">create_redis_pool</span><span class="p">(</span></tt>
+            </div>
+            <div id="l20"
+               class="code sev- "><tt><i>20</i>         <span class="p">(</span><span class="n">test_settings</span><span class="o">.</span><span class="n">redis_host</span><span class="p">,</span> <span class="n">test_settings</span><span class="o">.</span><span class="n">redis_port</span><span class="p">),</span></tt>
+            </div>
+            <div id="l21"
+               class="code sev- "><tt><i>21</i>         <span class="n">minsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span></tt>
+            </div>
+            <div id="l22"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS432
+                     </span>
+                     Found magic number: 20</li>
+               
+               </ul><tt><i>22</i>         <span class="n">maxsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span></tt>
+            </div>
+            <div id="l23"
+               class="code sev- "><tt><i>23</i>     <span class="p">)</span></tt>
+            </div>
+            <div id="l24"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS121
+                     </span>
+                     Found usage of a variable marked as unused: _client</li>
+               
+               </ul><tt><i>24</i>     <span class="k">yield</span> <span class="n">_client</span></tt>
+            </div>
+            <div id="l25"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS121
+                     </span>
+                     Found usage of a variable marked as unused: _client</li>
+               
+               </ul><tt><i>25</i>     <span class="n">_client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></tt>
+            </div>
+            <div id="l26"
+               class="code sev- "><tt><i>26</i> &nbsp;</tt>
+            </div>
+            <div id="l27"
+               class="code sev- "><tt><i>27</i> &nbsp;</tt>
+            </div>
+            <div id="l28"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred</li>
+               
+               </ul><tt><i>28</i> <span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s1">&#39;session&#39;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l29"
+               class="code sev- "><tt><i>29</i> <span class="k">def</span> <span class="nf">pg_conn</span><span class="p">():</span></tt>
+            </div>
+            <div id="l30"
+               class="code sev- "><tt><i>30</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Подключиться к БД.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l31"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR301
+                     </span>
+                     Missing "Yields" in Docstring: - yield</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS442
+                     </span>
+                     Found outer scope names shadowing: pg_conn</li>
+               
+               </ul><tt><i>31</i>     <span class="k">with</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span></tt>
+            </div>
+            <div id="l32"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS318
+                     </span>
+                     Found extra indentation</li>
+               
+               </ul><tt><i>32</i>                           <span class="n">dbname</span><span class="o">=</span><span class="n">test_settings</span><span class="o">.</span><span class="n">pg_settings</span><span class="o">.</span><span class="n">db_name</span><span class="p">,</span></tt>
+            </div>
+            <div id="l33"
+               class="code sev- "><tt><i>33</i>                           <span class="n">user</span><span class="o">=</span><span class="n">test_settings</span><span class="o">.</span><span class="n">pg_settings</span><span class="o">.</span><span class="n">username</span><span class="p">,</span></tt>
+            </div>
+            <div id="l34"
+               class="code sev- "><tt><i>34</i>                           <span class="n">password</span><span class="o">=</span><span class="n">test_settings</span><span class="o">.</span><span class="n">pg_settings</span><span class="o">.</span><span class="n">password</span><span class="p">,</span></tt>
+            </div>
+            <div id="l35"
+               class="code sev- "><tt><i>35</i>                           <span class="n">host</span><span class="o">=</span><span class="n">test_settings</span><span class="o">.</span><span class="n">pg_settings</span><span class="o">.</span><span class="n">host</span><span class="p">,</span></tt>
+            </div>
+            <div id="l36"
+               class="code sev- "><tt><i>36</i>                           <span class="n">port</span><span class="o">=</span><span class="n">test_settings</span><span class="o">.</span><span class="n">pg_settings</span><span class="o">.</span><span class="n">port</span><span class="p">,</span></tt>
+            </div>
+            <div id="l37"
+               class="code sev- "><tt><i>37</i>                           <span class="n">cursor_factory</span><span class="o">=</span><span class="n">DictCursor</span><span class="p">,</span></tt>
+            </div>
+            <div id="l38"
+               class="code sev- "><tt><i>38</i>                           <span class="p">)</span> <span class="k">as</span> <span class="n">pg_conn</span><span class="p">:</span></tt>
+            </div>
+            <div id="l39"
+               class="code sev- "><tt><i>39</i>         <span class="k">yield</span> <span class="n">pg_conn</span></tt>
+            </div>
+            <div id="l40"
+               class="code sev- "><tt><i>40</i> &nbsp;</tt>
+            </div>
+            <div id="l41"
+               class="code sev- "><tt><i>41</i> &nbsp;</tt>
+            </div>
+            <div id="l42"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred</li>
+               
+               </ul><tt><i>42</i> <span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s1">&#39;session&#39;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l43"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS442
+                     </span>
+                     Found outer scope names shadowing: pg_conn</li>
+               
+               </ul><tt><i>43</i> <span class="k">def</span> <span class="nf">pg_cursor</span><span class="p">(</span><span class="n">pg_conn</span><span class="p">):</span></tt>
+            </div>
+            <div id="l44"
+               class="code sev- "><tt><i>44</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Получить курсор.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l45"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - pg_conn</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR301
+                     </span>
+                     Missing "Yields" in Docstring: - yield</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS442
+                     </span>
+                     Found outer scope names shadowing: pg_cursor</li>
+               
+               </ul><tt><i>45</i>     <span class="n">pg_cursor</span> <span class="o">=</span> <span class="n">pg_conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span></tt>
+            </div>
+            <div id="l46"
+               class="code sev- "><tt><i>46</i>     <span class="k">yield</span> <span class="n">pg_cursor</span></tt>
+            </div>
+            <div id="l47"
+               class="code sev- "><tt><i>47</i> &nbsp;</tt>
+            </div>
+            <div id="l48"
+               class="code sev- "><tt><i>48</i> &nbsp;</tt>
+            </div>
+            <div id="l49"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred</li>
+               
+               </ul><tt><i>49</i> <span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s1">&#39;session&#39;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l50"
+               class="code sev- "><tt><i>50</i> <span class="k">def</span> <span class="nf">user_action</span><span class="p">():</span></tt>
+            </div>
+            <div id="l51"
+               class="code sev- "><tt><i>51</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Получить класс-эмулятор действий пользователя.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l52"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR201
+                     </span>
+                     Missing "Returns" in Docstring: - return</li>
+               
+               </ul><tt><i>52</i>     <span class="k">return</span> <span class="n">UserActions</span><span class="p">()</span></tt>
+            </div>
+            <div id="l53"
+               class="code sev- "><tt><i>53</i> &nbsp;</tt>
+            </div>
+            <div id="l54"
+               class="code sev- "><tt><i>54</i> &nbsp;</tt>
+            </div>
+            <div id="l55"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred</li>
+               
+               </ul><tt><i>55</i> <span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s1">&#39;session&#39;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l56"
+               class="code sev- "><tt><i>56</i> <span class="k">def</span> <span class="nf">admin_action</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">UserActions</span><span class="p">:</span></tt>
+            </div>
+            <div id="l57"
+               class="code sev- "><tt><i>57</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Объект для обращений к Auth API от лица админа.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l58"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR201
+                     </span>
+                     Missing "Returns" in Docstring: - return</li>
+               
+               </ul><tt><i>58</i>     <span class="c1"># В env JWT_SECRET_KEY=jwt_secret_key</span></tt>
+            </div>
+            <div id="l59"
+               class="code sev- "><tt><i>59</i>     <span class="c1"># Токен доступа для админа cо следующими значениями ключей</span></tt>
+            </div>
+            <div id="l60"
+               class="code sev- "><tt><i>60</i>     <span class="c1"># в payload:</span></tt>
+            </div>
+            <div id="l61"
+               class="code sev- "><tt><i>61</i>     <span class="c1">#   jit: 8ad1fe48-4330-42b4-9f5f-76f3f0ee636e,  # Уникальный ID токена.</span></tt>
+            </div>
+            <div id="l62"
+               class="code sev- "><tt><i>62</i>     <span class="c1">#   sub: admin@mail.com,    # Для какого пользователя создан.</span></tt>
+            </div>
+            <div id="l63"
+               class="code sev- "><tt><i>63</i>     <span class="c1">#   roles: [&#39;admin]         # Роли пользователя.</span></tt>
+            </div>
+            <div id="l64"
+               class="code sev- "><tt><i>64</i>     <span class="c1">#   nbf: 13 ноября 2022,    # Когда токен создан.</span></tt>
+            </div>
+            <div id="l65"
+               class="code sev- "><tt><i>65</i>     <span class="c1">#   exp: 10 ноября 2032,    # Когда токен истекает.</span></tt>
+            </div>
+            <div id="l66"
+               class="code sev- "><tt><i>66</i>     <span class="n">admin_access_token</span> <span class="o">=</span> <span class="p">(</span></tt>
+            </div>
+            <div id="l67"
+               class="code sev- "><tt><i>67</i>         <span class="s1">&#39;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.&#39;</span>  <span class="c1"># noqa</span></tt>
+            </div>
+            <div id="l68"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS326
+                     </span>
+                     Found implicit string concatenation</li>
+               
+               </ul><tt><i>68</i>         <span class="s1">&#39;eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2ODMyNDk5NSwianRpIjoiOGFkMWZlNDgtNDMz&#39;</span></tt>
+            </div>
+            <div id="l69"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS326
+                     </span>
+                     Found implicit string concatenation</li>
+               
+               </ul><tt><i>69</i>         <span class="s1">&#39;MC00MmI0LTlmNWYtNzZmM2YwZWU2MzZlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFk&#39;</span></tt>
+            </div>
+            <div id="l70"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS326
+                     </span>
+                     Found implicit string concatenation</li>
+               
+               </ul><tt><i>70</i>         <span class="s1">&#39;bWluQG1haWwuY29tIiwibmJmIjoxNjY4MzI0OTk1LCJleHAiOjE5ODM2ODQ5OTUsInJv&#39;</span></tt>
+            </div>
+            <div id="l71"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS326
+                     </span>
+                     Found implicit string concatenation</li>
+               
+               </ul><tt><i>71</i>         <span class="s1">&#39;bGVzIjpbImFkbWluIl19.&#39;</span></tt>
+            </div>
+            <div id="l72"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS326
+                     </span>
+                     Found implicit string concatenation</li>
+               
+               </ul><tt><i>72</i>         <span class="s1">&#39;NhzdXB3_UEffeRC2gzOGjgYWDkQuJdV7nuI-YrZXKEg&#39;</span></tt>
+            </div>
+            <div id="l73"
+               class="code sev- "><tt><i>73</i>     <span class="p">)</span></tt>
+            </div>
+            <div id="l74"
+               class="code sev- "><tt><i>74</i>     <span class="k">return</span> <span class="n">UserActions</span><span class="p">(</span><span class="n">bearer</span><span class="o">=</span><span class="n">admin_access_token</span><span class="p">)</span></tt>
+            </div>
+            <div id="l75"
+               class="code sev- "><tt><i>75</i> &nbsp;</tt>
+            </div>
+            <div id="l76"
+               class="code sev- "><tt><i>76</i> &nbsp;</tt>
+            </div>
+            <div id="l77"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred</li>
+               
+               </ul><tt><i>77</i> <span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s1">&#39;session&#39;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l78"
+               class="code sev- "><tt><i>78</i> <span class="k">def</span> <span class="nf">http_client</span><span class="p">():</span></tt>
+            </div>
+            <div id="l79"
+               class="code sev- "><tt><i>79</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;HTTP-клиент для тестов.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l80"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR201
+                     </span>
+                     Missing "Returns" in Docstring: - return</li>
+               
+               </ul><tt><i>80</i>     <span class="k">return</span> <span class="n">HttpClient</span><span class="p">()</span></tt>
+            </div>
+            
+         </div>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>auth/tests/functional/utils/helpers.py - flake8 annotated source</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+   </head>
+   <body>
+      <div id="masthead" class="sev-2"></div>
+      <div id="page">
+         <h1>
+            <a href="auth.tests.functional.utils.helpers.report.html">
+               <img src="back.svg" alt="&#x2B05;">
+               auth/tests/functional/utils/helpers.py source
+            </a>
+         </h1>
+
+         <div id="doc">
+            <div id="l1"
+               class="code sev- "><tt><i>1</i> <span class="sd">&quot;&quot;&quot;Функции помощники.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l2"
+               class="code sev- "><tt><i>2</i> &nbsp;</tt>
+            </div>
+            <div id="l3"
+               class="code sev- "><tt><i>3</i> <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Type</span></tt>
+            </div>
+            <div id="l4"
+               class="code sev- "><tt><i>4</i> &nbsp;</tt>
+            </div>
+            <div id="l5"
+               class="code sev- "><tt><i>5</i> <span class="kn">import</span> <span class="nn">orjson</span></tt>
+            </div>
+            <div id="l6"
+               class="code sev- "><tt><i>6</i> &nbsp;</tt>
+            </div>
+            <div id="l7"
+               class="code sev- "><tt><i>7</i> <span class="kn">from</span> <span class="nn">functional.testdata.models</span> <span class="kn">import</span> <span class="n">BaseDt</span></tt>
+            </div>
+            <div id="l8"
+               class="code sev- "><tt><i>8</i> &nbsp;</tt>
+            </div>
+            <div id="l9"
+               class="code sev- "><tt><i>9</i> &nbsp;</tt>
+            </div>
+            <div id="l10"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS111
+                     </span>
+                     Found too short name: v < 2</li>
+               
+               </ul><tt><i>10</i> <span class="k">def</span> <span class="nf">orjson_dumps</span><span class="p">(</span><span class="n">v</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span></tt>
+            </div>
+            <div id="l11"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR201
+                     </span>
+                     Missing "Returns" in Docstring: - return</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - v</li>
+               
+               </ul><tt><i>11</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Декодировать orjson.dumps, который возарщает непривычный bytes.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l12"
+               class="code sev- "><tt><i>12</i>     <span class="k">return</span> <span class="n">orjson</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span></tt>
+            </div>
+            <div id="l13"
+               class="code sev- "><tt><i>13</i> &nbsp;</tt>
+            </div>
+            <div id="l14"
+               class="code sev- "><tt><i>14</i> &nbsp;</tt>
+            </div>
+            <div id="l15"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS317
+                     </span>
+                     Found incorrect multi-line parameters</li>
+               
+               </ul><tt><i>15</i> <span class="k">def</span> <span class="nf">construct_query</span><span class="p">(</span><span class="n">table_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span></tt>
+            </div>
+            <div id="l16"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS318
+                     </span>
+                     Found extra indentation</li>
+               
+               </ul><tt><i>16</i>                     <span class="n">data_class</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">BaseDt</span><span class="p">],</span></tt>
+            </div>
+            <div id="l17"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS110
+                     </span>
+                     Found wrong variable name: data</li>
+               
+               </ul><tt><i>17</i>                     <span class="n">data</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">BaseDt</span><span class="p">],</span></tt>
+            </div>
+            <div id="l18"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - data</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - data_class</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR201
+                     </span>
+                     Missing "Returns" in Docstring: - return</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - table_name</li>
+               
+               </ul><tt><i>18</i>                     <span class="p">):</span></tt>
+            </div>
+            <div id="l19"
+               class="code sev- "><tt><i>19</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Сформировать интсерт-данные и SQL-запрос к ним в видет строки.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l20"
+               class="code sev- "><tt><i>20</i>     <span class="n">columns</span> <span class="o">=</span> <span class="n">data_class</span><span class="o">.</span><span class="n">get_fields</span><span class="p">()</span></tt>
+            </div>
+            <div id="l21"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred</li>
+               
+               </ul><tt><i>21</i>     <span class="n">stmt</span> <span class="o">=</span> <span class="s1">&#39;INSERT INTO </span><span class="si">{table_name}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table_name</span><span class="o">=</span><span class="n">table_name</span><span class="p">)</span></tt>
+            </div>
+            <div id="l22"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred (in 2 places)</li>
+               
+               </ul><tt><i>22</i>     <span class="n">stmt</span> <span class="o">+=</span> <span class="s1">&#39; (</span><span class="si">{col_str}</span><span class="s1">) &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">col_str</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">columns</span><span class="p">))</span></tt>
+            </div>
+            <div id="l23"
+               class="code sev- "><tt><i>23</i>     <span class="n">stmt</span> <span class="o">+=</span> <span class="s1">&#39; VALUES (</span><span class="si">{values_str}</span><span class="s1">);&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">values_str</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">columns</span><span class="p">)))</span>  <span class="c1"># noqa</span></tt>
+            </div>
+            <div id="l24"
+               class="code sev- "><tt><i>24</i> &nbsp;</tt>
+            </div>
+            <div id="l25"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS110
+                     </span>
+                     Found wrong variable name: data</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS110
+                     </span>
+                     Found wrong variable name: item</li>
+               
+               </ul><tt><i>25</i>     <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">as_tuple</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span></tt>
+            </div>
+            <div id="l26"
+               class="code sev- "><tt><i>26</i>     <span class="k">return</span> <span class="n">stmt</span><span class="p">,</span> <span class="n">data</span></tt>
+            </div>
+            
+         </div>
+      </div>
+   </body>
+</html>

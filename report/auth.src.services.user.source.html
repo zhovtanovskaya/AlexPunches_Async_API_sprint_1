@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>auth/src/services/user.py - flake8 annotated source</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+   </head>
+   <body>
+      <div id="masthead" class="sev-2"></div>
+      <div id="page">
+         <h1>
+            <a href="auth.src.services.user.report.html">
+               <img src="back.svg" alt="&#x2B05;">
+               auth/src/services/user.py source
+            </a>
+         </h1>
+
+         <div id="doc">
+            <div id="l1"
+               class="code sev- "><tt><i>1</i> <span class="sd">&quot;&quot;&quot;Сервис для управления пользвателями.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l2"
+               class="code sev- "><tt><i>2</i> <span class="kn">import</span> <span class="nn">secrets</span></tt>
+            </div>
+            <div id="l3"
+               class="code sev- "><tt><i>3</i> <span class="kn">import</span> <span class="nn">string</span></tt>
+            </div>
+            <div id="l4"
+               class="code sev- "><tt><i>4</i> <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">lru_cache</span></tt>
+            </div>
+            <div id="l5"
+               class="code sev- "><tt><i>5</i> <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Type</span></tt>
+            </div>
+            <div id="l6"
+               class="code sev- "><tt><i>6</i> <span class="kn">from</span> <span class="nn">uuid</span> <span class="kn">import</span> <span class="n">UUID</span></tt>
+            </div>
+            <div id="l7"
+               class="code sev- "><tt><i>7</i> &nbsp;</tt>
+            </div>
+            <div id="l8"
+               class="code sev- "><tt><i>8</i> <span class="kn">from</span> <span class="nn">werkzeug.security</span> <span class="kn">import</span> <span class="n">generate_password_hash</span></tt>
+            </div>
+            <div id="l9"
+               class="code sev- "><tt><i>9</i> &nbsp;</tt>
+            </div>
+            <div id="l10"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS301
+                     </span>
+                     Found dotted raw import: services.models.roles</li>
+               
+               </ul><tt><i>10</i> <span class="kn">import</span> <span class="nn">services.models.roles</span> <span class="k">as</span> <span class="nn">service_role_models</span></tt>
+            </div>
+            <div id="l11"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS301
+                     </span>
+                     Found dotted raw import: services.models.users</li>
+               
+               </ul><tt><i>11</i> <span class="kn">import</span> <span class="nn">services.models.users</span> <span class="k">as</span> <span class="nn">service_user_models</span></tt>
+            </div>
+            <div id="l12"
+               class="code sev- "><tt><i>12</i> <span class="kn">from</span> <span class="nn">core.db</span> <span class="kn">import</span> <span class="n">db</span></tt>
+            </div>
+            <div id="l13"
+               class="code sev- "><tt><i>13</i> <span class="kn">from</span> <span class="nn">core.exceptions</span> <span class="kn">import</span> <span class="n">ResourceNotFoundError</span></tt>
+            </div>
+            <div id="l14"
+               class="code sev- "><tt><i>14</i> <span class="kn">from</span> <span class="nn">models.role</span> <span class="kn">import</span> <span class="n">Role</span></tt>
+            </div>
+            <div id="l15"
+               class="code sev- "><tt><i>15</i> <span class="kn">from</span> <span class="nn">models.user</span> <span class="kn">import</span> <span class="n">User</span></tt>
+            </div>
+            <div id="l16"
+               class="code sev- "><tt><i>16</i> &nbsp;</tt>
+            </div>
+            <div id="l17"
+               class="code sev- "><tt><i>17</i> &nbsp;</tt>
+            </div>
+            <div id="l18"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS306
+                     </span>
+                     Found class without a base class: UserService</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS338
+                     </span>
+                     Found incorrect order of methods in a class</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS214
+                     </span>
+                     Found too many methods: 10 > 7</li>
+               
+               </ul><tt><i>18</i> <span class="k">class</span> <span class="nc">UserService</span><span class="p">:</span></tt>
+            </div>
+            <div id="l19"
+               class="code sev- "><tt><i>19</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Класс управления пользователя.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l20"
+               class="code sev- "><tt><i>20</i> &nbsp;</tt>
+            </div>
+            <div id="l21"
+               class="code sev- "><tt><i>21</i>     <span class="n">user_model</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">]</span> <span class="o">=</span> <span class="n">User</span></tt>
+            </div>
+            <div id="l22"
+               class="code sev- "><tt><i>22</i>     <span class="n">role_model</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">]</span> <span class="o">=</span> <span class="n">Role</span></tt>
+            </div>
+            <div id="l23"
+               class="code sev- "><tt><i>23</i> &nbsp;</tt>
+            </div>
+            <div id="l24"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS317
+                     </span>
+                     Found incorrect multi-line parameters</li>
+               
+               </ul><tt><i>24</i>     <span class="k">def</span> <span class="nf">register_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span></tt>
+            </div>
+            <div id="l25"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS318
+                     </span>
+                     Found extra indentation</li>
+               
+               </ul><tt><i>25</i>                       <span class="n">user_in</span><span class="p">:</span> <span class="n">service_user_models</span><span class="o">.</span><span class="n">UserCreateModel</span><span class="p">,</span></tt>
+            </div>
+            <div id="l26"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR201
+                     </span>
+                     Missing "Returns" in Docstring: - return</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - user_in</li>
+               
+               </ul><tt><i>26</i>                       <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">service_user_models</span><span class="o">.</span><span class="n">UserModel</span><span class="p">:</span></tt>
+            </div>
+            <div id="l27"
+               class="code sev- "><tt><i>27</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;Зарегистрировать пользователя.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l28"
+               class="code sev- "><tt><i>28</i>         <span class="n">user_values</span> <span class="o">=</span> <span class="n">user_in</span><span class="o">.</span><span class="n">dict</span><span class="p">(</span></tt>
+            </div>
+            <div id="l29"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred</li>
+               
+               </ul><tt><i>29</i>             <span class="n">exclude</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;password&#39;</span><span class="p">},</span></tt>
+            </div>
+            <div id="l30"
+               class="code sev- "><tt><i>30</i>             <span class="n">exclude_unset</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span></tt>
+            </div>
+            <div id="l31"
+               class="code sev- "><tt><i>31</i>         <span class="p">)</span></tt>
+            </div>
+            <div id="l32"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred</li>
+               
+               </ul><tt><i>32</i>         <span class="n">user_values</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">generate_password_hash</span><span class="p">(</span></tt>
+            </div>
+            <div id="l33"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred</li>
+               
+               </ul><tt><i>33</i>             <span class="n">password</span><span class="o">=</span><span class="n">user_in</span><span class="o">.</span><span class="n">password</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;sha256&#39;</span><span class="p">,</span></tt>
+            </div>
+            <div id="l34"
+               class="code sev- "><tt><i>34</i>         <span class="p">)</span></tt>
+            </div>
+            <div id="l35"
+               class="code sev- "><tt><i>35</i>         <span class="n">new_user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_model</span><span class="p">(</span><span class="o">**</span><span class="n">user_values</span><span class="p">)</span></tt>
+            </div>
+            <div id="l36"
+               class="code sev- "><tt><i>36</i>         <span class="n">new_user</span><span class="o">.</span><span class="n">create</span><span class="p">()</span></tt>
+            </div>
+            <div id="l37"
+               class="code sev- "><tt><i>37</i>         <span class="k">return</span> <span class="n">service_user_models</span><span class="o">.</span><span class="n">UserModel</span><span class="o">.</span><span class="n">from_orm</span><span class="p">(</span><span class="n">new_user</span><span class="p">)</span></tt>
+            </div>
+            <div id="l38"
+               class="code sev- "><tt><i>38</i> &nbsp;</tt>
+            </div>
+            <div id="l39"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS125
+                     </span>
+                     Found builtin shadowing: id</li>
+               
+               </ul><tt><i>39</i>     <span class="k">def</span> <span class="nf">get_user_by_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="n">UUID</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">service_user_models</span><span class="o">.</span><span class="n">UserModel</span><span class="p">:</span></tt>
+            </div>
+            <div id="l40"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - id</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR201
+                     </span>
+                     Missing "Returns" in Docstring: - return</li>
+               
+               </ul><tt><i>40</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;Получить пользователя.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l41"
+               class="code sev- "><tt><i>41</i>         <span class="n">user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_model</span><span class="o">.</span><span class="n">get_or_404</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span></tt>
+            </div>
+            <div id="l42"
+               class="code sev- "><tt><i>42</i>         <span class="k">return</span> <span class="n">service_user_models</span><span class="o">.</span><span class="n">UserModel</span><span class="o">.</span><span class="n">from_orm</span><span class="p">(</span><span class="n">user</span><span class="p">)</span></tt>
+            </div>
+            <div id="l43"
+               class="code sev- "><tt><i>43</i> &nbsp;</tt>
+            </div>
+            <div id="l44"
+               class="code sev- "><tt><i>44</i>     <span class="k">def</span> <span class="nf">get_user_by_email</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">service_user_models</span><span class="o">.</span><span class="n">UserModel</span><span class="p">:</span></tt>
+            </div>
+            <div id="l45"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - email</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR201
+                     </span>
+                     Missing "Returns" in Docstring: - return</li>
+               
+               </ul><tt><i>45</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;Получить пользователя по email.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l46"
+               class="code sev- "><tt><i>46</i>         <span class="n">user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_model</span><span class="o">.</span><span class="n">get_by_filter_or_404</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">)</span></tt>
+            </div>
+            <div id="l47"
+               class="code sev- "><tt><i>47</i>         <span class="k">return</span> <span class="n">service_user_models</span><span class="o">.</span><span class="n">UserModel</span><span class="o">.</span><span class="n">from_orm</span><span class="p">(</span><span class="n">user</span><span class="p">)</span></tt>
+            </div>
+            <div id="l48"
+               class="code sev- "><tt><i>48</i> &nbsp;</tt>
+            </div>
+            <div id="l49"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS317
+                     </span>
+                     Found incorrect multi-line parameters</li>
+               
+               </ul><tt><i>49</i>     <span class="k">def</span> <span class="nf">edit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span></tt>
+            </div>
+            <div id="l50"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS318
+                     </span>
+                     Found extra indentation</li>
+               
+               </ul><tt><i>50</i>              <span class="n">user_in</span><span class="p">:</span> <span class="n">service_user_models</span><span class="o">.</span><span class="n">UserEditModel</span><span class="p">,</span></tt>
+            </div>
+            <div id="l51"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR201
+                     </span>
+                     Missing "Returns" in Docstring: - return</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - user_in</li>
+               
+               </ul><tt><i>51</i>              <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">service_user_models</span><span class="o">.</span><span class="n">UserModel</span><span class="p">:</span></tt>
+            </div>
+            <div id="l52"
+               class="code sev- "><tt><i>52</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;Редактировать данные пользователя. !Кроме ролей.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l53"
+               class="code sev- "><tt><i>53</i>         <span class="n">user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_model</span><span class="o">.</span><span class="n">get_or_404</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">user_in</span><span class="o">.</span><span class="n">id</span><span class="p">)</span></tt>
+            </div>
+            <div id="l54"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred (in 2 places)</li>
+               
+               </ul><tt><i>54</i>         <span class="n">user</span><span class="o">.</span><span class="n">edit</span><span class="p">(</span><span class="n">scheme_in</span><span class="o">=</span><span class="n">user_in</span><span class="p">,</span> <span class="n">exclude</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;password&#39;</span><span class="p">,</span> <span class="s1">&#39;roles&#39;</span><span class="p">})</span></tt>
+            </div>
+            <div id="l55"
+               class="code sev- "><tt><i>55</i>         <span class="k">if</span> <span class="n">user_in</span><span class="o">.</span><span class="n">password</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span></tt>
+            </div>
+            <div id="l56"
+               class="code sev- "><tt><i>56</i>             <span class="n">user</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">generate_password_hash</span><span class="p">(</span></tt>
+            </div>
+            <div id="l57"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred</li>
+               
+               </ul><tt><i>57</i>                 <span class="n">password</span><span class="o">=</span><span class="n">user_in</span><span class="o">.</span><span class="n">password</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;sha256&#39;</span><span class="p">,</span></tt>
+            </div>
+            <div id="l58"
+               class="code sev- "><tt><i>58</i>             <span class="p">)</span></tt>
+            </div>
+            <div id="l59"
+               class="code sev- "><tt><i>59</i>         <span class="n">user</span><span class="o">.</span><span class="n">save</span><span class="p">()</span></tt>
+            </div>
+            <div id="l60"
+               class="code sev- "><tt><i>60</i>         <span class="k">return</span> <span class="n">service_user_models</span><span class="o">.</span><span class="n">UserModel</span><span class="o">.</span><span class="n">from_orm</span><span class="p">(</span><span class="n">user</span><span class="p">)</span></tt>
+            </div>
+            <div id="l61"
+               class="code sev- "><tt><i>61</i> &nbsp;</tt>
+            </div>
+            <div id="l62"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS317
+                     </span>
+                     Found incorrect multi-line parameters</li>
+               
+               </ul><tt><i>62</i>     <span class="k">def</span> <span class="nf">get_user_roles_by_user_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span></tt>
+            </div>
+            <div id="l63"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS318
+                     </span>
+                     Found extra indentation</li>
+               
+               </ul><tt><i>63</i>                                   <span class="n">user_id</span><span class="p">:</span> <span class="n">UUID</span><span class="p">,</span></tt>
+            </div>
+            <div id="l64"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR201
+                     </span>
+                     Missing "Returns" in Docstring: - return</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - user_id</li>
+               
+               </ul><tt><i>64</i>                                   <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">service_role_models</span><span class="o">.</span><span class="n">RoleModel</span><span class="p">]:</span></tt>
+            </div>
+            <div id="l65"
+               class="code sev- "><tt><i>65</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;Получить список Ролей пользователя.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l66"
+               class="code sev- "><tt><i>66</i>         <span class="n">user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_model</span><span class="o">.</span><span class="n">get_or_404</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">user_id</span><span class="p">)</span></tt>
+            </div>
+            <div id="l67"
+               class="code sev- "><tt><i>67</i>         <span class="k">return</span> <span class="p">[</span></tt>
+            </div>
+            <div id="l68"
+               class="code sev- "><tt><i>68</i>             <span class="n">service_role_models</span><span class="o">.</span><span class="n">RoleModel</span><span class="o">.</span><span class="n">from_orm</span><span class="p">(</span><span class="n">role</span><span class="p">)</span> <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="n">user</span><span class="o">.</span><span class="n">roles</span></tt>
+            </div>
+            <div id="l69"
+               class="code sev- "><tt><i>69</i>         <span class="p">]</span></tt>
+            </div>
+            <div id="l70"
+               class="code sev- "><tt><i>70</i> &nbsp;</tt>
+            </div>
+            <div id="l71"
+               class="code sev- "><tt><i>71</i>     <span class="k">def</span> <span class="nf">remove_role_from_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">:</span> <span class="n">UUID</span><span class="p">,</span> <span class="n">role_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span></tt>
+            </div>
+            <div id="l72"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - role_id</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - user_id</li>
+               
+               </ul><tt><i>72</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;Отобрать Роль у пользователя.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l73"
+               class="code sev- "><tt><i>73</i>         <span class="n">user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_model</span><span class="o">.</span><span class="n">get_or_404</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">user_id</span><span class="p">)</span></tt>
+            </div>
+            <div id="l74"
+               class="code sev- "><tt><i>74</i>         <span class="n">role</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">role_model</span><span class="o">.</span><span class="n">get_or_404</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">role_id</span><span class="p">)</span></tt>
+            </div>
+            <div id="l75"
+               class="code sev- "><tt><i>75</i>         <span class="n">user</span><span class="o">.</span><span class="n">roles</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">role</span><span class="p">)</span></tt>
+            </div>
+            <div id="l76"
+               class="code sev- "><tt><i>76</i>         <span class="n">user</span><span class="o">.</span><span class="n">save</span><span class="p">()</span></tt>
+            </div>
+            <div id="l77"
+               class="code sev- "><tt><i>77</i> &nbsp;</tt>
+            </div>
+            <div id="l78"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS317
+                     </span>
+                     Found incorrect multi-line parameters</li>
+               
+               </ul><tt><i>78</i>     <span class="k">def</span> <span class="nf">add_role_to_user_by_rolename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span></tt>
+            </div>
+            <div id="l79"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS318
+                     </span>
+                     Found extra indentation</li>
+               
+               </ul><tt><i>79</i>                                      <span class="n">user_id</span><span class="p">:</span> <span class="n">UUID</span><span class="p">,</span></tt>
+            </div>
+            <div id="l80"
+               class="code sev- "><tt><i>80</i>                                      <span class="n">rolename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span></tt>
+            </div>
+            <div id="l81"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR201
+                     </span>
+                     Missing "Returns" in Docstring: - return</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - rolename</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - user_id</li>
+               
+               </ul><tt><i>81</i>                                      <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span></tt>
+            </div>
+            <div id="l82"
+               class="code sev- "><tt><i>82</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;Добавить пользователю Роль по названию Роли.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l83"
+               class="code sev- "><tt><i>83</i>         <span class="n">user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_model</span><span class="o">.</span><span class="n">get_or_404</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">user_id</span><span class="p">)</span></tt>
+            </div>
+            <div id="l84"
+               class="code sev- "><tt><i>84</i>         <span class="n">role</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">role_model</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">rolename</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span></tt>
+            </div>
+            <div id="l85"
+               class="code sev- "><tt><i>85</i>         <span class="k">if</span> <span class="n">role</span> <span class="ow">in</span> <span class="n">user</span><span class="o">.</span><span class="n">roles</span><span class="p">:</span></tt>
+            </div>
+            <div id="l86"
+               class="code sev- "><tt><i>86</i>             <span class="k">return</span> <span class="kc">False</span></tt>
+            </div>
+            <div id="l87"
+               class="code sev- "><tt><i>87</i>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_user_role_by_orm</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="n">role</span><span class="p">)</span></tt>
+            </div>
+            <div id="l88"
+               class="code sev- "><tt><i>88</i> &nbsp;</tt>
+            </div>
+            <div id="l89"
+               class="code sev- "><tt><i>89</i>     <span class="nd">@staticmethod</span></tt>
+            </div>
+            <div id="l90"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS602
+                     </span>
+                     Found using `@staticmethod`</li>
+               
+               </ul><tt><i>90</i>     <span class="k">def</span> <span class="nf">_create_user_role_by_orm</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">,</span> <span class="n">role</span><span class="p">:</span> <span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span></tt>
+            </div>
+            <div id="l91"
+               class="code sev- "><tt><i>91</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;Добавить пользователю Роль. Используя Модели ОРМ.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l92"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR201
+                     </span>
+                     Missing "Returns" in Docstring: - return</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - role</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - user</li>
+               
+               </ul><tt><i>92</i>         <span class="n">user</span><span class="o">.</span><span class="n">roles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">role</span><span class="p">)</span></tt>
+            </div>
+            <div id="l93"
+               class="code sev- "><tt><i>93</i>         <span class="n">user</span><span class="o">.</span><span class="n">save</span><span class="p">()</span></tt>
+            </div>
+            <div id="l94"
+               class="code sev- "><tt><i>94</i>         <span class="k">return</span> <span class="kc">True</span></tt>
+            </div>
+            <div id="l95"
+               class="code sev- "><tt><i>95</i> &nbsp;</tt>
+            </div>
+            <div id="l96"
+               class="code sev- "><tt><i>96</i>     <span class="nd">@staticmethod</span></tt>
+            </div>
+            <div id="l97"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS602
+                     </span>
+                     Found using `@staticmethod`</li>
+               
+               </ul><tt><i>97</i>     <span class="k">def</span> <span class="nf">_password_generator</span><span class="p">(</span><span class="n">count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span></tt>
+            </div>
+            <div id="l98"
+               class="code sev- "><tt><i>98</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;Генератор случайной строки из count=10 символов.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l99"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - count</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR201
+                     </span>
+                     Missing "Returns" in Docstring: - return</li>
+               
+               </ul><tt><i>99</i>         <span class="n">alphabet</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">ascii_letters</span> <span class="o">+</span> <span class="n">string</span><span class="o">.</span><span class="n">digits</span></tt>
+            </div>
+            <div id="l100"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        Q000
+                     </span>
+                     Single quotes found but double quotes preferred</li>
+               
+               </ul><tt><i>100</i>         <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">secrets</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">alphabet</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">count</span><span class="p">))</span></tt>
+            </div>
+            <div id="l101"
+               class="code sev- "><tt><i>101</i> &nbsp;</tt>
+            </div>
+            <div id="l102"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS317
+                     </span>
+                     Found incorrect multi-line parameters</li>
+               
+               </ul><tt><i>102</i>     <span class="k">def</span> <span class="nf">get_or_create_user_by_email</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span></tt>
+            </div>
+            <div id="l103"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        WPS318
+                     </span>
+                     Found extra indentation</li>
+               
+               </ul><tt><i>103</i>                                     <span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span></tt>
+            </div>
+            <div id="l104"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR101
+                     </span>
+                     Missing parameter(s) in Docstring: - email</li>
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR201
+                     </span>
+                     Missing "Returns" in Docstring: - return</li>
+               
+               </ul><tt><i>104</i>                                     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">service_user_models</span><span class="o">.</span><span class="n">UserModel</span><span class="p">:</span></tt>
+            </div>
+            <div id="l105"
+               class="code sev- "><tt><i>105</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;Получить пользователя по email.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l106"
+               class="code sev- "><tt><i>106</i>         <span class="k">try</span><span class="p">:</span></tt>
+            </div>
+            <div id="l107"
+               class="code sev- "><tt><i>107</i>             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_model</span><span class="o">.</span><span class="n">get_by_filter_or_404</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">)</span></tt>
+            </div>
+            <div id="l108"
+               class="code sev- "><tt><i>108</i>         <span class="k">except</span> <span class="n">ResourceNotFoundError</span><span class="p">:</span></tt>
+            </div>
+            <div id="l109"
+               class="code sev- "><tt><i>109</i>             <span class="n">password</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_password_generator</span><span class="p">()</span></tt>
+            </div>
+            <div id="l110"
+               class="code sev- "><tt><i>110</i>             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">register_user</span><span class="p">(</span></tt>
+            </div>
+            <div id="l111"
+               class="code sev- "><tt><i>111</i>                 <span class="n">user_in</span><span class="o">=</span><span class="n">service_user_models</span><span class="o">.</span><span class="n">UserCreateModel</span><span class="p">(</span></tt>
+            </div>
+            <div id="l112"
+               class="code sev- "><tt><i>112</i>                     <span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">,</span></tt>
+            </div>
+            <div id="l113"
+               class="code sev- "><tt><i>113</i>                 <span class="p">))</span></tt>
+            </div>
+            <div id="l114"
+               class="code sev- "><tt><i>114</i> &nbsp;</tt>
+            </div>
+            <div id="l115"
+               class="code sev- "><tt><i>115</i> &nbsp;</tt>
+            </div>
+            <div id="l116"
+               class="code sev- "><tt><i>116</i> <span class="nd">@lru_cache</span><span class="p">()</span></tt>
+            </div>
+            <div id="l117"
+               class="code sev- "><tt><i>117</i> <span class="k">def</span> <span class="nf">get_user_service</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">UserService</span><span class="p">:</span></tt>
+            </div>
+            <div id="l118"
+               class="code sev- "><tt><i>118</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Создать и/или вернуть синглтон UserService.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l119"
+               class="code sev-3  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-3">
+                        DAR201
+                     </span>
+                     Missing "Returns" in Docstring: - return</li>
+               
+               </ul><tt><i>119</i>     <span class="k">return</span> <span class="n">UserService</span><span class="p">()</span></tt>
+            </div>
+            
+         </div>
+      </div>
+   </body>
+</html>

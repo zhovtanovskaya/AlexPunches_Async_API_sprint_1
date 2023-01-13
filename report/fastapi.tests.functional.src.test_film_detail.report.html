@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>flake8 violations: fastapi/tests/functional/src/test_film_detail.py</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+<script>
+function bindHandler(link) {
+   var code = link.getAttribute('data-code');
+   var key = location.pathname + '#' + code;
+
+   var ul = link.parentNode.querySelector('.details');
+   if (sessionStorage[key] != 'open') {
+      ul.style.display = 'none';
+   }
+   link.addEventListener('click', function (event) {
+      if (!ul.style.display || ul.style.display == 'none') {
+         ul.style.display = 'block';
+         sessionStorage[key] = 'open';
+      } else {
+         ul.style.display = 'none';
+         sessionStorage[key] = 'closed';
+      }
+   });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+   var links = document.querySelectorAll('#index > li > a');
+   for (var i = 0; i < links.length; i++) {
+      bindHandler(links[i]);
+   }
+});
+</script>
+   </head>
+   <body>
+      <div id="masthead" class="sev-2"></div>
+      <div id="page">
+         <p id="srclink">
+            <a title="View full annotated source"
+               href="fastapi.tests.functional.src.test_film_detail.source.html">
+               <img src="file.svg" alt="&#x2261;">
+            </a></p>
+         <h1>
+            <a href="index.html">
+               <img src="back.svg" alt="&#x2B05;">
+               fastapi/tests/functional/src/test_film_detail.py
+            </a>
+         </h1>
+
+         <ul id="index">
+         
+         <li>
+            <a data-code="WPS226">
+               <span class="count sev-2">
+                  11
+               </span>
+               <strong>WPS226:</strong> Found string literal over-use: film_uuid > 3
+               
+                  (and 10 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Found string literal over-use: actors > 3:</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l0">
+                  <tt><i>0</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;writers&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;writers&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found string literal over-use: body > 3:</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l0">
+                  <tt><i>0</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;writers&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;writers&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found string literal over-use: directors > 3:</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l0">
+                  <tt><i>0</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;writers&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;writers&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found string literal over-use: film_uuid > 3:</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l0">
+                  <tt><i>0</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;writers&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;writers&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found string literal over-use: full_name > 3:</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l0">
+                  <tt><i>0</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;writers&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;writers&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found string literal over-use: genre > 3:</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l0">
+                  <tt><i>0</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;writers&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;writers&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found string literal over-use: name > 3:</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l0">
+                  <tt><i>0</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;writers&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;writers&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found string literal over-use: status > 3:</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l0">
+                  <tt><i>0</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;writers&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;writers&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found string literal over-use: title > 3:</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l0">
+                  <tt><i>0</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;writers&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;writers&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found string literal over-use: uuid > 3:</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l0">
+                  <tt><i>0</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;writers&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;writers&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found string literal over-use: writers > 3:</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l0">
+                  <tt><i>0</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;writers&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;writers&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="C819">
+               <span class="count sev-2">
+                  8
+               </span>
+               <strong>C819:</strong> trailing comma prohibited
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Trailing comma prohibited (in 8 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l27">
+                  <tt><i>27</i>                 <span class="s1">&#39;genre&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;ca88141b-a6b4-450d-bbc3-efa940e4953f&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Mystery&#39;</span><span class="p">,</span> <span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;f39d7b6d-aef2-40b1-aaf0-cf05e7048011&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Horror&#39;</span><span class="p">,</span> <span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;9c91a5b2-eb70-4889-8581-ebe427370edd&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Musical&#39;</span><span class="p">,</span> <span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;237fd1e4-c98e-454e-aa13-8a13fb7547b5&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Romance&#39;</span><span class="p">,</span> <span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;fb58fd7f-7afd-447f-b833-e51e45e2a778&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Game-Show&#39;</span><span class="p">,</span> <span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;56b541ab-4d66-4021-8708-397762bff2d4&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Music&#39;</span><span class="p">,</span> <span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;e508c1c8-24c0-4136-80b4-340c4befb190&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Reality-TV&#39;</span><span class="p">,</span> <span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;f24fd632-b1a5-4273-a835-0119bd12f829&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;News&#39;</span><span class="p">,</span> <span class="p">}],</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="C812">
+               <span class="count sev-2">
+                  7
+               </span>
+               <strong>C812:</strong> missing trailing comma
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l21">
+                  <tt><i>21</i>             <span class="p">}</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l31">
+                  <tt><i>31</i>             <span class="p">}</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l41">
+                  <tt><i>41</i>             <span class="p">}</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l45">
+                  <tt><i>45</i>               <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">NOT_FOUND</span><span class="p">}</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l46">
+                  <tt><i>46</i>         <span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l47">
+                  <tt><i>47</i>     <span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l70">
+                  <tt><i>70</i>         <span class="n">es_index</span><span class="o">=</span><span class="n">test_settings</span><span class="o">.</span><span class="n">es_indexes</span><span class="p">[</span><span class="s1">&#39;movies&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS221">
+               <span class="count sev-2">
+                  3
+               </span>
+               <strong>WPS221:</strong> Found line with high Jones Complexity: 22 > 14
+               
+                  (and 1 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Found line with high Jones Complexity: 22 > 14:</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l19">
+                  <tt><i>19</i>                 <span class="s1">&#39;writers&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;3acaaf82-374a-4cc9-a039-7e67926146de&#39;</span><span class="p">,</span> <span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Robert Oneal&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;a8b56f85-346d-4b7e-80d3-d1af353e0c86&#39;</span><span class="p">,</span> <span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Teresa Martinez&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;3b019fcb-f96d-4403-948c-93f3028d042b&#39;</span><span class="p">,</span> <span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Andrea Barry&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;30c32323-c1b1-49c4-9f1f-f97c71cff814&#39;</span><span class="p">,</span> <span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Richard Jones&#39;</span><span class="p">}],</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found line with high Jones Complexity: 22 > 14:</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l20">
+                  <tt><i>20</i>                 <span class="s1">&#39;directors&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;3acaaf82-374a-4cc9-a039-7e67926146de&#39;</span><span class="p">,</span> <span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Robert Oneal&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;a8b56f85-346d-4b7e-80d3-d1af353e0c86&#39;</span><span class="p">,</span> <span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Teresa Martinez&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;8611f583-b2d1-4e3d-809e-2109c7867a38&#39;</span><span class="p">,</span> <span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Eric Wilson&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;30c32323-c1b1-49c4-9f1f-f97c71cff814&#39;</span><span class="p">,</span> <span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Richard Jones&#39;</span><span class="p">}],</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Found line with high Jones Complexity: 42 > 14:</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l27">
+                  <tt><i>27</i>                 <span class="s1">&#39;genre&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;ca88141b-a6b4-450d-bbc3-efa940e4953f&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Mystery&#39;</span><span class="p">,</span> <span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;f39d7b6d-aef2-40b1-aaf0-cf05e7048011&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Horror&#39;</span><span class="p">,</span> <span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;9c91a5b2-eb70-4889-8581-ebe427370edd&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Musical&#39;</span><span class="p">,</span> <span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;237fd1e4-c98e-454e-aa13-8a13fb7547b5&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Romance&#39;</span><span class="p">,</span> <span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;fb58fd7f-7afd-447f-b833-e51e45e2a778&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Game-Show&#39;</span><span class="p">,</span> <span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;56b541ab-4d66-4021-8708-397762bff2d4&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Music&#39;</span><span class="p">,</span> <span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;e508c1c8-24c0-4136-80b4-340c4befb190&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Reality-TV&#39;</span><span class="p">,</span> <span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;f24fd632-b1a5-4273-a835-0119bd12f829&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;News&#39;</span><span class="p">,</span> <span class="p">}],</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS318">
+               <span class="count sev-2">
+                  2
+               </span>
+               <strong>WPS318:</strong> Found extra indentation
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l44">
+                  <tt><i>44</i>               <span class="p">{</span><span class="s1">&#39;film_uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;00af52ec-9345-4d66-adbe-50eb917f463a&#39;</span><span class="p">},</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l50">
+                  <tt><i>50</i>           <span class="n">es_write_data</span><span class="p">,</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS204">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS204:</strong> Found overused expression: response['body']; used 5 > 4
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l82">
+                  <tt><i>82</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS211">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS211:</strong> Found too many arguments: 6 > 5
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l49">
+                  <tt><i>49</i> <span class="k">async</span> <span class="k">def</span> <span class="nf">test_film_detail</span><span class="p">(</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS218">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS218:</strong> Found too many `assert` statements: 6 > 5
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l49">
+                  <tt><i>49</i> <span class="k">async</span> <span class="k">def</span> <span class="nf">test_film_detail</span><span class="p">(</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS305">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS305:</strong> Found `f` string
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l75">
+                  <tt><i>75</i>         <span class="s1">&#39;Authorization&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Bearer </span><span class="si">{</span><span class="n">access_token</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="WPS319">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>WPS319:</strong> Found bracket in wrong position
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l78">
+                  <tt><i>78</i>         <span class="n">test_settings</span><span class="o">.</span><span class="n">service_url</span><span class="p">,</span> <span class="n">path_param</span><span class="p">[</span><span class="s1">&#39;film_uuid&#39;</span><span class="p">])</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="Q000">
+               <span class="count sev-3">
+                  148
+               </span>
+               <strong>Q000:</strong> Single quotes found but double quotes preferred
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l11">
+                  <tt><i>11</i>     <span class="s1">&#39;path_param, expected_answer&#39;</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l14">
+                  <tt><i>14</i>             <span class="p">{</span><span class="s1">&#39;film_uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;1a42b629-14af-4646-be32-16bd97d01e70&#39;</span><span class="p">},</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l15">
+                  <tt><i>15</i>             <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">OK</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l16">
+                  <tt><i>16</i>                 <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Film heavy chair by development wikipedia amazon&#39;</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 5 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l17">
+                  <tt><i>17</i>                 <span class="s1">&#39;genre&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;9c91a5b2-eb70-4889-8581-ebe427370edd&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Musical&#39;</span><span class="p">}],</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 9 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l18">
+                  <tt><i>18</i>                 <span class="s1">&#39;actors&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;3acaaf82-374a-4cc9-a039-7e67926146de&#39;</span><span class="p">,</span> <span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Robert Oneal&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;a8b56f85-346d-4b7e-80d3-d1af353e0c86&#39;</span><span class="p">,</span> <span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Teresa Martinez&#39;</span><span class="p">}],</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 17 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l19">
+                  <tt><i>19</i>                 <span class="s1">&#39;writers&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;3acaaf82-374a-4cc9-a039-7e67926146de&#39;</span><span class="p">,</span> <span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Robert Oneal&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;a8b56f85-346d-4b7e-80d3-d1af353e0c86&#39;</span><span class="p">,</span> <span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Teresa Martinez&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;3b019fcb-f96d-4403-948c-93f3028d042b&#39;</span><span class="p">,</span> <span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Andrea Barry&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;30c32323-c1b1-49c4-9f1f-f97c71cff814&#39;</span><span class="p">,</span> <span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Richard Jones&#39;</span><span class="p">}],</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 17 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l20">
+                  <tt><i>20</i>                 <span class="s1">&#39;directors&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;3acaaf82-374a-4cc9-a039-7e67926146de&#39;</span><span class="p">,</span> <span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Robert Oneal&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;a8b56f85-346d-4b7e-80d3-d1af353e0c86&#39;</span><span class="p">,</span> <span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Teresa Martinez&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;8611f583-b2d1-4e3d-809e-2109c7867a38&#39;</span><span class="p">,</span> <span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Eric Wilson&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;30c32323-c1b1-49c4-9f1f-f97c71cff814&#39;</span><span class="p">,</span> <span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Richard Jones&#39;</span><span class="p">}],</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l24">
+                  <tt><i>24</i>             <span class="p">{</span><span class="s1">&#39;film_uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;50852f4f-0b09-4c41-b89a-28298a663359&#39;</span><span class="p">},</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l25">
+                  <tt><i>25</i>             <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">OK</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l26">
+                  <tt><i>26</i>                 <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Hotel by year player&#39;</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 33 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l27">
+                  <tt><i>27</i>                 <span class="s1">&#39;genre&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;ca88141b-a6b4-450d-bbc3-efa940e4953f&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Mystery&#39;</span><span class="p">,</span> <span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;f39d7b6d-aef2-40b1-aaf0-cf05e7048011&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Horror&#39;</span><span class="p">,</span> <span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;9c91a5b2-eb70-4889-8581-ebe427370edd&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Musical&#39;</span><span class="p">,</span> <span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;237fd1e4-c98e-454e-aa13-8a13fb7547b5&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Romance&#39;</span><span class="p">,</span> <span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;fb58fd7f-7afd-447f-b833-e51e45e2a778&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Game-Show&#39;</span><span class="p">,</span> <span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;56b541ab-4d66-4021-8708-397762bff2d4&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Music&#39;</span><span class="p">,</span> <span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;e508c1c8-24c0-4136-80b4-340c4befb190&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Reality-TV&#39;</span><span class="p">,</span> <span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;f24fd632-b1a5-4273-a835-0119bd12f829&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;News&#39;</span><span class="p">,</span> <span class="p">}],</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l28">
+                  <tt><i>28</i>                 <span class="s1">&#39;actors&#39;</span><span class="p">:</span> <span class="p">[],</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 5 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l29">
+                  <tt><i>29</i>                 <span class="s1">&#39;writers&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;27f9e728-c618-4c1e-aa48-05421965e435&#39;</span><span class="p">,</span> <span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Amanda Griffin&#39;</span><span class="p">}],</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l30">
+                  <tt><i>30</i>                 <span class="s1">&#39;directors&#39;</span><span class="p">:</span> <span class="p">[],</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l34">
+                  <tt><i>34</i>             <span class="p">{</span><span class="s1">&#39;film_uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;6480fdc0-f1c5-4f44-be08-3c1bcda6a326&#39;</span><span class="p">},</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l35">
+                  <tt><i>35</i>             <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">OK</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l36">
+                  <tt><i>36</i>                 <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Morning explain light&#39;</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 5 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l37">
+                  <tt><i>37</i>                 <span class="s1">&#39;genre&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;f39d7b6d-aef2-40b1-aaf0-cf05e7048011&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Horror&#39;</span><span class="p">}],</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l38">
+                  <tt><i>38</i>                 <span class="s1">&#39;actors&#39;</span><span class="p">:</span> <span class="p">[],</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l39">
+                  <tt><i>39</i>                 <span class="s1">&#39;writers&#39;</span><span class="p">:</span> <span class="p">[],</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 9 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l40">
+                  <tt><i>40</i>                 <span class="s1">&#39;directors&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;8611f583-b2d1-4e3d-809e-2109c7867a38&#39;</span><span class="p">,</span> <span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Eric Wilson&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;27f9e728-c618-4c1e-aa48-05421965e435&#39;</span><span class="p">,</span> <span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Amanda Griffin&#39;</span><span class="p">}],</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l44">
+                  <tt><i>44</i>               <span class="p">{</span><span class="s1">&#39;film_uuid&#39;</span><span class="p">:</span> <span class="s1">&#39;00af52ec-9345-4d66-adbe-50eb917f463a&#39;</span><span class="p">},</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l45">
+                  <tt><i>45</i>               <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">NOT_FOUND</span><span class="p">}</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l69">
+                  <tt><i>69</i>         <span class="n">data</span><span class="o">=</span><span class="n">es_determination_data</span><span class="p">[</span><span class="s1">&#39;films&#39;</span><span class="p">],</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l70">
+                  <tt><i>70</i>         <span class="n">es_index</span><span class="o">=</span><span class="n">test_settings</span><span class="o">.</span><span class="n">es_indexes</span><span class="p">[</span><span class="s1">&#39;movies&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l74">
+                  <tt><i>74</i>         <span class="s1">&#39;X-Not-Cache&#39;</span><span class="p">:</span> <span class="s1">&#39;True&#39;</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l75">
+                  <tt><i>75</i>         <span class="s1">&#39;Authorization&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Bearer </span><span class="si">{</span><span class="n">access_token</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l77">
+                  <tt><i>77</i>     <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">/api/v1/films/</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred:</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l78">
+                  <tt><i>78</i>         <span class="n">test_settings</span><span class="o">.</span><span class="n">service_url</span><span class="p">,</span> <span class="n">path_param</span><span class="p">[</span><span class="s1">&#39;film_uuid&#39;</span><span class="p">])</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 2 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l81">
+                  <tt><i>81</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 3 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l82">
+                  <tt><i>82</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 3 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l83">
+                  <tt><i>83</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;genre&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;genre&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 3 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l84">
+                  <tt><i>84</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;actors&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;actors&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 3 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l85">
+                  <tt><i>85</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;directors&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;directors&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Single quotes found but double quotes preferred (in 3 places):</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l86">
+                  <tt><i>86</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;writers&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;writers&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="DAR101">
+               <span class="count sev-3">
+                  6
+               </span>
+               <strong>DAR101:</strong> Missing parameter(s) in Docstring: - access_token
+               
+                  (and 5 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Missing parameter(s) in Docstring: - access_token:</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l57">
+                  <tt><i>57</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - aiohttp_get:</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l57">
+                  <tt><i>57</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - es_determination_data:</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l57">
+                  <tt><i>57</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - es_write_data:</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l57">
+                  <tt><i>57</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - expected_answer:</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l57">
+                  <tt><i>57</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing parameter(s) in Docstring: - path_param:</p>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l57">
+                  <tt><i>57</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="S101">
+               <span class="count sev-3">
+                  6
+               </span>
+               <strong>S101:</strong> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l81">
+                  <tt><i>81</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l82">
+                  <tt><i>82</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l83">
+                  <tt><i>83</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;genre&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;genre&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l84">
+                  <tt><i>84</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;actors&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;actors&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l85">
+                  <tt><i>85</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;directors&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;directors&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l86">
+                  <tt><i>86</i>     <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;writers&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;writers&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="D100">
+               <span class="count sev-3">
+                  1
+               </span>
+               <strong>D100:</strong> Missing docstring in public module
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l1">
+                  <tt><i>1</i> <span class="kn">from</span> <span class="nn">http</span> <span class="kn">import</span> <span class="n">HTTPStatus</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="D205">
+               <span class="count sev-3">
+                  1
+               </span>
+               <strong>D205:</strong> 1 blank line required between summary line and description
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l57">
+                  <tt><i>57</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="P101">
+               <span class="count sev-3">
+                  1
+               </span>
+               <strong>P101:</strong> format string does contain unindexed parameters
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="fastapi.tests.functional.src.test_film_detail.source.html#l77">
+                  <tt><i>77</i>     <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">/api/v1/films/</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         </ul>
+      </div>
+   </body>
+</html>
