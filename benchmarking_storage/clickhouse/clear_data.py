@@ -4,11 +4,11 @@ import sys
 
 from clickhouse_driver import Client
 
+from config import settings
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(
     __file__)))
 sys.path.append(BASE_DIR)
-
-from config import settings
 
 
 def run() -> None:
