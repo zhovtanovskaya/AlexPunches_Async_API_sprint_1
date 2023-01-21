@@ -1,0 +1,102 @@
+// Запрос первой страницы проголосовавших фильм.
+{
+	"page": {
+		"number":
+		"size":
+		"next":
+		"prev":
+		"content" {
+			"vouters": [
+				{
+					"full_name":
+					"avatar":
+					"username":
+					"rating":
+				}
+			],
+		},
+	}
+}
+
+// График распределения голосов по рейтингам.
+{
+	"votes": {
+		"0": 10,
+		"1": 10,
+		"2":
+		...
+	}
+}
+
+// Получить рейтинги фильма.
+GET ratings/?movie_id={movie_id}
+{
+	"movie_id": "asdf-asdf-asdf",
+	"ratings": {
+		"average": 7.5,
+		"total": 10050,
+	}
+}
+
+// Выставить оценку фильму.
+// ID пользователя берется из JWT.
+POST ratings/
+{
+	"movie_id":
+	"rating": 8,
+}
+PUT ratings/{rating_id}/
+DELETE ratings/{rating_id}/
+
+
+GET feedback/?movie_id
+{
+	"rating": {
+		"id": "asdf-asdf-asdf",
+		"rating": 8,
+		"created_at": "2023-01-21"
+	},
+	"bookmark": {
+		"id": "",
+	},
+}
+// Получить список всех закладок пользователя.
+GET bookmarks/
+{
+	"page": {
+		"number":
+		"size":
+		"next":
+		"prev":
+		"content": {
+			"bookmarks": [
+				{
+					"movie_id":
+					"collections": ["ljkh"]
+				}
+			]
+		}
+}
+GET bookmarks/
+DELETE bookmarks/{bookmarks_id}/
+
+
+// Получить рецензии.
+POST reviews/
+{
+	"content_type": "article",
+	"object_id": "<article_id>",
+	"text": "",
+	"status": "good",    // "good", "bad", "neutral"
+}
+GET reviews/?movie_id &page_number &page_size &status &sort=-likes_count,created_at
+PATCH reviews/{review_id}
+DELETE reviews/{review_id}
+
+POST likes/
+{
+	"content_type": "review",
+	"object_id": "<review_id>",
+	"value": "like"|"dislike"|...,
+}
+DELETE likes/{like_id}/
