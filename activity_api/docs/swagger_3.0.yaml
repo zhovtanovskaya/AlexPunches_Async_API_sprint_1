@@ -242,7 +242,7 @@ paths:
                           $ref: "#/components/schemas/LikeScheme"
 
   /api/v1/likes/{like_id}:
-    patch:
+    put: 
       tags:
         - like
       summary: Изменить лайк.
