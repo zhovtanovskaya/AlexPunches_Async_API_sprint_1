@@ -1,0 +1,543 @@
+openapi: 3.0.3
+info:
+  title: UGC. Sprint 9.
+  description: |-
+    ### Закладки, рецензии, лайки
+
+  version: 0.1.0
+servers:
+  - url: http://127.0.0.1:27017
+tags:
+  - name: bookmark
+    description: Закладки
+  - name: review
+    description: Рецензии
+  - name: like
+    description: Лайки
+
+paths:
+  /api/v1/bookmarks:
+    post:
+      tags:
+        - bookmark
+      summary: Создать новую закладку.
+      requestBody:
+        description: Создать закладку.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookmarkCreateScheme'
+      security:
+        - JWTAccessToken: []
+      responses:
+        201:
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookmarkScheme'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        422:
+          $ref: '#/components/responses/Unprocessable'
+    get:
+      tags:
+        - bookmark
+      summary: Получить все закладки авторизованного юзера.
+      description: Список всех закладок авторизованного юзера.
+      parameters:
+        - $ref: '#/components/parameters/sort'
+      security:
+        - JWTAccessToken: []
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BookmarkScheme'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+
+  /api/v1/bookmarks/{bookmark_id}:
+    delete:
+      tags:
+        - bookmark
+      summary: Удалить закладку.
+      parameters:
+        - $ref: '#/components/parameters/bookmark_id'
+      security:
+        - JWTAccessToken: []
+      responses:
+        204:
+          description: Закладка удалена и HTTP-ответ пуст.
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/Response404'
+
+  /api/v1/reviews:
+    post:
+      tags:
+        - review
+      summary: Создать новую рецензию.
+      requestBody:
+        description: Создать рецензию.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewCreateScheme'
+      security:
+        - JWTAccessToken: []
+      responses:
+        201:
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewScheme'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        422:
+          $ref: '#/components/responses/Unprocessable'
+    get:
+      tags:
+        - review
+      summary: Получить все рецензии.
+      description: Список рецензий.
+      parameters:
+        - $ref: '#/components/parameters/filter[user_id]'
+        - $ref: '#/components/parameters/filter[recipient_id]'
+        - $ref: '#/components/parameters/page[size]'
+        - $ref: '#/components/parameters/page[number]'
+        - $ref: '#/components/parameters/sort'
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/PaginatedResult"
+                  - type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/ReviewScheme"
+
+  /api/v1/reviews/{review_id}:
+    get:
+      tags:
+        - review
+      summary: Получить существующую рецензию.
+      parameters:
+        - $ref: '#/components/parameters/review_id'
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewScheme'
+        404:
+          $ref: '#/components/responses/Response404'
+    patch:
+      tags:
+        - review
+      summary: Изменить существующую рецензию.
+      parameters:
+        - $ref: '#/components/parameters/review_id'
+      requestBody:
+        description: Изменить рецензию.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewEditScheme'
+      security:
+        - JWTAccessToken: []
+      responses:
+        200:
+          description: Рецензия изменена.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewScheme'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/Response404'
+        422:
+          $ref: '#/components/responses/Unprocessable'
+    delete:
+      tags:
+        - review
+      summary: Удалить рецензию.
+      parameters:
+        - $ref: '#/components/parameters/review_id'
+      security:
+        - JWTAccessToken: []
+      responses:
+        204:
+          description: Рецензия удалена и HTTP-ответ пуст.
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/Response404'
+
+  /api/v1/likes:
+    post:
+      tags:
+        - like
+      summary: Создать новый лайк.
+      requestBody:
+        description: Создать лайк.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewCreateScheme'
+      security:
+        - JWTAccessToken: []
+      responses:
+        201:
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewScheme'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        422:
+          $ref: '#/components/responses/Unprocessable'
+    get:
+      tags:
+        - like
+      summary: Получить все лайки.
+      description: Список лайков.
+      parameters:
+        - $ref: '#/components/parameters/filter[user_id]'
+        - $ref: '#/components/parameters/filter[recipient_id]'
+        - $ref: '#/components/parameters/page[size]'
+        - $ref: '#/components/parameters/page[number]'
+        - $ref: '#/components/parameters/sort'
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/PaginatedResult"
+                  - type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/LikeScheme"
+
+  /api/v1/likes/{like_id}:
+    patch:
+      tags:
+        - like
+      summary: Изменить лайк.
+      parameters:
+        - $ref: '#/components/parameters/like_id'
+      requestBody:
+        description: Изменить роль.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LikeEditScheme'
+      security:
+        - JWTAccessToken: []
+      responses:
+        200:
+          description: Лайк изменен.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LikeScheme'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          description: Лайк с таким like_id не существует.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseMessage'
+        422:
+          $ref: '#/components/responses/Unprocessable'
+    delete:
+      tags:
+        - like
+      summary: Удалить лайк.
+      parameters:
+        - $ref: '#/components/parameters/like_id'
+      security:
+        - JWTAccessToken: []
+      responses:
+        204:
+          description: Лайк удален и HTTP-ответ пуст.
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/Response404'
+
+
+components:
+  parameters:
+    page[number]:
+      name: page[number]
+      in: query
+      description: номер страницы
+      required: false
+      schema:
+        type: integer
+    page[size]:
+      name: page[size]
+      in: query
+      description: кол-во объектов на странице
+      required: false
+      schema:
+        type: integer
+    filter[user_id]:
+      name: filter[user_id]
+      in: query
+      description: фильтр по user_id
+      required: false
+      schema:
+        type: string
+        format: uuid
+    filter[recipient_id]:
+      name: filter[recipient_id]
+      in: query
+      description: фильтр по recipient_id
+      required: false
+      schema:
+        type: string
+    sort:
+      name: sort
+      in: query
+      description: сортировка
+      required: false
+      schema:
+        type: string
+
+    bookmark_id:
+      name: bookmark_id
+      in: path
+      description: ID закладки
+      required: true
+      schema:
+        type: string
+        format: ObjectID
+    review_id:
+      name: review_id
+      in: path
+      description: ID рецензии
+      required: true
+      schema:
+        type: string
+        format: ObjectID
+    like_id:
+      name: like_id
+      in: path
+      description: ID лайка
+      required: true
+      schema:
+        type: string
+        format: ObjectID
+
+
+  schemas:
+    BookmarkCreateScheme:
+      type: object
+      properties:
+        recipient_id:
+          type: string
+          description: Айди обьекта, на который закладка.
+        user_id:
+          type: string
+          format: uuid
+          description: Айди юзера.
+      required:
+        - recipient_id
+        - user_id
+    BookmarkScheme:
+      type: object
+      properties:
+        id:
+          type: string
+          format: ObjectID
+          description: Уникальный идентификатор закладки.
+        recipient_id:
+          type: string
+          description: Айди обьекта, на который закладка.
+        user_id:
+          type: string
+          format: uuid
+          description: Айди юзера.
+      required:
+        - id
+        - recipient_id
+        - user_id
+    ReviewCreateScheme:
+      type: object
+      properties:
+        recipient_id:
+          type: string
+          description: Айди обьекта, на который рецензия.
+        user_id:
+          type: string
+          format: uuid
+          description: Айди юзера.
+        header:
+          type: string
+          description: Заголовок рецензии.
+        description:
+          type: string
+          description: Текст рецензии.
+      required:
+        - recipient_id
+        - user_id
+        - header
+        - description
+    ReviewEditScheme:
+      type: object
+      properties:
+        header:
+          type: string
+          description: Заголовок рецензии.
+        description:
+          type: string
+          description: Текст рецензии.
+    ReviewScheme:
+      type: object
+      properties:
+        id:
+          type: string
+          format: ObjectID
+          description: Уникальный идентификатор рецензии.
+        recipient_id:
+          type: string
+          description: Айди обьекта, на который рецензия.
+        user_id:
+          type: string
+          format: uuid
+          description: Айди юзера.
+        header:
+          type: string
+          description: Заголовок рецензии.
+        description:
+          type: string
+          description: Текст рецензии.
+      required:
+        - recipient_id
+        - user_id
+        - header
+        - description
+    LikeCreateScheme:
+      type: object
+      properties:
+        recipient_id:
+          type: string
+          description: Айди обьекта, на который лайк.
+        user_id:
+          type: string
+          format: uuid
+          description: Айди юзера.
+        value:
+          type: integer
+          description: Значение лайка.
+      required:
+        - recipient_id
+        - user_id
+        - value
+    LikeEditScheme:
+      type: object
+      properties:
+        value:
+          type: integer
+          description: Значение лайка.
+      required:
+        - value
+    LikeScheme:
+      type: object
+      properties:
+        id:
+          type: string
+          format: ObjectID
+          description: Уникальный идентификатор лайка.
+        recipient_id:
+          type: string
+          description: Айди обьекта, на который лайк.
+        user_id:
+          type: string
+          format: uuid
+          description: Айди юзера.
+        value:
+          type: integer
+          description: Значение лайка.
+      required:
+        - recipient_id
+        - user_id
+        - value
+
+    BaseMessage:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          description: Ошибки в запросе. Например, ошибки валидации данных в запросе.
+      required:
+        - message
+    PaginatedResult:
+      type: object
+      properties:
+        total: { type: number }
+        page: { type: number }
+        per_page: { type: number }
+        results: { type: array, items: {} }
+
+  responses:
+    Unprocessable:
+      description: Операция не выполнена. В теле ответа описание ошибки.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BaseMessage'
+    Unauthorized:
+      description: Операция не выполнена потому что нужна авторизация.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BaseMessage'
+    UserBookmarkList:
+      description: Актуальный список закладок пользователя.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/BookmarkScheme'
+    Response404:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BaseMessage'
+
+  securitySchemes:
+    JWTAccessToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
