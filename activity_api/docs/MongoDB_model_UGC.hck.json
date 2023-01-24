@@ -1,0 +1,709 @@
+{
+    "modelName": "New Model",
+    "collections": [
+        {
+            "collectionName": "User",
+            "type": "object",
+            "properties": [
+                {
+                    "name": "user_id",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "binary",
+                    "primaryKey": true,
+                    "required": true,
+                    "GUID": "fbb36ff0-dd86-4210-985c-da30254388f1",
+                    "error": {},
+                    "childRelationships": [
+                        "edbadeb3-8bf1-4351-aea2-ad3841de5b00",
+                        "17769ed9-edd2-48bd-999b-6a1b020833df",
+                        "6a0d95ec-d429-4c25-b0fb-11c37e3595f6"
+                    ]
+                },
+                {
+                    "name": "bookmarks",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "array",
+                    "properties": [
+                        {
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "objectId",
+                            "GUID": "f71449ef-0ec0-4916-b73a-24256203e138",
+                            "arrayItem": true,
+                            "arrayParentType": "array",
+                            "relationshipType": "Foreign Key",
+                            "foreignCollection": "829eaa7f-3b56-45e2-b8da-b6bc8d804b65",
+                            "foreignField": [
+                                "829eaa7f-3b56-45e2-b8da-b6bc8d804b65",
+                                "0cbfefb2-ad83-4e92-b216-b4d9e4c39d0d"
+                            ],
+                            "parentRelationship": "e73907da-3553-4dc4-995e-b1c18e616e4a",
+                            "displayName": "movies",
+                            "error": {}
+                        }
+                    ],
+                    "additionalItems": true,
+                    "GUID": "ef4350b7-d8dc-4751-8cc8-8a8d1d0eb82b",
+                    "error": {}
+                }
+            ],
+            "definitions": {
+                "type": "definitions",
+                "properties": [],
+                "GUID": "dab2293f-da9a-4f4f-88ce-4a0581574600"
+            },
+            "isActivated": true,
+            "additionalProperties": false,
+            "validationLevel": "Off",
+            "validationAction": "Warn",
+            "storageEngineName": "WiredTiger",
+            "collectionUsers": [],
+            "indexes": [],
+            "collation": {},
+            "sharding": {
+                "unique": true,
+                "collation": "null"
+            },
+            "GUID": "b5723f6c-1790-428f-9b93-293f7d7df0af",
+            "bucketId": "8cdb3a90-d83b-4e3c-a56a-acc3b17e65f0"
+        },
+        {
+            "collectionName": "Movie",
+            "type": "object",
+            "properties": [
+                {
+                    "name": "movie_id",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "binary",
+                    "primaryKey": true,
+                    "required": true,
+                    "GUID": "0cbfefb2-ad83-4e92-b216-b4d9e4c39d0d",
+                    "childRelationships": [
+                        "e73907da-3553-4dc4-995e-b1c18e616e4a"
+                    ],
+                    "error": {}
+                },
+                {
+                    "name": "likes",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "array",
+                    "properties": [
+                        {
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "document",
+                            "properties": [
+                                {
+                                    "name": "user_id",
+                                    "hackoladeMeta": {},
+                                    "isActivated": true,
+                                    "type": "binary",
+                                    "primaryKey": false,
+                                    "GUID": "8f62983b-46ac-4c5b-a3db-60ca362ee568",
+                                    "error": {},
+                                    "relationshipType": "Foreign Key",
+                                    "foreignCollection": "b5723f6c-1790-428f-9b93-293f7d7df0af",
+                                    "foreignField": [
+                                        "b5723f6c-1790-428f-9b93-293f7d7df0af",
+                                        "fbb36ff0-dd86-4210-985c-da30254388f1"
+                                    ],
+                                    "parentRelationship": "edbadeb3-8bf1-4351-aea2-ad3841de5b00"
+                                },
+                                {
+                                    "name": "power",
+                                    "hackoladeMeta": {},
+                                    "isActivated": true,
+                                    "type": "numeric",
+                                    "GUID": "667e1d6d-14f3-4c49-887a-4218fc2103f9",
+                                    "mode": "integer32",
+                                    "minimum": 0,
+                                    "maximum": 10,
+                                    "exclusiveMinimum": false,
+                                    "error": {}
+                                }
+                            ],
+                            "additionalProperties": false,
+                            "GUID": "dbb93d0e-9628-448c-b470-0f898089c2ac",
+                            "arrayItem": true,
+                            "arrayParentType": "array",
+                            "displayName": "like",
+                            "error": {}
+                        }
+                    ],
+                    "additionalItems": true,
+                    "GUID": "b3209d1a-4d22-465a-b3fc-69ae20eb33c7",
+                    "error": {}
+                },
+                {
+                    "name": "reviews",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "array",
+                    "properties": [
+                        {
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "objectId",
+                            "GUID": "023feb20-fc56-440b-bedc-905379076438",
+                            "arrayItem": true,
+                            "arrayParentType": "array",
+                            "relationshipType": "Foreign Key",
+                            "foreignCollection": "a77e2b68-b85d-4c0d-bde3-6010046e45fb",
+                            "foreignField": [
+                                "a77e2b68-b85d-4c0d-bde3-6010046e45fb",
+                                "b9dfb44c-db1c-4b67-a4fd-938ce1f2f889"
+                            ],
+                            "parentRelationship": "51909da3-5bbf-48a4-ac1c-e233d9a40d17",
+                            "displayName": "reviews",
+                            "error": {}
+                        }
+                    ],
+                    "additionalItems": true,
+                    "GUID": "c31878e5-a4a0-4d8d-908f-1cca4c973e6a",
+                    "error": {}
+                }
+            ],
+            "definitions": {
+                "type": "definitions",
+                "properties": [],
+                "GUID": "6569f458-6242-493f-813c-d28cbcb8e06d"
+            },
+            "isActivated": true,
+            "additionalProperties": false,
+            "validationLevel": "Off",
+            "validationAction": "Warn",
+            "storageEngineName": "WiredTiger",
+            "collectionUsers": [],
+            "indexes": [],
+            "collation": {},
+            "sharding": {
+                "unique": true,
+                "collation": "null"
+            },
+            "GUID": "829eaa7f-3b56-45e2-b8da-b6bc8d804b65",
+            "bucketId": "8cdb3a90-d83b-4e3c-a56a-acc3b17e65f0"
+        },
+        {
+            "collectionName": "Review",
+            "type": "object",
+            "properties": [
+                {
+                    "name": "review_id",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "b9dfb44c-db1c-4b67-a4fd-938ce1f2f889",
+                    "required": true,
+                    "primaryKey": true,
+                    "error": {},
+                    "childRelationships": [
+                        "51909da3-5bbf-48a4-ac1c-e233d9a40d17"
+                    ]
+                },
+                {
+                    "name": "user_id",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "binary",
+                    "primaryKey": false,
+                    "GUID": "bf19a94e-cc3f-4d5e-b4be-310c2ae91bd3",
+                    "error": {},
+                    "relationshipType": "Foreign Key",
+                    "foreignCollection": "b5723f6c-1790-428f-9b93-293f7d7df0af",
+                    "foreignField": [
+                        "b5723f6c-1790-428f-9b93-293f7d7df0af",
+                        "fbb36ff0-dd86-4210-985c-da30254388f1"
+                    ],
+                    "parentRelationship": "17769ed9-edd2-48bd-999b-6a1b020833df"
+                },
+                {
+                    "name": "respect",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "numeric",
+                    "GUID": "71e58422-de08-4e89-ae8a-a83e62924946",
+                    "required": true,
+                    "default": 0,
+                    "minimum": -1,
+                    "maximum": 1,
+                    "mode": "integer32",
+                    "error": {
+                        "enum": false,
+                        "enums": [],
+                        "exampleItems": []
+                    }
+                },
+                {
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "e5214343-1983-44ba-83a4-2891f0d60959",
+                    "name": "text",
+                    "minLength": 100,
+                    "maxLength": 10000,
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "likes",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "array",
+                    "properties": [
+                        {
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "document",
+                            "properties": [
+                                {
+                                    "name": "user_id",
+                                    "hackoladeMeta": {},
+                                    "isActivated": true,
+                                    "type": "binary",
+                                    "primaryKey": false,
+                                    "GUID": "2a846491-a336-4748-b2af-583a1058be37",
+                                    "relationshipType": "Foreign Key",
+                                    "foreignCollection": "b5723f6c-1790-428f-9b93-293f7d7df0af",
+                                    "foreignField": [
+                                        "b5723f6c-1790-428f-9b93-293f7d7df0af",
+                                        "fbb36ff0-dd86-4210-985c-da30254388f1"
+                                    ],
+                                    "parentRelationship": "6a0d95ec-d429-4c25-b0fb-11c37e3595f6",
+                                    "required": true,
+                                    "error": {}
+                                },
+                                {
+                                    "name": "power",
+                                    "hackoladeMeta": {},
+                                    "isActivated": true,
+                                    "type": "numeric",
+                                    "required": false,
+                                    "GUID": "6a2a8cff-991e-411b-a340-97173d49f83e",
+                                    "mode": "integer32",
+                                    "minimum": 0,
+                                    "maximum": 1,
+                                    "error": {}
+                                }
+                            ],
+                            "additionalProperties": false,
+                            "GUID": "e1a35662-85f3-4fd6-94fb-230b63f5f1c2",
+                            "arrayItem": true,
+                            "arrayParentType": "array",
+                            "displayName": "like",
+                            "error": {}
+                        }
+                    ],
+                    "additionalItems": true,
+                    "GUID": "0fb8e508-cda5-4877-a586-38d4f8367cea",
+                    "foreignCollection": "",
+                    "foreignField": [],
+                    "error": {
+                        "name": false,
+                        "code": false
+                    }
+                }
+            ],
+            "definitions": {
+                "type": "definitions",
+                "properties": [],
+                "GUID": "671f46fc-47df-4c61-aa28-b5eee1959679"
+            },
+            "isActivated": true,
+            "additionalProperties": true,
+            "validationLevel": "Off",
+            "validationAction": "Warn",
+            "storageEngineName": "WiredTiger",
+            "collectionUsers": [],
+            "indexes": [],
+            "collation": {},
+            "sharding": {
+                "unique": true,
+                "collation": "null"
+            },
+            "GUID": "a77e2b68-b85d-4c0d-bde3-6010046e45fb",
+            "bucketId": "8cdb3a90-d83b-4e3c-a56a-acc3b17e65f0",
+            "error": {}
+        },
+        {
+            "collectionName": "Like",
+            "type": "object",
+            "properties": [
+                {
+                    "name": "movie_id",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "binary",
+                    "primaryKey": true,
+                    "required": true,
+                    "GUID": "54b454b2-64e4-4f76-a8cd-cdb9663cd0c4",
+                    "childRelationships": [],
+                    "foreignCollection": "",
+                    "foreignField": [],
+                    "error": {
+                        "name": false,
+                        "code": false
+                    }
+                },
+                {
+                    "name": "review_id",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "8a6832fa-0afa-488f-aacb-7aabe17aeebc",
+                    "required": true,
+                    "primaryKey": true,
+                    "childRelationships": [],
+                    "foreignCollection": "",
+                    "foreignField": [],
+                    "error": {
+                        "name": false,
+                        "code": false
+                    }
+                },
+                {
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "array",
+                    "properties": [
+                        {
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "document",
+                            "properties": [
+                                {
+                                    "name": "user_id",
+                                    "hackoladeMeta": {},
+                                    "isActivated": true,
+                                    "type": "binary",
+                                    "primaryKey": false,
+                                    "GUID": "97b22fa3-116a-4891-9f9d-2e080a698cf0",
+                                    "error": {}
+                                },
+                                {
+                                    "name": "power",
+                                    "hackoladeMeta": {},
+                                    "isActivated": true,
+                                    "type": "numeric",
+                                    "GUID": "65650030-0c5c-4a24-87bb-e50f16843c14",
+                                    "minimum": 0,
+                                    "maximum": 10,
+                                    "error": {}
+                                }
+                            ],
+                            "additionalProperties": false,
+                            "GUID": "ea58dddb-c231-48ef-b717-e58f5d87ffe8",
+                            "arrayItem": true,
+                            "arrayParentType": "array"
+                        }
+                    ],
+                    "additionalItems": true,
+                    "GUID": "84b53e03-368d-4be5-9110-3b4e7ad96288",
+                    "name": "likes",
+                    "error": {}
+                }
+            ],
+            "definitions": {
+                "type": "definitions",
+                "properties": [],
+                "GUID": "fb75ed5d-d219-47c7-a8f2-8ad35c301de8"
+            },
+            "isActivated": true,
+            "additionalProperties": false,
+            "validationLevel": "Off",
+            "validationAction": "Warn",
+            "storageEngineName": "WiredTiger",
+            "collectionUsers": [],
+            "indexes": [],
+            "collation": {},
+            "sharding": {
+                "unique": true,
+                "collation": "null"
+            },
+            "GUID": "1560fa4f-c2ad-47bf-940b-55f1052be10a",
+            "bucketId": "8cdb3a90-d83b-4e3c-a56a-acc3b17e65f0"
+        }
+    ],
+    "buckets": [
+        {
+            "name": "Ugc",
+            "type": "bucket",
+            "collectionIds": [
+                "b5723f6c-1790-428f-9b93-293f7d7df0af",
+                "829eaa7f-3b56-45e2-b8da-b6bc8d804b65",
+                "a77e2b68-b85d-4c0d-bde3-6010046e45fb",
+                "1560fa4f-c2ad-47bf-940b-55f1052be10a"
+            ],
+            "backgroundColor": {
+                "r": 53,
+                "g": 94,
+                "b": 59,
+                "a": 1
+            },
+            "show": true,
+            "isActivated": true,
+            "GUID": "8cdb3a90-d83b-4e3c-a56a-acc3b17e65f0",
+            "enableSharding": false
+        }
+    ],
+    "views": [],
+    "relationships": [
+        {
+            "name": "fk User.bookmarks.[0] to Movie.movie_id",
+            "relationshipType": "Foreign Key",
+            "parentField": [
+                [
+                    "829eaa7f-3b56-45e2-b8da-b6bc8d804b65",
+                    "0cbfefb2-ad83-4e92-b216-b4d9e4c39d0d"
+                ]
+            ],
+            "parentCardinality": "1",
+            "childField": [
+                [
+                    "b5723f6c-1790-428f-9b93-293f7d7df0af",
+                    "ef4350b7-d8dc-4751-8cc8-8a8d1d0eb82b",
+                    "f71449ef-0ec0-4916-b73a-24256203e138"
+                ]
+            ],
+            "childCardinality": "1",
+            "parentCollection": "829eaa7f-3b56-45e2-b8da-b6bc8d804b65",
+            "childCollection": "b5723f6c-1790-428f-9b93-293f7d7df0af",
+            "GUID": "e73907da-3553-4dc4-995e-b1c18e616e4a"
+        },
+        {
+            "name": "fk Movie.likes.[0].user_id to User.user_id",
+            "relationshipType": "Foreign Key",
+            "parentField": [
+                [
+                    "b5723f6c-1790-428f-9b93-293f7d7df0af",
+                    "fbb36ff0-dd86-4210-985c-da30254388f1"
+                ]
+            ],
+            "parentCardinality": "1",
+            "childField": [
+                [
+                    "829eaa7f-3b56-45e2-b8da-b6bc8d804b65",
+                    "b3209d1a-4d22-465a-b3fc-69ae20eb33c7",
+                    "dbb93d0e-9628-448c-b470-0f898089c2ac",
+                    "8f62983b-46ac-4c5b-a3db-60ca362ee568"
+                ]
+            ],
+            "childCardinality": "1",
+            "parentCollection": "b5723f6c-1790-428f-9b93-293f7d7df0af",
+            "childCollection": "829eaa7f-3b56-45e2-b8da-b6bc8d804b65",
+            "GUID": "edbadeb3-8bf1-4351-aea2-ad3841de5b00"
+        },
+        {
+            "name": "fk user_id.user_id to User.user_id",
+            "relationshipType": "Foreign Key",
+            "parentField": [
+                [
+                    "b5723f6c-1790-428f-9b93-293f7d7df0af",
+                    "fbb36ff0-dd86-4210-985c-da30254388f1"
+                ]
+            ],
+            "parentCardinality": "1",
+            "childField": [
+                [
+                    "a77e2b68-b85d-4c0d-bde3-6010046e45fb",
+                    "bf19a94e-cc3f-4d5e-b4be-310c2ae91bd3"
+                ]
+            ],
+            "childCardinality": "1",
+            "parentCollection": "b5723f6c-1790-428f-9b93-293f7d7df0af",
+            "childCollection": "a77e2b68-b85d-4c0d-bde3-6010046e45fb",
+            "GUID": "17769ed9-edd2-48bd-999b-6a1b020833df"
+        },
+        {
+            "name": "fk Movie.reviews.[0] to Review.review_id",
+            "relationshipType": "Foreign Key",
+            "parentField": [
+                [
+                    "a77e2b68-b85d-4c0d-bde3-6010046e45fb",
+                    "b9dfb44c-db1c-4b67-a4fd-938ce1f2f889"
+                ]
+            ],
+            "parentCardinality": "1",
+            "childField": [
+                [
+                    "829eaa7f-3b56-45e2-b8da-b6bc8d804b65",
+                    "c31878e5-a4a0-4d8d-908f-1cca4c973e6a",
+                    "023feb20-fc56-440b-bedc-905379076438"
+                ]
+            ],
+            "childCardinality": "1",
+            "parentCollection": "a77e2b68-b85d-4c0d-bde3-6010046e45fb",
+            "childCollection": "829eaa7f-3b56-45e2-b8da-b6bc8d804b65",
+            "GUID": "51909da3-5bbf-48a4-ac1c-e233d9a40d17"
+        },
+        {
+            "name": "fk Movie.likes.[0].user_id to User.user_id",
+            "relationshipType": "Foreign Key",
+            "parentField": [
+                [
+                    "b5723f6c-1790-428f-9b93-293f7d7df0af",
+                    "fbb36ff0-dd86-4210-985c-da30254388f1"
+                ]
+            ],
+            "parentCardinality": "1",
+            "childField": [
+                [
+                    "a77e2b68-b85d-4c0d-bde3-6010046e45fb",
+                    "0fb8e508-cda5-4877-a586-38d4f8367cea",
+                    "e1a35662-85f3-4fd6-94fb-230b63f5f1c2",
+                    "2a846491-a336-4748-b2af-583a1058be37"
+                ]
+            ],
+            "childCardinality": "1",
+            "GUID": "6a0d95ec-d429-4c25-b0fb-11c37e3595f6",
+            "parentCollection": "b5723f6c-1790-428f-9b93-293f7d7df0af",
+            "childCollection": "a77e2b68-b85d-4c0d-bde3-6010046e45fb"
+        }
+    ],
+    "users": [],
+    "diagramViews": [],
+    "idToNameHashTable": {
+        "8cdb3a90-d83b-4e3c-a56a-acc3b17e65f0": "Ugc",
+        "b5723f6c-1790-428f-9b93-293f7d7df0af": "User",
+        "fbb36ff0-dd86-4210-985c-da30254388f1": "user_id",
+        "829eaa7f-3b56-45e2-b8da-b6bc8d804b65": "Movie",
+        "0cbfefb2-ad83-4e92-b216-b4d9e4c39d0d": "movie_id",
+        "a77e2b68-b85d-4c0d-bde3-6010046e45fb": "Review",
+        "b9dfb44c-db1c-4b67-a4fd-938ce1f2f889": "review_id",
+        "ef4350b7-d8dc-4751-8cc8-8a8d1d0eb82b": "bookmarks",
+        "e73907da-3553-4dc4-995e-b1c18e616e4a": "fk User.bookmarks.[0] to Movie.movie_id",
+        "b3209d1a-4d22-465a-b3fc-69ae20eb33c7": "likes",
+        "8f62983b-46ac-4c5b-a3db-60ca362ee568": "user_id",
+        "edbadeb3-8bf1-4351-aea2-ad3841de5b00": "fk Movie.likes.[0].user_id to User.user_id",
+        "667e1d6d-14f3-4c49-887a-4218fc2103f9": "power",
+        "bf19a94e-cc3f-4d5e-b4be-310c2ae91bd3": "user_id",
+        "17769ed9-edd2-48bd-999b-6a1b020833df": "fk user_id.user_id to User.user_id",
+        "c31878e5-a4a0-4d8d-908f-1cca4c973e6a": "reviews",
+        "51909da3-5bbf-48a4-ac1c-e233d9a40d17": "fk Movie.reviews.[0] to Review.review_id",
+        "0fb8e508-cda5-4877-a586-38d4f8367cea": "likes",
+        "2a846491-a336-4748-b2af-583a1058be37": "user_id",
+        "6a2a8cff-991e-411b-a340-97173d49f83e": "power",
+        "6a0d95ec-d429-4c25-b0fb-11c37e3595f6": "fk Movie.likes.[0].user_id to User.user_id",
+        "71e58422-de08-4e89-ae8a-a83e62924946": "respect",
+        "e5214343-1983-44ba-83a4-2891f0d60959": "text",
+        "1560fa4f-c2ad-47bf-940b-55f1052be10a": "Like",
+        "54b454b2-64e4-4f76-a8cd-cdb9663cd0c4": "movie_id",
+        "8a6832fa-0afa-488f-aacb-7aabe17aeebc": "review_id",
+        "84b53e03-368d-4be5-9110-3b4e7ad96288": "likes",
+        "97b22fa3-116a-4891-9f9d-2e080a698cf0": "user_id",
+        "65650030-0c5c-4a24-87bb-e50f16843c14": "power"
+    },
+    "definitions": {
+        "type": "definitions",
+        "properties": [],
+        "GUID": "a2dd03ad-2b61-4024-bc9e-67877b6e24f7"
+    },
+    "polyglotDefinitions": {
+        "type": "polyglotDefinitions",
+        "properties": [],
+        "GUID": "339e3c07-b05f-4ac9-983e-010461269182"
+    },
+    "externalDefinitions": {
+        "type": "externalDefinitions",
+        "properties": [],
+        "GUID": "df18ef3a-488d-497b-a3fd-9f9e3631300a"
+    },
+    "sources": [],
+    "decorativeSymbols": [],
+    "dbVersion": "v6.0",
+    "dbVendor": "MongoDB",
+    "appTarget": "MONGODB",
+    "creationTS": "2023-01-18T05:06:59.398Z",
+    "GUID": "fdc47684-bb6f-444f-a12e-43fa0e1cb17b",
+    "isLineageEnabled": false,
+    "lastModifTS": "2023-01-18T21:33:30.298Z",
+    "persistenceSchemaVersion": "6",
+    "isCreatedByPlugin": true,
+    "pluginInformation": {
+        "pluginEngineVersion": "1.0.0"
+    },
+    "applicationInformation": {
+        "version": "6.8.3"
+    },
+    "settings": {
+        "centralPane": {
+            "dbLevel": {
+                "erd": [
+                    {
+                        "GUID": "b5723f6c-1790-428f-9b93-293f7d7df0af",
+                        "x": 546,
+                        "y": 133,
+                        "width": 224,
+                        "height": 87,
+                        "color": {}
+                    },
+                    {
+                        "GUID": "829eaa7f-3b56-45e2-b8da-b6bc8d804b65",
+                        "x": 200,
+                        "y": 123,
+                        "width": 238,
+                        "height": 159,
+                        "color": {}
+                    },
+                    {
+                        "GUID": "a77e2b68-b85d-4c0d-bde3-6010046e45fb",
+                        "x": 355,
+                        "y": 397,
+                        "width": 238,
+                        "height": 177,
+                        "color": {}
+                    },
+                    {
+                        "GUID": "1560fa4f-c2ad-47bf-940b-55f1052be10a",
+                        "x": 925,
+                        "y": 729,
+                        "width": 226,
+                        "height": 141,
+                        "color": {}
+                    }
+                ],
+                "erdDefinitions": {
+                    "erd": [],
+                    "rootPath": [],
+                    "entities": [],
+                    "decorativeSymbols": []
+                },
+                "buckets": [
+                    {
+                        "x": 160,
+                        "y": 83,
+                        "GUID": "8cdb3a90-d83b-4e3c-a56a-acc3b17e65f0"
+                    }
+                ],
+                "collapsedNodes": [],
+                "activeRelationship": "",
+                "activeRelationshipFields": {
+                    "childField": [],
+                    "parentField": []
+                },
+                "selectedCollections": [],
+                "displayColorPicker": false,
+                "graphView": {
+                    "erd": [],
+                    "buckets": [],
+                    "decorativeSymbols": [],
+                    "forceLayout": true,
+                    "defaultLinkLength": 300
+                },
+                "diagramViews": [],
+                "decorativeSymbols": [],
+                "nestedCollectionsLayout": "horizontal",
+                "options": []
+            },
+            "collectionLevel": {},
+            "changed": false
+        },
+        "dtDiagram": {
+            "collapsedNodes": [],
+            "shouldDistributeCollections": false
+        }
+    }
+}
