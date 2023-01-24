@@ -52,13 +52,7 @@ paths:
         - JWTAccessToken: []
       responses:
         200:
-          description: success
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/BookmarkScheme'
+          $ref: '#/components/responses/UserBookmarkList'
         401:
           $ref: '#/components/responses/Unauthorized'
 
@@ -242,7 +236,7 @@ paths:
                           $ref: "#/components/schemas/LikeScheme"
 
   /api/v1/likes/{like_id}:
-    put: 
+    put:
       tags:
         - like
       summary: Изменить лайк.
@@ -398,6 +392,9 @@ components:
           type: string
           format: uuid
           description: Айди юзера.
+        worth:
+          type: integer
+          description: Значение рецензии.
         header:
           type: string
           description: Заголовок рецензии.
@@ -412,6 +409,9 @@ components:
     ReviewEditScheme:
       type: object
       properties:
+        worth:
+          type: integer
+          description: Значение рецензии.
         header:
           type: string
           description: Заголовок рецензии.
@@ -432,6 +432,9 @@ components:
           type: string
           format: uuid
           description: Айди юзера.
+        worth:
+          type: integer
+          description: Значение рецензии.
         header:
           type: string
           description: Заголовок рецензии.
@@ -453,7 +456,7 @@ components:
           type: string
           format: uuid
           description: Айди юзера.
-        value:
+        worth:
           type: integer
           description: Значение лайка.
       required:
@@ -463,7 +466,7 @@ components:
     LikeEditScheme:
       type: object
       properties:
-        value:
+        worth:
           type: integer
           description: Значение лайка.
       required:
@@ -482,7 +485,7 @@ components:
           type: string
           format: uuid
           description: Айди юзера.
-        value:
+        worth:
           type: integer
           description: Значение лайка.
       required:
