@@ -1,7 +1,7 @@
 """Исключения для авторизации и аутентификации."""
 
 from http import HTTPStatus
-from typing import Any, Optional
+from typing import Any, Dict, Optional
 
 from fastapi import HTTPException
 
@@ -12,7 +12,7 @@ class AuthorizationException(HTTPException):
     def __init__(
             self,
             detail: Any = None,
-            headers: Optional[dict[str, Any]] = None,
+            headers: Optional[Dict[str, Any]] = None,
     ):
         """Инициализировать исключение со статусом HTTPStatus.FORBIDDEN."""
         super().__init__(
