@@ -222,20 +222,16 @@ paths:
         - $ref: '#/components/parameters/page[size]'
         - $ref: '#/components/parameters/page[number]'
         - $ref: '#/components/parameters/sort'
+        - $ref: '#/components/parameters/aggregate'
       responses:
         200:
           description: success
           content:
             application/json:
               schema:
-                allOf:
-                  - $ref: "#/components/schemas/PaginatedResult"
-                  - type: object
-                    properties:
-                      results:
-                        type: array
-                        items:
-                          $ref: "#/components/schemas/LikeScheme"
+                oneOf:
+                  - $ref: "#/components/schemas/LikesPaginatedResult"
+                  - $ref: "#/components/schemas/LikeAggregatedResult"
 
   /api/v1/likes/{like_id}:
     put:
@@ -332,6 +328,13 @@ components:
       required: false
       schema:
         type: string
+    aggregate:
+      name: aggregate
+      in: query
+      description: агрегировать
+      required: false
+      schema:
+        type: boolean
 
     bookmark_id:
       name: bookmark_id
@@ -533,6 +536,25 @@ components:
           description: Ошибки в запросе. Например, ошибки валидации данных в запросе.
       required:
         - message
+    LikeAggregatedResult:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          description: Ошибки в запросе. Например, ошибки валидации данных в запросе.
+      required:
+        - message
+    LikesPaginatedResult:
+      allOf:
+        - $ref: "#/components/schemas/PaginatedResult"
+        - type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: "#/components/schemas/LikeScheme"
     PaginatedResult:
       type: object
       properties:
