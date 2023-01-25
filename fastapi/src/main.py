@@ -2,6 +2,7 @@ import os
 import sys
 
 import aioredis
+import sentry_sdk
 import uvicorn as uvicorn
 from elasticsearch import AsyncElasticsearch
 from fastapi import FastAPI
@@ -15,6 +16,8 @@ from api.v1 import films, genres, persons
 from core.cache_middleware import RedisCacheMiddleware
 from core.config import config
 from db import elastic, redis
+
+sentry_sdk.init(dsn=config.api_sentry_dns, traces_sample_rate=1.0)
 
 app = FastAPI(
     title=config.project_name,
