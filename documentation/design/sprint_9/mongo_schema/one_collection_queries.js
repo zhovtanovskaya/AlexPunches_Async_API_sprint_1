@@ -1,3 +1,6 @@
+// Запросы к схеме документов one_collection_docs.js
+// Версия от 2023-01-25.
+
 // Посчитать средний рейтинг фильма.
 db.reactions.aggregate([
     { $match: {"target_type": "movie", "type": "rating"} },

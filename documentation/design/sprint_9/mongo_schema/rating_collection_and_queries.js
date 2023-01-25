@@ -1,3 +1,5 @@
+// Возможная схема коллекции с рейтингами.
+// Версия от 2023-01-21.
 db.ratings.insertOne({
     // _id
     movie_id: 1,
@@ -5,10 +7,12 @@ db.ratings.insertOne({
     rating: 5,
     created_at: new Date(),
 })
+
 db.ratings.updateOne(
   {_id: ObjectId("63cbcafaf07c838bc58f9a0d"),},
   {$set: {rating: 3},},
 )
+
 db.ratings.deleteOne({ _id: ObjectId("63cbcafaf07c838bc58f9a0d")})
 
 db.ratings.aggregate([
