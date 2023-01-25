@@ -105,7 +105,8 @@ paths:
       description: Список рецензий.
       parameters:
         - $ref: '#/components/parameters/filter[user_id]'
-        - $ref: '#/components/parameters/filter[recipient_id]'
+        - $ref: '#/components/parameters/filter[target_type]'
+        - $ref: '#/components/parameters/filter[target_id]'
         - $ref: '#/components/parameters/page[size]'
         - $ref: '#/components/parameters/page[number]'
         - $ref: '#/components/parameters/sort'
@@ -216,7 +217,8 @@ paths:
       description: Список лайков.
       parameters:
         - $ref: '#/components/parameters/filter[user_id]'
-        - $ref: '#/components/parameters/filter[recipient_id]'
+        - $ref: '#/components/parameters/filter[target_type]'
+        - $ref: '#/components/parameters/filter[target_id]'
         - $ref: '#/components/parameters/page[size]'
         - $ref: '#/components/parameters/page[number]'
         - $ref: '#/components/parameters/sort'
@@ -309,10 +311,17 @@ components:
       schema:
         type: string
         format: uuid
-    filter[recipient_id]:
-      name: filter[recipient_id]
+    filter[target_type]:
+      name: filter[target_type]
       in: query
-      description: фильтр по recipient_id
+      description: фильтр по target_type
+      required: false
+      schema:
+        $ref: '#/components/schemas/TargetType'
+    filter[target_id]:
+      name: filter[target_id]
+      in: query
+      description: фильтр по target_id
       required: false
       schema:
         type: string
@@ -354,16 +363,14 @@ components:
     BookmarkCreateScheme:
       type: object
       properties:
-        recipient_id:
+        target_type:
+          $ref: '#/components/schemas/TargetType'
+        target_id:
           type: string
           description: Айди обьекта, на который закладка.
-        user_id:
-          type: string
-          format: uuid
-          description: Айди юзера.
       required:
-        - recipient_id
-        - user_id
+        - target_type
+        - target_id
     BookmarkScheme:
       type: object
       properties:
@@ -371,28 +378,24 @@ components:
           type: string
           format: ObjectID
           description: Уникальный идентификатор закладки.
-        recipient_id:
+        target_type:
+          $ref: '#/components/schemas/TargetType'
+        target_id:
           type: string
           description: Айди обьекта, на который закладка.
-        user_id:
-          type: string
-          format: uuid
-          description: Айди юзера.
       required:
         - id
-        - recipient_id
-        - user_id
+        - target_type
+        - target_id
     ReviewCreateScheme:
       type: object
       properties:
-        recipient_id:
+        target_type:
+          $ref: '#/components/schemas/TargetType'
+        target_id:
           type: string
           description: Айди обьекта, на который рецензия.
-        user_id:
-          type: string
-          format: uuid
-          description: Айди юзера.
-        worth:
+        value:
           type: integer
           description: Значение рецензии.
         header:
@@ -402,14 +405,15 @@ components:
           type: string
           description: Текст рецензии.
       required:
-        - recipient_id
-        - user_id
+        - target_type
+        - target_id
+        - value
         - header
         - description
     ReviewEditScheme:
       type: object
       properties:
-        worth:
+        value:
           type: integer
           description: Значение рецензии.
         header:
@@ -425,14 +429,16 @@ components:
           type: string
           format: ObjectID
           description: Уникальный идентификатор рецензии.
-        recipient_id:
+        target_type:
+          $ref: '#/components/schemas/TargetType'
+        target_id:
           type: string
           description: Айди обьекта, на который рецензия.
         user_id:
           type: string
           format: uuid
           description: Айди юзера.
-        worth:
+        value:
           type: integer
           description: Значение рецензии.
         header:
@@ -442,31 +448,32 @@ components:
           type: string
           description: Текст рецензии.
       required:
-        - recipient_id
+        - id
+        - target_type
+        - target_id
         - user_id
+        - value
         - header
         - description
     LikeCreateScheme:
       type: object
       properties:
-        recipient_id:
+        target_type:
+          $ref: '#/components/schemas/TargetType'
+        target_id:
           type: string
           description: Айди обьекта, на который лайк.
-        user_id:
-          type: string
-          format: uuid
-          description: Айди юзера.
         worth:
           type: integer
           description: Значение лайка.
       required:
-        - recipient_id
-        - user_id
+        - target_type
+        - target_id
         - value
     LikeEditScheme:
       type: object
       properties:
-        worth:
+        value:
           type: integer
           description: Значение лайка.
       required:
@@ -478,18 +485,22 @@ components:
           type: string
           format: ObjectID
           description: Уникальный идентификатор лайка.
-        recipient_id:
+        target_type:
+          $ref: '#/components/schemas/TargetType'
+        target_id:
           type: string
           description: Айди обьекта, на который лайк.
         user_id:
           type: string
           format: uuid
           description: Айди юзера.
-        worth:
+        value:
           type: integer
           description: Значение лайка.
       required:
-        - recipient_id
+        - id
+        - target_type
+        - target_id
         - user_id
         - value
 
@@ -511,6 +522,15 @@ components:
         per_page: { type: number }
         results: { type: array, items: {} }
 
+    TargetType:
+      type: string
+      enum:
+        - user
+        - movie
+        - review
+        - like
+        - rating
+
   responses:
     Unprocessable:
       description: Операция не выполнена. В теле ответа описание ошибки.
@@ -524,6 +544,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/BaseMessage'
+    Response404:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BaseMessage'
     UserBookmarkList:
       description: Актуальный список закладок пользователя.
       content:
@@ -532,12 +558,6 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/BookmarkScheme'
-    Response404:
-      description: Not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/BaseMessage'
 
   securitySchemes:
     JWTAccessToken:
