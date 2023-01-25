@@ -378,6 +378,14 @@ components:
           type: string
           format: ObjectID
           description: Уникальный идентификатор закладки.
+        created_at:
+          type: string
+          format: date-time
+          description: Время создания закладки.
+        user_id:
+          type: string
+          format: uuid
+          description: Айди юзера.
         target_type:
           $ref: '#/components/schemas/TargetType'
         target_id:
@@ -385,6 +393,7 @@ components:
           description: Айди обьекта, на который закладка.
       required:
         - id
+        - created_at
         - target_type
         - target_id
     ReviewCreateScheme:
@@ -398,28 +407,28 @@ components:
         value:
           type: integer
           description: Значение рецензии.
-        header:
+        title:
           type: string
           description: Заголовок рецензии.
-        description:
+        text:
           type: string
           description: Текст рецензии.
       required:
         - target_type
         - target_id
         - value
-        - header
-        - description
+        - title
+        - text
     ReviewEditScheme:
       type: object
       properties:
         value:
           type: integer
           description: Значение рецензии.
-        header:
+        title:
           type: string
           description: Заголовок рецензии.
-        description:
+        text:
           type: string
           description: Текст рецензии.
     ReviewScheme:
@@ -429,6 +438,10 @@ components:
           type: string
           format: ObjectID
           description: Уникальный идентификатор рецензии.
+        created_at:
+          type: string
+          format: date-time
+          description: Время создания рецензии.
         target_type:
           $ref: '#/components/schemas/TargetType'
         target_id:
@@ -441,20 +454,21 @@ components:
         value:
           type: integer
           description: Значение рецензии.
-        header:
+        title:
           type: string
           description: Заголовок рецензии.
-        description:
+        text:
           type: string
           description: Текст рецензии.
       required:
         - id
+        - created_at
         - target_type
         - target_id
         - user_id
         - value
-        - header
-        - description
+        - title
+        - text
     LikeCreateScheme:
       type: object
       properties:
@@ -485,6 +499,10 @@ components:
           type: string
           format: ObjectID
           description: Уникальный идентификатор лайка.
+        created_at:
+          type: string
+          format: date-time
+          description: Время создания лайка.
         target_type:
           $ref: '#/components/schemas/TargetType'
         target_id:
@@ -499,6 +517,7 @@ components:
           description: Значение лайка.
       required:
         - id
+        - created_at
         - target_type
         - target_id
         - user_id
