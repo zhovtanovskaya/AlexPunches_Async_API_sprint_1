@@ -1,5 +1,5 @@
 """Модуль для JWT-авторизации HTTP-запроса."""
-from typing import Optional
+from typing import List, Optional
 
 import jwt
 from fastapi import HTTPException, Request, Security
@@ -25,7 +25,7 @@ class AuthErrors:
 
 class AccessTokenPayload(BaseModel):
     """Ожидаемый формат данных в токене авторизации JWT."""
-    roles: list[str]
+    roles: List[str]
     type: str = Field('access', const=True)
 
 
