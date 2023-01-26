@@ -212,25 +212,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         422:
           $ref: '#/components/responses/Unprocessable'
-    get:
-      tags:
-        - ratings
-      summary: Получить все лайки.
-      description: Список лайков.
-      parameters:
-        - $ref: '#/components/parameters/filter[user_id]'
-        - $ref: '#/components/parameters/filter[target_type]'
-        - $ref: '#/components/parameters/filter[target_id]'
-        - $ref: '#/components/parameters/page[size]'
-        - $ref: '#/components/parameters/page[number]'
-        - $ref: '#/components/parameters/sort'
-      responses:
-        200:
-          description: success
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/RatingPaginatedResult"
 
   /api/v1/likes/{like_id}:
     put:
@@ -281,6 +262,23 @@ paths:
         404:
           $ref: '#/components/responses/Response404'
 
+  /api/v1/aggregate:
+    get:
+      tags:
+        - agregator
+      summary: Получить агрегацию.
+      description: Агрегация всех оценок и фидбеков для объекта.
+      parameters:
+        - $ref: '#/components/parameters/filter[user_id]'
+        - $ref: '#/components/parameters/filter[target_type]'
+        - $ref: '#/components/parameters/filter[target_id]'
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgregatorResult"
 
 components:
   parameters:
@@ -517,6 +515,20 @@ components:
         - target_id
         - user_id
         - value
+    AgregatorScheme:
+      type: object
+      properties:
+        aggregate_type:
+          $ref: '#/components/schemas/AggregatorType'
+        aggregate_properties:
+          type: array
+          items:
+            $ref: '#/components/schemas/Property'
+      required:
+        - aggregate_type
+
+
+
 
     BaseMessage:
       type: object
@@ -544,6 +556,13 @@ components:
         page: { type: number }
         per_page: { type: number }
         results: { type: array, items: {} }
+    AgregatorResult:
+      type: object
+      properties:
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgregatorScheme'
 
     TargetType:
       type: string
@@ -553,6 +572,20 @@ components:
         - review
         - like
         - rating
+    AggregatorType:
+      type: string
+      enum:
+        - like
+        - review
+        - rating
+        - bookmark
+    Property:
+      type: object
+      properties:
+        property_name:
+          type: string
+        property_value:
+          type: number
 
   responses:
     Unprocessable:
