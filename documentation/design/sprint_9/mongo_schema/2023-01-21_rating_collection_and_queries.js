@@ -24,7 +24,9 @@ db.ratings.aggregate([
 db.ratings.aggregate([
     {
         $group: {
-            _id: "$movie_id", avgRatings: { $avg : "$rating" }, totalRatings: { $count : { } }
+            _id: "$movie_id",
+            avgRatings: { $avg : "$rating" },
+            totalRatings: { $count : { } }
         }
     },
     { $sort: { avgRatings: -1 } }
