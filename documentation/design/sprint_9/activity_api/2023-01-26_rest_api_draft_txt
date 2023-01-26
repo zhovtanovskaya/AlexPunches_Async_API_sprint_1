@@ -1,0 +1,43 @@
+// Список всех пользовательских реакций
+GET reactions/?target_type=movie&target_id=6fdcc8ca-9c6f-11ed-9682-7831c1bc31e4 =>
+{
+    "content": [
+        {
+            "type": "rating",
+            "totalRatings"
+            "averageRating"
+            "myRating"
+        },
+        {
+            "type": "review",
+            "totalReviews"
+            "positiveCount"
+            "negativeCount"
+        }
+    ]
+}
+// Топ пользовательских рецензий.  Вот в этом варианте не нравится
+// поле "reactions".  Может позволить end-point'у reactions/ принимать
+// список [{"target_type", "target_id"}, ...]?  Чтобы возвращать реакции
+// на много объектов.
+GET reviews/?target_type=&target_id=&page_number=&page_size=&order_by=likes =>
+{
+	"content": [
+		{"title", "text", "user_id", "reactions": [{"type": "like", "totalLikes"}]},
+		{"title", "text", "user_id", "reactions": [{"type": "like", "totalLikes"}]},
+	]
+}
+
+// Оценки фильма. Решено отказаться от этого end-point'а.
+GET likes/ -> GET ratings/?aggregate =>
+{
+ 	"content": [
+    	{"create_at", "value", "user_id"},
+      	{"create_at", "value", "user_id"},
+      	{"create_at", "value", "user_id"},
+    ]
+  	"aggregate": {
+  		...
+	}
+}
+
