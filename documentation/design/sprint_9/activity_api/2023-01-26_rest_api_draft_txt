@@ -3,16 +3,21 @@ GET reactions/?target_type=movie&target_id=6fdcc8ca-9c6f-11ed-9682-7831c1bc31e4 
 {
     "content": [
         {
-            "type": "rating",
-            "totalRatings"
-            "averageRating"
-            "myRating"
+            "type": "rating"
+            "total_ratings"
+            "average_rating"
         },
         {
-            "type": "review",
-            "totalReviews"
-            "positiveCount"
-            "negativeCount"
+            "type": "review"
+            "total_reviews"
+            "positive_count"
+            "negative_count"
+            "neutral_count"
+        },
+        {
+            "type": "my_reactions",
+            "content": [
+            ]
         }
     ]
 }
