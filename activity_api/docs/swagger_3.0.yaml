@@ -262,23 +262,27 @@ paths:
         404:
           $ref: '#/components/responses/Response404'
 
-  /api/v1/aggregate:
+  /api/v1/statistics/movies/{movie_id}:
     get:
       tags:
-        - agregator
-      summary: Получить агрегацию.
-      description: Агрегация всех оценок и фидбеков для объекта.
+        - statistics
+      summary: Статистика оценок по фильму.
+      description: Статистика оценок по фильму.
       parameters:
-        - $ref: '#/components/parameters/filter[user_id]'
-        - $ref: '#/components/parameters/filter[target_type]'
-        - $ref: '#/components/parameters/filter[target_id]'
+        - $ref: '#/components/parameters/movie_id'
       responses:
         200:
           description: success
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/AgregatorResult"
+                $ref: "#/components/schemas/StatisticMovieResult"
+        404:
+          description: Статистика с таким movie_id не существует.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseMessage'
 
 components:
   parameters:
@@ -350,6 +354,14 @@ components:
       schema:
         type: string
         format: ObjectID
+    movie_id:
+      name: movie_id
+      in: path
+      description: ID фильма
+      required: true
+      schema:
+        type: string
+        format: uuid
 
 
   schemas:
@@ -515,20 +527,30 @@ components:
         - target_id
         - user_id
         - value
-    AgregatorScheme:
+    StatisticRatingScheme:
       type: object
       properties:
-        aggregate_type:
-          $ref: '#/components/schemas/AggregatorType'
-        aggregate_properties:
-          type: array
-          items:
-            $ref: '#/components/schemas/Property'
-      required:
-        - aggregate_type
-
-
-
+        total_ratings:
+          type: integer
+          description: Всего оценок
+        average_rating:
+          type: number
+          description: Средняя оценка
+    StatisticReviewScheme:
+      type: object
+      properties:
+        total_reviews:
+          type: integer
+          description: Всего рецензий
+        positive_count:
+          type: integer
+          description: Кол-во положительных рецензий
+        negative_count:
+          type: integer
+          description: Кол-во отрицательных рецензий
+        neutral_count:
+          type: integer
+          description: Кол-во нейтральных рецензий
 
     BaseMessage:
       type: object
@@ -556,13 +578,14 @@ components:
         page: { type: number }
         per_page: { type: number }
         results: { type: array, items: {} }
-    AgregatorResult:
+    StatisticMovieResult:
       type: object
       properties:
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/AgregatorScheme'
+        rating:
+          $ref: '#/components/schemas/StatisticRatingScheme'
+        review:
+          $ref: '#/components/schemas/StatisticReviewScheme'
+
 
     TargetType:
       type: string
@@ -572,20 +595,6 @@ components:
         - review
         - like
         - rating
-    AggregatorType:
-      type: string
-      enum:
-        - like
-        - review
-        - rating
-        - bookmark
-    Property:
-      type: object
-      properties:
-        property_name:
-          type: string
-        property_value:
-          type: number
 
   responses:
     Unprocessable:
