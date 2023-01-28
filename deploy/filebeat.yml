@@ -6,6 +6,16 @@ filebeat.inputs:
   json:
     keys_under_root: true
     add_error_key: true
+  tags: ["nginx"]
+
+- type: log
+  enabled: true
+  paths:
+    - /var/log/auth-flask/*
+  json:
+    keys_under_root: true
+    add_error_key: true
+  tags: ["auth-flask"]
 
 output.logstash:
   enabled: true
