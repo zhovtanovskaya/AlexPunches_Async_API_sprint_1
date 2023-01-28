@@ -9,20 +9,22 @@ servers:
   - url: http://127.0.0.1:27017
 tags:
   - name: bookmark
-    description: Закладки
+    description: Закладки фильмов
   - name: review
-    description: Рецензии
+    description: Рецензии на фильмы
   - name: ratings
-    description: Оценки
-  - name: agregator
-    description: Агрегации
+    description: Оценки фильмов
+  - name: statistics
+    description: Статистика по фильмам
+  - name: likes
+    description: Лайки на рецензии
 
 paths:
   /api/v1/bookmarks:
     post:
       tags:
         - bookmark
-      summary: Создать новую закладку.
+      summary: Создать новую закладку на фильм.
       requestBody:
         description: Создать закладку.
         required: true
@@ -54,7 +56,16 @@ paths:
         - JWTAccessToken: []
       responses:
         200:
-          $ref: '#/components/responses/UserBookmarkList'
+          description: Список всех закладок пользователя без паджинации.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/BookmarkScheme"
         401:
           $ref: '#/components/responses/Unauthorized'
 
@@ -79,7 +90,7 @@ paths:
     post:
       tags:
         - review
-      summary: Создать новую рецензию.
+      summary: Создать новую рецензию на фильм.
       requestBody:
         description: Создать рецензию.
         required: true
@@ -106,7 +117,6 @@ paths:
       summary: Получить все рецензии.
       description: Список рецензий.
       parameters:
-        - $ref: '#/components/parameters/filter[user_id]'
         - $ref: '#/components/parameters/filter[target_type]'
         - $ref: '#/components/parameters/filter[target_id]'
         - $ref: '#/components/parameters/page[size]'
@@ -170,7 +180,7 @@ paths:
         422:
           $ref: '#/components/responses/Unprocessable'
 
-  /api/v1/likes/{like_id}:
+  /api/v1/ratings/{ratings_id}:
     delete:
       tags:
         - ratings
@@ -182,6 +192,49 @@ paths:
       responses:
         204:
           description: Оценка удалена и HTTP-ответ пуст.
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/Response404'
+
+  /api/v1/likes:
+    post:
+      tags:
+        - likes
+      summary: Лайкнуть рецензию.
+      security:
+        -   JWTAccessToken: [ ]
+      requestBody:
+        description: Создать лайк.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LikeCreateScheme'
+      responses:
+        201:
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LikeScheme'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        422:
+          $ref: '#/components/responses/Unprocessable'
+
+  /api/v1/likes/{like_id}:
+    delete:
+      tags:
+        - likes
+      summary: Удалить лайк на рецензию.
+      parameters:
+        -   $ref: '#/components/parameters/like_id'
+      security:
+        -   JWTAccessToken: [ ]
+      responses:
+        204:
+          description: Лайк удален и HTTP-ответ пуст.
         401:
           $ref: '#/components/responses/Unauthorized'
         404:
@@ -287,7 +340,14 @@ components:
       schema:
         type: string
         format: uuid
-
+    like_id:
+      name: like_id
+      in: path
+      description: ID лайка
+      required: true
+      schema:
+        type: string
+        format: ObjectID
 
   schemas:
     BookmarkCreateScheme:
@@ -297,6 +357,7 @@ components:
           $ref: '#/components/schemas/TargetType'
         target_id:
           type: string
+          format: UUID
           description: Айди обьекта, на который закладка.
       required:
         - target_type
@@ -320,6 +381,7 @@ components:
           $ref: '#/components/schemas/TargetType'
         target_id:
           type: string
+          format: UUID
           description: Айди обьекта, на который закладка.
       required:
         - id
@@ -333,9 +395,14 @@ components:
           $ref: '#/components/schemas/TargetType'
         target_id:
           type: string
+          format: UUID
           description: Айди обьекта, на который рецензия.
         value:
           type: integer
+          enum:
+            - 0
+            - 5
+            - 10
           description: Значение рецензии.
         title:
           type: string
@@ -376,6 +443,7 @@ components:
           $ref: '#/components/schemas/TargetType'
         target_id:
           type: string
+          format: UUID
           description: Айди обьекта, на который рецензия.
         user_id:
           type: string
@@ -406,8 +474,9 @@ components:
           $ref: '#/components/schemas/TargetType'
         target_id:
           type: string
+          format: UUID
           description: Айди обьекта, на который оценка.
-        worth:
+        value:
           type: integer
           description: Значение оценки.
       required:
@@ -437,6 +506,7 @@ components:
           $ref: '#/components/schemas/TargetType'
         target_id:
           type: string
+          format: UUID
           description: Айди обьекта, на который оценка.
         user_id:
           type: string
@@ -444,6 +514,58 @@ components:
           description: Айди юзера.
         value:
           type: integer
+          description: Значение оценки.
+      required:
+        - id
+        - created_at
+        - target_type
+        - target_id
+        - user_id
+        - value
+    LikeCreateScheme:
+      type: object
+      properties:
+        target_type:
+          $ref: '#/components/schemas/TargetType'
+        target_id:
+          type: string
+          format: ObjectID
+          description: Айди обьекта, на который оценка.
+        value:
+          type: integer
+          enum:
+            - 0
+            - 10
+          description: Значение оценки.
+      required:
+        - target_type
+        - target_id
+        - value
+    LikeScheme:
+      type: object
+      properties:
+        id:
+          type: string
+          format: ObjectID
+          description: Уникальный идентификатор оценки.
+        created_at:
+          type: string
+          format: date-time
+          description: Время создания оценки.
+        target_type:
+          $ref: '#/components/schemas/TargetType'
+        target_id:
+          type: string
+          description: Айди обьекта, на который оценка.
+        user_id:
+          type: string
+          format: uuid
+          description: Айди юзера.
+        value:
+          type: integer
+          enum:
+            - 0
+            - 10
           description: Значение оценки.
       required:
         - id
@@ -499,26 +621,27 @@ components:
     PaginatedResult:
       type: object
       properties:
-        total: { type: number }
-        page: { type: number }
-        per_page: { type: number }
-        results: { type: array, items: {} }
+        page:
+          type: object
+          properties:
+            total_pages: { type: number }
+            total_items: { type: number }
+            number: { type: number }
+            size: { type: number }
     StatisticMovieResult:
       type: object
       properties:
-        rating:
+        ratings:
           $ref: '#/components/schemas/StatisticRatingScheme'
-        review:
+        reviews:
           $ref: '#/components/schemas/StatisticReviewScheme'
 
 
     TargetType:
       type: string
       enum:
-        - user
         - movie
         - review
-        - like
         - rating
 
   responses:
