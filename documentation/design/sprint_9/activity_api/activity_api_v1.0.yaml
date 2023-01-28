@@ -128,49 +128,6 @@ paths:
                           $ref: "#/components/schemas/ReviewScheme"
 
   /api/v1/reviews/{review_id}:
-    get:
-      tags:
-        - review
-      summary: Получить существующую рецензию.
-      parameters:
-        - $ref: '#/components/parameters/review_id'
-      responses:
-        200:
-          description: success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ReviewScheme'
-        404:
-          $ref: '#/components/responses/Response404'
-    patch:
-      tags:
-        - review
-      summary: Изменить существующую рецензию.
-      parameters:
-        - $ref: '#/components/parameters/review_id'
-      requestBody:
-        description: Изменить рецензию.
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ReviewEditScheme'
-      security:
-        - JWTAccessToken: []
-      responses:
-        200:
-          description: Рецензия изменена.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ReviewScheme'
-        401:
-          $ref: '#/components/responses/Unauthorized'
-        404:
-          $ref: '#/components/responses/Response404'
-        422:
-          $ref: '#/components/responses/Unprocessable'
     delete:
       tags:
         - review
@@ -214,38 +171,6 @@ paths:
           $ref: '#/components/responses/Unprocessable'
 
   /api/v1/likes/{like_id}:
-    put:
-      tags:
-        - ratings
-      summary: Изменить оценку.
-      parameters:
-        - $ref: '#/components/parameters/rating_id'
-      requestBody:
-        description: Изменить оценку.
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RatingEditScheme'
-      security:
-        - JWTAccessToken: []
-      responses:
-        200:
-          description: Оценка изменен.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RatingScheme'
-        401:
-          $ref: '#/components/responses/Unauthorized'
-        404:
-          description: Оценка с таким like_id не существует.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BaseMessage'
-        422:
-          $ref: '#/components/responses/Unprocessable'
     delete:
       tags:
         - ratings
