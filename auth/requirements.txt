@@ -23,3 +23,5 @@ google-auth-oauthlib==0.7.1
 google-auth==2.14.1
 google-auth-httplib2==0.1.0
 Flask_Limiter==2.8.1
+sentry-sdk[flask]==1.14.0
+python-logstash==0.4.8
