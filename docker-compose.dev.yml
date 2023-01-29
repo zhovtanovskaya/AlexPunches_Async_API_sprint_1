@@ -40,6 +40,7 @@ services:
     volumes:
       - service_static_value:/opt/app/static/
       - service_media_value:/opt/app/media/
+      - /tmp/logs/admin_panel/:/var/log/admin_panel/
     expose:
       - "8000"
     env_file:
@@ -140,6 +141,7 @@ services:
       - /var/log/auth_flask/:/var/log/auth_flask/
       - /var/log/activity_api/:/var/log/activity_api/
       - /var/log/async_api/:/var/log/async_api/
+      - /var/log/admin_panel/:/var/log/admin_panel/
       - ./deploy/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
     depends_on:
       - nginx

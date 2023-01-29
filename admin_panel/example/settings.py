@@ -13,7 +13,7 @@ include(
     'components/middleware.py',
     'components/templates.py',
     'components/validators.py',
-    'components/logging.py',
+    'components/logger.py',
 )
 
 SECRET_KEY = os.environ.get('SECRET_KEY')

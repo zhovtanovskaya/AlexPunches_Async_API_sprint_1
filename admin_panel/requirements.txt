@@ -11,3 +11,5 @@ python-dotenv==0.20.0
 six==1.16.0
 uWSGI==2.0.20
 more-itertools==8.14.0
+python-json-logger==2.0.4
+django-log-request-id==2.1.0
