@@ -11,11 +11,20 @@ filebeat.inputs:
 - type: log
   enabled: true
   paths:
-    - /var/log/auth-flask/*
+    - /var/log/auth_flask/*
   json:
     keys_under_root: true
     add_error_key: true
-  tags: ["auth-flask"]
+  tags: ["auth_flask"]
+
+- type: log
+  enabled: true
+  paths:
+    - /var/log/activity_api/*
+  json:
+    keys_under_root: true
+    add_error_key: true
+  tags: ["activity_api"]
 
 output.logstash:
   enabled: true

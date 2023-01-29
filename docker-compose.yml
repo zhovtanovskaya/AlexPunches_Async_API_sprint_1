@@ -96,7 +96,7 @@ services:
   auth_flask:
     build: auth
     volumes:
-      - /tmp/logs/auth-flask/:/var/log/auth-flask/
+      - /tmp/logs/auth_flask/:/var/log/auth_flask/
     depends_on:
       - auth_postgres
       - redis
@@ -121,6 +121,8 @@ services:
 
   activity_api:
     build: activity_api
+    volumes:
+      - /tmp/logs/activity_api/:/var/log/activity_api/
     expose:
       - "8000"
     env_file:
@@ -167,7 +169,8 @@ services:
     command: filebeat -e -strict.perms=false
     volumes:
       - /tmp/logs/nginx:/var/log/nginx:ro
-      - /tmp/logs/auth-flask/:/var/log/auth-flask:ro
+      - /tmp/logs/auth_flask/:/var/log/auth_flask:ro
+      - /tmp/logs/activity_api/:/var/log/activity_api:ro
       - ./deploy/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
     depends_on:
       - nginx

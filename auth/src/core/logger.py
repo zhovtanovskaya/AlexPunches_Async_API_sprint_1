@@ -78,7 +78,7 @@ LOGGING = {
         'file': {
             'formatter': 'json',
             'class': 'logging.FileHandler',
-            'filename': '/var/log/auth-flask/flask.log',
+            'filename': '/var/log/auth_flask/flask.log',
             'filters': ['request_id'],
         },
     },
@@ -97,7 +97,7 @@ LOGGING = {
         },
     },
     'root': {
-        'level': 'INFO',
+        'level': 'DEBUG',
         'formatter': 'verbose',
         'handlers': LOG_DEFAULT_HANDLERS,
     },
