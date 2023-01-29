@@ -2,6 +2,7 @@ import logging
 
 LOG_FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 LOG_DEFAULT_HANDLERS = ['console', 'file']
+LOG_FILE = '/var/log/activity_api/activity_api.log'
 
 
 class RequestIdFilter(logging.Filter):
@@ -53,6 +54,7 @@ LOGGING = {
                     thread: %(thread)d
                     threadName: %(threadName)s
                     exc_info: %(exc_info)s
+                    request_id: %(request_id)s
                 """,
             'datefmt': '%Y-%m-%d %H:%M:%S',
         },
@@ -76,7 +78,7 @@ LOGGING = {
         'file': {
             'formatter': 'json',
             'class': 'logging.FileHandler',
-            'filename': '/var/log/activity_api/activity_api.log',
+            'filename': LOG_FILE,
             'filters': ['request_id'],
         },
     },

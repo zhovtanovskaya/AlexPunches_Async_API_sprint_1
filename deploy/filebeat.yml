@@ -26,6 +26,15 @@ filebeat.inputs:
     add_error_key: true
   tags: ["activity_api"]
 
+- type: log
+  enabled: true
+  paths:
+    - /var/log/async_api/*
+  json:
+    keys_under_root: true
+    add_error_key: true
+  tags: ["async_api"]
+
 output.logstash:
   enabled: true
   hosts: ["${ELK_LOGSTASH_HOST}"]

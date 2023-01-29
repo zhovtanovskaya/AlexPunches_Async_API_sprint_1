@@ -1,9 +1,25 @@
+import logging
+
 LOG_FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-LOG_DEFAULT_HANDLERS = ['console', ]
+LOG_DEFAULT_HANDLERS = ['console', 'file']
+LOG_FILE = '/var/log/async_api/async_api.log'
+
+
+class RequestIdFilter(logging.Filter):
+
+    def filter(self, record):
+        # record.request_id = ...  TODO получить заголовок X-Request-Id
+        return True
+
 
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'filters': {
+        'request_id': {
+            '()': RequestIdFilter,
+        },
+    },
     'formatters': {
         'verbose': {
             'format': LOG_FORMAT
@@ -16,6 +32,31 @@ LOGGING = {
         'access': {
             '()': 'uvicorn.logging.AccessFormatter',
             'fmt': "%(levelprefix)s %(client_addr)s - '%(request_line)s' %(status_code)s",
+        },
+        'json': {
+            '()': 'pythonjsonlogger.jsonlogger.JsonFormatter',
+            'format': """
+                    asctime: %(asctime)s
+                    created: %(created)f
+                    filename: %(filename)s
+                    funcName: %(funcName)s
+                    levelname: %(levelname)s
+                    levelno: %(levelno)s
+                    lineno: %(lineno)d
+                    message: %(message)s
+                    module: %(module)s
+                    msec: %(msecs)d
+                    name: %(name)s
+                    pathname: %(pathname)s
+                    process: %(process)d
+                    processName: %(processName)s
+                    relativeCreated: %(relativeCreated)d
+                    thread: %(thread)d
+                    threadName: %(threadName)s
+                    exc_info: %(exc_info)s
+                    request_id: %(request_id)s
+                """,
+            'datefmt': '%Y-%m-%d %H:%M:%S',
         },
     },
     'handlers': {
@@ -34,6 +75,12 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'stream': 'ext://sys.stdout',
         },
+        'file': {
+            'formatter': 'json',
+            'class': 'logging.FileHandler',
+            'filename': LOG_FILE,
+            'filters': ['request_id'],
+        },
     },
     'loggers': {
         '': {
@@ -50,7 +97,7 @@ LOGGING = {
         },
     },
     'root': {
-        'level': 'INFO',
+        'level': 'DEBUG',
         'formatter': 'verbose',
         'handlers': LOG_DEFAULT_HANDLERS,
     },

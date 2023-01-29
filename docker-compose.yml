@@ -43,6 +43,8 @@ services:
 
   fastapi:
     build: fastapi
+    volumes:
+      - /tmp/logs/async_api/:/var/log/async_api/
     depends_on:
       - elastic
       - redis
@@ -171,6 +173,7 @@ services:
       - /tmp/logs/nginx:/var/log/nginx:ro
       - /tmp/logs/auth_flask/:/var/log/auth_flask:ro
       - /tmp/logs/activity_api/:/var/log/activity_api:ro
+      - /tmp/logs/async_api/:/var/log/async_api:ro
       - ./deploy/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
     depends_on:
       - nginx

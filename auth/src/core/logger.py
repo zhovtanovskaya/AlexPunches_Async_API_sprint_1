@@ -12,6 +12,7 @@ class RequestIdFilter(logging.Filter):
 
 LOG_FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 LOG_DEFAULT_HANDLERS = ['console', 'file']
+LOG_FILE = '/var/log/auth_flask/flask.log'
 
 LOGGING = {
     'version': 1,
@@ -78,7 +79,7 @@ LOGGING = {
         'file': {
             'formatter': 'json',
             'class': 'logging.FileHandler',
-            'filename': '/var/log/auth_flask/flask.log',
+            'filename': LOG_FILE,
             'filters': ['request_id'],
         },
     },
