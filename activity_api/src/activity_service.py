@@ -2,8 +2,8 @@
 import asyncio
 
 from aiokafka import AIOKafkaProducer
+from Async_API_sprint_1.activity_api.src.db.producer import get_producer
 from fastapi import Depends
-from producer import get_producer
 
 from core.config import config
 from models import SpawnPointModel

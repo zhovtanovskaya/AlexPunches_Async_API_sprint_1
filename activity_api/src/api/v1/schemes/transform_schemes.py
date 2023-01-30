@@ -1,5 +1,5 @@
 """Трансофмации из схем в модели и наоборот."""
-from api.v1.schemes.spawn_point import SpawnPointScheme
+from .spawn_point import SpawnPointScheme
 from models import SpawnPointModel
 
 

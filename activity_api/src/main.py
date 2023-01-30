@@ -11,7 +11,7 @@ from fastapi.responses import ORJSONResponse
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(BASE_DIR)
 
-import producer
+import activity_api.src.db.kafka as get_producer
 
 from api.v1 import activities
 from core.config import config
@@ -28,18 +28,18 @@ app = FastAPI(
 async def startup():
     """Запустить продюсера для Кафки."""
     loop = asyncio.get_event_loop()
-    producer.aioproducer = AIOKafkaProducer(
+    get_producer.aioproducer = AIOKafkaProducer(
         loop=loop,
         client_id=config.project_name,
         bootstrap_servers=f'{config.event_store_host}:{config.event_store_port}', # noqa
     )
-    await producer.aioproducer.start()
+    await get_producer.aioproducer.start()
 
 
 @app.on_event('shutdown')
 async def shutdown():
     """Остановить продюсера для Кафки."""
-    await producer.aioproducer.stop()
+    await get_producer.aioproducer.stop()
 
 
 app.include_router(
