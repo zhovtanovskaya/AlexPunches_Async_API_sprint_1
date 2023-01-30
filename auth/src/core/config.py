@@ -96,7 +96,7 @@ class ApiSettings(BaseSettings):
     google_oauth = GoogleClientSecret().as_dict()
     google_oauth_endpoint = 'http://localhost:5000/api/v1/social-auth/google'
 
-    auth_sentry_dns: str
+    auth_sentry_dsn: str
 
 
 @lru_cache()

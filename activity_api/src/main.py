@@ -18,7 +18,7 @@ from api.v1 import activities
 from core.config import config
 
 sentry_sdk.init(
-    dsn=config.activity_sentry_dns,
+    dsn=config.activity_sentry_dsn,
     traces_sample_rate=1.0,
 )
 app = FastAPI(

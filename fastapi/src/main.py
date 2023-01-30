@@ -17,7 +17,7 @@ from core.cache_middleware import RedisCacheMiddleware
 from core.config import config
 from db import elastic, redis
 
-sentry_sdk.init(dsn=config.api_sentry_dns, traces_sample_rate=1.0)
+sentry_sdk.init(dsn=config.api_sentry_dsn, traces_sample_rate=1.0)
 
 app = FastAPI(
     title=config.project_name,

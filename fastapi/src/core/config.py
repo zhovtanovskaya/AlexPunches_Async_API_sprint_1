@@ -60,7 +60,7 @@ class ApiSettings(BaseSettings):
     }
 
     api_port: str = '8000'
-    api_sentry_dns: str
+    api_sentry_dsn: str
 
 
 @lru_cache()
