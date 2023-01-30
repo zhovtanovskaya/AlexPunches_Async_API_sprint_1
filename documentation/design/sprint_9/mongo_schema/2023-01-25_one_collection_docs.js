@@ -63,3 +63,12 @@ db.reactions.insertOne({
     type: "like",
     value: 10, // [0, 10]
 })
+db.reactions.insertOne({
+    // _id
+    created_at: new Date(),
+    user_id: "60bf29d4-9c6f-11ed-a1a5-7831c1bc31e4",          // UUID.
+    target_id: ObjectId("63d0c92bf5eb85d9a10bd8ac"),          // Review UUID.
+    target_type: "review",
+    type: "like",
+    value: 0, // [0, 10]
+})
