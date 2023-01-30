@@ -14,11 +14,6 @@ GET reactions/?target_type=movie&target_id=6fdcc8ca-9c6f-11ed-9682-7831c1bc31e4 
             "negative_count"
             "neutral_count"
         },
-        {
-            "type": "my_reactions",
-            "content": [
-            ]
-        }
     ]
 }
 // Топ пользовательских рецензий.  Вот в этом варианте не нравится
