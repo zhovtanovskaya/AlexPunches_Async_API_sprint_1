@@ -16,6 +16,6 @@ class SpawnPointScheme(BaseModel):
     film_id: str
     time: int
 
-    class Config:
+    class Config:  # noqa
         json_loads = orjson.loads
         json_dumps = orjson_dumps
