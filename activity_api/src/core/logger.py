@@ -1,14 +1,18 @@
 import logging
 
+from utils import request_id
+
 LOG_FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 LOG_DEFAULT_HANDLERS = ['console', 'file']
 LOG_FILE = '/var/log/activity_api/activity_api.log'
 
 
 class RequestIdFilter(logging.Filter):
+    """Фильтры для логера."""
 
     def filter(self, record):
-        # record.request_id = ...  TODO получить заголовок X-Request-Id
+        """Добавить X-Request-Id к логам."""
+        record.request_id = request_id.get()
         return True
 
 

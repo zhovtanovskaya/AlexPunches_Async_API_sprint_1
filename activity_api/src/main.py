@@ -5,7 +5,7 @@ import sys
 
 import uvicorn
 from aiokafka import AIOKafkaProducer
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.responses import ORJSONResponse
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -15,6 +15,7 @@ import producer
 
 from api.v1 import activities
 from core.config import config
+from utils import request_id
 
 app = FastAPI(
     title=config.project_name,
@@ -22,6 +23,13 @@ app = FastAPI(
     openapi_url='/api/v1/activities/openapi.json',
     default_response_class=ORJSONResponse,
 )
+
+
+@app.middleware('http')
+async def request_middleware(request: Request, call_next):
+    """Поймать заголовок X-Request-Id и придержать его в ContextVar."""
+    request_id.set(request.headers.get('X-Request-Id', default=''))
+    return await call_next(request)
 
 
 @app.on_event('startup')
