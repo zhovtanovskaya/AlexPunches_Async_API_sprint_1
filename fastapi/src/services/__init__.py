@@ -1,12 +1,12 @@
 from typing import Any, Mapping, Type
 
 from elastic_transport import ObjectApiResponse
+from fastapi import Depends
 from pydantic import BaseModel
 
 from api.v1 import SearchEngineSortedPaginate
 from api.v1.shemes.transform_schemes import api_field_name_to_es_field_name
 from core.config import config
-from fastapi import Depends
 from services.search_engine import AsyncSearchEngine
 from utils.search_engine import (es_scroll_all_pages,
                                  get_one_page_from_search_engine,

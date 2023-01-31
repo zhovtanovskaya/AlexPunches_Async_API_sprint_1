@@ -3,7 +3,7 @@ from contextvars import ContextVar
 
 import orjson
 
-request_id: ContextVar[str] = ContextVar('request_id')
+request_id: ContextVar[str] = ContextVar('request_id', default='')
 
 
 def orjson_dumps(v, *, default):
