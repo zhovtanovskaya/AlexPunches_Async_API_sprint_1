@@ -75,10 +75,6 @@ def create_app():
     sentry_sdk.init(
         dsn=config.auth_sentry_dsn,
         integrations=[FlaskIntegration()],
-        traces_sample_rate=1.0
+        traces_sample_rate=1.0,
     )
     return app
-
-
-
-
