@@ -73,7 +73,7 @@ def create_app():
         storage_uri=f'redis://{config.redis_host}:{config.redis_port}',
     )
     sentry_sdk.init(
-        dsn=config.auth_sentry_dns,
+        dsn=config.auth_sentry_dsn,
         integrations=[FlaskIntegration()],
         traces_sample_rate=1.0
     )

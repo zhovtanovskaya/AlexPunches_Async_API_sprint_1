@@ -28,6 +28,7 @@ class ApiSettings(BaseSettings):
     event_store_host: str = 'localhost'
     event_store_port: str = '9092'
     film_progress_topic: str = 'views'
+    activity_sentry_dsn: str
 
 
 @lru_cache()
