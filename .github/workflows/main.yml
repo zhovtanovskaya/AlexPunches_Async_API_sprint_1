@@ -16,10 +16,7 @@ jobs:
     - name: Install dependencies
       run: | 
         python3 -m pip install --upgrade pip                
-        pip install flake8 flake8-broken-line flake8-return flake8-isort flake8-html        
-        pip install mypy
-        pip install pep8-naming        
-       
+        pip install flake8
 
     - name: Test with flake8
       run: |

@@ -16,5 +16,7 @@ class SpawnPointModel(BaseModel):
     time: int
 
     class Config:
+        """Класс Config."""
+
         json_loads = orjson.loads
         json_dumps = orjson_dumps
