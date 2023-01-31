@@ -1,0 +1,24 @@
+@startuml to_be_activity_api_mongo
+!theme materia
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+
+title Activity API на основе Kafka и Mongo
+
+
+database MongoDB [
+  <b> MongoDB
+  ----
+  Коллекции закладок,
+  рейтингов, лайков,
+  ревью.
+]
+[ActivityAPI] -> MongoDB
+actor FrontEnd [
+  <b> Front End
+  ----
+  Сайт Кинотеатра.
+]
+FrontEnd -(0- ActivityAPI : REST API
+
+@enduml

@@ -148,3 +148,7 @@ admin_panel/static/
 # Workflow reports.
 report/
 flake-report/
+
+snippets
+dotenvs
+.envrc
