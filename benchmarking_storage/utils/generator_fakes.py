@@ -9,8 +9,9 @@ from dataclasses import dataclass
 from typing import Generator, List
 from uuid import UUID
 
-from config import logger
 from faker import Faker
+
+from config import logger
 
 fake = Faker()
 Faker.seed(0)

@@ -13,7 +13,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(
 sys.path.append(BASE_DIR)
 
 from config import logger, settings
-
 from utils.async_timer import async_timed
 from utils.generator_fakes import generate_points
 
