@@ -12,7 +12,6 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(BASE_DIR)
 
 import activity_api.src.db.kafka as get_producer
-
 from api.v1 import activities
 from core.config import config
 

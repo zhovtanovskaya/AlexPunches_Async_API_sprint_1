@@ -7,11 +7,11 @@ from time import sleep
 
 from clickhouse_driver import Client
 
-from config import logger, settings
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(
     __file__)))
 sys.path.append(BASE_DIR)
+
+from config import logger, settings
 
 
 @dataclass

@@ -144,3 +144,11 @@ admin_panel/static/
 .env
 .env.dev
 .env.pytests
+
+# Workflow reports.
+report/
+flake-report/
+
+snippets
+dotenvs
+.envrc 
