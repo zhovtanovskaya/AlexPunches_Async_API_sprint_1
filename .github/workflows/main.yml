@@ -19,7 +19,8 @@ jobs:
     - name: Install dependencies
       run: | 
         python3 -m pip install --upgrade pip                
-        pip install flake8       
+        pip install flake8
+        pip install mypy       
   
     - name: Test with flake8
       run: |
