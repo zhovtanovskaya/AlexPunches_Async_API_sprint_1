@@ -144,3 +144,7 @@ admin_panel/static/
 .env
 .env.dev
 .env.pytests
+
+snippets
+dotenvs
+.envrc

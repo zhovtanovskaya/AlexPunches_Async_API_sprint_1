@@ -1,0 +1,19 @@
+@startuml to_be_activity_api_kafka_sequence
+!theme materia
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+
+title Общение в Activity API на основе Kafka
+
+participant "Front End" as FrontEnd
+participant ActivityAPI [
+  =Activity API
+  ----
+  Kafka Producer
+]
+FrontEnd -> ActivityAPI : JSON лайка.
+queue "Kafka Topic" as Kafka
+ActivityAPI -> Kafka : Создает в топике Kafka JSON-событие о лайке.
+Kafka --> ActivityAPI : Событие создано.
+
+@enduml

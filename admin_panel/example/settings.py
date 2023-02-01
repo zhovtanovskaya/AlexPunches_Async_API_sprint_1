@@ -1,7 +1,9 @@
 import os
 from pathlib import Path
 
+import sentry_sdk
 from dotenv import load_dotenv
+from sentry_sdk.integrations.django import DjangoIntegration
 from split_settings.tools import include
 
 load_dotenv()
@@ -36,3 +38,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000']
 
 SHELL_PLUS = "ipython"
+
+sentry_sdk.init(
+    dsn=os.environ.get('ADMIN_SENTRY_DNS'),
+    integrations=[
+        DjangoIntegration(),
+    ],
+    traces_sample_rate=1.0,
+    send_default_pii=True
+)
