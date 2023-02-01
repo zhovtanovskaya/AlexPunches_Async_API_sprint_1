@@ -3,6 +3,7 @@ import asyncio
 import os
 import sys
 
+import sentry_sdk
 import uvicorn
 from aiokafka import AIOKafkaProducer
 from fastapi import FastAPI
@@ -15,6 +16,10 @@ import activity_api.src.db.kafka as get_producer
 from api.v1 import activities
 from core.config import config
 
+sentry_sdk.init(
+    dsn=config.activity_sentry_dsn,
+    traces_sample_rate=1.0,
+)
 app = FastAPI(
     title=config.project_name,
     docs_url='/api/v1/activities/openapi',

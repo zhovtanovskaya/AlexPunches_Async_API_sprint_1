@@ -1,0 +1,33 @@
+@startuml to_be
+!theme materia
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+
+title Логирование в ELK
+
+actor Programer
+
+database elastic [
+  <b> Elastic
+  ____
+  Отдельный экземпляр БД
+  только для логов.
+]
+[Kibana] -left-> elastic
+Programer -down-> Kibana : "Пользуется веб-интерфейсом Kibana \nдля просмотра логов в Elastic."
+[LogStash] -> elastic
+() ":5054" as logstash_port
+logstash_port - [LogStash]
+[FileBeat] -> logstash_port
+
+rectangle "Docker Volume" {
+  folder "/opt/app/logs/" as fastapi_logs_dir {
+    file ".json.log" as fastapi_log {
+    }
+  }
+}
+FileBeat -down- fastapi_logs_dir
+[FastAPI] -up-> fastapi_log : "Пишет строки в лог \nв виде JSON-объектов."
+[Nginx] -up-> [FastAPI] : HTTP Request (X-Request-ID)
+
+@enduml

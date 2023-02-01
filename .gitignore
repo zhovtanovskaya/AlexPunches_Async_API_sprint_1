@@ -145,7 +145,6 @@ admin_panel/static/
 .env.dev
 .env.pytests
 
-# Workflow reports.
 report/
 flake-report/
 

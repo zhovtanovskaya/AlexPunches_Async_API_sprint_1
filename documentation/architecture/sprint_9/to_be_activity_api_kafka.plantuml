@@ -1,0 +1,41 @@
+@startuml to_be_activity_api_kafka
+!theme materia
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+
+title Activity API на основе Kafka и Mongo
+
+
+database Kafka [
+  <b> Kafka
+  ----
+  Топик с событиями UGC:
+  закладок, рейтингов,
+  лайков, ревью.
+]
+database MongoDB [
+  <b> MongoDB
+  ----
+  Коллекции закладок,
+  рейтингов, лайков,
+  ревью.
+]
+[ActivityAPI] -> Kafka
+component ETL_UGC [
+  <b> ETL Из Kafka в Mongo
+  ----
+  Потребляет события из топика
+  Kafka и создает соответствующие
+  объекты в Mongo: закладку,
+  рейтинг, лайк, ревью.
+]
+[ETL_UGC] -> MongoDB
+[ETL_UGC] -left-> Kafka
+actor FrontEnd [
+  <b> Front End
+  ----
+  Сайт Кинотеатра.
+]
+FrontEnd -(0- ActivityAPI : REST API
+
+@enduml
