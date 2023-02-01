@@ -8,11 +8,11 @@ from time import sleep
 import vertica_python
 from vertica_python import Connection
 
-from config import logger, settings
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(
     __file__)))
 sys.path.append(BASE_DIR)
+
+from config import logger, settings
 
 
 @dataclass
