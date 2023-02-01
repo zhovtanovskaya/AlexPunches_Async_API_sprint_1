@@ -8,13 +8,14 @@ import more_itertools
 from asynch import connect
 from asynch.cursors import DictCursor
 
-from config import logger, settings
-from utils.async_timer import async_timed
-from utils.generator_fakes import generate_points
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(
     __file__)))
 sys.path.append(BASE_DIR)
+
+from config import logger, settings
+
+from utils.async_timer import async_timed
+from utils.generator_fakes import generate_points
 
 
 async def load_data(connection: Any, data: Generator, chunk_size: int) -> None:
