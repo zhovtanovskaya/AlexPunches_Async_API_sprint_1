@@ -1,4 +1,5 @@
 """Создать фабрику для приложения."""
+import sentry_sdk
 from flask import Flask
 from flask_jwt_extended import JWTManager
 from flask_limiter import Limiter
@@ -11,6 +12,7 @@ from opentelemetry.sdk.resources import SERVICE_NAME, Resource
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import (BatchSpanProcessor,
                                             ConsoleSpanExporter)
+from sentry_sdk.integrations.flask import FlaskIntegration
 
 from api.v1.auth import auth
 from api.v1.login_histories import login_histories
@@ -69,5 +71,10 @@ def create_app():
         key_func=get_remote_address,
         default_limits=['30 per second'],
         storage_uri=f'redis://{config.redis_host}:{config.redis_port}',
+    )
+    sentry_sdk.init(
+        dsn=config.auth_sentry_dsn,
+        integrations=[FlaskIntegration()],
+        traces_sample_rate=1.0,
     )
     return app
