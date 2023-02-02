@@ -3,6 +3,13 @@
 from config import settings
 
 
+def input_default(param1, param2=False) -> int:
+    """Ввод данных по параметру."""
+    if not param2:
+        param2 = param1
+    return int(input(f'default {param1}>') or param2)
+
+
 def main() -> None:
     """Запустить загрузку, предварительно уточнить начальные данные."""
     print('Куда загружать будем?\n'
@@ -13,16 +20,14 @@ def main() -> None:
     cloud = str(input('c/a/v>'))
 
     print('Сколько юзеров?')
-    users_count = int(input(f'default {settings.fake_users_count}>')
-                      or settings.fake_users_count)
+    users_count = input_default(settings.fake_users_count)
 
     print('Сколько фильмов?')
-    films_count = int(input(f'default {settings.fake_films_count}>')
-                      or settings.fake_users_count)
+    films_count = input_default(
+        settings.fake_films_count, settings.fake_users_count)
 
     print('Какой chunk_size?')
-    chunk_size = int(input(f'default {settings.chunk_size}>')
-                     or settings.chunk_size)
+    chunk_size = input_default(settings.chunk_size)
 
     if cloud == 'c':
         import clickhouse.clear_data as clear_ch

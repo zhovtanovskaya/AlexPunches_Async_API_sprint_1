@@ -21,7 +21,7 @@ user_service = get_user_service()
 @jwt_required()
 def get_one_user() -> user_schemes.UserScheme:
     """Подробная информация о пользователе."""
-    if email := get_jwt().get('sub'):
+    if (email := get_jwt().get('sub')):
         user_model = user_service.get_user_by_email(email=email)
         return transform.user_model_to_user_scheme(user_model=user_model)
     raise ResourceNotAllowedError(msg.not_allowed, HTTPStatus.FORBIDDEN)

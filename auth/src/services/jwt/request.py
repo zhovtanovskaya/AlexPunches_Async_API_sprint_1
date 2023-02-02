@@ -19,15 +19,14 @@ def admin_required():
     def decorator(controller: C) -> C:
         @wraps(controller)
         def wrapper(
-                *args: Any, **kwargs: Any,
-                ) -> Union[Response, tuple[Response, HTTPStatus]]:
+            *args: Any, **kwargs: Any,
+        ) -> Union[Response, tuple[Response, HTTPStatus]]:
             verify_jwt_in_request()
             claims = get_jwt()
             if config.admin_role_name in claims.get('roles', ()):
                 return controller(*args, **kwargs)
-            else:
-                msg = 'Нет прав администратора.'
-                return jsonify(msg=msg), HTTPStatus.FORBIDDEN
+            msg = 'Нет прав администратора.'
+            return jsonify(msg=msg), HTTPStatus.FORBIDDEN
 
         return wrapper
 

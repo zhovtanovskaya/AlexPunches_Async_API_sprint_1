@@ -11,7 +11,7 @@ import services.models.users as service_user_models
 
 
 def user_scheme_to_user_model(
-          user_scheme: user_schemes.UserBaseScheme,
+    user_scheme: user_schemes.UserBaseScheme,
 ) -> service_user_models.UserBaseModel:
     """Трансформитровать UserScheme -> UserModel.
 
@@ -34,7 +34,7 @@ def user_scheme_to_user_model(
 
 
 def user_model_to_user_scheme(
-          user_model: service_user_models.UserBaseModel,
+    user_model: service_user_models.UserBaseModel,
 ) -> user_schemes.UserScheme:
     """Трансформитровать UserModel -> UserScheme."""
     return user_schemes.UserScheme(
@@ -46,7 +46,7 @@ def user_model_to_user_scheme(
 
 
 def role_scheme_to_role_model(
-          role_scheme: role_schemes.RoleBaseScheme,
+    role_scheme: role_schemes.RoleBaseScheme,
 ) -> service_role_models.RoleBaseModel:
     """Трансформировать RoleScheme -> RoleModel."""
     return service_role_models.RoleBaseModel(
@@ -57,7 +57,7 @@ def role_scheme_to_role_model(
 
 
 def role_model_to_role_scheme(
-          role_model: service_role_models.RoleBaseModel,
+    role_model: service_role_models.RoleBaseModel,
 ) -> role_schemes.RoleBaseScheme:
     """Трансформировать RoleModel -> RoleScheme."""
     return role_schemes.RoleBaseScheme(

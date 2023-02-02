@@ -31,7 +31,7 @@ class RoleService:
 
     def find_or_create_role(self, name: str) -> service_models.RoleModel:
         """Вернуть Роль по названию. Если несуществует -- создать и вернуть."""
-        if role := self._get_role_by_rolename(rolename=name):
+        if (role := self._get_role_by_rolename(rolename=name)):
             return service_models.RoleModel.from_orm(role)
         return self.create_role(service_models.RoleCreateModel(name=name))
 

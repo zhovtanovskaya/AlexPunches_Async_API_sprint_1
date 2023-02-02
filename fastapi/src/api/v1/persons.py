@@ -1,5 +1,6 @@
 from http import HTTPStatus
 
+from fastapi import Depends, HTTPException, Query
 from fastapi_utils.cbv import cbv
 from fastapi_utils.inferring_router import InferringRouter
 
@@ -8,7 +9,6 @@ from api.v1.shemes.film import FilmShort
 from api.v1.shemes.person import Person
 from api.v1.shemes.transform_schemes import (es_film_to_film_short_scheme,
                                              es_person_to_person_scheme)
-from fastapi import Depends, HTTPException, Query
 from services import NotFoundSearchEngineError
 from services.person import PersonService, get_person_service
 from utils import messages as msg

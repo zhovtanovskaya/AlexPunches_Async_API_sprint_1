@@ -14,8 +14,8 @@ from typing import Generator
 
 import more_itertools
 from clickhouse_driver import Client
-from config import logger, settings
 
+from config import logger, settings
 from utils.generator_fakes import generate_points
 from utils.timer import timed
 
@@ -26,11 +26,11 @@ def load_data(chunk_size: int, data: Generator):
     for points in more_itertools.ichunked(data, chunk_size):
         client = Client(host=settings.ch_host, port=settings.ch_ports[0])
         client.execute(
-             'INSERT INTO '
-             'shard.test (user_id, film_id, event_time, spawn_point) VALUES',
-             ((point.user_id, point.film_id, point.created_at, point.value)
-                 for point in points),
-         )
+            'INSERT INTO '
+            'shard.test (user_id, film_id, event_time, spawn_point) VALUES',
+            ((point.user_id, point.film_id, point.created_at, point.value)
+                for point in points),
+        )
 
 
 def run(users_count: int, films_count: int, chunk_size: int) -> None:

@@ -27,7 +27,7 @@ from core.exceptions import exceptions
 def configure_tracer() -> None:
     """Настроить трасировщик."""
     resource = Resource(attributes={
-         SERVICE_NAME: config.project_name,
+        SERVICE_NAME: config.project_name,
     })
     tracer_provider = TracerProvider(resource=resource)
     trace.set_tracer_provider(tracer_provider)
@@ -75,10 +75,6 @@ def create_app():
     sentry_sdk.init(
         dsn=config.auth_sentry_dsn,
         integrations=[FlaskIntegration()],
-        traces_sample_rate=1.0
+        traces_sample_rate=1.0,
     )
     return app
-
-
-
-
