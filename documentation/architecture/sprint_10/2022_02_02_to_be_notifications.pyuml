@@ -1,0 +1,55 @@
+@startuml to_be
+!theme materia
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+
+title Уведомления
+
+database NotificationDB [
+  <b> База А
+  ----
+  Хранит уведомления
+  notification_id
+  и content_id.
+]
+database NotificationHistoryDB [
+  <b> База Б
+  ----
+  История отправки
+  уведомлений.
+]
+database ScheduleDB [
+  <b> База В
+  ----
+  Хранит переодичность
+  уведомлений.
+]
+
+component NotificationsAPI [
+  <b> API
+  ----
+  Принимает события на
+  создание уведомлений.
+]
+component SendingWorker [
+  <b>Отправщик
+  (воркер)
+  ----
+  Отправляет
+  уведомления.
+]
+component AutoEventsGenerator [
+  <b>Генератор
+  автоматических
+  событий
+  ----
+  Шедулер, cron.
+]
+component AdminPanel [
+  <b>Панель
+  админа
+  ----
+  Для чего?
+]
+
+@enduml
