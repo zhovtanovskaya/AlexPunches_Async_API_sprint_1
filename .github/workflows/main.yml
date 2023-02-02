@@ -20,7 +20,7 @@ jobs:
       run: | 
         python3 -m pip install --upgrade pip                
         pip install flake8
-        pip install mypy types-requests
+        pip install mypy types-requests types-redis
        
 
     - name: Test with flake8
