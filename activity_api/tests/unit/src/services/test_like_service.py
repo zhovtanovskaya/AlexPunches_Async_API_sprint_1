@@ -3,7 +3,7 @@ import unittest
 from motor.motor_asyncio import AsyncIOMotorClient
 
 from src.services.like import LikeService
-from src.services.models.user_content import Like, LikeValue
+from src.services.models.user_content.likes import Like, LikeValue
 from tests.unit.src.core.config import settings
 
 
