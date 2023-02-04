@@ -25,10 +25,10 @@ async def load_data(connection: Any, data: Generator, chunk_size: int) -> None:
     async with connection.cursor(cursor=DictCursor) as cursor:
         for points in more_itertools.ichunked(data, chunk_size):
             await cursor.execute(
-                 'INSERT INTO '
-                 'shard.test (user_id, film_id, event_time, spawn_point) VALUES', # noqa
-                 [(point.user_id, point.film_id, point.created_at, point.value)
-                     for point in points],
+                'INSERT INTO '
+                'shard.test (user_id, film_id, event_time, spawn_point) VALUES', # noqa
+                [(point.user_id, point.film_id, point.created_at, point.value)
+                    for point in points],
             )
             timer += cursor.connection._connection.last_query.elapsed
             count_insert += 1

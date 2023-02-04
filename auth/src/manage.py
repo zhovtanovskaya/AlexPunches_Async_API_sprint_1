@@ -34,6 +34,7 @@ def create_superuser(password: str, email: str) -> None:
 
     Название роли в конфигах.
     Если роль не существует, то она создается.
+    Параметры password и email.
     """
     user_service = get_user_service()
     role_service = get_role_service()

@@ -1,10 +1,10 @@
 import pickle
 
-from db import redis
+from fastapi import Request
 from starlette.responses import StreamingResponse
 
 from core.config import config
-from fastapi import Request
+from db import redis
 from models.json_response import CacheResponseScheme
 
 

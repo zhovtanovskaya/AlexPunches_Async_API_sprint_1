@@ -22,7 +22,7 @@ login_histories = Blueprint('login_histories', __name__)
 def get_login_history(
         user_id: uuid.UUID,
         query: Page,
-        ) -> ListLoginHistoryScheme:
+) -> ListLoginHistoryScheme:
     """Страница истории входов пользователя в систему."""
     user_obj = User.get_or_404(id=user_id)
     login_history = db.session.query(LoginHistory).filter_by(

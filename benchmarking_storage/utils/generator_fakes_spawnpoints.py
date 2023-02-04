@@ -51,7 +51,7 @@ def create_films(count: int) -> List[Film]:
     return [Film(
         id=fake.uuid4(),
         duration=fake.random_int(min=20, max=200),
-        ) for _ in range(count)]
+    ) for _ in range(count)]
 
 
 def generate_points(users_count: int, films_count: int) -> Generator:
@@ -75,7 +75,7 @@ def generate_points(users_count: int, films_count: int) -> Generator:
                     film_id=film.id,
                     value=minute,
                     created_at=start_film + ((minute + 1) * 60),
-                    )
+                )
             start_film += film.duration
 
     logger.info(f'готово points: {duration}')
