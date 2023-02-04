@@ -1,4 +1,5 @@
 from .base import ReactionService
+from .models.user_content.reviews import Review
 
 PIPELINE = [
     {'$match':  {'target_type':  'review', 'type':  'like'}},
@@ -56,16 +57,21 @@ PIPELINE = [
             'from':  'reactions',
             'localField':  '_id',
             'foreignField':  '_id',
-            'as':  'review',
+            'as':  'reviews',
         },
     }
-    # {_id:  <review_id>, rating, review:  {}}
+    # {_id: <review_id>, rating, review:  [{}]}
 ]
 
 
 class ReviewService(ReactionService):
 
-    async def get_all(self):
+    user_content_type = Review
+
+    async def get_all(self) -> Review:
         result = self.collection.aggregate(PIPELINE)
         async for doc in result:
-            yield doc['review']
+            # doc выглядит как {_id: <review_id>, rating, reviews: [{}]}.
+            # Поле reviews всегда содержит список из одного
+            # ревью.  И это ревью с _id равным doc['_id'].
+            yield self.to_obj(doc['reviews'][0])

@@ -1,12 +1,6 @@
-from datetime import datetime
 from enum import Enum
-from typing import Optional
-from uuid import UUID
 
-from bson import ObjectId
-from pydantic import BaseModel, Field
-
-from .base import ContentType, StrObjectId
+from .base import ContentType, Reaction, StrObjectId
 
 
 class LikeValue(int, Enum):
@@ -16,20 +10,10 @@ class LikeValue(int, Enum):
     DISLIKE = 0
 
 
-class Like(BaseModel):
+class Like(Reaction):
     """Объектное представление лайка из Mongo."""
 
-    id: Optional[StrObjectId] = Field(alias='_id')
-    created_at: Optional[datetime] = Field(default_factory=datetime.now)
-    user_id: UUID
     type: ContentType = ContentType.LIKE
     target_id: StrObjectId
     target_type: ContentType = ContentType.REVIEW
     value: LikeValue
-
-    class Config:
-        """Настроить модель для совместимости с Mongo и BSON."""
-
-        # Разрешить в классе поле типа bson.ObjectId.
-        arbitrary_types_allowed = True
-        json_encoders = {ObjectId: str}

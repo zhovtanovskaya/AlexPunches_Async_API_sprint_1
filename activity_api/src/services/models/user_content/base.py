@@ -1,7 +1,11 @@
 """Сущности, общие для всех моделей пользовательского контента."""
+from datetime import datetime
 from enum import Enum
+from typing import Optional
+from uuid import UUID
 
 from bson import ObjectId
+from pydantic import BaseModel, Field
 
 
 class StrObjectId(ObjectId):
@@ -30,3 +34,25 @@ class ContentType(str, Enum):
     BOOKMARK = 'bookmark'
     RATING = 'rating'
     LIKE = 'like'
+
+
+class Reaction(BaseModel):
+    """Базовый класс и настройки для пользовательского контента."""
+
+    id: Optional[StrObjectId] = Field(alias='_id')
+    created_at: Optional[datetime] = Field(default_factory=datetime.now)
+    user_id: UUID
+
+    class Config:
+        """Настроить модель для совместимости с Mongo и BSON."""
+
+        # Разрешить в классе поле типа bson.ObjectId.
+        arbitrary_types_allowed = True
+        json_encoders = {ObjectId: str}
+
+
+class MovieReaction(Reaction):
+    """Базовый класс для реакций на фильм."""
+
+    target_id: UUID
+    target_type: ContentType = ContentType.MOVIE

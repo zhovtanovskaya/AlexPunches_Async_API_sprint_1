@@ -14,4 +14,4 @@ class TestLikeService(unittest.IsolatedAsyncioTestCase):
 
     async def test(self):
         async for review in self.service.get_all():
-            print(review)
+            print(type(review))
