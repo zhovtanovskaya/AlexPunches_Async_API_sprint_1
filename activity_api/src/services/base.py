@@ -19,7 +19,7 @@ class ReactionService:
         self.collection = self.mongo.reactions
 
     async def get(self, id: ObjectId) -> UserContent:
-        """Получить документ из базы данных.
+        """Получить объект из базы данных.
 
         Поля _id и id будут содержать одинаковый
         ObjectId документа.

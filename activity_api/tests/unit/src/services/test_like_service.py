@@ -26,7 +26,3 @@ class TestLikeService(unittest.IsolatedAsyncioTestCase):
         new_like = await self.service.create(self.like)
         await self.service.delete(new_like.id)
         self.assertIsNone(await self.service.get(new_like.id))
-
-
-if __name__ == '__main__':
-    unittest.main()
