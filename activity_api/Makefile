@@ -1,2 +1,5 @@
 run_unittests:
-	python -m unittest tests/unit/src/services/test_like_service.py
+	python -m unittest $(path)
+
+run_all_unittests:
+	python -m unittest discover tests/unit/src/
