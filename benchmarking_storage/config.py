@@ -2,7 +2,7 @@
 import logging
 from urllib.parse import quote_plus as quote
 
-from pydantic import BaseSettings, FilePath
+from pydantic import BaseSettings
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger('Benchmarking')

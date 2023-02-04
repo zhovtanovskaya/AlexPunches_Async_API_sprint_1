@@ -127,4 +127,3 @@ def generate_user_content(users_count: int, films_count: int) -> Generator:
                 guc_count += 1
 
     logger.info(f'готово guc: {guc_count} штук')
-
