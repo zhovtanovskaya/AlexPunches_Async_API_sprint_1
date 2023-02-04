@@ -79,3 +79,4 @@ def generate_points(users_count: int, films_count: int) -> Generator:
             start_film += film.duration
 
     logger.info(f'готово points: {duration}')
+

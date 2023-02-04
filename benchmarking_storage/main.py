@@ -8,9 +8,10 @@ def main() -> None:
     print('Куда загружать будем?\n'
           'c) Clickhouse\n'
           'a) Async Clickhouse for 3 shards\n'
-          'v) Vertica',
+          'v) Vertica\n'
+          'm) Mongo',
           )
-    cloud = str(input('c/a/v>'))
+    cloud = str(input('c/a/v/m>'))
 
     print('Сколько юзеров?')
     users_count = int(input(f'default {settings.fake_users_count}>')
@@ -39,6 +40,9 @@ def main() -> None:
     elif cloud == 'v':
         from vertica import load_vertica
         load_vertica.run(users_count, films_count, chunk_size)
+    elif cloud == 'm':
+        from mongo import load_mongo
+        load_mongo.run(users_count, films_count, chunk_size)
     else:
         print('\n\nВсе таки...')
         main()
