@@ -8,9 +8,10 @@ from datetime import datetime, timedelta
 from typing import Generator, List
 
 from bson.objectid import ObjectId
-from config import logger
 from faker import Faker
 from pydantic import BaseModel, Field
+
+from config import logger
 
 fake = Faker()
 Faker.seed(0)

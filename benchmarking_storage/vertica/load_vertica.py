@@ -3,8 +3,8 @@ from typing import Generator
 
 import more_itertools
 import vertica_python
-from config import settings
 
+from config import settings
 from utils.generator_fakes_spawnpoints import generate_points
 from utils.timer import timed
 

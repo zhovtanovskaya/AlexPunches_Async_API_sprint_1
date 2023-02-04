@@ -1,9 +1,9 @@
 from typing import Generator
 
 import more_itertools
-from config import logger, settings
 from pymongo import MongoClient
 
+from config import logger, settings
 from utils.generator_fakes_guc import generate_user_content
 from utils.timer import timed
 

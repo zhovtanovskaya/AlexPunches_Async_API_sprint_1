@@ -14,8 +14,8 @@ from typing import Generator
 
 import more_itertools
 from clickhouse_driver import Client
-from config import logger, settings
 
+from config import logger, settings
 from utils.generator_fakes_spawnpoints import generate_points
 from utils.timer import timed
 
