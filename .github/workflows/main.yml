@@ -24,3 +24,8 @@ jobs:
     - name: Test with flake8
       run: |
         python3 -m flake8 .
+    
+    - name: Test pytest auth
+      run: |
+        docker-compose -f ./auth/tests/functional/docker-compose.yml --env-file .env.pytests up -d --build
+        
