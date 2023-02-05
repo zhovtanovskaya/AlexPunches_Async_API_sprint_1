@@ -27,5 +27,6 @@ jobs:
     
     - name: Test pytest auth
       run: |
+        ls
         pip install -r /auth/tests/functional/requirements.txt
         pytest /auth/tests/functional/src
