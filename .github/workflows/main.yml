@@ -29,5 +29,6 @@ jobs:
       run: |
         cd auth
         cd tests
+        cd functional
         pip install -r requirements.txt
         pytest ./auth/tests/functional/src
