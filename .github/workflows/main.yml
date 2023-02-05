@@ -27,5 +27,4 @@ jobs:
     
     - name: Test pytest auth
       run: |
-        docker-compose -f ./auth/tests/functional/docker-compose.yml --env-file .env.pytests up -d --build
-        
+        pytest /auth/tests/functional/src
