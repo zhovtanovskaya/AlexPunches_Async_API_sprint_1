@@ -19,7 +19,7 @@ user_service = get_user_service()
 @users.route('/signup', methods=['POST'])
 @validate(on_success_status=HTTPStatus.CREATED)
 def create_user(
-          body: user_schemes.UserCreateScheme,
+        body: user_schemes.UserCreateScheme,
 ) -> user_schemes.UserScheme:
     """Создать пользователя."""
     user_model = transform.user_scheme_to_user_model(user_scheme=body)
@@ -68,7 +68,7 @@ def create_user_role(user_id: uuid.UUID,
 @validate()
 @admin_required()
 def user_role_list(
-          user_id: uuid.UUID,
+        user_id: uuid.UUID,
 ) -> user_role_schemes.ListUserRolesScheme:
     """Список Ролей пользователя."""
     user_roles = user_service.get_user_roles_by_user_id(user_id=user_id)

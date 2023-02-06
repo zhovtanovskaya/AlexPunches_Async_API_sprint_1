@@ -20,4 +20,3 @@ class AuthorizationException(HTTPException):
             detail=detail,
             headers=headers,
         )
-

@@ -18,7 +18,7 @@ role_service = get_role_service()
 @validate(on_success_status=HTTPStatus.CREATED)
 @admin_required()
 def create_role(
-          body: role_schemes.RoleCreateScheme,
+        body: role_schemes.RoleCreateScheme,
 ) -> role_schemes.RoleScheme:
     """Создать Роль."""
     role_model = transform.role_scheme_to_role_model(role_scheme=body)
