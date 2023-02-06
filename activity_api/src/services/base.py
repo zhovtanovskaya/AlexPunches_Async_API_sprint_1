@@ -1,9 +1,10 @@
 """Сущности, общие для всех сервисов пользовательского контента."""
 
-from typing import Type
+from typing import AsyncIterable, Type
 
 from bson.objectid import ObjectId
 from motor.motor_asyncio import AsyncIOMotorDatabase
+from pydantic import PositiveInt
 
 from .models.user_content.protocols import UserContent
 
@@ -26,6 +27,16 @@ class ReactionService:
         """
         doc = await self.collection.find_one({'_id': ObjectId(id)})
         return self.to_obj(doc) if doc else None
+
+    async def get_all(
+            self, page_number: PositiveInt = 1, page_size: PositiveInt = 50,
+    ) -> AsyncIterable:
+        """Получить список объектов на странице."""
+        content_type_name = self.user_content_type.__fields__['type'].default
+        result = self.collection.find({'type': content_type_name})
+        offset = page_size * (page_number - 1)
+        async for doc in result.skip(offset).limit(page_size):
+            yield self.to_obj(doc)
 
     async def create(self, obj: UserContent) -> UserContent:
         """Создать объект в базе данных.

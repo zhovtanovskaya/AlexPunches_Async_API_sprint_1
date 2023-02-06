@@ -1,7 +1,4 @@
-from typing import AsyncIterable
 from uuid import UUID
-
-from pydantic import PositiveInt
 
 from .base import ReactionService
 from .models.user_content.reviews import Review, ReviewStats, ReviewValue
@@ -10,15 +7,6 @@ from .models.user_content.reviews import Review, ReviewStats, ReviewValue
 class ReviewService(ReactionService):
 
     user_content_type = Review
-
-    async def get_all(
-            self, page_number: PositiveInt = 1, page_size: PositiveInt = 50,
-    ) -> AsyncIterable:
-        """Получить список объектов на странице."""
-        result = self.collection.find({'type':  'review'})
-        offset = page_size * (page_number - 1)
-        async for doc in result.skip(offset).limit(page_size):
-            yield self.to_obj(doc)
 
     async def get_stats(self, movie_id: UUID) -> ReviewStats:
         """Получить число разных ревью на фильм."""
