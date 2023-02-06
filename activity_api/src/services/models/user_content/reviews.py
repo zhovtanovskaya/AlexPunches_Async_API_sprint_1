@@ -1,5 +1,7 @@
 from enum import Enum
 
+from pydantic import BaseModel, NonNegativeInt
+
 from .base import ContentType, MovieReaction
 
 
@@ -23,3 +25,12 @@ class Review(MovieReaction):
     value: ReviewValue
     title: str
     text: str
+
+
+class ReviewStats(BaseModel):
+    """Количественная статистика рецензияй на конкретный фильм."""
+
+    total_reviews: NonNegativeInt
+    positive_count: NonNegativeInt
+    neutral_count: NonNegativeInt
+    negative_count: NonNegativeInt
