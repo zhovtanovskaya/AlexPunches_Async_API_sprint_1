@@ -11,7 +11,7 @@ class LikeValue(int, Enum):
 
 
 class Like(Reaction):
-    """Объектное представление лайка из Mongo."""
+    """Объектное представление лайка или дизлайка рецензии из Mongo."""
 
     type: ContentType = ContentType.LIKE
     target_id: StrObjectId
