@@ -1,17 +1,13 @@
-import unittest
-
-from motor.motor_asyncio import AsyncIOMotorClient
-
 from src.services.like import LikeService
 from src.services.models.user_content.likes import Like, LikeValue
-from tests.unit.src.core.config import settings
+from tests.unit.src.base import ReactionTestCase
 
 
-class TestLikeService(unittest.IsolatedAsyncioTestCase):
+class TestLikeService(ReactionTestCase):
 
-    def setUp(self):
-        client = AsyncIOMotorClient(settings.test_mongo_url)
-        self.service = LikeService(client.test_ugc)
+    async def asyncSetUp(self):
+        await super().asyncSetUp()
+        self.service = LikeService(self.db)
         self.like = Like(
             user_id='af18023d-9c76-11ed-9485-7831c1bc31e4',
             target_id='63d0c92bf5eb85d9a10bd8ac',

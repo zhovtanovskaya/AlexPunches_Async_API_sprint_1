@@ -1,17 +1,13 @@
-import unittest
-
-from motor.motor_asyncio import AsyncIOMotorClient
-
 from src.services.models.user_content.reviews import Review, ReviewValue
 from src.services.review import ReviewService
-from tests.unit.src.core.config import settings
+from tests.unit.src.base import ReactionTestCase
 
 
-class TestReviewService(unittest.IsolatedAsyncioTestCase):
+class TestReviewService(ReactionTestCase):
 
-    def setUp(self):
-        client = AsyncIOMotorClient(settings.test_mongo_url)
-        self.service = ReviewService(client.test_ugc)
+    async def asyncSetUp(self):
+        await super().asyncSetUp()
+        self.service = ReviewService(self.db)
         self.review = Review(
             user_id='af18023d-9c76-11ed-9485-7831c1bc31e4',
             target_id='6fdcc8ca-9c6f-11ed-9682-7831c1bc31e4',
