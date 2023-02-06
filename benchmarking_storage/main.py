@@ -24,8 +24,7 @@ def main() -> None:
     users_count = input_default(settings.fake_users_count)
 
     print('Сколько фильмов?')
-    films_count = input_default(
-        settings.fake_films_count, settings.fake_users_count)
+    films_count = input_default(settings.fake_films_count)
 
     print('Какой chunk_size?')
     chunk_size = input_default(settings.chunk_size)

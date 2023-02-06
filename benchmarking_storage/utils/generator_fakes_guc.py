@@ -38,7 +38,7 @@ class Reaction(BaseModel):
     reaction.dict(exclude_none=True).
     """
 
-    id: str = Field(alias="_id")
+    id: str | None = Field(None, alias="_id")
     created_at: datetime
     user_id: str
     target_id: str
@@ -91,6 +91,7 @@ def generate_user_content(users_count: int, films_count: int) -> Generator:
             guc_count += 1
             guc_at_time += timedelta(minutes=41)
             # сделать рецензию
+            title = fake.sentence(nb_words=7)
             review_obj = Reaction(
                 _id=str(ObjectId()),
                 created_at=guc_at_time,
@@ -99,8 +100,8 @@ def generate_user_content(users_count: int, films_count: int) -> Generator:
                 target_type='movie',
                 type='review',
                 value=fake.random_element(elements=(0, 5, 10)),
-                title=fake.sentence(nb_words=7),
-                text=fake.text(max_nb_chars=1000),
+                title=title,
+                text=title * 5,
             )
             light_reviews_list.append({
                 'id': review_obj.id,
