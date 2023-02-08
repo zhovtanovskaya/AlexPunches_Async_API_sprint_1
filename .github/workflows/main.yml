@@ -25,10 +25,16 @@ jobs:
       run: |
         python3 -m flake8 .
     
-    - name: Test pytest auth
-      run: |
-        cd auth
-        cd tests
-        cd functional
-        pip install -r requirements.txt
-        pytest ./auth/tests/functional/src
+    - name: Push Docker image to Docker Hub
+      runs-on: ubuntu-latest
+    needs: tests
+    steps:
+      - uses: actions/checkout@v3
+      - uses: isbang/compose-action@v1.4.1
+        with:
+          compose-file: "./auth/tests/functional/docker-compose.yml"
+          env:
+            POSTGRES_DB_AUTH: "test"
+            POSTGRES_PASSWORD_AUTH: "test1"
+            POSTGRES_USER_AUTH: "test2"
+
