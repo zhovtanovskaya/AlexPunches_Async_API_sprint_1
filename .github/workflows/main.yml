@@ -29,13 +29,13 @@ jobs:
     name: Push Docker image to Docker Hub
     needs: tests
     runs-on: ubuntu-latest    
-    #env:
+    env:
+      POSTGRES_DB_AUTH: ${{ secrets.POSTGRES_DB_AUTH }}
+      POSTGRES_PASSWORD_AUTH: ${{ github.POSTGRES_PASSWORD_AUTH }}
+      POSTGRES_USER_AUTH: ${{ github.POSTGRES_USER_AUTH }}          
     steps:
       - uses: actions/checkout@v3
       - uses: isbang/compose-action@v1.4.1   
         with:     
-          POSTGRES_DB_AUTH: ${{ secrets.POSTGRES_DB_AUTH }}
-          POSTGRES_PASSWORD_AUTH: ${{ github.POSTGRES_PASSWORD_AUTH }}
-          POSTGRES_USER_AUTH: ${{ github.POSTGRES_USER_AUTH }}
           compose-file: "./auth/tests/functional/docker-compose.yml"
           
