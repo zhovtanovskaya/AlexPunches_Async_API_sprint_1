@@ -34,8 +34,8 @@ jobs:
       - uses: isbang/compose-action@v1.4.1
         with:
           compose-file: "./auth/tests/functional/docker-compose.yml"
-          env:
-            POSTGRES_DB_AUTH: "test"
-            POSTGRES_PASSWORD_AUTH: "test1"
-            POSTGRES_USER_AUTH: "test2"
+          #env:
+          #  POSTGRES_DB_AUTH: "test"
+          #  POSTGRES_PASSWORD_AUTH: "test1"
+          #  POSTGRES_USER_AUTH: "test2"
 
