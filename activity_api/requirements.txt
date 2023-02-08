@@ -8,3 +8,5 @@ PyJWT==2.6.0
 aiokafka==0.8.0
 python-json-logger==2.0.4
 sentry-sdk[fastapi]==1.14.0
+motor==2.3.0
+dnspython==2.0.0
