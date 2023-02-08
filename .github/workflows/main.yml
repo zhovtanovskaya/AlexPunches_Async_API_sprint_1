@@ -31,8 +31,38 @@ jobs:
     runs-on: ubuntu-latest    
     env:
       POSTGRES_DB_AUTH: ${{ secrets.POSTGRES_DB_AUTH }}
-      POSTGRES_PASSWORD_AUTH: ${{ github.POSTGRES_PASSWORD_AUTH }}
-      POSTGRES_USER_AUTH: ${{ github.POSTGRES_USER_AUTH }}          
+      POSTGRES_PASSWORD_AUTH: ${{ secrets.POSTGRES_PASSWORD_AUTH }}
+      POSTGRES_USER_AUTH: ${{ secrets.POSTGRES_USER_AUTH }}
+      #flask
+      FLASK_APP: ${secrets.FLASK_APP}
+      FLASK_DEBUG: ${secrets.FLASK_DEBUG}
+      FLASK_SECRET_KEY: ${secrets.FLASK_SECRET_KEY}
+      JWT_SECRET_KEY: ${secrets.JWT_SECRET_KEY}
+      JWT_ACCESS_TOKEN_EXPIRES: ${secrets.JWT_ACCESS_TOKEN_EXPIRES}
+      JWT_REFRESH_TOKEN_EXPIRES: ${secrets.JWT_REFRESH_TOKEN_EXPIRES}
+      GOOGLE_OAUTH_CLIENT_ID: ${secrets.GOOGLE_OAUTH_CLIENT_ID}
+      GOOGLE_OAUTH_CLIENT_SECRET: ${secrets.GOOGLE_OAUTH_CLIENT_SECRET}          
+      #activity_api
+      API_HOST: ${secrets.API_HOST}
+      API_PORT: ${secrets.API_HOST}
+      #etl
+      SQLITE3_PATH: ${secrets.SQLITE3_PATH}
+      BUNCH_EXTRACT: ${secrets.BUNCH_EXTRACT}
+      BUNCH_INSERT: ${secrets.BUNCH_INSERT}
+      ES_SCHEMAS_DIR: ${secrets.ES_SCHEMAS_DIR}
+      ES_HOST: ${secrets.ES_HOST}
+      ES_PORT: ${secrets.ES_PORT}
+      BUNCH_ES_LOAD: ${secrets.BUNCH_ES_LOAD}
+      #fastapi
+      S_HOST: ${secrets.ES_HOST}
+      ES_PORT: ${secrets.ES_PORT}
+      #admin_panel
+      POSTGRES_DB_ADMIN: ${secrets.POSTGRES_DB_ADMIN}  
+      POSTGRES_USER_ADMIN: ${secrets.POSTGRES_USER_ADMIN}  
+      POSTGRES_PASSWORD_ADMIN: ${secrets.POSTGRES_PASSWORD_ADMIN}  
+      DB_HOST_ADMIN: ${secrets.DB_HOST_ADMIN}  
+      DB_PORT_ADMIN: ${secrets.DB_PORT_ADMIN}
+      SECRET_KEY: ${secrets.SECRET_KEY}
     steps:
       - uses: actions/checkout@v3
       - uses: isbang/compose-action@v1.4.1   
