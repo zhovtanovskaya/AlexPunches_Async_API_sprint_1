@@ -1,7 +1,6 @@
 name: Online Cinema application workflow
 
 on: [pull_request]
-
   workflow_call:
     secrets:
       POSTGRES_DB_AUTH:
