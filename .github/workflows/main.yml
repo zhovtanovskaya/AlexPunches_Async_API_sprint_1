@@ -2,10 +2,19 @@ name: Online Cinema application workflow
 
 on: [pull_request]
 
+  workflow_call:
+    secrets:
+      POSTGRES_DB_AUTH:
+        description: 'movies_database'
+        required: true
+      POSTGRES_PASSWORD_AUTH:
+        description: '123qwe'
+        required: true
+      POSTGRES_USER_AUTH:
+        description: 'app'
+        required: true  
+
 jobs:
-  
-
-
   tests:
     runs-on: ubuntu-latest
     strategy:
