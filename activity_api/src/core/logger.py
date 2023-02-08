@@ -10,7 +10,7 @@ LOG_FILE = '/var/log/activity_api/activity_api.log'
 class RequestIdFilter(logging.Filter):
     """Фильтры для логера."""
 
-    def filter(self, record):
+    def filter(self, record: logging.LogRecord):
         """Добавить X-Request-Id к логам."""
         record.request_id = request_id.get()
         return True

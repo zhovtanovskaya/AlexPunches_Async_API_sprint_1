@@ -5,7 +5,7 @@ import flask
 
 
 class RequestIdFilter(logging.Filter):
-    def filter(self, record):
+    def filter(self, record: logging.LogRecord):
         record.request_id = ''
         if flask.has_request_context():
             record.request_id = flask.request.headers.get('X-Request-Id')
