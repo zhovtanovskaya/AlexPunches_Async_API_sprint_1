@@ -8,20 +8,23 @@ import uvicorn
 from aiokafka import AIOKafkaProducer
 from fastapi import FastAPI, Request, Response
 from fastapi.responses import ORJSONResponse
+from motor.motor_asyncio import AsyncIOMotorClient
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(BASE_DIR)
 
 import producer
 
-from api.v1 import activities
+from api.v1 import activities, likes
 from core.config import config
 from core.context import request_id
+from db import mongo
 
-sentry_sdk.init(
-    dsn=config.activity_sentry_dsn,
-    traces_sample_rate=1.0,
-)
+if config.activity_sentry_dsn:
+    sentry_sdk.init(
+        dsn=config.activity_sentry_dsn,
+        traces_sample_rate=1.0,
+    )
 app = FastAPI(
     title=config.project_name,
     docs_url='/api/v1/activities/openapi',
@@ -47,6 +50,8 @@ async def startup():
         bootstrap_servers=f'{config.event_store_host}:{config.event_store_port}', # noqa
     )
     await producer.aioproducer.start()
+    client = AsyncIOMotorClient(config.mongo_url)
+    mongo.mongo_db = client.ugc
 
 
 @app.on_event('shutdown')
@@ -58,6 +63,10 @@ async def shutdown():
 app.include_router(
     activities.router, prefix='/api/v1/activities', tags=['activity'],
 )
+app.include_router(
+    likes.router, prefix='/api/v1/likes', tags=['activity'],
+)
+
 
 if __name__ == '__main__':
     uvicorn.run(
