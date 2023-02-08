@@ -1,0 +1,49 @@
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /var/log/nginx/*
+  json:
+    keys_under_root: true
+    add_error_key: true
+  tags: ["nginx"]
+
+- type: log
+  enabled: true
+  paths:
+    - /var/log/auth_flask/*
+  json:
+    keys_under_root: true
+    add_error_key: true
+  tags: ["auth_flask"]
+
+- type: log
+  enabled: true
+  paths:
+    - /var/log/activity_api/*
+  json:
+    keys_under_root: true
+    add_error_key: true
+  tags: ["activity_api"]
+
+- type: log
+  enabled: true
+  paths:
+    - /var/log/async_api/*
+  json:
+    keys_under_root: true
+    add_error_key: true
+  tags: ["async_api"]
+
+- type: log
+  enabled: true
+  paths:
+    - /var/log/admin_panel/*
+  json:
+    keys_under_root: true
+    add_error_key: true
+  tags: ["admin_panel"]
+
+output.logstash:
+  enabled: true
+  hosts: ["${ELK_LOGSTASH_HOST}"]

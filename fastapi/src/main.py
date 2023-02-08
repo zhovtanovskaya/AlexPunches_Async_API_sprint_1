@@ -15,6 +15,7 @@ sys.path.append(BASE_DIR)
 from api.v1 import films, genres, persons
 from core.cache_middleware import RedisCacheMiddleware
 from core.config import config
+from core.request_id_middleware import RequestIdMiddleware
 from db import elastic, redis
 
 sentry_sdk.init(dsn=config.api_sentry_dsn, traces_sample_rate=1.0)
@@ -49,8 +50,11 @@ app.include_router(films.router, prefix='/api/v1/films', tags=['films'])
 app.include_router(genres.router, prefix='/api/v1/genres', tags=['genres'])
 app.include_router(persons.router, prefix='/api/v1/persons', tags=['persons'])
 
+request_middleware = RequestIdMiddleware()
 my_middleware = RedisCacheMiddleware()
+app.add_middleware(BaseHTTPMiddleware, dispatch=request_middleware)
 app.add_middleware(BaseHTTPMiddleware, dispatch=my_middleware)
+
 
 if __name__ == '__main__':
     uvicorn.run(

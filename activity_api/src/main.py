@@ -6,7 +6,7 @@ import sys
 import sentry_sdk
 import uvicorn
 from aiokafka import AIOKafkaProducer
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, Response
 from fastapi.responses import ORJSONResponse
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -16,6 +16,7 @@ import producer
 
 from api.v1 import activities
 from core.config import config
+from core.context import request_id
 
 sentry_sdk.init(
     dsn=config.activity_sentry_dsn,
@@ -27,6 +28,13 @@ app = FastAPI(
     openapi_url='/api/v1/activities/openapi.json',
     default_response_class=ORJSONResponse,
 )
+
+
+@app.middleware('http')
+async def request_middleware(request: Request, call_next) -> Response:
+    """Поймать заголовок X-Request-Id и придержать его в ContextVar."""
+    request_id.set(request.headers.get('X-Request-Id', default=''))
+    return await call_next(request)
 
 
 @app.on_event('startup')

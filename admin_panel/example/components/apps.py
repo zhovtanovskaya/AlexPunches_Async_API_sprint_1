@@ -9,4 +9,5 @@ INSTALLED_APPS = [
     'movies_admin.apps.MoviesAdminConfig',
     'django_extensions',
     'corsheaders',
+    'log_request_id',
 ]
