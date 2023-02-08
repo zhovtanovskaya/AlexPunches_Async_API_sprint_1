@@ -1,6 +1,6 @@
 import logging
 
-from utils.request_id import request_id
+from core.context import request_id
 
 LOG_FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 LOG_DEFAULT_HANDLERS = ['console', 'file']
@@ -40,26 +40,26 @@ LOGGING = {
         'json': {
             '()': 'pythonjsonlogger.jsonlogger.JsonFormatter',
             'format': """
-                    asctime: %(asctime)s
-                    created: %(created)f
-                    filename: %(filename)s
-                    funcName: %(funcName)s
-                    levelname: %(levelname)s
-                    levelno: %(levelno)s
-                    lineno: %(lineno)d
-                    message: %(message)s
-                    module: %(module)s
-                    msec: %(msecs)d
-                    name: %(name)s
-                    pathname: %(pathname)s
-                    process: %(process)d
-                    processName: %(processName)s
-                    relativeCreated: %(relativeCreated)d
-                    thread: %(thread)d
-                    threadName: %(threadName)s
-                    exc_info: %(exc_info)s
-                    request_id: %(request_id)s
-                """,
+                asctime: %(asctime)s
+                created: %(created)f
+                filename: %(filename)s
+                funcName: %(funcName)s
+                levelname: %(levelname)s
+                levelno: %(levelno)s
+                lineno: %(lineno)d
+                message: %(message)s
+                module: %(module)s
+                msec: %(msecs)d
+                name: %(name)s
+                pathname: %(pathname)s
+                process: %(process)d
+                processName: %(processName)s
+                relativeCreated: %(relativeCreated)d
+                thread: %(thread)d
+                threadName: %(threadName)s
+                exc_info: %(exc_info)s
+                request_id: %(request_id)s
+            """,
             'datefmt': '%Y-%m-%d %H:%M:%S',
         },
     },

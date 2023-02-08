@@ -16,7 +16,7 @@ import producer
 
 from api.v1 import activities
 from core.config import config
-from utils import request_id
+from core.context import request_id
 
 sentry_sdk.init(
     dsn=config.activity_sentry_dsn,

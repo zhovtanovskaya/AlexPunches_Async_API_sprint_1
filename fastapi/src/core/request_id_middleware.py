@@ -1,6 +1,7 @@
+"""Мидлваре для передачи X-Request-Id в контекст приложения."""
 from fastapi import Request
 
-from utils.request_id import request_id
+from core.context import request_id
 
 
 class RequestIdMiddleware:

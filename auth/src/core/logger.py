@@ -6,7 +6,9 @@ import flask
 
 class RequestIdFilter(logging.Filter):
     def filter(self, record):
-        record.request_id = flask.request.headers.get('X-Request-Id') if flask.has_request_context() else ''  # noqa
+        record.request_id = ''
+        if flask.has_request_context():
+            record.request_id = flask.request.headers.get('X-Request-Id')
         return True
 
 
@@ -38,25 +40,25 @@ LOGGING = {
         'json': {
             '()': 'pythonjsonlogger.jsonlogger.JsonFormatter',
             'format': """
-                    asctime: %(asctime)s
-                    created: %(created)f
-                    filename: %(filename)s
-                    funcName: %(funcName)s
-                    levelname: %(levelname)s
-                    levelno: %(levelno)s
-                    lineno: %(lineno)d
-                    message: %(message)s
-                    module: %(module)s
-                    msec: %(msecs)d
-                    name: %(name)s
-                    pathname: %(pathname)s
-                    process: %(process)d
-                    processName: %(processName)s
-                    relativeCreated: %(relativeCreated)d
-                    thread: %(thread)d
-                    threadName: %(threadName)s
-                    exc_info: %(exc_info)s
-                """,
+                asctime: %(asctime)s
+                created: %(created)f
+                filename: %(filename)s
+                funcName: %(funcName)s
+                levelname: %(levelname)s
+                levelno: %(levelno)s
+                lineno: %(lineno)d
+                message: %(message)s
+                module: %(module)s
+                msec: %(msecs)d
+                name: %(name)s
+                pathname: %(pathname)s
+                process: %(process)d
+                processName: %(processName)s
+                relativeCreated: %(relativeCreated)d
+                thread: %(thread)d
+                threadName: %(threadName)s
+                exc_info: %(exc_info)s
+            """,
             'datefmt': '%Y-%m-%d %H:%M:%S',
         },
     },
