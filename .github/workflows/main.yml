@@ -45,17 +45,14 @@ jobs:
       #activity_api
       API_HOST: ${secrets.API_HOST}
       API_PORT: ${secrets.API_HOST}
-      #etl
+      #etl #fastapi
       SQLITE3_PATH: ${secrets.SQLITE3_PATH}
       BUNCH_EXTRACT: ${secrets.BUNCH_EXTRACT}
       BUNCH_INSERT: ${secrets.BUNCH_INSERT}
       ES_SCHEMAS_DIR: ${secrets.ES_SCHEMAS_DIR}
       ES_HOST: ${secrets.ES_HOST}
       ES_PORT: ${secrets.ES_PORT}
-      BUNCH_ES_LOAD: ${secrets.BUNCH_ES_LOAD}
-      #fastapi
-      S_HOST: ${secrets.ES_HOST}
-      ES_PORT: ${secrets.ES_PORT}
+      BUNCH_ES_LOAD: ${secrets.BUNCH_ES_LOAD}      
       #admin_panel
       POSTGRES_DB_ADMIN: ${secrets.POSTGRES_DB_ADMIN}  
       POSTGRES_USER_ADMIN: ${secrets.POSTGRES_USER_ADMIN}  
