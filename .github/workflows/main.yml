@@ -1,17 +1,17 @@
 name: Online Cinema application workflow
 
 on: [pull_request]
-  workflow_call:
-    secrets:
-      POSTGRES_DB_AUTH:
-        description: 'movies_database'
-        required: true
-      POSTGRES_PASSWORD_AUTH:
-        description: '123qwe'
-        required: true
-      POSTGRES_USER_AUTH:
-        description: 'app'
-        required: true  
+  #workflow_call:
+  #  secrets:
+  #    POSTGRES_DB_AUTH:
+  #      description: 'movies_database'
+  #      required: true
+  #    POSTGRES_PASSWORD_AUTH:
+  #      description: '123qwe'
+  #      required: true
+  #    POSTGRES_USER_AUTH:
+  #      description: 'app'
+  #      required: true  
 
 jobs:
   tests:
@@ -46,6 +46,6 @@ jobs:
         with:     
           compose-file: "./auth/tests/functional/docker-compose.yml"
           env:
-            POSTGRES_DB_AUTH: ${{ secrets.POSTGRES_DB_AUTH }}
-            POSTGRES_PASSWORD_AUTH: ${{ secrets.POSTGRES_PASSWORD_AUTH }}
-            POSTGRES_USER_AUTH: ${{ secrets.POSTGRES_USER_AUTH }}
+            POSTGRES_DB_AUTH: ${{ github.POSTGRES_DB_AUTH }}
+            POSTGRES_PASSWORD_AUTH: ${{ github.POSTGRES_PASSWORD_AUTH }}
+            POSTGRES_USER_AUTH: ${{ github.POSTGRES_USER_AUTH }}
