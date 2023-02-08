@@ -12,7 +12,10 @@ on: [pull_request]
   #    POSTGRES_USER_AUTH:
   #      description: 'app'
   #      required: true  
-
+env:
+  POSTGRES_DB_AUTH: ${{ secrets.POSTGRES_DB_AUTH }}
+  POSTGRES_PASSWORD_AUTH: ${{ github.POSTGRES_PASSWORD_AUTH }}
+  POSTGRES_USER_AUTH: ${{ github.POSTGRES_USER_AUTH }}
 jobs:
   tests:
     runs-on: ubuntu-latest
@@ -45,7 +48,4 @@ jobs:
       - uses: isbang/compose-action@v1.4.1   
         with:     
           compose-file: "./auth/tests/functional/docker-compose.yml"
-          env:
-            POSTGRES_DB_AUTH: ${{ github.POSTGRES_DB_AUTH }}
-            POSTGRES_PASSWORD_AUTH: ${{ github.POSTGRES_PASSWORD_AUTH }}
-            POSTGRES_USER_AUTH: ${{ github.POSTGRES_USER_AUTH }}
+          
