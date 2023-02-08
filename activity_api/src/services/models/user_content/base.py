@@ -42,6 +42,8 @@ class Reaction(BaseModel):
     id: Optional[StrObjectId] = Field(alias='_id')
     created_at: Optional[datetime] = Field(default_factory=datetime.now)
     user_id: UUID
+    target_type: ContentType
+    target_id: StrObjectId
 
     class Config:
         """Настроить модель для совместимости с Mongo и BSON."""

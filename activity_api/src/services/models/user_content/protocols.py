@@ -18,9 +18,9 @@ class UserContent(Protocol):
     id: Optional[StrObjectId] = Field(alias='_id')
     created_at: Optional[datetime]
     user_id: UUID
-    type: ContentType = ContentType
-    target_id: StrObjectId
-    target_type: ContentType = ContentType
+    type: ContentType
+    target_id: StrObjectId | UUID
+    target_type: ContentType
 
     def __init__(self, **data: Any):
         """Создать объект с полями и значениями из data."""
