@@ -34,7 +34,8 @@ jobs:
     needs: tests
     steps:
       - uses: actions/checkout@v3
-      - uses: isbang/compose-action@v1.4.1        
+      - uses: isbang/compose-action@v1.4.1   
+        with:     
           compose-file: "./auth/tests/functional/docker-compose.yml"
           env:
             POSTGRES_DB_AUTH: ${{ secrets.POSTGRES_DB_AUTH }}
