@@ -3,10 +3,7 @@ name: Online Cinema application workflow
 on: [pull_request]
 
 jobs:
-  variables:
-    POSTGRES_DB_AUTH: 'movies_database'
-    POSTGRES_PASSWORD_AUTH: '123qwe'
-    POSTGRES_USER_AUTH: 'app'
+  
 
 
   tests:
@@ -38,9 +35,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: isbang/compose-action@v1.4.1
-        with:
+        
           compose-file: "./auth/tests/functional/docker-compose.yml"
           env:
-            POSTGRES_DB_AUTH: $POSTGRES_DB_AUTH
-            POSTGRES_PASSWORD_AUTH: $POSTGRES_PASSWORD_AUTH
-            POSTGRES_USER_AUTH: $POSTGRES_USER_AUTH 
+            POSTGRES_DB_AUTH: ${{ secrets.POSTGRES_DB_AUTH }}
+            POSTGRES_PASSWORD_AUTH: ${{ secrets.POSTGRES_PASSWORD_AUTH }}
+            POSTGRES_USER_AUTH: ${{ secrets.POSTGRES_USER_AUTH }}
