@@ -6,7 +6,7 @@ import sys
 import sentry_sdk
 import uvicorn
 from aiokafka import AIOKafkaProducer
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Response
 from fastapi.responses import ORJSONResponse
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -31,7 +31,7 @@ app = FastAPI(
 
 
 @app.middleware('http')
-async def request_middleware(request: Request, call_next):
+async def request_middleware(request: Request, call_next) -> Response:
     """Поймать заголовок X-Request-Id и придержать его в ContextVar."""
     request_id.set(request.headers.get('X-Request-Id', default=''))
     return await call_next(request)
