@@ -60,6 +60,13 @@ jobs:
       DB_HOST_ADMIN: ${secrets.DB_HOST_ADMIN}  
       DB_PORT_ADMIN: ${secrets.DB_PORT_ADMIN}
       SECRET_KEY: ${secrets.SECRET_KEY}
+      #
+      GOOGLE_OAUTH_ENDPOINT: ${secrets.GOOGLE_OAUTH_ENDPOINT}  
+      OAUTHLIB_INSECURE_TRANSPORT: ${secrets.OAUTHLIB_INSECURE_TRANSPORT}  
+      ENABLE_TRACER: ${secrets.ENABLE_TRACER}  
+      JAEGER_HOST: ${secrets.JAEGER_HOST}  
+      JAEGER_PORT: ${secrets.JAEGER_PORT}  
+      AUTH_SENTRY_DSN: ${secrets.AUTH_SENTRY_DSN}
     steps:
       - uses: actions/checkout@v3
       - uses: isbang/compose-action@v1.4.1   
