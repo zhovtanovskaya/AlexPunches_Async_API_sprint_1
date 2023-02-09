@@ -52,7 +52,7 @@ async def startup():
     )
     try:
         await producer.aioproducer.start()
-    except KafkaConnectionError as e:
+    except KafkaConnectionError:
         pass
     mongo.mongo_db = AsyncIOMotorClient(
         config.mongo_url,
