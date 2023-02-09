@@ -73,7 +73,7 @@ jobs:
         with:     
           compose-file: "./auth/tests/functional/docker-compose.yml"
           #up-flags: "up -d --build"
-          compose-flags: " up -d --build"
+          #compose-flags: " up -d --build"
           #compose-flags: "logs -f functional_auth-pytests_1"
           #services: |
           #  auth-pytests
