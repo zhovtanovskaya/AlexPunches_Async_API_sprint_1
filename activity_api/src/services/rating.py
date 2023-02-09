@@ -1,4 +1,10 @@
+from functools import lru_cache
 from uuid import UUID
+
+from fastapi import Depends
+from motor.motor_asyncio import AsyncIOMotorDatabase
+
+from db.mongo import get_mongo_db
 
 from .base import ReactionService
 from .models.user_content.ratings import Rating, RatingStats
@@ -28,3 +34,10 @@ class RatingService(ReactionService):
         ]
         results = await self.collection.aggregate(pipeline).to_list(1)
         return RatingStats(**results[0])
+
+
+@lru_cache()
+def get_ratind_service(
+    mongo: AsyncIOMotorDatabase = Depends(get_mongo_db)
+) -> RatingService:
+    return RatingService(mongo)

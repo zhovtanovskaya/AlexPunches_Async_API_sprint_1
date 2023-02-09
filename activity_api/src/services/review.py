@@ -1,4 +1,10 @@
+from functools import lru_cache
 from uuid import UUID
+
+from fastapi import Depends
+from motor.motor_asyncio import AsyncIOMotorDatabase
+
+from db.mongo import get_mongo_db
 
 from .base import ReactionService
 from .models.user_content.reviews import Review, ReviewStats, ReviewValue
@@ -28,3 +34,10 @@ class ReviewService(ReactionService):
             negative_count=stats.get(ReviewValue.NEGATIVE, 0),
             total_reviews=sum(stats.values()),
         )
+
+
+@lru_cache()
+def get_review_service(
+    mongo: AsyncIOMotorDatabase = Depends(get_mongo_db)
+) -> ReviewService:
+    return ReviewService(mongo)

@@ -15,7 +15,7 @@ sys.path.append(BASE_DIR)
 
 import producer
 
-from api.v1 import activities, likes
+from api.v1 import activities, likes, statistics
 from core.config import config
 from core.context import request_id
 from db import mongo
@@ -49,9 +49,14 @@ async def startup():
         client_id=config.project_name,
         bootstrap_servers=f'{config.event_store_host}:{config.event_store_port}', # noqa
     )
-    await producer.aioproducer.start()
-    client = AsyncIOMotorClient(config.mongo_url)
-    mongo.mongo_db = client.ugc
+    # await producer.aioproducer.start()
+    client = AsyncIOMotorClient(
+        config.mongo_url,
+        serverSelectionTimeoutMS=5000,
+        tls=True,
+        tlsCAFile=config.mongo_tls_ca_file,
+    )
+    mongo.mongo_db = client['sprint-9']
 
 
 @app.on_event('shutdown')
@@ -66,7 +71,9 @@ app.include_router(
 app.include_router(
     likes.router, prefix='/api/v1/likes', tags=['activity'],
 )
-
+app.include_router(
+    statistics.router, prefix='/api/v1/statistics', tags=['statistics'],
+)
 
 if __name__ == '__main__':
     uvicorn.run(
