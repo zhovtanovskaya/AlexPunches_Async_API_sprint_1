@@ -71,9 +71,10 @@ jobs:
       - uses: actions/checkout@v3
       - uses: isbang/compose-action@v1.4.1   
         with:     
-          compose-file: "./auth/tests/functional/docker-compose.yml"
-          up-flags: "up -d --build"
-          compose-flags: "logs -f functional_auth-pytests_1"
+          compose-file: "./auth/tests/functional/docker-compose.yml up -d --build"
+          #up-flags: "up -d --build"
+          #compose-flags: "logs -f functional_auth-pytests_1"
+          #compose-flags: "logs -f functional_auth-pytests_1"
           #services: |
           #  auth-pytests
           
