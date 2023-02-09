@@ -11,17 +11,9 @@ class MongoConn(BaseSettings):
     mongo_host: str
     mongo_rs: str
     test_mongo_auth_src: str
-    test_mongo_url: str
 
     def get_conn(self) -> str:
-        if self.test_mongo_url:
-            return self.test_mongo_url
-        uri = (
-            'mongodb://{user}:{pw}@{host}/'
-            '?replicaSet={rs}&authSource={auth_src}'
-            '&retryWrites=true&w=majority'
-        )
-        return uri.format(
+        return 'mongodb://{user}:{pw}@{host}/?replicaSet={rs}&authSource={auth_src}&retryWrites=true&w=majority'.format(  # noqa
             user=quote(self.mongo_user),
             pw=quote(self.mongo_pw),
             host=self.mongo_host,
