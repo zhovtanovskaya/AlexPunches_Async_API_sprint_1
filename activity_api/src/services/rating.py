@@ -14,14 +14,14 @@ class RatingService(ReactionService):
 
     user_content_type = Rating
 
-    async def get_stats(self, movie_id: UUID) -> RatingStats:
+    async def get_stats(self, movie_id: UUID) -> RatingStats | None:
         """Посчитать средний рейтинг и количество оценок фильма."""
         pipeline = [
             {
                 '$match': {
                     'target_type': 'movie',
                     'type': 'rating',
-                    'target_id': movie_id,
+                    'target_id': str(movie_id),
                 },
             },
             {
@@ -33,7 +33,8 @@ class RatingService(ReactionService):
             },
         ]
         results = await self.collection.aggregate(pipeline).to_list(1)
-        return RatingStats(**results[0])
+        if len(results) > 0:
+            return RatingStats(**results[0])
 
 
 @lru_cache()

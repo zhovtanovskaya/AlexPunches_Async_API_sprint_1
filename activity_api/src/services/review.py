@@ -21,7 +21,7 @@ class ReviewService(ReactionService):
                 '$match': {
                     'target_type': 'movie',
                     'type': 'review',
-                    'target_id': movie_id,
+                    'target_id': str(movie_id),
                 },
             },
             {'$group': {'_id': '$value', 'count': {'$count': {}}}},

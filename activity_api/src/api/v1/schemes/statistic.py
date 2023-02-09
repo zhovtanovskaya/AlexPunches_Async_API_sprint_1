@@ -14,5 +14,5 @@ class ReviewStatisticScheme(BaseModel):
 
 
 class MovieStatisticScheme(BaseModel):
-    ratings: RatingStatisticScheme
-    reviews: ReviewStatisticScheme
+    ratings: RatingStatisticScheme | None
+    reviews: ReviewStatisticScheme | None
