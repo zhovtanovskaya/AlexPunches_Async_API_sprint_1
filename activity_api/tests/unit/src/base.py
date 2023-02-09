@@ -13,6 +13,6 @@ class ReactionTestCase(unittest.IsolatedAsyncioTestCase):
             serverSelectionTimeoutMS=5000,
             tls=bool(settings.mongo_tls_ca_file),
             tlsCAFile=settings.mongo_tls_ca_file,
-        )[settings.test_mongo_auth_src]
+        )[settings.mongo_auth_src_test]
         await self.db.drop_collection('reactions')
         await self.db.create_collection('reactions')
