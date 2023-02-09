@@ -8,6 +8,7 @@ import uvicorn
 from aiokafka import AIOKafkaProducer
 from fastapi import FastAPI, Request, Response
 from fastapi.responses import ORJSONResponse
+from kafka.errors import KafkaConnectionError
 from motor.motor_asyncio import AsyncIOMotorClient
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -49,7 +50,10 @@ async def startup():
         client_id=config.project_name,
         bootstrap_servers=f'{config.event_store_host}:{config.event_store_port}', # noqa
     )
-    # await producer.aioproducer.start()
+    try:
+        await producer.aioproducer.start()
+    except KafkaConnectionError as e:
+        pass
     mongo.mongo_db = AsyncIOMotorClient(
         config.mongo_url,
         serverSelectionTimeoutMS=5000,
