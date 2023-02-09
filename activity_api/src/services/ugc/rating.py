@@ -5,16 +5,16 @@ from fastapi import Depends
 from motor.motor_asyncio import AsyncIOMotorDatabase
 
 from db.mongo import get_mongo_db
+from services.ugc.models.user_content.ratings import Rating, RatingStats
 
 from .base import ReactionService
-from .models.user_content.ratings import Rating, RatingStats
 
 
 class RatingService(ReactionService):
 
     user_content_type = Rating
 
-    async def get_stats(self, movie_id: UUID) -> RatingStats | None:
+    async def get_stats(self, movie_id: UUID) -> RatingStats:
         """Посчитать средний рейтинг и количество оценок фильма."""
         pipeline = [
             {
@@ -33,8 +33,9 @@ class RatingService(ReactionService):
             },
         ]
         results = await self.collection.aggregate(pipeline).to_list(1)
-        if len(results) > 0:
-            return RatingStats(**results[0])
+        if len(results) == 0:
+            return RatingStats()
+        return RatingStats(**results[0])
 
 
 @lru_cache()

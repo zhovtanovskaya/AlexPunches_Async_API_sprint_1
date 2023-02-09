@@ -30,7 +30,7 @@ class Review(MovieReaction):
 class ReviewStats(BaseModel):
     """Количественная статистика рецензияй на конкретный фильм."""
 
-    total_reviews: NonNegativeInt
-    positive_count: NonNegativeInt
-    neutral_count: NonNegativeInt
-    negative_count: NonNegativeInt
+    total_reviews: NonNegativeInt = 0
+    positive_count: NonNegativeInt = 0
+    neutral_count: NonNegativeInt = 0
+    negative_count: NonNegativeInt = 0

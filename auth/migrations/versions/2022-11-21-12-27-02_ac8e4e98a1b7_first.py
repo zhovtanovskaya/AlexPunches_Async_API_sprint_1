@@ -5,8 +5,8 @@ Revises:
 Create Date: 2022-11-21 12:27:02.096099
 
 """
-from alembic import op
 import sqlalchemy as sa
+from alembic import op
 from sqlalchemy.dialects import postgresql
 
 # revision identifiers, used by Alembic.
@@ -95,10 +95,8 @@ def upgrade():
     # ### end Alembic commands ###
 
 
-    from models.patition_login_history import (
-        PARTITION_TABLES_REGISTRY,
-        create_table_login_history_partition_ddl
-    )    
+    from services.activity.models.spawn_point import (
+        PARTITION_TABLES_REGISTRY, create_table_login_history_partition_ddl)    
     for table_class, device_type in PARTITION_TABLES_REGISTRY:
         ddl = create_table_login_history_partition_ddl(table_class.__table__, device_type)
         ddl(target=None, bind=op.get_bind())

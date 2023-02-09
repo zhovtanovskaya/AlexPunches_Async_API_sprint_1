@@ -50,13 +50,12 @@ async def startup():
         bootstrap_servers=f'{config.event_store_host}:{config.event_store_port}', # noqa
     )
     # await producer.aioproducer.start()
-    client = AsyncIOMotorClient(
+    mongo.mongo_db = AsyncIOMotorClient(
         config.mongo_url,
         serverSelectionTimeoutMS=5000,
-        tls=True,
+        tls=bool(config.mongo_tls_ca_file),
         tlsCAFile=config.mongo_tls_ca_file,
-    )
-    mongo.mongo_db = client['sprint-9']
+    )[config.mongo_auth_src]
 
 
 @app.on_event('shutdown')

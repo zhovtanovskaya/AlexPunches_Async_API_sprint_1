@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from pydantic.types import NonNegativeInt, PositiveFloat, PositiveInt
+from pydantic.types import NonNegativeFloat, NonNegativeInt, PositiveInt
 
 from .base import ContentType, MovieReaction
 
@@ -10,5 +10,5 @@ class Rating(MovieReaction):
 
 
 class RatingStats(BaseModel):
-    total_ratings: NonNegativeInt
-    average_rating: PositiveFloat
+    total_ratings: NonNegativeInt = 0
+    average_rating: NonNegativeFloat = 0

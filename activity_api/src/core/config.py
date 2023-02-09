@@ -50,9 +50,10 @@ class ApiSettings(BaseSettings):
     event_store_port: str = '9092'
     film_progress_topic: str = 'views'
     activity_sentry_dsn: Optional[str]
-    # mongo_url: str = ''
+
     mongo_url: str = MongoConn().get_conn()
     mongo_tls_ca_file: Optional[str]
+    mongo_auth_src: str
 
 
 @lru_cache()

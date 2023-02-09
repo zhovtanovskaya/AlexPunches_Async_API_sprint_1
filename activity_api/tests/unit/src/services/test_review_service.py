@@ -1,5 +1,5 @@
-from src.services.models.user_content.reviews import Review, ReviewValue
-from src.services.review import ReviewService
+from src.services.ugc.models.user_content.reviews import Review, ReviewValue
+from src.services.ugc.review import ReviewService
 from tests.unit.src.base import ReactionTestCase
 
 

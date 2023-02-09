@@ -6,7 +6,7 @@ from fastapi import Depends
 from producer import get_producer
 
 from core.config import config
-from models import SpawnPointModel
+from services.activity.models.spawn_point import SpawnPointModel
 
 loop = asyncio.get_event_loop()
 
