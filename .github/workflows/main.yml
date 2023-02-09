@@ -72,5 +72,5 @@ jobs:
       - uses: isbang/compose-action@v1.4.1   
         with:     
           compose-file: "./auth/tests/functional/docker-compose.yml"
-          down-flags: " logs -f auth-pytests"
+          compose-flags: " logs -f auth-pytests"
           
