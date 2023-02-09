@@ -26,8 +26,22 @@ services:
     image: auth-flask-image
     expose:
       - "5000"
-    env_file:
-      - ../../../.env.pytests
+    environment:
+      FLASK_APP: ${FLASK_APP}  
+      FLASK_DEBUG: ${FLASK_DEBUG}  
+      FLASK_SECRET_KEY: ${FLASK_SECRET_KEY}  
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}  
+      JWT_ACCESS_TOKEN_EXPIRES: ${JWT_ACCESS_TOKEN_EXPIRES}  
+      JWT_REFRESH_TOKEN_EXPIRES: ${JWT_REFRESH_TOKEN_EXPIRES}  
+      GOOGLE_OAUTH_CLIENT_ID: ${GOOGLE_OAUTH_CLIENT_ID}  
+      GOOGLE_OAUTH_CLIENT_SECRET: ${GOOGLE_OAUTH_CLIENT_SECRET}  
+      GOOGLE_OAUTH_ENDPOINT: ${GOOGLE_OAUTH_ENDPOINT}  
+      OAUTHLIB_INSECURE_TRANSPORT: ${OAUTHLIB_INSECURE_TRANSPORT}  
+      ENABLE_TRACER: ${ENABLE_TRACER}  
+      JAEGER_HOST: ${JAEGER_HOST}  
+      JAEGER_PORT: ${JAEGER_PORT}  
+      AUTH_SENTRY_DSN: ${AUTH_SENTRY_DSN}
+
     ports:
       - "5000:5000"
     entrypoint:
@@ -38,8 +52,12 @@ services:
     image: auth-flask-image
     expose:
       - "5000"
-    env_file:
-      - ../../../.env.pytests
+    environment:
+      POSTGRES_DB_AUTH: ${FLASK_APP} 
+      POSTGRES_USER_AUTH: ${FLASK_APP} 
+      POSTGRES_PASSWORD_AUTH: ${FLASK_APP}
+      DB_HOST_AUTH: ${FLASK_APP} 
+      DB_PORT_AUTH: ${FLASK_APP} 
     depends_on:
       - test-auth-postgres
       - test-redis

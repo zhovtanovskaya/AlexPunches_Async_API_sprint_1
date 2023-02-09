@@ -23,8 +23,9 @@ services:
     image: fastapi-image
     expose:
       - "8000"
-    env_file:
-      - ../../../.env.pytests
+    environment:
+      ES_HOST: ${ES_HOST}
+      ES_PORT: ${ES_PORT}
     ports:
       - "8000:8000"
 
@@ -32,8 +33,9 @@ services:
     image: fastapi-image
     expose:
       - "8000"
-    env_file:
-      - ../../../.env.pytests
+    environment:
+      ES_HOST: ${ES_HOST}
+      ES_PORT: ${ES_PORT}
     depends_on:
       - test-elastic
       - test-redis
