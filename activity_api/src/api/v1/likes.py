@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from motor.motor_asyncio import AsyncIOMotorDatabase
 
-from db.mongo import get_mongo_db
+from src.db.mongo import get_mongo_db
 
 router = APIRouter()
 
