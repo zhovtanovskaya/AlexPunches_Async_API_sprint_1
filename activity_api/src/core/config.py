@@ -8,7 +8,7 @@ from urllib.parse import quote_plus as quote
 
 from pydantic import BaseSettings, Field
 
-from core.logger import LOGGING
+from src.core.logger import LOGGING
 
 logging_config.dictConfig(LOGGING)
 

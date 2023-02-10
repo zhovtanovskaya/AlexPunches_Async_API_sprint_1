@@ -2,7 +2,7 @@ from enum import Enum
 
 from pydantic import BaseModel, NonNegativeInt
 
-from .base import ContentType, MovieReaction
+from src.services.ugc.models.base import ContentType, MovieReaction
 
 
 class ReviewValue(int, Enum):

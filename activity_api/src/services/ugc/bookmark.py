@@ -1,5 +1,5 @@
-from .base import ReactionService
-from .models.user_content.bookmarks import Bookmark
+from src.services.ugc.base import ReactionService
+from src.services.ugc.models.bookmarks import Bookmark
 
 
 class BookmarkService(ReactionService):

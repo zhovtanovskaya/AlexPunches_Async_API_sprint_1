@@ -1,7 +1,5 @@
 """Точка входа в приложение."""
 import asyncio
-import os
-import sys
 
 import sentry_sdk
 import uvicorn
@@ -11,15 +9,11 @@ from fastapi.responses import ORJSONResponse
 from kafka.errors import KafkaConnectionError
 from motor.motor_asyncio import AsyncIOMotorClient
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(BASE_DIR)
-
-import producer
-
-from api.v1 import activities, likes, statistics
-from core.config import config
-from core.context import request_id
-from db import mongo
+from src import producer
+from src.api.v1 import activities, likes, statistics
+from src.core.config import config
+from src.core.context import request_id
+from src.db import mongo
 
 if config.activity_sentry_dsn:
     sentry_sdk.init(

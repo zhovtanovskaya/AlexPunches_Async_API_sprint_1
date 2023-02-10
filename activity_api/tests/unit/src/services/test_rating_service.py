@@ -1,6 +1,6 @@
 import uuid
 
-from src.services.ugc.models.user_content.ratings import Rating
+from src.services.ugc.models.ratings import Rating
 from src.services.ugc.rating import RatingService
 from tests.unit.src.base import ReactionTestCase
 

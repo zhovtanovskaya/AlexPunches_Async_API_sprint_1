@@ -3,9 +3,9 @@ from uuid import UUID
 
 from fastapi import APIRouter, Depends
 
-from api.v1.schemes.statistic import MovieStatisticScheme
-from services.ugc.rating import RatingService, get_ratind_service
-from services.ugc.review import ReviewService, get_review_service
+from src.api.v1.schemes.statistic import MovieStatisticScheme
+from src.services.ugc.rating import RatingService, get_ratind_service
+from src.services.ugc.review import ReviewService, get_review_service
 
 router = APIRouter()
 

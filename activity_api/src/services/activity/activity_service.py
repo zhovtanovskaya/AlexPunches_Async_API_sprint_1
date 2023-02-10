@@ -3,10 +3,10 @@ import asyncio
 
 from aiokafka import AIOKafkaProducer
 from fastapi import Depends
-from producer import get_producer
 
-from core.config import config
-from services.activity.models.spawn_point import SpawnPointModel
+from src.core.config import config
+from src.producer import get_producer
+from src.services.activity.models.spawn_point import SpawnPointModel
 
 loop = asyncio.get_event_loop()
 

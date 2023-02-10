@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field
 from pydantic.types import NonNegativeFloat, NonNegativeInt, PositiveInt
 
-from .base import ContentType, MovieReaction
+from src.services.ugc.models.base import ContentType, MovieReaction
 
 
 class Rating(MovieReaction):

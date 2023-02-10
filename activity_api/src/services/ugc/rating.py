@@ -4,9 +4,9 @@ from uuid import UUID
 from fastapi import Depends
 from motor.motor_asyncio import AsyncIOMotorDatabase
 
-from ...db.mongo import get_mongo_db
-from ...services.ugc.models.user_content.ratings import Rating, RatingStats
-from .base import ReactionService
+from src.db.mongo import get_mongo_db
+from src.services.ugc.base import ReactionService
+from src.services.ugc.models.ratings import Rating, RatingStats
 
 
 class RatingService(ReactionService):
