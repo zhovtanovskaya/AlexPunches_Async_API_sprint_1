@@ -5,7 +5,7 @@ from typing import Optional
 from uuid import UUID
 
 from bson import ObjectId
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, validator
 
 
 class StrObjectId(ObjectId):
@@ -45,6 +45,12 @@ class Reaction(BaseModel):
     target_type: ContentType
     target_id: StrObjectId
 
+    @validator("user_id")
+    def validate_uuids(cls, value):
+        if value:
+            return str(value)
+        return value
+
     class Config:
         """Настроить модель для совместимости с Mongo и BSON."""
 
@@ -58,3 +64,9 @@ class MovieReaction(Reaction):
 
     target_id: UUID
     target_type: ContentType = ContentType.MOVIE
+
+    @validator("target_id")
+    def validate_uuids(cls, value):
+        if value:
+            return str(value)
+        return value

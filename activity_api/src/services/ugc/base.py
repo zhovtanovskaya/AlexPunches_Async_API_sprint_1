@@ -6,7 +6,7 @@ from bson.objectid import ObjectId
 from motor.motor_asyncio import AsyncIOMotorDatabase
 from pydantic import PositiveInt
 
-from .models.user_content.protocols import UserContent
+from src.services.ugc.models.protocols import UserContent
 
 
 class ReactionService:

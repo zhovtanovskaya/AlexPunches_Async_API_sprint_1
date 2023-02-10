@@ -1,4 +1,4 @@
-from .base import ContentType, MovieReaction
+from src.services.ugc.models.base import ContentType, MovieReaction
 
 
 class Bookmark(MovieReaction):

@@ -1,5 +1,5 @@
-from src.services.like import LikeService
-from src.services.models.user_content.likes import Like, LikeValue
+from src.services.ugc.like import LikeService
+from src.services.ugc.models.likes import Like, LikeValue
 from tests.unit.src.base import ReactionTestCase
 
 

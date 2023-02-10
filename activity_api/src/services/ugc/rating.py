@@ -1,7 +1,12 @@
+from functools import lru_cache
 from uuid import UUID
 
-from .base import ReactionService
-from .models.user_content.ratings import Rating, RatingStats
+from fastapi import Depends
+from motor.motor_asyncio import AsyncIOMotorDatabase
+
+from src.db.mongo import get_mongo_db
+from src.services.ugc.base import ReactionService
+from src.services.ugc.models.ratings import Rating, RatingStats
 
 
 class RatingService(ReactionService):
@@ -15,7 +20,7 @@ class RatingService(ReactionService):
                 '$match': {
                     'target_type': 'movie',
                     'type': 'rating',
-                    'target_id': movie_id,
+                    'target_id': str(movie_id),
                 },
             },
             {
@@ -27,4 +32,13 @@ class RatingService(ReactionService):
             },
         ]
         results = await self.collection.aggregate(pipeline).to_list(1)
+        if len(results) == 0:
+            return RatingStats()
         return RatingStats(**results[0])
+
+
+@lru_cache()
+def get_ratind_service(
+    mongo: AsyncIOMotorDatabase = Depends(get_mongo_db)
+) -> RatingService:
+    return RatingService(mongo)

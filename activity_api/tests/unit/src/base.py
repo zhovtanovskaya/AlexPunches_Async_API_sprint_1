@@ -8,7 +8,11 @@ from tests.unit.src.core.config import settings
 class ReactionTestCase(unittest.IsolatedAsyncioTestCase):
 
     async def asyncSetUp(self):
-        client = AsyncIOMotorClient(settings.test_mongo_url)
-        self.db = client.test_ugc
+        self.db = AsyncIOMotorClient(
+            settings.test_mongo_url,
+            serverSelectionTimeoutMS=5000,
+            tls=bool(settings.mongo_tls_ca_file),
+            tlsCAFile=settings.mongo_tls_ca_file,
+        )[settings.mongo_auth_src_test]
         await self.db.drop_collection('reactions')
         await self.db.create_collection('reactions')

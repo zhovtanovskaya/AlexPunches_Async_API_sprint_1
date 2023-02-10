@@ -1,3 +1,6 @@
+run_server:
+	uvicorn src.main:app --reload
+
 run_unittests:
 	python -m unittest $(path)
 

@@ -1,7 +1,12 @@
+from functools import lru_cache
 from uuid import UUID
 
-from .base import ReactionService
-from .models.user_content.reviews import Review, ReviewStats, ReviewValue
+from fastapi import Depends
+from motor.motor_asyncio import AsyncIOMotorDatabase
+
+from src.db.mongo import get_mongo_db
+from src.services.ugc.base import ReactionService
+from src.services.ugc.models.reviews import Review, ReviewStats, ReviewValue
 
 
 class ReviewService(ReactionService):
@@ -15,7 +20,7 @@ class ReviewService(ReactionService):
                 '$match': {
                     'target_type': 'movie',
                     'type': 'review',
-                    'target_id': movie_id,
+                    'target_id': str(movie_id),
                 },
             },
             {'$group': {'_id': '$value', 'count': {'$count': {}}}},
@@ -28,3 +33,10 @@ class ReviewService(ReactionService):
             negative_count=stats.get(ReviewValue.NEGATIVE, 0),
             total_reviews=sum(stats.values()),
         )
+
+
+@lru_cache()
+def get_review_service(
+    mongo: AsyncIOMotorDatabase = Depends(get_mongo_db)
+) -> ReviewService:
+    return ReviewService(mongo)

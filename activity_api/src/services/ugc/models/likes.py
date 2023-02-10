@@ -1,6 +1,6 @@
 from enum import Enum
 
-from .base import ContentType, Reaction
+from src.services.ugc.models.base import ContentType, Reaction
 
 
 class LikeValue(int, Enum):

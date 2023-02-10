@@ -4,7 +4,7 @@ from uuid import UUID
 
 from pydantic import Field
 
-from .base import ContentType, StrObjectId
+from src.services.ugc.models.base import ContentType, StrObjectId
 
 
 @runtime_checkable

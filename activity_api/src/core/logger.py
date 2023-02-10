@@ -1,6 +1,6 @@
 import logging
 
-from core.context import request_id
+from src.core.context import request_id
 
 LOG_FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 LOG_DEFAULT_HANDLERS = ['console', 'file']
