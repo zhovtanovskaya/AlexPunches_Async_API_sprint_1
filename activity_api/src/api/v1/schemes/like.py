@@ -25,8 +25,6 @@ class LikeScheme(LikeBaseScheme):
     created_at: datetime
     user_id: UUID
     type: ContentType = ContentType.LIKE
-    target_id: StrObjectId
-    target_type: ContentType = ContentType.REVIEW
 
     @validator('id', 'target_id')
     def validate_objectid(cls, value):

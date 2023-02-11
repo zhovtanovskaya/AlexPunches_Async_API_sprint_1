@@ -10,7 +10,7 @@ class RatingBaseScheme(BaseModel):
     id: StrObjectId | None = None
     created_at: datetime | None = None
     user_id: UUID | None = None
-    type: ContentType | None = ContentType.LIKE
+    type: ContentType | None = ContentType.RATING
     target_id: UUID
     target_type: ContentType = ContentType.MOVIE
     value: int = Field(..., ge=0, le=10)
@@ -24,9 +24,7 @@ class RatingScheme(RatingBaseScheme):
     id: StrObjectId
     created_at: datetime
     user_id: UUID
-    type: ContentType = ContentType.LIKE
-    target_id: UUID
-    target_type: ContentType = ContentType.MOVIE
+    type: ContentType = ContentType.RATING
 
     @validator('id')
     def validate_objectid(cls, value):

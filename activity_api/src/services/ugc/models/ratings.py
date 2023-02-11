@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from pydantic.types import NonNegativeFloat, NonNegativeInt, PositiveInt
+from pydantic.types import NonNegativeFloat, NonNegativeInt
 
 from src.services.ugc.models.base import ContentType, MovieReaction
 
