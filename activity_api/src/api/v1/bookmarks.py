@@ -47,10 +47,14 @@ async def get_user_bookmark(
     )
 
 
-@router.delete('/<bookmark_id>')
+@router.delete('/{bookmark_id}', dependencies=[Depends(subscription_required)])
 async def delete_bookmark(
     bookmark_id: StrObjectId,
+    request: Request,
     bookmark_service: BookmarkService = Depends(get_bookmark_service),
 ) -> Response:
-    await bookmark_service.delete(id=bookmark_id)
+    await bookmark_service.delete(
+        id=bookmark_id,
+        filters={'user_id': str(request.state.user_id)},
+    )
     return Response(status_code=status.HTTP_204_NO_CONTENT)

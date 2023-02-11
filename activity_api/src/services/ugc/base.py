@@ -1,6 +1,6 @@
 """Сущности, общие для всех сервисов пользовательского контента."""
 
-from typing import AsyncIterable, Mapping, Type
+from typing import Any, AsyncIterable, Mapping, Type
 
 import pymongo
 from bson.objectid import ObjectId
@@ -32,16 +32,16 @@ class ReactionService:
     async def get_all(
         self,
         sort: str | None,
-        filters: Mapping[str, str] | None = None,
+        filters: Mapping[str, Any] | None = None,
         page_number: PositiveInt = 1,
         page_size: NonNegativeInt = 50,
     ) -> AsyncIterable:
         """Получить список объектов на странице."""
         content_type_name = self.user_content_type.__fields__['type'].default
-        find = {'type': content_type_name}
+        find_filter = {'type': content_type_name}
         if filters is not None:
-            find.update(filters)
-        result = self.collection.find(find)
+            find_filter.update(filters)
+        result = self.collection.find(find_filter)
 
         if sort is not None:
             result = result.sort(sort, pymongo.DESCENDING)
@@ -60,13 +60,20 @@ class ReactionService:
         if result.acknowledged:
             return await self.get(result.inserted_id)
 
-    async def delete(self, id: ObjectId) -> bool:
+    async def delete(
+              self,
+              id: ObjectId,
+              filters: Mapping[str, Any] | None = None,
+    ) -> bool:
         """Удалить объект из базы данных.
 
         Returns:
             True -- если объект удален успешно.
         """
-        result = await self.collection.delete_one({'_id': ObjectId(id)})
+        delete_filter = {'_id': ObjectId(id)}
+        if filters is not None:
+            delete_filter.update(filters)
+        result = await self.collection.delete_one(delete_filter)
         return result.deleted_count == 1
 
     def to_obj(self, doc: dict) -> UserContent:
