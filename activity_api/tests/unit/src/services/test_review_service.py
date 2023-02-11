@@ -22,7 +22,9 @@ class TestReviewService(ReactionTestCase):
         self.assertEqual([self.new_review], all_reviews)
 
     async def test_get_all_pagination(self):
-        all_reviews = [r async for r in self.service.get_all(2, 1)]
+        all_reviews = [r async for r in self.service.get_all(
+            page_number=2, page_size=1,
+        )]
         self.assertEqual([], all_reviews)
 
     async def test_get_stats(self):

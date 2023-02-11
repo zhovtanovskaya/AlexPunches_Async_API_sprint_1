@@ -31,7 +31,7 @@ class ReactionService:
 
     async def get_all(
         self,
-        sort: str | None,
+        sort: str | None = None,
         filters: Mapping[str, Any] | None = None,
         page_number: PositiveInt = 1,
         page_size: NonNegativeInt = 50,
