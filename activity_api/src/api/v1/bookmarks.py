@@ -1,4 +1,6 @@
-from fastapi import APIRouter, Depends, Request, Response, status
+from fastapi import (APIRouter, Depends, HTTPException, Request, Response,
+                     status)
+from pymongo.errors import DuplicateKeyError
 
 import src.api.v1.schemes.bookmark as schemes
 from src.api.v1.schemes.transform_schemes import (
@@ -22,7 +24,13 @@ async def create_bookmark(
 ) -> schemes.BookmarkScheme:
     bookmark.user_id = request.state.user_id
     bookmark_model = transform_bookmark_scheme_to_model(bookmark)
-    new_bookmark = await bookmark_service.create(obj=bookmark_model)
+    try:
+        new_bookmark = await bookmark_service.create(obj=bookmark_model)
+    except DuplicateKeyError:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail='DuplicateKeyError',
+        )
     return transform_bookmark_model_to_scheme(new_bookmark)
 
 

@@ -1,4 +1,6 @@
-from fastapi import APIRouter, Depends, Request, Response, status
+from fastapi import (APIRouter, Depends, HTTPException, Request, Response,
+                     status)
+from pymongo.errors import DuplicateKeyError
 
 import src.api.v1.schemes.like as schemes
 from src.api.v1.schemes.transform_schemes import (
@@ -22,7 +24,13 @@ async def create_like(
 ) -> schemes.LikeScheme:
     like.user_id = request.state.user_id
     like_model = transform_like_scheme_to_model(like)
-    new_like = await like_service.create(obj=like_model)
+    try:
+        new_like = await like_service.create(obj=like_model)
+    except DuplicateKeyError:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail='DuplicateKeyError',
+        )
     return transform_like_model_to_scheme(new_like)
 
 

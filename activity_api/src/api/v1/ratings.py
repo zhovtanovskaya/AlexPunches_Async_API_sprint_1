@@ -1,4 +1,6 @@
-from fastapi import APIRouter, Depends, Request, Response, status
+from fastapi import (APIRouter, Depends, HTTPException, Request, Response,
+                     status)
+from pymongo.errors import DuplicateKeyError
 
 import src.api.v1.schemes.rating as schemes
 from src.api.v1.schemes.transform_schemes import (
@@ -22,7 +24,13 @@ async def create_rating(
 ) -> schemes.RatingScheme:
     rating.user_id = request.state.user_id
     rating_model = transform_rating_scheme_to_model(rating)
-    new_rating = await rating_service.create(obj=rating_model)
+    try:
+        new_rating = await rating_service.create(obj=rating_model)
+    except DuplicateKeyError:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail='DuplicateKeyError',
+        )
     return transform_rating_model_to_scheme(new_rating)
 
 
