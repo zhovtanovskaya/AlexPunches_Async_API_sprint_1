@@ -1,8 +1,6 @@
 from fastapi import APIRouter, Depends, Request, Response, status
 
-from src.api.v1.schemes.bookmark import (BookmarkCreateScheme,
-                                         BookmarkResultsListScheme,
-                                         BookmarkScheme)
+import src.api.v1.schemes.bookmark as schemes
 from src.api.v1.schemes.transform_schemes import (
     transform_bookmark_model_to_scheme, transform_bookmark_scheme_to_model)
 from src.auth.request import subscription_required
@@ -19,9 +17,9 @@ router = APIRouter()
 )
 async def create_bookmark(
     request: Request,
-    bookmark: BookmarkCreateScheme,
+    bookmark: schemes.BookmarkCreateScheme,
     bookmark_service: BookmarkService = Depends(get_bookmark_service),
-) -> BookmarkScheme:
+) -> schemes.BookmarkScheme:
     bookmark.user_id = request.state.user_id
     bookmark_model = transform_bookmark_scheme_to_model(bookmark)
     new_bookmark = await bookmark_service.create(obj=bookmark_model)
@@ -29,17 +27,17 @@ async def create_bookmark(
 
 
 @router.get('', dependencies=[Depends(subscription_required)])
-async def get_user_bookmark(
+async def get_user_bookmarks(
     request: Request,
     sort: str = '_id',
     bookmark_service: BookmarkService = Depends(get_bookmark_service),
-) -> BookmarkResultsListScheme:
+) -> schemes.BookmarkResultsListScheme:
     bookmarks = bookmark_service.get_all(
         page_size=0,
         sort=sort,
         filters={'user_id': str(request.state.user_id)},
     )
-    return BookmarkResultsListScheme(
+    return schemes.BookmarkResultsListScheme(
         results=[
             transform_bookmark_model_to_scheme(bookmark)
             async for bookmark in bookmarks

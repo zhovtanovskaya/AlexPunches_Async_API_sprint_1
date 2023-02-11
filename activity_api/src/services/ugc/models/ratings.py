@@ -6,7 +6,7 @@ from src.services.ugc.models.base import ContentType, MovieReaction
 
 class Rating(MovieReaction):
     type: ContentType = ContentType.RATING
-    value: PositiveInt = Field(gte=0, lte=10)
+    value: int = Field(..., ge=0, le=10)
 
 
 class RatingStats(BaseModel):

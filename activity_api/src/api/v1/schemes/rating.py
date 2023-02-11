@@ -6,24 +6,25 @@ from pydantic import BaseModel, Field, validator
 from src.services.ugc.models.custom_types import ContentType, StrObjectId
 
 
-class BookmarkBaseScheme(BaseModel):
+class RatingBaseScheme(BaseModel):
     id: StrObjectId | None = None
     created_at: datetime | None = None
     user_id: UUID | None = None
-    type: ContentType | None = ContentType.BOOKMARK
+    type: ContentType | None = ContentType.LIKE
     target_id: UUID
     target_type: ContentType = ContentType.MOVIE
+    value: int = Field(..., ge=0, le=10)
 
 
-class BookmarkCreateScheme(BookmarkBaseScheme):
+class RatingCreateScheme(RatingBaseScheme):
     created_at: datetime | None = Field(default_factory=datetime.now)
 
 
-class BookmarkScheme(BookmarkBaseScheme):
+class RatingScheme(RatingBaseScheme):
     id: StrObjectId
     created_at: datetime
     user_id: UUID
-    type: ContentType = ContentType.BOOKMARK
+    type: ContentType = ContentType.LIKE
     target_id: UUID
     target_type: ContentType = ContentType.MOVIE
 
@@ -32,7 +33,3 @@ class BookmarkScheme(BookmarkBaseScheme):
         if value:
             return str(value)
         return value
-
-
-class BookmarkResultsListScheme(BaseModel):
-    results: list[BookmarkScheme] = []

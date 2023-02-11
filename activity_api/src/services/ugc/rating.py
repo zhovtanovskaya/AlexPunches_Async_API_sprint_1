@@ -38,7 +38,7 @@ class RatingService(ReactionService):
 
 
 @lru_cache()
-def get_ratind_service(
+def get_rating_service(
     mongo: AsyncIOMotorDatabase = Depends(get_mongo_db)
 ) -> RatingService:
     return RatingService(mongo)
