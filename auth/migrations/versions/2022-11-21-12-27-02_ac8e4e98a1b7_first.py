@@ -95,8 +95,8 @@ def upgrade():
     # ### end Alembic commands ###
 
 
-    from services.activity.models.spawn_point import (
-        PARTITION_TABLES_REGISTRY, create_table_login_history_partition_ddl)    
+    from models.patition_login_history import (
+        PARTITION_TABLES_REGISTRY, create_table_login_history_partition_ddl)
     for table_class, device_type in PARTITION_TABLES_REGISTRY:
         ddl = create_table_login_history_partition_ddl(table_class.__table__, device_type)
         ddl(target=None, bind=op.get_bind())

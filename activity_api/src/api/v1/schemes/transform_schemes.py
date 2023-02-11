@@ -1,5 +1,5 @@
 """Трансофмации из схем в модели и наоборот."""
-from src.api.v1.schemes.bookmark import BookmarkScheme
+from src.api.v1.schemes.bookmark import BookmarkBaseScheme, BookmarkScheme
 from src.api.v1.schemes.spawn_point import SpawnPointScheme
 from src.api.v1.schemes.statistic import (RatingStatisticScheme,
                                           ReviewStatisticScheme)
@@ -44,10 +44,20 @@ def transform_ratingstats_model_to_scheme(
 def transform_bookmark_model_to_scheme(model: Bookmark) -> BookmarkScheme:
     """Трансформировать из модели Bookmark в схему BookmarkScheme."""
     return BookmarkScheme(
-        id=str(model.id),
+        id=model.id,
         created_at=model.created_at,
         user_id=model.user_id,
         type=model.type,
         target_id=model.target_id,
         target_type=model.target_type,
+    )
+
+
+def transform_bookmark_scheme_to_model(scheme: BookmarkBaseScheme) -> Bookmark:
+    return Bookmark(
+        id=scheme.id,
+        created_at=scheme.created_at,
+        user_id=scheme.user_id,
+        target_type=scheme.target_type,
+        target_id=scheme.target_id,
     )

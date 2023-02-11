@@ -55,8 +55,7 @@ class ReactionService:
 
         Поля obj.id не будет в документе БД.
         """
-        obj_dict = obj.dict()
-        del obj_dict['id']
+        obj_dict = obj.dict(exclude={'id': True}, exclude_none=True)
         result = await self.collection.insert_one(obj_dict)
         if result.acknowledged:
             return await self.get(result.inserted_id)

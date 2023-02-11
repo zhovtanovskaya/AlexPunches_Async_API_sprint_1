@@ -26,6 +26,6 @@ class UserContent(Protocol):
         """Создать объект с полями и значениями из data."""
         ...
 
-    def dict(self) -> dict:
+    def dict(self, *args, **kwargs) -> dict:
         """Вернуть поля класс их значения в виде dict."""
         ...

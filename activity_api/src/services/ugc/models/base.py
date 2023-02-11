@@ -18,9 +18,14 @@ class Reaction(BaseModel):
     target_type: ContentType
     target_id: StrObjectId
 
-    @classmethod
     @validator('user_id')
     def validate_uuids(cls, value):
+        if value:
+            return str(value)
+        return value
+
+    @validator('id', 'target_id')
+    def validate_objectid(cls, value):
         if value:
             return str(value)
         return value
@@ -39,7 +44,6 @@ class MovieReaction(Reaction):
     target_id: UUID
     target_type: ContentType = ContentType.MOVIE
 
-    @classmethod
     @validator('target_id')
     def validate_uuids(cls, value):
         if value:
