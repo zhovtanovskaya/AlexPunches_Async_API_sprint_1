@@ -1,4 +1,5 @@
 from functools import lru_cache
+from typing import Type
 
 from fastapi import Depends
 from motor.motor_asyncio import AsyncIOMotorDatabase
@@ -10,7 +11,7 @@ from src.services.ugc.models.likes import Like
 
 class LikeService(ReactionService):
 
-    user_content_type = Like
+    user_content_type = Type[Like]
 
 
 @lru_cache()

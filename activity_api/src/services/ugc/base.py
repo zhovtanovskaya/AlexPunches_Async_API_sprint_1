@@ -20,7 +20,7 @@ class ReactionService:
         self.mongo = mongo
         self.collection = self.mongo.reactions
 
-    async def get(self, id: ObjectId) -> UserContent:
+    async def get(self, id: ObjectId) -> UserContent | None:
         """Получить объект из базы данных.
 
         Поля _id и id будут содержать одинаковый
@@ -37,7 +37,9 @@ class ReactionService:
         page_size: NonNegativeInt = 50,
     ) -> AsyncIterable:
         """Получить список объектов на странице."""
-        content_type_name = self.user_content_type.__fields__['type'].default
+        content_type_name = self.user_content_type.__fields__[  # type: ignore
+            'type'
+        ].default
         find_filter = {'type': content_type_name}
         if filters is not None:
             find_filter.update(filters)
@@ -50,7 +52,7 @@ class ReactionService:
         async for doc in result.skip(offset).limit(page_size):
             yield self.to_obj(doc)
 
-    async def create(self, obj: UserContent) -> UserContent:
+    async def create(self, obj: UserContent) -> UserContent | None:
         """Создать объект в базе данных.
 
         Поля obj.id не будет в документе БД.
@@ -59,6 +61,7 @@ class ReactionService:
         result = await self.collection.insert_one(obj_dict)
         if result.acknowledged:
             return await self.get(result.inserted_id)
+        return None
 
     async def delete(
               self,

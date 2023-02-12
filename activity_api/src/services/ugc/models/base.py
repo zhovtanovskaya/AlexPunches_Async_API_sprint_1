@@ -16,7 +16,7 @@ class Reaction(BaseModel):
     created_at: Optional[datetime] = Field(default_factory=datetime.now)
     user_id: UUID
     target_type: ContentType
-    target_id: StrObjectId
+    target_id: StrObjectId | UUID
 
     @validator('user_id')
     def validate_uuids(cls, value):

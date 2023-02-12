@@ -1,4 +1,5 @@
 from functools import lru_cache
+from typing import Type
 from uuid import UUID
 
 from fastapi import Depends
@@ -11,7 +12,7 @@ from src.services.ugc.models.reviews import Review, ReviewStats, ReviewValue
 
 class ReviewService(ReactionService):
 
-    user_content_type = Review
+    user_content_type = Type[Review]
 
     async def get_stats(self, movie_id: UUID) -> ReviewStats:
         """Получить число разных ревью на фильм."""

@@ -1,4 +1,5 @@
 from functools import lru_cache
+from typing import Type
 from uuid import UUID
 
 from fastapi import Depends
@@ -11,7 +12,7 @@ from src.services.ugc.models.ratings import Rating, RatingStats
 
 class RatingService(ReactionService):
 
-    user_content_type = Rating
+    user_content_type = Type[Rating]
 
     async def get_stats(self, movie_id: UUID) -> RatingStats:
         """Посчитать средний рейтинг и количество оценок фильма."""
