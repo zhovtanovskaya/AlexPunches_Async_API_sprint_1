@@ -38,7 +38,7 @@ services:
       # Подключение к Redis внутри сети Docker Compose.
       REDIS_HOST: 'test-redis'
       # Настройки безопасности.
-      ENABLE_TRACER: False
+      ENABLE_TRACER: 'False'
       FLASK_SECRET_KEY: 'test_flask_security_key'
       JWT_SECRET_KEY: 'test_jwt_security_key'
       GOOGLE_OAUTH_CLIENT_ID: ''
