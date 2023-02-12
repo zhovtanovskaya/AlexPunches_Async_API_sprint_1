@@ -64,7 +64,7 @@ def admin_action() -> UserActions:
     #   nbf: 13 ноября 2022,    # Когда токен создан.
     #   exp: 10 ноября 2032,    # Когда токен истекает.
     admin_access_token = (
-        'zzzzzeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'  # noqa
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'  # noqa
         'eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2ODMyNDk5NSwianRpIjoiOGFkMWZlNDgtNDMz'
         'MC00MmI0LTlmNWYtNzZmM2YwZWU2MzZlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFk'
         'bWluQG1haWwuY29tIiwibmJmIjoxNjY4MzI0OTk1LCJleHAiOjE5ODM2ODQ5OTUsInJv'
