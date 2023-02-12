@@ -2,7 +2,7 @@
 import orjson
 from pydantic import BaseModel
 
-from utils import orjson_dumps
+from src.utils import orjson_dumps
 
 
 class SpawnPointScheme(BaseModel):
@@ -16,8 +16,6 @@ class SpawnPointScheme(BaseModel):
     film_id: str
     time: int
 
-    class Config:
-        """Класс Config."""
-
+    class Config:  # noqa
         json_loads = orjson.loads
         json_dumps = orjson_dumps

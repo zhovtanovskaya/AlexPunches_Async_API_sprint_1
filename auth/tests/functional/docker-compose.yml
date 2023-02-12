@@ -24,6 +24,8 @@ services:
   test-auth:
     build: ../../.
     image: auth-flask-image
+    volumes:
+      - /tmp/logs/auth_flask/:/var/log/auth_flask/
     expose:
       - "5000"
     environment:

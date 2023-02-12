@@ -1,4 +1,4 @@
-"""Функция orjson_dumps."""
+"""Удобные утилиты."""
 import orjson
 
 

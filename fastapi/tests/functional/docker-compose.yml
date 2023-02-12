@@ -21,6 +21,8 @@ services:
   test-fastapi:
     build: ../../.
     image: fastapi-image
+    volumes:
+      - /tmp/logs/async_api/:/var/log/async_api/
     expose:
       - "8000"
     environment:

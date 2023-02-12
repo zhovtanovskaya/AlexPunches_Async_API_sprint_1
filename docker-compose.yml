@@ -36,6 +36,7 @@ services:
     volumes:
       - service_static_value:/opt/app/static/
       - service_media_value:/opt/app/media/
+      - /tmp/logs/admin_panel/:/var/log/admin_panel/
     expose:
       - "8000"
     environment:
@@ -48,6 +49,8 @@ services:
 
   fastapi:
     build: fastapi
+    volumes:
+      - /tmp/logs/async_api/:/var/log/async_api/
     depends_on:
       - elastic
       - redis
@@ -68,6 +71,7 @@ services:
       - ./nginx/configs:/etc/nginx/conf.d:ro
       - service_static_value:/var/html/static/
       - service_media_value:/var/html/media/
+      - /tmp/logs/nginx/:/var/log/nginx/
     depends_on:
       - fastapi
       - admin_panel
@@ -107,6 +111,8 @@ services:
 
   auth_flask:
     build: auth
+    volumes:
+      - /tmp/logs/auth_flask/:/var/log/auth_flask/
     depends_on:
       - auth_postgres
       - redis
@@ -138,6 +144,8 @@ services:
 
   activity_api:
     build: activity_api
+    volumes:
+      - /tmp/logs/activity_api/:/var/log/activity_api/
     expose:
       - "8000"
     environment:
