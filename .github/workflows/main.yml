@@ -19,8 +19,12 @@ jobs:
     - name: Install dependencies
       run: | 
         python3 -m pip install --upgrade pip                
-        pip install flake8 flake8-isort
+        pip install flake8 flake8-isort mypy
 
     - name: Test with flake8
       run: |
         python3 -m flake8 --config=setup.cfg ./
+
+    - name: Test with mypy
+      run: |
+        python3 -m mypy --config-file=setup.cfg activity_api/

@@ -60,10 +60,12 @@ class JWTBearer(HTTPBearer):
         self.secret = secret
         self.algorithm = algorithm
 
-    async def __call__(self, request: Request) -> AccessTokenPayload:
+    async def __call__(  # type: ignore
+              self, request: Request
+    ) -> AccessTokenPayload:
         """Убедиться, что в запросе присутствует валидный JWT-токен."""
-        credentials: HTTPAuthorizationCredentials = await super().__call__(
-            request)
+        credentials: HTTPAuthorizationCredentials | None = await super(
+        ).__call__(request)
         if not credentials:
             raise AuthorizationException(AuthErrors.NO_TOKEN)
         if not credentials.scheme == 'Bearer':
