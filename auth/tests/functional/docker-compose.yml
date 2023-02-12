@@ -45,6 +45,8 @@ services:
       GOOGLE_OAUTH_CLIENT_SECRET: ''
     ports:
       - "5000:5000"
+    depends_on:
+      - test-auth-postgres
     entrypoint: >
       sh -c "python /opt/app/src/manage.py db upgrade head
       && gunicorn -b 0.0.0.0:5000 --workers 4 src.pywsgi:app"
@@ -56,7 +58,6 @@ services:
     environment:
       AUTH_HOST: 'test-auth'
     depends_on:
-      - test-auth-postgres
       - test-redis
       - test-auth
     entrypoint: >
