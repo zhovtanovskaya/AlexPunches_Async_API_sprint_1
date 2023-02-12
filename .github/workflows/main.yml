@@ -71,11 +71,13 @@ jobs:
           #up-flags: "up -d --build"
           #compose-flags: " up -d --build"
           #compose-flags: "logs -f functional_auth-pytests_1"
-          #services: |
-          #  auth-pytests
+          services: |
+            test-redis
+            test-auth-postgres
+            test-auth
+            
 
       - name: Run functional tests for Auth
         run: |
           pip install -r auth/tests/functional/requirements.txt
-          python auth/src/manage.py db upgrade head
           pytest auth/tests/functional/src
