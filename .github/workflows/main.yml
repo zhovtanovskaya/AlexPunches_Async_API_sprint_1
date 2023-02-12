@@ -71,10 +71,10 @@ jobs:
           #up-flags: "up -d --build"
           #compose-flags: " up -d --build"
           #compose-flags: "logs -f functional_auth-pytests_1"
-#          services: |
-#            test-redis
-#            test-auth-postgres
-#            test-auth
+          services: |
+            test-redis
+            test-auth-postgres
+            test-auth
           up-flags: "--exit-code-from=test-auth --abort-on-container-exit"
 
 
