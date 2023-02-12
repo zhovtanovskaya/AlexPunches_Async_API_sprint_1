@@ -40,7 +40,7 @@ services:
       # Настройки безопасности.
       ENABLE_TRACER: 'False'
       FLASK_SECRET_KEY: 'test_flask_security_key'
-      JWT_SECRET_KEY: 'test_jwt_security_key'
+      JWT_SECRET_KEY: 'jwt_secret_key'
       GOOGLE_OAUTH_CLIENT_ID: ''
       GOOGLE_OAUTH_CLIENT_SECRET: ''
     ports:
@@ -56,8 +56,25 @@ services:
     image: auth-flask-image
     expose:
       - "5000"
+    volumes:
+      - /tmp/logs/auth_flask/:/var/log/auth_flask/
     environment:
+      POSTGRES_DB_AUTH: ${POSTGRES_DB_AUTH}
+      POSTGRES_USER_AUTH: ${POSTGRES_USER_AUTH}
+      POSTGRES_PASSWORD_AUTH: ${POSTGRES_PASSWORD_AUTH}
+      # Подключение к PostgresSQL внутри сети Docker Compose.
+      DB_HOST_AUTH: 'test-auth-postgres'
+      # Подключение к Redis внутри сети Docker Compose.
+      REDIS_HOST: 'test-redis'
+      # Настройки безопасности.
+      ENABLE_TRACER: 'False'
+      FLASK_SECRET_KEY: 'test_flask_security_key'
+      JWT_SECRET_KEY: 'jwt_secret_key'
+      GOOGLE_OAUTH_CLIENT_ID: ''
+      GOOGLE_OAUTH_CLIENT_SECRET: ''
       AUTH_HOST: 'test-auth'
+      JWT_ACCESS_TOKEN_EXPIRES: '1 00:00:00.000000'
+      JWT_REFRESH_TOKEN_EXPIRES: '30 00:00:00.000000'
     depends_on:
       - test-redis
       - test-auth
@@ -65,7 +82,7 @@ services:
       sh -c "pip install -r /opt/app/tests/functional/requirements.txt
       && python3 /opt/app/tests/functional/utils/wait_for_redis.py
       && python3 /opt/app/src/manage.py db upgrade head
-      && pytest /opt/app/tests/functional/src"
+      && pytest /opt/app/tests/functional/src -vvv"
 
 volumes:
   pg_data_auth_test:
