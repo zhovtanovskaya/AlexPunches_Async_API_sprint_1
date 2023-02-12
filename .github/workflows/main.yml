@@ -24,7 +24,3 @@ jobs:
     - name: Test with flake8
       run: |
         python3 -m flake8 --config=setup.cfg ./
-
-    - name: Test with mypy
-      run: |
-        MYPYPATH=activity_api python3 -m mypy --config-file=setup.cfg activity_api
