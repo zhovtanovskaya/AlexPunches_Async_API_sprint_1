@@ -27,7 +27,7 @@ jobs:
 
     - name: Check with mypy
       run: |
-        MYPYPATH=activity_api/src python3 -m mypy -v --config-file=setup.cfg activity_api/src
+        MYPYPATH=activity_api/src python3 -m mypy --config-file=setup.cfg activity_api/src
 
     - name: send default message
       uses: appleboy/telegram-action@master
