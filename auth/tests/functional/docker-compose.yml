@@ -1,3 +1,4 @@
+version: '3'
 services:
   test-redis:
     image: redis:7-alpine
@@ -18,8 +19,8 @@ services:
       - "5432:5432"
     environment:
       POSTGRES_DB: ${POSTGRES_DB_AUTH}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_AUTH}
       POSTGRES_USER: ${POSTGRES_USER_AUTH}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_AUTH}
 
   test-auth:
     build: ../../.
@@ -29,37 +30,30 @@ services:
     expose:
       - "5000"
     environment:
-      FLASK_APP: ${FLASK_APP}  
-      FLASK_DEBUG: ${FLASK_DEBUG}  
-      FLASK_SECRET_KEY: ${FLASK_SECRET_KEY}  
-      JWT_SECRET_KEY: ${JWT_SECRET_KEY}  
-      JWT_ACCESS_TOKEN_EXPIRES: ${JWT_ACCESS_TOKEN_EXPIRES}  
-      JWT_REFRESH_TOKEN_EXPIRES: ${JWT_REFRESH_TOKEN_EXPIRES}  
-      GOOGLE_OAUTH_CLIENT_ID: ${GOOGLE_OAUTH_CLIENT_ID}  
-      GOOGLE_OAUTH_CLIENT_SECRET: ${GOOGLE_OAUTH_CLIENT_SECRET}  
-      GOOGLE_OAUTH_ENDPOINT: ${GOOGLE_OAUTH_ENDPOINT}  
-      OAUTHLIB_INSECURE_TRANSPORT: ${OAUTHLIB_INSECURE_TRANSPORT}  
-      ENABLE_TRACER: ${ENABLE_TRACER}  
-      JAEGER_HOST: ${JAEGER_HOST}  
-      JAEGER_PORT: ${JAEGER_PORT}  
-      AUTH_SENTRY_DSN: ${AUTH_SENTRY_DSN}
-
+      POSTGRES_DB_AUTH: ${POSTGRES_DB_AUTH}
+      POSTGRES_USER_AUTH: ${POSTGRES_USER_AUTH}
+      POSTGRES_PASSWORD_AUTH: ${POSTGRES_PASSWORD_AUTH}
+      # Подключение к PostgresSQL внутри сети Docker Compose.
+      DB_HOST_AUTH: 'test-auth-postgres'
+      # Подключение к Redis внутри сети Docker Compose.
+      REDIS_HOST: 'test-redis'
+      # Настройки безопасности.
+      ENABLE_TRACER: False
+      FLASK_SECRET_KEY: 'test_flask_security_key'
+      JWT_SECRET_KEY: 'test_jwt_security_key'
+      GOOGLE_OAUTH_CLIENT_ID: ''
+      GOOGLE_OAUTH_CLIENT_SECRET: ''
     ports:
       - "5000:5000"
     entrypoint:
       ["gunicorn", "-b", "0.0.0.0:5000", "--workers", "4", "src.pywsgi:app"]
-
 
   auth-pytests:
     image: auth-flask-image
     expose:
       - "5000"
     environment:
-      POSTGRES_DB_AUTH: ${FLASK_APP} 
-      POSTGRES_USER_AUTH: ${FLASK_APP} 
-      POSTGRES_PASSWORD_AUTH: ${FLASK_APP}
-      DB_HOST_AUTH: ${FLASK_APP} 
-      DB_PORT_AUTH: ${FLASK_APP} 
+      AUTH_HOST: 'test-auth'
     depends_on:
       - test-auth-postgres
       - test-redis
