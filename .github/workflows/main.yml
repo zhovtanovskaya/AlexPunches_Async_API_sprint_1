@@ -76,4 +76,5 @@ jobs:
 
       - name: Try using Redis
         run: |
+          pip install redis==4.3.4
           python try_redis.py
