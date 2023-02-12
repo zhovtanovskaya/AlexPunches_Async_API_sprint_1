@@ -77,4 +77,6 @@ jobs:
           #compose-flags: "logs -f functional_auth-pytests_1"
           #services: |
           #  auth-pytests
-          
+      -name: Try using Redis
+       run: |
+         python try_redis.py
