@@ -74,7 +74,7 @@ jobs:
           #services: |
           #  auth-pytests
 
-      - name: Try using Redis
+      - name: Run functional tests for Auth
         run: |
           pip install -r auth/tests/functional/requirements.txt
           pytest auth/tests/functional/src
