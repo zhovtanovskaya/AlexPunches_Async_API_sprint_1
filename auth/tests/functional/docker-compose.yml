@@ -45,8 +45,9 @@ services:
       GOOGLE_OAUTH_CLIENT_SECRET: ''
     ports:
       - "5000:5000"
-    entrypoint:
-      ["gunicorn", "-b", "0.0.0.0:5000", "--workers", "4", "src.pywsgi:app"]
+    entrypoint: >
+      sh -c "python /opt/app/src/manage.py db upgrade head
+      && gunicorn -b 0.0.0.0:5000 --workers 4 src.pywsgi:app"
 
   auth-pytests:
     image: auth-flask-image
