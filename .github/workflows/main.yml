@@ -27,6 +27,4 @@ jobs:
 
     - name: Test with mypy
       run: |
-        pwd
-        ls
-        MYPYPATH==activity_api python3 -m mypy --config-file=setup.cfg activity_api
+        MYPYPATH=activity_api python3 -m mypy --config-file=setup.cfg activity_api
