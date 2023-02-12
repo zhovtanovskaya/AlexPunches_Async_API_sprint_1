@@ -1,76 +1,1 @@
-name: Online Cinema application workflow
-
-on: [pull_request]
-
-jobs:
-  tests:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.10", "3.11"]
-    
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v4
-      with:
-        python-version: ${{ matrix.python-version }}
-
-    - name: Install dependencies
-      run: | 
-        python3 -m pip install --upgrade pip                
-        pip install flake8 flake8-isort
-    
-  build_and_push_to_docker_hub:  
-    name: Push Docker image to Docker Hub
-    needs: tests
-    runs-on: ubuntu-latest    
-    env:
-      POSTGRES_DB_AUTH: ${{ secrets.POSTGRES_DB_AUTH }}
-      POSTGRES_PASSWORD_AUTH: ${{ secrets.POSTGRES_PASSWORD_AUTH }}
-      POSTGRES_USER_AUTH: ${{ secrets.POSTGRES_USER_AUTH }}
-      #flask
-      FLASK_APP: ${secrets.FLASK_APP}
-      FLASK_DEBUG: ${secrets.FLASK_DEBUG}
-      FLASK_SECRET_KEY: ${secrets.FLASK_SECRET_KEY}
-      JWT_SECRET_KEY: ${secrets.JWT_SECRET_KEY}
-      JWT_ACCESS_TOKEN_EXPIRES: ${secrets.JWT_ACCESS_TOKEN_EXPIRES}
-      JWT_REFRESH_TOKEN_EXPIRES: ${secrets.JWT_REFRESH_TOKEN_EXPIRES}
-      GOOGLE_OAUTH_CLIENT_ID: ${secrets.GOOGLE_OAUTH_CLIENT_ID}
-      GOOGLE_OAUTH_CLIENT_SECRET: ${secrets.GOOGLE_OAUTH_CLIENT_SECRET}          
-      #activity_api
-      API_HOST: ${secrets.API_HOST}
-      API_PORT: ${secrets.API_HOST}
-      #etl #fastapi
-      SQLITE3_PATH: ${secrets.SQLITE3_PATH}
-      BUNCH_EXTRACT: ${secrets.BUNCH_EXTRACT}
-      BUNCH_INSERT: ${secrets.BUNCH_INSERT}
-      ES_SCHEMAS_DIR: ${secrets.ES_SCHEMAS_DIR}
-      ES_HOST: ${secrets.ES_HOST}
-      ES_PORT: ${secrets.ES_PORT}
-      BUNCH_ES_LOAD: ${secrets.BUNCH_ES_LOAD}      
-      #admin_panel
-      POSTGRES_DB_ADMIN: ${secrets.POSTGRES_DB_ADMIN}  
-      POSTGRES_USER_ADMIN: ${secrets.POSTGRES_USER_ADMIN}  
-      POSTGRES_PASSWORD_ADMIN: ${secrets.POSTGRES_PASSWORD_ADMIN}  
-      DB_HOST_ADMIN: ${secrets.DB_HOST_ADMIN}  
-      DB_PORT_ADMIN: ${secrets.DB_PORT_ADMIN}
-      SECRET_KEY: ${secrets.SECRET_KEY}
-      #
-      GOOGLE_OAUTH_ENDPOINT: ${secrets.GOOGLE_OAUTH_ENDPOINT}  
-      OAUTHLIB_INSECURE_TRANSPORT: ${secrets.OAUTHLIB_INSECURE_TRANSPORT}  
-      ENABLE_TRACER: ${secrets.ENABLE_TRACER}  
-      JAEGER_HOST: ${secrets.JAEGER_HOST}  
-      JAEGER_PORT: ${secrets.JAEGER_PORT}  
-      AUTH_SENTRY_DSN: ${secrets.AUTH_SENTRY_DSN}
-    steps:
-      - uses: actions/checkout@v3
-      - uses: isbang/compose-action@v1.4.1   
-        with:     
-          compose-file: "./auth/tests/functional/docker-compose.yml"
-      - name: Test Auth
-        run: |
-          pip install -r auth/tests/functional/requirements.txt
-#          python3 auth/tests/functional/utils/wait_for_redis.py
-          python auth/src/manage.py db upgrade head
-          pytest auth/tests/functional/src
+name: Online Cinema application workflowon: [pull_request]jobs:  tests:    runs-on: ubuntu-latest    strategy:      matrix:        python-version: ["3.10", "3.11"]        steps:    - uses: actions/checkout@v3    - name: Set up Python ${{ matrix.python-version }}      uses: actions/setup-python@v4      with:        python-version: ${{ matrix.python-version }}    - name: Install dependencies      run: |         python3 -m pip install --upgrade pip                        pip install flake8 flake8-isort      build_and_push_to_docker_hub:      name: Push Docker image to Docker Hub    needs: tests    runs-on: ubuntu-latest        env:      POSTGRES_DB_AUTH: ${{ secrets.POSTGRES_DB_AUTH }}      POSTGRES_PASSWORD_AUTH: ${{ secrets.POSTGRES_PASSWORD_AUTH }}      POSTGRES_USER_AUTH: ${{ secrets.POSTGRES_USER_AUTH }}      #flask      FLASK_APP: ${secrets.FLASK_APP}      FLASK_DEBUG: ${secrets.FLASK_DEBUG}      FLASK_SECRET_KEY: ${secrets.FLASK_SECRET_KEY}      JWT_SECRET_KEY: ${secrets.JWT_SECRET_KEY}      JWT_ACCESS_TOKEN_EXPIRES: ${secrets.JWT_ACCESS_TOKEN_EXPIRES}      JWT_REFRESH_TOKEN_EXPIRES: ${secrets.JWT_REFRESH_TOKEN_EXPIRES}      GOOGLE_OAUTH_CLIENT_ID: ${secrets.GOOGLE_OAUTH_CLIENT_ID}      GOOGLE_OAUTH_CLIENT_SECRET: ${secrets.GOOGLE_OAUTH_CLIENT_SECRET}                #activity_api      API_HOST: ${secrets.API_HOST}      API_PORT: ${secrets.API_HOST}      #etl #fastapi      SQLITE3_PATH: ${secrets.SQLITE3_PATH}      BUNCH_EXTRACT: ${secrets.BUNCH_EXTRACT}      BUNCH_INSERT: ${secrets.BUNCH_INSERT}      ES_SCHEMAS_DIR: ${secrets.ES_SCHEMAS_DIR}      ES_HOST: ${secrets.ES_HOST}      ES_PORT: ${secrets.ES_PORT}      BUNCH_ES_LOAD: ${secrets.BUNCH_ES_LOAD}            #admin_panel      POSTGRES_DB_ADMIN: ${secrets.POSTGRES_DB_ADMIN}        POSTGRES_USER_ADMIN: ${secrets.POSTGRES_USER_ADMIN}        POSTGRES_PASSWORD_ADMIN: ${secrets.POSTGRES_PASSWORD_ADMIN}        DB_HOST_ADMIN: ${secrets.DB_HOST_ADMIN}        DB_PORT_ADMIN: ${secrets.DB_PORT_ADMIN}      SECRET_KEY: ${secrets.SECRET_KEY}      #      GOOGLE_OAUTH_ENDPOINT: ${secrets.GOOGLE_OAUTH_ENDPOINT}        OAUTHLIB_INSECURE_TRANSPORT: ${secrets.OAUTHLIB_INSECURE_TRANSPORT}        ENABLE_TRACER: ${secrets.ENABLE_TRACER}        JAEGER_HOST: ${secrets.JAEGER_HOST}        JAEGER_PORT: ${secrets.JAEGER_PORT}        AUTH_SENTRY_DSN: ${secrets.AUTH_SENTRY_DSN}    steps:      - uses: actions/checkout@v3      - uses: isbang/compose-action@v1.4.1           with:               compose-file: "./auth/tests/functional/docker-compose.yml"          #up-flags: "up -d --build"          #compose-flags: " up -d --build"          #compose-flags: "logs -f functional_auth-pytests_1"          #services: |          #  auth-pytests      - name: Try using Redis        run: |          pip install redis==4.3.4          python try_redis.py          pip install -r auth/tests/functional/requirements.txt          python auth/src/manage.py db upgrade head          pytest auth/tests/functional/src
