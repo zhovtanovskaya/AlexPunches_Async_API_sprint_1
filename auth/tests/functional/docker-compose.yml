@@ -48,7 +48,8 @@ services:
     depends_on:
       - test-auth-postgres
     entrypoint: >
-      sh -c "python /opt/app/src/manage.py db upgrade head
+      sh -c "wait-for-it.sh -s -t 0 test-auth-postgres:5432 --
+      python /opt/app/src/manage.py db upgrade head
       && gunicorn -b 0.0.0.0:5000 --workers 4 src.pywsgi:app"
 
   auth-pytests:
