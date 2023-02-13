@@ -1,0 +1,87 @@
+@startuml to_be_ugc_service
+!theme materia
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+
+title Сервисы UGC
+
+enum ContentType {
+  MOVIE
+  REVIEW
+  BOOKMARK
+  REVIEW
+  RATING
+  LIKE
+}
+
+class Reaction {
+  +created_at: datetime
+  +user_id: UUID
+}
+class MovieReaction {
+  +target_id: UUID
+  +target_type: ContentType.MOVIE  
+}
+class Bookmark {
+  +type: ContentType.BOOKMARK
+}
+class Review {
+  +type: ContentType.REVIEW
+  +value: POSITIVE | NEUTRAL | NEGATIVE
+  +title: str
+  +text: str
+}
+class Rating {
+  +type: ContentType.RATING
+  +value: PositiveInt(min=0, max=10)
+}
+class Like {
+  +type: ContentType.LIKE,
+  +target_id: ObjectId
+  +target_type: ContentType.REVIEW
+  +value: LIKE | DISLIKE
+}
+interface UserContent {
+  +created_at: datetime
+  +user_id: UUID
+  +target_id: UUID | ObjectId
+  +target_type: ContentType
+  +type: ContentType
+  +as_json() -> str
+}
+MovieReaction <|-- Bookmark
+MovieReaction <|-- Review
+MovieReaction <|-- Rating
+Reaction <|-- MovieReaction
+Reaction <|-- Like
+UserContent <|.up. Bookmark
+UserContent <|.up. Review
+UserContent <|.up. Rating
+UserContent <|.up. Like
+
+class ReactionService {
+  +delete(id: ObjectID)
+  +create(obj: UserContent) -> UserContent
+}
+class BookmarkService {
+  +__init__(collection)
+  +get_bookmarks() -> list[Bookmark]
+}
+class ReviewService {
+  +get_reviews(page: Page)
+}
+class RatingService {
+}
+class LikeService {
+}
+class MovieStatsService {
+  +get_stats() -> tuple[ReviewStats, RatingStats]
+}
+ReactionService <|-- BookmarkService
+ReactionService <|-- ReviewService
+ReactionService <|-- RatingService
+ReactionService <|-- LikeService
+
+
+@enduml
+

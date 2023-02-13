@@ -23,7 +23,7 @@ db.reactions.insertOne({
 })
 // Обзор на фильм.
 db.reactions.insertOne({
-    // _id: ObjectId("63d0c92bf5eb85d9a10bd8ac"),
+    _id: ObjectId("63d0c92bf5eb85d9a10bd8ac"),
     created_at: new Date(),
     user_id: "60bf29d4-9c6f-11ed-a1a5-7831c1bc31e4",          // UUID.
     target_id: "6fdcc8ca-9c6f-11ed-9682-7831c1bc31e4",        // Movie UUID.
@@ -35,7 +35,7 @@ db.reactions.insertOne({
     text: "Long and detailed explanations..."
 })
 db.reactions.insertOne({
-    // _id: ObjectId("63d2651655dfa9351270284b"),
+    _id: ObjectId("63d2651655dfa9351270284b"),
     created_at: new Date(),
     user_id: "60bf29d4-9c6f-11ed-9400-7831c1bc31e4",          // UUID.
     target_id: "6fdcc8ca-9c6f-11ed-9682-7831c1bc31e4",        // Movie UUID.

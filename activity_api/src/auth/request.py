@@ -8,8 +8,8 @@ from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from jwt import DecodeError, ExpiredSignatureError, InvalidSignatureError
 from pydantic import BaseModel, Field, ValidationError
 
-from auth.exceptions import AuthorizationException
-from core.config import config
+from src.auth.exceptions import AuthorizationException
+from src.core.config import config
 
 
 class AuthErrors:

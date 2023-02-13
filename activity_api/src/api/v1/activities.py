@@ -1,10 +1,11 @@
 """Эндпоинты обработки событий."""
-from activity_service import ActivityService
 from fastapi import APIRouter, Depends, Request, status
 
-from api.v1.schemes.spawn_point import SpawnPointScheme
-from api.v1.schemes.transform_schemes import transform_point_scheme_to_model
-from auth.request import subscription_required
+from src.api.v1.schemes.spawn_point import SpawnPointScheme
+from src.api.v1.schemes.transform_schemes import \
+    transform_point_scheme_to_model
+from src.auth.request import subscription_required
+from src.services.activity.activity_service import ActivityService
 
 router = APIRouter()
 
