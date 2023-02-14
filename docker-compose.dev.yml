@@ -43,8 +43,15 @@ services:
       - /tmp/logs/admin_panel/:/var/log/admin_panel/
     expose:
       - "8000"
-    env_file:
-      - ./.env
+    environment:
+      POSTGRES_DB_ADMIN: ${POSTGRES_DB_ADMIN}
+      POSTGRES_PASSWORD_ADMIN: ${POSTGRES_PASSWORD_ADMIN}
+      POSTGRES_USER_ADMIN: ${POSTGRES_USER_ADMIN}
+      DB_HOST_ADMIN: ${DB_HOST_ADMIN}
+      DB_PORT_ADMIN: ${DB_PORT_ADMIN}
+      SECRET_KEY: ${SECRET_KEY}
+      DEBUG: ${DEBUG}
+      ADMIN_SENTRY_DSN: ${ADMIN_SENTRY_DSN}
 
   nginx:
     image: nginx:1.23
