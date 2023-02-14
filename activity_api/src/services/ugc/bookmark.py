@@ -1,5 +1,4 @@
 from functools import lru_cache
-from typing import Type
 
 from fastapi import Depends
 from motor.motor_asyncio import AsyncIOMotorDatabase
@@ -11,7 +10,7 @@ from src.services.ugc.models.bookmarks import Bookmark
 
 class BookmarkService(ReactionService):
 
-    user_content_type = Type[Bookmark]
+    user_content_type = Bookmark
 
 
 @lru_cache()
