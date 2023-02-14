@@ -1,4 +1,6 @@
 """Трансофмации из схем в модели и наоборот."""
+from uuid import UUID
+
 from src.api.v1.schemes.bookmark import BookmarkBaseScheme, BookmarkScheme
 from src.api.v1.schemes.like import LikeBaseScheme, LikeScheme
 from src.api.v1.schemes.rating import RatingBaseScheme, RatingScheme
@@ -60,7 +62,6 @@ def transform_bookmark_model_to_scheme(model: Bookmark) -> BookmarkScheme:
 def transform_bookmark_scheme_to_model(scheme: BookmarkBaseScheme) -> Bookmark:
     """Трансформировать из схемы BookmarkBaseScheme в модель Bookmark."""
     return Bookmark(
-        id=scheme.id,
         created_at=scheme.created_at,
         user_id=scheme.user_id,
         target_type=scheme.target_type,
@@ -84,7 +85,6 @@ def transform_like_model_to_scheme(model: Like) -> LikeScheme:
 def transform_like_scheme_to_model(scheme: LikeBaseScheme) -> Like:
     """Трансформировать из схемы LikeBaseScheme в модель Like."""
     return Like(
-        id=scheme.id,
         created_at=scheme.created_at,
         user_id=scheme.user_id,
         target_id=scheme.target_id,
@@ -106,14 +106,14 @@ def transform_rating_model_to_scheme(model: Rating) -> RatingScheme:
     )
 
 
-def transform_rating_scheme_to_model(scheme: RatingBaseScheme) -> Rating:
+def transform_rating_scheme_to_model(
+          scheme: RatingBaseScheme,
+          user_id: UUID,
+) -> Rating:
     """Трансформировать из схемы RatingBaseScheme в модель Rating."""
     return Rating(
-        id=scheme.id,
-        created_at=scheme.created_at,
-        user_id=scheme.user_id,
+        user_id=user_id,
         target_id=scheme.target_id,
-        target_type=scheme.target_type,
         value=scheme.value,
     )
 
@@ -136,7 +136,6 @@ def transform_review_model_to_scheme(model: Review) -> ReviewScheme:
 def transform_review_scheme_to_model(scheme: ReviewBaseScheme) -> Review:
     """Трансформировать из схемы ReviewBaseScheme в модель Review."""
     return Review(
-        id=scheme.id,
         created_at=scheme.created_at,
         user_id=scheme.user_id,
         target_id=scheme.target_id,

@@ -7,7 +7,6 @@ from src.services.ugc.models.custom_types import ContentType, StrObjectId
 
 
 class BookmarkBaseScheme(BaseModel):
-    id: StrObjectId | None = None
     created_at: datetime | None = None
     user_id: UUID | None = None
     type: ContentType | None = ContentType.BOOKMARK

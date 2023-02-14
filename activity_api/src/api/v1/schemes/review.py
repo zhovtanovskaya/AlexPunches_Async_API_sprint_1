@@ -8,7 +8,6 @@ from src.services.ugc.models.custom_types import ContentType, StrObjectId
 
 
 class ReviewBaseScheme(BaseModel):
-    id: StrObjectId | None = None
     created_at: datetime | None = None
     user_id: UUID | None = None
     type: ContentType | None = ContentType.REVIEW

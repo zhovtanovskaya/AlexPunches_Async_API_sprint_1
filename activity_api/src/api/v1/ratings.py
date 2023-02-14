@@ -22,8 +22,10 @@ async def create_rating(
     rating: schemes.RatingCreateScheme,
     rating_service: RatingService = Depends(get_rating_service),
 ) -> schemes.RatingScheme:
-    rating.user_id = request.state.user_id
-    rating_model = transform_rating_scheme_to_model(rating)
+    rating_model = transform_rating_scheme_to_model(
+        rating,
+        user_id=request.state.user_id,
+    )
     try:
         new_rating = await rating_service.create(obj=rating_model)
     except DuplicateKeyError:

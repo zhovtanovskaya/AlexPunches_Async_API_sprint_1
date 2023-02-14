@@ -7,12 +7,7 @@ from src.services.ugc.models.custom_types import ContentType, StrObjectId
 
 
 class RatingBaseScheme(BaseModel):
-    id: StrObjectId | None = None
-    created_at: datetime | None = None
-    user_id: UUID | None = None
-    type: ContentType | None = ContentType.RATING
     target_id: UUID
-    target_type: ContentType = ContentType.MOVIE
     value: int = Field(..., ge=0, le=10)
 
 
@@ -25,6 +20,7 @@ class RatingScheme(RatingBaseScheme):
     created_at: datetime
     user_id: UUID
     type: ContentType = ContentType.RATING
+    target_type: ContentType = ContentType.MOVIE
 
     @validator('id')
     def validate_objectid(cls, value):
