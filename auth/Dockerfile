@@ -9,3 +9,7 @@ RUN  pip install --no-cache-dir --upgrade pip \
      && pip install --no-cache-dir -r requirements.txt
 
 COPY . .
+
+CMD  /opt/app/wait-for-it.sh -s -t 0 test-auth-postgres:5432 -- \
+     python /opt/app/src/manage.py db upgrade head \
+     && gunicorn -b 0.0.0.0:5000 --workers 4 src.pywsgi:app

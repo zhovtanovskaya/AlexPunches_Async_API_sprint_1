@@ -1,39 +1,12 @@
 """Сущности, общие для всех моделей пользовательского контента."""
 from datetime import datetime
-from enum import Enum
 from typing import Optional
 from uuid import UUID
 
 from bson import ObjectId
 from pydantic import BaseModel, Field, validator
 
-
-class StrObjectId(ObjectId):
-    """Класс для приведения строки к типу ObjecId."""
-
-    @classmethod
-    def __get_validators__(cls):
-        yield cls.validate
-
-    @classmethod
-    def validate(cls, v):
-        if not ObjectId.is_valid(v):
-            raise ValueError('Invalid ObjectId.')
-        return ObjectId(v)
-
-    @classmethod
-    def __modify_schema__(cls, field_schema):
-        field_schema.update(type='string')
-
-
-class ContentType(str, Enum):
-    """Типы пользовательского контента в Mongo."""
-
-    MOVIE = 'movie'
-    REVIEW = 'review'
-    BOOKMARK = 'bookmark'
-    RATING = 'rating'
-    LIKE = 'like'
+from src.services.ugc.models.custom_types import ContentType, StrObjectId
 
 
 class Reaction(BaseModel):
@@ -43,10 +16,16 @@ class Reaction(BaseModel):
     created_at: Optional[datetime] = Field(default_factory=datetime.now)
     user_id: UUID
     target_type: ContentType
-    target_id: StrObjectId
+    target_id: StrObjectId | UUID
 
-    @validator("user_id")
+    @validator('user_id')
     def validate_uuids(cls, value):
+        if value:
+            return str(value)
+        return value
+
+    @validator('id', 'target_id')
+    def validate_objectid(cls, value):
         if value:
             return str(value)
         return value
@@ -65,7 +44,7 @@ class MovieReaction(Reaction):
     target_id: UUID
     target_type: ContentType = ContentType.MOVIE
 
-    @validator("target_id")
+    @validator('target_id')
     def validate_uuids(cls, value):
         if value:
             return str(value)

@@ -62,40 +62,10 @@ def upgrade():
     sa.UniqueConstraint('id'),
     sa.UniqueConstraint('social_id', 'social_name', name='social_pk')
     )
-    op.create_table('login_history_mobile',
-    sa.Column('id', postgresql.UUID(as_uuid=True), nullable=False),
-    sa.Column('email', sa.String(), nullable=False),
-    sa.Column('date_login', sa.DateTime(), nullable=True),
-    sa.Column('user_agent', sa.Text(), nullable=True),
-    sa.Column('user_device_type', sa.Text(), nullable=False),
-    sa.Column('user_id', postgresql.UUID(as_uuid=True), nullable=True),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id', 'user_device_type')
-    )
-    op.create_table('login_history_smart',
-    sa.Column('id', postgresql.UUID(as_uuid=True), nullable=False),
-    sa.Column('email', sa.String(), nullable=False),
-    sa.Column('date_login', sa.DateTime(), nullable=True),
-    sa.Column('user_agent', sa.Text(), nullable=True),
-    sa.Column('user_device_type', sa.Text(), nullable=False),
-    sa.Column('user_id', postgresql.UUID(as_uuid=True), nullable=True),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id', 'user_device_type')
-    )
-    op.create_table('login_history_web',
-    sa.Column('id', postgresql.UUID(as_uuid=True), nullable=False),
-    sa.Column('email', sa.String(), nullable=False),
-    sa.Column('date_login', sa.DateTime(), nullable=True),
-    sa.Column('user_agent', sa.Text(), nullable=True),
-    sa.Column('user_device_type', sa.Text(), nullable=False),
-    sa.Column('user_id', postgresql.UUID(as_uuid=True), nullable=True),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id', 'user_device_type')
-    )
     # ### end Alembic commands ###
 
 
-    from services.activity.models.spawn_point import (
+    from models.patition_login_history import (
         PARTITION_TABLES_REGISTRY, create_table_login_history_partition_ddl)    
     for table_class, device_type in PARTITION_TABLES_REGISTRY:
         ddl = create_table_login_history_partition_ddl(table_class.__table__, device_type)
