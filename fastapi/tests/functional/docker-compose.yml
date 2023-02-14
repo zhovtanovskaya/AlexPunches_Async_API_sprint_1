@@ -25,8 +25,9 @@ services:
       - /tmp/logs/async_api/:/var/log/async_api/
     expose:
       - "8000"
-    env_file:
-      - ../../../.env.pytests
+    environment:
+      ES_HOST: test-elastic
+      REDIS_HOST: test-redis
     ports:
       - "8000:8000"
 
@@ -34,8 +35,11 @@ services:
     image: fastapi-image
     expose:
       - "8000"
-    env_file:
-      - ../../../.env.pytests
+    environment:
+      ES_HOST: test-elastic
+      REDIS_HOST: test-redis
+      API_HOST: test-fastapi
+
     depends_on:
       - test-elastic
       - test-redis

@@ -1,3 +1,4 @@
+version: '3'
 services:
   test-redis:
     image: redis:7-alpine
@@ -18,8 +19,8 @@ services:
       - "5432:5432"
     environment:
       POSTGRES_DB: ${POSTGRES_DB_AUTH}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_AUTH}
       POSTGRES_USER: ${POSTGRES_USER_AUTH}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_AUTH}
 
   test-auth:
     build: ../../.
@@ -28,28 +29,55 @@ services:
       - /tmp/logs/auth_flask/:/var/log/auth_flask/
     expose:
       - "5000"
-    env_file:
-      - ../../../.env.pytests
+    environment:
+      POSTGRES_DB_AUTH: ${POSTGRES_DB_AUTH}
+      POSTGRES_USER_AUTH: ${POSTGRES_USER_AUTH}
+      POSTGRES_PASSWORD_AUTH: ${POSTGRES_PASSWORD_AUTH}
+      # Подключение к PostgresSQL внутри сети Docker Compose.
+      DB_HOST_AUTH: 'test-auth-postgres'
+      # Подключение к Redis внутри сети Docker Compose.
+      REDIS_HOST: 'test-redis'
+      # Настройки безопасности.
+      ENABLE_TRACER: 'False'
+      FLASK_SECRET_KEY: 'test_flask_security_key'
+      JWT_SECRET_KEY: 'jwt_secret_key'
+      GOOGLE_OAUTH_CLIENT_ID: ''
+      GOOGLE_OAUTH_CLIENT_SECRET: ''
     ports:
       - "5000:5000"
-    entrypoint:
-      ["gunicorn", "-b", "0.0.0.0:5000", "--workers", "4", "src.pywsgi:app"]
-
+    depends_on:
+      - test-auth-postgres
 
   auth-pytests:
     image: auth-flask-image
     expose:
       - "5000"
-    env_file:
-      - ../../../.env.pytests
+    volumes:
+      - /tmp/logs/auth_flask/:/var/log/auth_flask/
+    environment:
+      POSTGRES_DB_AUTH: ${POSTGRES_DB_AUTH}
+      POSTGRES_USER_AUTH: ${POSTGRES_USER_AUTH}
+      POSTGRES_PASSWORD_AUTH: ${POSTGRES_PASSWORD_AUTH}
+      # Подключение к PostgresSQL внутри сети Docker Compose.
+      DB_HOST_AUTH: 'test-auth-postgres'
+      # Подключение к Redis внутри сети Docker Compose.
+      REDIS_HOST: 'test-redis'
+      # Настройки безопасности.
+      ENABLE_TRACER: 'False'
+      FLASK_SECRET_KEY: 'test_flask_security_key'
+      JWT_SECRET_KEY: 'jwt_secret_key'
+      GOOGLE_OAUTH_CLIENT_ID: ''
+      GOOGLE_OAUTH_CLIENT_SECRET: ''
+      AUTH_HOST: 'test-auth'
+      JWT_ACCESS_TOKEN_EXPIRES: '1 00:00:00.000000'
+      JWT_REFRESH_TOKEN_EXPIRES: '30 00:00:00.000000'
     depends_on:
-      - test-auth-postgres
       - test-redis
       - test-auth
     entrypoint: >
       sh -c "pip install -r /opt/app/tests/functional/requirements.txt
       && python3 /opt/app/tests/functional/utils/wait_for_redis.py
-      && python /opt/app/src/manage.py db upgrade head
+      && python3 /opt/app/src/manage.py db upgrade head
       && pytest /opt/app/tests/functional/src"
 
 volumes:

@@ -45,7 +45,7 @@ class PgBaseUrl(BaseSettings):
     scheme: str = 'postgresql'
     username: str = Field(..., env='postgres_user_auth')
     password: str = Field(..., env='postgres_password_auth')
-    host: str = Field(..., env='db_host_auth')
+    host: str = Field('localhost', env='db_host_auth')
     port: str = Field('5432', env='db_port_auth')
     db_name: str = Field(..., env='postgres_db_auth')
 
