@@ -2,12 +2,12 @@
 # Репозиторий
 [https://github.com/AlexPunches/Async_API_sprint_1](https://github.com/AlexPunches/Async_API_sprint_1)
 
-# Спринт 8
+# Спринт 9
 
-- [Структура проекта .plantuml](https://github.com/AlexPunches/Async_API_sprint_1/tree/main/documentation/architecture/sprint_8)
-- [API добавления событий в Кафку](https://github.com/AlexPunches/Async_API_sprint_1/tree/main/activity_api)
-- [ETL из Кафки в Кликхаус](https://github.com/AlexPunches/Async_API_sprint_1/tree/main/etl_activity)
-- [Бенчмаркинг Кликхауса и Вертики](https://github.com/AlexPunches/Async_API_sprint_1/blob/main/benchmarking_storage)
+- [Бенчмаркинг Монги добавился к прошлым бенчмаркингам](https://github.com/AlexPunches/Async_API_sprint_1/blob/main/benchmarking_storage)
+- [Структура проекта .plantuml](https://github.com/AlexPunches/Async_API_sprint_1/tree/main/documentation/architecture/sprint_9)
+- [API для UGC подселился к activity_api](https://github.com/AlexPunches/Async_API_sprint_1/tree/main/activity_api)
+
 
 # Подготовка проекта
 
