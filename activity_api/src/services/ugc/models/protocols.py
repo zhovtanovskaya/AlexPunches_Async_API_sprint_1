@@ -15,6 +15,11 @@ class UserContent(Protocol):
     контента: лайков, закладок, рейтингов, обзоров.
     """
 
+    # Ожидается имя типа пользовательского
+    # контента в .__fields__['type'].  Например,
+    # "review", "like".
+    __fields__: dict
+
     id: Optional[StrObjectId] = Field(alias='_id')
     created_at: Optional[datetime]
     user_id: UUID
