@@ -1,5 +1,4 @@
 from functools import lru_cache
-from typing import Type
 
 from fastapi import Depends
 from motor.motor_asyncio import AsyncIOMotorDatabase

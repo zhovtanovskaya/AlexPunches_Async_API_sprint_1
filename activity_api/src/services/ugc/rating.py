@@ -1,5 +1,4 @@
 from functools import lru_cache
-from typing import Type
 from uuid import UUID
 
 from fastapi import Depends
