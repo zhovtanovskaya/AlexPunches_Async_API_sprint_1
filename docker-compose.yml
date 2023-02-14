@@ -59,6 +59,7 @@ services:
     environment:
       ES_HOST: ${ES_HOST}
       ES_PORT: ${ES_PORT}
+      REDIS_HOST: ${REDIS_HOST}
 
     entrypoint: ["./wait-for-it.sh", "-s", "-t", "0", "elastic:9200", "--"]
     command: ["gunicorn", "-b", "0.0.0.0:8000", "--workers", "4", "-k", "uvicorn.workers.UvicornWorker", "src.main:app"]
@@ -119,6 +120,12 @@ services:
     expose:
       - "5000"
     environment:
+      POSTGRES_DB_AUTH: ${POSTGRES_DB_AUTH}
+      POSTGRES_USER_AUTH: ${POSTGRES_USER_AUTH}
+      POSTGRES_PASSWORD_AUTH: ${POSTGRES_PASSWORD_AUTH}
+      DB_HOST_AUTH: ${DB_HOST_AUTH}
+      REDIS_HOST: ${REDIS_HOST}
+      ENABLE_TRACER: ${ENABLE_TRACER}
       FLASK_APP: ${FLASK_APP}
       FLASK_DEBUG: ${FLASK_DEBUG}
       FLASK_SECRET_KEY: ${FLASK_SECRET_KEY}
