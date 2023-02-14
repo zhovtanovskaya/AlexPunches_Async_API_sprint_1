@@ -14,7 +14,7 @@ sys.path.append(BASE_DIR)
 
 from config import logger, settings
 from utils.async_timer import async_timed
-from utils.generator_fakes import generate_points
+from utils.generator_fakes_spawnpoints import generate_points
 
 
 async def load_data(connection: Any, data: Generator, chunk_size: int) -> None:
