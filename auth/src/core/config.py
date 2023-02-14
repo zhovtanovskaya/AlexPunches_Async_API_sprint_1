@@ -42,8 +42,10 @@ class FlaskConfig(BaseSettings):
     SECRET_KEY: str = Field(..., env='flask_secret_key')
     WTF_CSRF_ENABLED: bool = False
     JWT_SECRET_KEY: str = Field(..., min_length=8)
-    JWT_ACCESS_TOKEN_EXPIRES: timedelta
-    JWT_REFRESH_TOKEN_EXPIRES: timedelta
+    # Сколько дней, часов и минут жить JWT-токенам.
+    # Записывать в формате [ДД ][ЧЧ:ММ]СС[.сссссс].
+    JWT_ACCESS_TOKEN_EXPIRES: timedelta = '1 00:00:00.000000'
+    JWT_REFRESH_TOKEN_EXPIRES: timedelta = '1 00:00:00.000000'
 
 
 class GoogleClientSecret(BaseSettings):
@@ -96,7 +98,7 @@ class ApiSettings(BaseSettings):
     google_oauth = GoogleClientSecret().as_dict()
     google_oauth_endpoint = 'http://localhost:5000/api/v1/social-auth/google'
 
-    auth_sentry_dsn: str
+    auth_sentry_dsn: str = ''
 
 
 @lru_cache()
