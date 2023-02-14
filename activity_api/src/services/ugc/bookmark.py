@@ -11,7 +11,7 @@ from src.services.ugc.models.bookmarks import Bookmark
 
 class BookmarkService(ReactionService):
 
-    user_content_type = Type[Bookmark]
+    user_content_type = Bookmark
 
 
 @lru_cache()

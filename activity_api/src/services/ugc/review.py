@@ -12,7 +12,7 @@ from src.services.ugc.models.reviews import Review, ReviewStats, ReviewValue
 
 class ReviewService(ReactionService):
 
-    user_content_type = Type[Review]
+    user_content_type = Review
 
     async def get_stats(self, movie_id: UUID) -> ReviewStats:
         """Получить число разных ревью на фильм."""

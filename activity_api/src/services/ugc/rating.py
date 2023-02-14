@@ -12,7 +12,7 @@ from src.services.ugc.models.ratings import Rating, RatingStats
 
 class RatingService(ReactionService):
 
-    user_content_type = Type[Rating]
+    user_content_type = Rating
 
     async def get_stats(self, movie_id: UUID) -> RatingStats:
         """Посчитать средний рейтинг и количество оценок фильма."""
