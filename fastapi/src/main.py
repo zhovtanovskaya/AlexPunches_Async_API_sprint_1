@@ -18,7 +18,8 @@ from core.config import config
 from core.request_id_middleware import RequestIdMiddleware
 from db import elastic, redis
 
-sentry_sdk.init(dsn=config.api_sentry_dsn, traces_sample_rate=1.0)
+if config.api_sentry_dsn:
+    sentry_sdk.init(dsn=config.api_sentry_dsn, traces_sample_rate=1.0)
 
 app = FastAPI(
     title=config.project_name,

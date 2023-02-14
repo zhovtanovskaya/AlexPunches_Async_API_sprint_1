@@ -26,8 +26,8 @@ services:
     expose:
       - "8000"
     environment:
-      ES_HOST: ${ES_HOST}
-      ES_PORT: ${ES_PORT}
+      ES_HOST: test-elastic
+      REDIS_HOST: test-redis
     ports:
       - "8000:8000"
 
@@ -36,8 +36,10 @@ services:
     expose:
       - "8000"
     environment:
-      ES_HOST: ${ES_HOST}
-      ES_PORT: ${ES_PORT}
+      ES_HOST: test-elastic
+      REDIS_HOST: test-redis
+      API_HOST: test-fastapi
+
     depends_on:
       - test-elastic
       - test-redis
