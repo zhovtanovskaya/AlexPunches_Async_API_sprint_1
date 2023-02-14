@@ -21,10 +21,13 @@ jobs:
         python3 -m pip install --upgrade pip
         pip install flake8 flake8-isort
 
-  build_and_push_to_docker_hub:
-    name: Push Docker image to Docker Hub
+  run_functional_tests:
+    name: Run functional tests in Auth
     needs: tests
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11"]
     env:
       POSTGRES_DB_AUTH: ${{ secrets.POSTGRES_DB_AUTH }}
       POSTGRES_PASSWORD_AUTH: ${{ secrets.POSTGRES_PASSWORD_AUTH }}
