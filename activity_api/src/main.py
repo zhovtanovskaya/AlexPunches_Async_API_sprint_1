@@ -10,7 +10,8 @@ from kafka.errors import KafkaConnectionError
 from motor.motor_asyncio import AsyncIOMotorClient
 
 from src import producer
-from src.api.v1 import activities, likes, statistics
+from src.api.v1 import (activities, bookmarks, likes, ratings, reviews,
+                        statistics)
 from src.core.config import config
 from src.core.context import request_id
 from src.db import mongo
@@ -66,10 +67,19 @@ app.include_router(
     activities.router, prefix='/api/v1/activities', tags=['activity'],
 )
 app.include_router(
-    likes.router, prefix='/api/v1/likes', tags=['activity'],
+    likes.router, prefix='/api/v1/likes', tags=['likes'],
 )
 app.include_router(
     statistics.router, prefix='/api/v1/statistics', tags=['statistics'],
+)
+app.include_router(
+    bookmarks.router, prefix='/api/v1/bookmarks', tags=['bookmarks'],
+)
+app.include_router(
+    ratings.router, prefix='/api/v1/ratings', tags=['ratings'],
+)
+app.include_router(
+    reviews.router, prefix='/api/v1/reviews', tags=['reviews'],
 )
 
 if __name__ == '__main__':
