@@ -1,0 +1,53 @@
+@startuml to_be
+!theme materia
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+skinparam maxmessagesize 60
+
+title Уведомления. Архитектура решений
+
+queue Kafka [
+  <b>Kafka
+  ----
+  Для событий
+  микросервисов.
+]
+component AutoEventsGenerator [
+  <b>Генератор
+  автоматических
+  событий
+  ----
+  Шедулер, cron.
+]
+component NotificationsETL [
+  <b>ETL
+  ----
+  Потребляет события на
+  создание уведомлений.
+]
+component NotificationsAPI [
+  <b>Notifications
+  REST API
+  ----
+  Позволяет создать
+  отправление
+  напрямую.
+]
+database PostingsDB [
+  <b>База или
+  очередь
+  отправлений
+  ----
+  Отправления,
+  которые потребляют
+  воркеры.
+]
+
+AutoEventsGenerator --down--> Kafka: "Создает автоматическое событие"
+[Auth] --right--> Kafka: "Пишет событие в Kafka."
+NotificationsETL --left--> Kafka: "Читает события из Kafka."
+[Auth] --> NotificationsAPI: "Создает отправление через API."
+NotificationsAPI -right-> PostingsDB: "Создает отправление."
+NotificationsETL -down-> PostingsDB: "Создает отправление."
+
+@enduml
