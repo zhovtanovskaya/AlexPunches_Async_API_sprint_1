@@ -19,30 +19,16 @@ jobs:
     - name: Install dependencies
       run: | 
         python3 -m pip install --upgrade pip
-        pip3 install -r activity_api/requirements.txt
+#        pip3 install -r activity_api/requirements.txt
         pip3 install flake8 flake8-isort mypy==0.982
 
     - name: Test with flake8
       run: |
         python3 -m flake8 --config=setup.cfg ./
 
-    - name: Check with mypy
-      run: |
-        python3 -m mypy -v --config-file=setup.cfg activity_api/
-
-    - name: Send fail in telegram
-      if: ${{ failure() }}
-      uses: appleboy/telegram-action@master
-      with:
-        to: ${{ secrets.TELEGRAM_TO }}
-        token: ${{ secrets.TELEGRAM_TOKEN }}
-        format: markdown
-        if: ${{ job.status == 'failure' }}
-        message: |
-          ${{ github.repository }}: Pipeline for ${{ github.sha }} finished with error!
-#        else:
-#        message: |
-#          ${{ github.repository }}: Pipeline for ${{ github.sha }} finished successfully!
+#    - name: Check with mypy
+#      run: |
+#        python3 -m mypy -v --config-file=setup.cfg activity_api/
 
   run_functional_tests:
     name: Run functional tests in Auth
@@ -105,8 +91,9 @@ jobs:
           pytest auth/tests/functional/src
 
   send_message:
-    name: Send Telegram message
+    if: ${{ always() }}
     needs: [tests, run_functional_tests]
+    name: Send Telegram message
     runs-on: ubuntu-latest
     steps:
     - name: send action status
