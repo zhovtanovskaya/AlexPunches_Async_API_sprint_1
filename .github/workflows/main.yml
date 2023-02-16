@@ -92,7 +92,7 @@ jobs:
 
   send_message:
     name: Send Telegram message
-    needs: tests, run_functional_tests
+    needs: [tests, run_functional_tests]
     runs-on: ubuntu-latest
     steps:
     - name: send action status
