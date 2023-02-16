@@ -91,12 +91,15 @@ jobs:
           pytest auth/tests/functional/src
 
   send_message:
-      - name: send action status
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: |
-            ${{ github.GITHUB_REPOSITORY }}: Pipeline for ${{ github.sha }} finished ${{ github.action_status }}!
-            if: ${{ failure() }}
-              {name of step} failed
+    name: Send Telegram message
+    runs-on: ubuntu-latest
+    steps:
+    - name: send action status
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: |
+          ${{ github.GITHUB_REPOSITORY }}: Pipeline for ${{ github.sha }} finished ${{ github.action_status }}!
+          if: ${{ failure() }}
+            {name of step} failed
