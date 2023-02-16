@@ -101,5 +101,5 @@ jobs:
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
           ${{ github.GITHUB_REPOSITORY }}: Pipeline for ${{ github.sha }} finished ${{ github.action_status }}!
-          if: ${{ failure() }}
-            {name of step} failed
+#          if: ${{ failure() }}
+#            {name of step} failed
