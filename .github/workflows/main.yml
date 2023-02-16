@@ -30,6 +30,20 @@ jobs:
       run: |
         python3 -m mypy -v --config-file=setup.cfg activity_api/
 
+    - name: Send fail in telegram
+      if: ${{ failure() }}
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        format: markdown
+        if: ${{ job.status == 'failure' }}
+        message: |
+          ${{ github.repository }}: Pipeline for ${{ github.sha }} finished with error!
+#        else:
+#        message: |
+#          ${{ github.repository }}: Pipeline for ${{ github.sha }} finished successfully!
+
   run_functional_tests:
     name: Run functional tests in Auth
     needs: tests
@@ -100,7 +114,8 @@ jobs:
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
+        format: markdown
         message: |
-          ${{ github.GITHUB_REPOSITORY }}: Pipeline for ${{ github.sha }} finished ${{ github.action_status }}!
+          ${{ github.repository }}: Pipeline for ${{ github.sha }} finished ${{ github.action_status }}!
 #          if: ${{ failure() }}
 #            {name of step} failed
