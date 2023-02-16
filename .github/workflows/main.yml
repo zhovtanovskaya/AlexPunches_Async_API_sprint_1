@@ -101,8 +101,8 @@ jobs:
       run: echo '${{ toJSON(github) }}'
     - name: Dump job context
       run: echo '${{ toJSON(job) }}'
-    - name: Dump jobs context
-      run: echo '${{ toJSON(jobs) }}'
+    - name: Dump needs context
+      run: echo '${{ toJSON(needs) }}'
 
     - name: send action status
       uses: appleboy/telegram-action@master
