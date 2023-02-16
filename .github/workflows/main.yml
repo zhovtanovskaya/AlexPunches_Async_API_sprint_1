@@ -17,9 +17,9 @@ jobs:
         python-version: ${{ matrix.python-version }}
 
     - name: Install dependencies
-      run: | 
+      run: |
         python3 -m pip install --upgrade pip
-#        pip3 install -r activity_api/requirements.txt
+        pip3 install -r activity_api/requirements.txt
         pip3 install flake8 flake8-isort mypy==0.982
 
     - name: Test with flake8
