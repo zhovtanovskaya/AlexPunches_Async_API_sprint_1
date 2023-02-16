@@ -96,13 +96,8 @@ jobs:
     name: Send Telegram message
     runs-on: ubuntu-latest
     steps:
-    - name: Dump GitHub context
-      id: github_context_step
-      run: echo '${{ toJSON(github) }}'
-    - name: Dump job context
-      run: echo '${{ toJSON(job) }}'
     - name: Dump needs context
-      run: echo '${{ toJSON(needs) }}'
+      run: echo '${{ toJSON(needs.*.result) }}'
 
     - name: send action status
       uses: appleboy/telegram-action@master
@@ -112,5 +107,7 @@ jobs:
         format: markdown
         message: |
           ${{ github.repository }}: Pipeline for ${{ github.sha }} finished ${{ github.action_status }}!
-#          if: ${{ failure() }}
-#            {name of step} failed
+#        if: ${{ always() }}
+#        if: ${{ failure() }}
+#        message: |
+#          {name of step} failed
