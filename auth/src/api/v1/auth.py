@@ -74,6 +74,7 @@ def social_auth(service_name: str) -> Response:
 
 
 @auth.route('/email-confirmation', methods=['GET'])
+@validate()
 def confirmation_registration(query: RegistrationConfirmation) -> Response:
     """Подтвердить электронный адрес."""
     try:
