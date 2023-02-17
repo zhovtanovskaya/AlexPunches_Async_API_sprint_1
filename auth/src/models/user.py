@@ -22,6 +22,7 @@ class User(BaseModel):
                    unique=True, nullable=False)
     email = db.Column(db.String, nullable=False, unique=True)
     active = db.Column(db.Boolean, default=True, nullable=False)
+    email_confirmation = db.Column(db.Boolean, default=False, nullable=True)
     password = db.Column(db.String, nullable=False)
     roles = db.relationship('Role', secondary=roles_users, lazy='subquery',
                             backref=db.backref('users', lazy='subquery'))

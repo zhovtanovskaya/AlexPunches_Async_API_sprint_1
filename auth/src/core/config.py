@@ -100,6 +100,8 @@ class ApiSettings(BaseSettings):
 
     auth_sentry_dsn: str = ''
 
+    notify_events_topic = 'notify_events'
+
 
 @lru_cache()
 def get_settings() -> ApiSettings:
