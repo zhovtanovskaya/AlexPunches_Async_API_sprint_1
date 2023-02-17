@@ -75,7 +75,7 @@ jobs:
       JAEGER_HOST: ${secrets.JAEGER_HOST}
       JAEGER_PORT: ${secrets.JAEGER_PORT}
       AUTH_SENTRY_DSN: ${secrets.AUTH_SENTRY_DSN}
-      EVENT_STORE_HOST: ${EVENT_STORE_HOST}
+      EVENT_STORE_HOST: ${secrets.EVENT_STORE_HOST}
     steps:
       - uses: actions/checkout@v3
       - uses: isbang/compose-action@v1.4.1
