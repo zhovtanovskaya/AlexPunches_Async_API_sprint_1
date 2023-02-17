@@ -5,9 +5,10 @@ from functools import lru_cache
 from kafka import KafkaProducer
 
 import services.models.users as service_user_models
-from core.config import config
+from core.config import config, logger
 from kafka_producer import get_producer
 from services.models.events import WelcomUserEventModel
+from utils import messages as msg
 
 loop = asyncio.get_event_loop()
 
@@ -21,6 +22,9 @@ class EventService:
 
     def send_event(self, event: WelcomUserEventModel) -> None:
         """Отправить событие в хранилище."""
+        if self.producer is None:
+            logger.info(msg.event_has_not_been_sent)
+            return None
         key = f'{event.id}+{event.event_type}'.encode('utf8')
         value = event.json()
         self.producer.send(
