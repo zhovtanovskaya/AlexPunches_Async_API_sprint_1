@@ -1,4 +1,4 @@
-from load.models.events import Event
+from extract.models.protocols import Event
 from transform.models.protocols import Posting
 
 
