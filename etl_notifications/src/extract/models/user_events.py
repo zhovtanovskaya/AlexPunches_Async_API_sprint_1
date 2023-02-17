@@ -1,5 +1,5 @@
 from pydantic import BaseModel
 
 
-class UserCreatedEvent:
+class UserCreatedEvent(BaseModel):
     text: str
