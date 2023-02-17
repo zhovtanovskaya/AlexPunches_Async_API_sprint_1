@@ -2,7 +2,8 @@
 from kafka import KafkaProducer
 from kafka.errors import NoBrokersAvailable
 
-from core.config import config
+from core.config import config, logger
+from utils import messages as msg
 
 producer: KafkaProducer | None = None
 
@@ -17,5 +18,6 @@ def get_producer() -> KafkaProducer:
                                   f'{config.event_store_port}',
             )
         except NoBrokersAvailable:
+            logger.warning(f'{msg.kafka_unavailable} {config.event_store_host}:{config.event_store_port}')
             return None
     return producer
