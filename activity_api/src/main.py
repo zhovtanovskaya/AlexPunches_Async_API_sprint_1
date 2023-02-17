@@ -40,13 +40,13 @@ async def request_middleware(request: Request, call_next) -> Response:
 async def startup():
     """Запустить продюсера для Кафки."""
     loop = asyncio.get_event_loop()
-    producer.aioproducer = AIOKafkaProducer(
+    producer.producer = AIOKafkaProducer(
         loop=loop,
         client_id=config.project_name,
         bootstrap_servers=f'{config.event_store_host}:{config.event_store_port}', # noqa
     )
     try:
-        await producer.aioproducer.start()
+        await producer.producer.start()
     except KafkaConnectionError:
         pass
     mongo.mongo_db = AsyncIOMotorClient(

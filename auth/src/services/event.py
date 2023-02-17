@@ -2,12 +2,11 @@
 import asyncio
 from functools import lru_cache
 
-from aiokafka import AIOKafkaProducer
-from fastapi import Depends
+from kafka import KafkaProducer
 
 import services.models.users as service_user_models
 from core.config import config
-from producer import get_producer
+from kafka_producer import get_producer
 from services.models.events import WelcomUserEventModel
 
 loop = asyncio.get_event_loop()
@@ -16,9 +15,7 @@ loop = asyncio.get_event_loop()
 class EventService:
     """Сервис для работы с хранилищем событий."""
 
-    def __init__(self,
-                 producer: AIOKafkaProducer = Depends(get_producer),
-                 ):
+    def __init__(self, producer: KafkaProducer = get_producer()):
         """Сервис зависит от Продюсера Кафки."""
         self.producer = producer
 
@@ -26,9 +23,9 @@ class EventService:
         """Отправить событие в хранилище."""
         key = f'{event.id}+{event.event_type}'.encode('utf8')
         value = event.json()
-        self.producer.send_and_wait(
+        self.producer.send(
             topic=config.notify_events_topic,
-            value=value,
+            value=value.encode('utf-8'),
             key=key,
         )
 

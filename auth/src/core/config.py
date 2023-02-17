@@ -100,7 +100,9 @@ class ApiSettings(BaseSettings):
 
     auth_sentry_dsn: str = ''
 
-    notify_events_topic = 'notify_events'
+    event_store_host: str = 'localhost'
+    event_store_port: str = '9092'
+    notify_events_topic: str = 'notify_events'
 
 
 @lru_cache()
