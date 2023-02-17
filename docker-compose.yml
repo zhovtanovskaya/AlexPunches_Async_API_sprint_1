@@ -134,6 +134,7 @@ services:
       JWT_REFRESH_TOKEN_EXPIRES: ${JWT_REFRESH_TOKEN_EXPIRES}
       GOOGLE_OAUTH_CLIENT_ID: ${GOOGLE_OAUTH_CLIENT_ID}
       GOOGLE_OAUTH_CLIENT_SECRET: ${GOOGLE_OAUTH_CLIENT_SECRET}
+      EVENT_STORE_HOST: ${EVENT_STORE_HOST}
     entrypoint: >
       sh -c "python /opt/app/src/manage.py db upgrade head
       && gunicorn -b 0.0.0.0:5000 --workers 4 src.pywsgi:app"
