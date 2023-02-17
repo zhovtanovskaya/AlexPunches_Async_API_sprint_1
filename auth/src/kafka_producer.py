@@ -18,6 +18,9 @@ def get_producer() -> KafkaProducer:
                                   f'{config.event_store_port}',
             )
         except NoBrokersAvailable:
-            logger.warning(f'{msg.kafka_unavailable} {config.event_store_host}:{config.event_store_port}')
+            logger.warning(
+                f'{msg.kafka_unavailable} '
+                f'{config.event_store_host}:{config.event_store_port}',
+            )
             return None
     return producer
