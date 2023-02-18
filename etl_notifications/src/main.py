@@ -11,9 +11,9 @@ async def etl():
     loader = Loader()
     async for event in extractor.extract():
         print(event.text)
-        await transformer.add_event(event)
-        posting = await transformer.get_posting()
-        await loader.load(posting)
+        # await transformer.add_event(event)
+        # posting = await transformer.get_posting()
+        await loader.load(event.text)
 
 
 if __name__ == '__main__':

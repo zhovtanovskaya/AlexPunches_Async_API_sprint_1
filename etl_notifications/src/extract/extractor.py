@@ -17,8 +17,8 @@ class Extractor:
             async for msg in consumer:
                 yield UserCreatedEvent(
                     text="consumed: {} {} {} {} {} {}".format(
-                    msg.topic, msg.partition, msg.offset, msg.key, msg.value,
-                    msg.timestamp,
+                        msg.topic, msg.partition, msg.offset, msg.key,
+                        msg.value, msg.timestamp,
                     )
                 )
         finally:
