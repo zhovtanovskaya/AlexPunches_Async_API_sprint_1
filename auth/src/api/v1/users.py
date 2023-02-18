@@ -9,11 +9,13 @@ from flask_pydantic import validate
 import api.v1.schemes.transform_schemes as transform
 import api.v1.schemes.user_roles as user_role_schemes
 import api.v1.schemes.users as user_schemes
+from services.event import EventService, get_event_service
 from services.jwt.request import admin_required
-from services.user import get_user_service
+from services.user import UserService, get_user_service
 
 users = Blueprint('users', __name__)
-user_service = get_user_service()
+user_service: UserService = get_user_service()
+event_service: EventService = get_event_service()
 
 
 @users.route('/signup', methods=['POST'])
@@ -24,6 +26,8 @@ def create_user(
     """Создать пользователя."""
     user_model = transform.user_scheme_to_user_model(user_scheme=body)
     user = user_service.register_user(user_in=user_model)
+    event = event_service.create_event_user_register(user)
+    event_service.send_event(event)
     return transform.user_model_to_user_scheme(user_model=user)
 
 

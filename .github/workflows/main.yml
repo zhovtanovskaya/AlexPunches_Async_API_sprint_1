@@ -28,7 +28,7 @@ jobs:
 
     - name: Check with mypy
       run: |
-        python3 -m mypy -v --config-file=setup.cfg activity_api/
+        python3 -m mypy --config-file=setup.cfg activity_api/
 
   run_functional_tests:
     name: Run functional tests in Auth
@@ -75,6 +75,7 @@ jobs:
       JAEGER_HOST: ${secrets.JAEGER_HOST}
       JAEGER_PORT: ${secrets.JAEGER_PORT}
       AUTH_SENTRY_DSN: ${secrets.AUTH_SENTRY_DSN}
+      EVENT_STORE_HOST: ${secrets.EVENT_STORE_HOST}
     steps:
       - uses: actions/checkout@v3
       - uses: isbang/compose-action@v1.4.1

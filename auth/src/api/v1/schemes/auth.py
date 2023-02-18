@@ -1,4 +1,6 @@
 """Схемы для аутенификации."""
+from uuid import UUID
+
 from pydantic import BaseModel, EmailStr
 
 
@@ -13,3 +15,7 @@ class UserSigninScheme(BaseModel):
 
         anystr_strip_whitespace = True
         min_anystr_length = 1
+
+
+class RegistrationConfirmation(BaseModel):
+    code: UUID

@@ -51,6 +51,7 @@ configure_tracer()
 def create_app():
     """Фабрика приложения."""
     app = Flask(__name__)
+
     app.config.from_object(config.flask_config)
     app.register_blueprint(exceptions)
     app.register_blueprint(users, url_prefix='/api/v1')
