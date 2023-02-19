@@ -1,0 +1,21 @@
+@startuml to_be
+!theme materia
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+
+title Воркер
+
+participant "Отправщик\n(воркер)" as Worker
+participant "Очередь уведомлений" as NotificationQueue
+participant "API Email-сервиса" as EmailGateway
+
+Worker -> NotificationQueue : Берет уведомления из очереди.
+note left
+  Если этот воркер упадет,
+  то другой воркер должен
+  будет отправить за него
+  email пользователю.
+end note
+Worker -> EmailGateway : Передает email-ы на отправку.
+
+@enduml

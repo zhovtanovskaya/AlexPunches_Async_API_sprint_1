@@ -1,0 +1,12 @@
+@startuml to_be
+!theme materia
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+
+title Ручная рассылка
+
+[AdminPanel] -> [API] : Запрос о \nновом событии.
+[API] -> [Отправщик\n(воркер)] : Информация \nо событии.
+[Отправщик\n(воркер)] -> [Пользователь] : Уведомление.
+
+@enduml
