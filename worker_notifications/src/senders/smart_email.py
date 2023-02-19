@@ -1,14 +1,13 @@
-from datetime import datetime
-
+from core.config import logger
 from senders.base_sender import BaseNotificationSender
-from senders.posting_model import PostingBaseModel, WelcomeEmailPosting
+from senders.posting_model import WelcomeEmailPosting
 
 
 class SmartEmailSender(BaseNotificationSender):
 
     def __init__(self, posting):
-        super().__init__(posting)
         self.posting = WelcomeEmailPosting.parse_raw(posting)
 
     def send(self):
-        print(self.posting.user_info)
+        self.check_permit(checkers=('deadline', 'not_night'))
+        logger.info(self.posting.user_info.name)

@@ -1,28 +1,23 @@
 import asyncio
-from asyncio import sleep
 
 from aio_pika import connect
 from aio_pika.abc import AbstractIncomingMessage
-from aio_pika.patterns import NackMessage
 
 import senders
-from core.config import config, logger
-from utils import messages as msg
+import senders.exceptions as sender_exc
+from core.config import config
 
 
 async def on_message(message: AbstractIncomingMessage) -> None:
     async with message.process():
-        # получить отправлятель
         sender_service = senders.get_sender_by_posting(message.body)
-
-        # проваледировать возможность отправки (часовой пояс и т.п)
-        if sender_service.check_permit() is not True:
-            await message.nack(requeue=False)
 
         try:
             sender_service.send()
-        except Exception:
+        except sender_exc.TimeOfDayNotifyError:
             await message.nack(requeue=False)
+        except sender_exc.DeadlineNotifyError:
+            return None
 
 
 async def main() -> None:

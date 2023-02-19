@@ -1,8 +1,6 @@
 import logging
-from datetime import tzinfo
 from functools import lru_cache
 from logging import config as logging_config
-from zoneinfo import ZoneInfo
 
 from pydantic import BaseSettings, Field
 
@@ -12,16 +10,17 @@ logging_config.dictConfig(LOGGING)
 
 
 class AmqpConect(BaseSettings):
-    queue_user: str = 'user'
-    queue_password: str = '123456'
-    queue_host: str = '158.160.55.33'
-    queue_port: str = '5672'
+    notifications_queue_user: str = 'user'
+    notifications_queue_password: str = '123456'
+    notifications_queue_host: str = '51.250.2.205'
+    notifications_queue_port: str = '5672'
 
     def get_conn(self) -> str:
         """Получить троку подключения к Реббиту."""
         return str(
-            f'amqp://{self.queue_user}:{self.queue_password}@'
-            f'{self.queue_host}:{self.queue_port}/'
+            f'amqp://{self.notifications_queue_user}'
+            f':{self.notifications_queue_password}@'
+            f'{self.notifications_queue_host}:{self.notifications_queue_port}/'
         )
 
 

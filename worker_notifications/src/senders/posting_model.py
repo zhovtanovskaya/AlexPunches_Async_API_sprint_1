@@ -1,4 +1,4 @@
-from datetime import datetime, tzinfo
+from datetime import datetime
 
 from pydantic import BaseModel, EmailStr
 
@@ -6,6 +6,8 @@ from core.config import config
 
 
 class UserInfoModel(BaseModel):
+    """Модель данных юзера."""
+
     name: str | None = None
     last_name: str | None = None
     email: EmailStr | None = None
@@ -13,9 +15,13 @@ class UserInfoModel(BaseModel):
 
 
 class PostingBaseModel(BaseModel):
+    """Базовая модель отправления."""
+
     deadline: datetime
     user_info: UserInfoModel
 
 
 class WelcomeEmailPosting(PostingBaseModel):
+    """Модель отправления приветственного письма."""
+
     pass
