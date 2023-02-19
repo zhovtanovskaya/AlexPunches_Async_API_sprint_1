@@ -1,6 +1,8 @@
 import logging
+from datetime import tzinfo
 from functools import lru_cache
 from logging import config as logging_config
+from zoneinfo import ZoneInfo
 
 from pydantic import BaseSettings, Field
 
@@ -28,6 +30,13 @@ class WorkerSettings(BaseSettings):
     queue_name: str = 'notifications'
     queue_conn: str = AmqpConect().get_conn()
     def_priority: int = 5
+    def_timezone: str = 'Europe/Moscow'
+    night_start_hour: int = Field(22, ge=0, le=24)
+    night_stop_hour: int = Field(8, ge=0, le=24)
+
+    mapping_senders_type: dict = {
+        'smart_email': ''
+    }
 
 
 @lru_cache()
