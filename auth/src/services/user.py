@@ -9,8 +9,8 @@ from werkzeug.security import generate_password_hash
 
 import services.models.roles as service_role_models
 import services.models.users as service_user_models
-from core.db import db
 from core.exceptions import ResourceNotFoundError
+from db.db import db
 from models.role import Role
 from models.user import User
 

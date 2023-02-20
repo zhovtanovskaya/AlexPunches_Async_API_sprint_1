@@ -8,7 +8,7 @@ from flask_jwt_extended import (create_access_token, create_refresh_token,
 from pydantic import BaseModel, Field, PositiveInt
 
 from core.config import config
-from core.redis import jwt_redis_blocklist
+from db.redis import jwt_redis_blocklist
 from models import User
 
 ACCESS_EXPIRES = config.flask_config.JWT_ACCESS_TOKEN_EXPIRES

@@ -7,7 +7,7 @@ from sqlalchemy import UniqueConstraint
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.ext.declarative import declared_attr
 
-from core.db import db
+from db.db import db
 from models import BaseModel
 
 

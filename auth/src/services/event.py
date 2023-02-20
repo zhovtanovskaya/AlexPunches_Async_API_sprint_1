@@ -6,7 +6,7 @@ from kafka import KafkaProducer
 
 import services.models.users as service_user_models
 from core.config import config, logger
-from kafka_producer import get_producer
+from db.kafka_producer import get_producer
 from services.models.events import WelcomUserEventModel
 from utils import messages as msg
 

@@ -5,7 +5,7 @@ import google_auth_oauthlib.flow
 from googleapiclient.discovery import build
 
 from core.config import config, logger
-from core.db import db
+from db.db import db
 from models.social_account import SocialAccount
 from services.auth.exceptions import AuthenticationFailed
 from services.social_auth.base_provider import BaseOAuth, SocUser

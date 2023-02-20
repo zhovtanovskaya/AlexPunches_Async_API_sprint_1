@@ -20,8 +20,8 @@ from api.v1.profile import profile
 from api.v1.roles import roles
 from api.v1.users import users
 from core.config import config
-from core.db import db
 from core.exceptions import exceptions
+from db.db import db
 
 
 def configure_tracer() -> None:
