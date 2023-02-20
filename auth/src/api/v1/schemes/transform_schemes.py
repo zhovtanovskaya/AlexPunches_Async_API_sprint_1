@@ -41,7 +41,6 @@ def user_model_to_user_scheme(
         id=user_model.id,
         email=user_model.email,
         active=user_model.active,
-        email_confirmation=user_model.email_confirmation,
         roles=user_model.roles,
     )
 
