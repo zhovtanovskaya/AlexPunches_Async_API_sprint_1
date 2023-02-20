@@ -97,7 +97,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Dump needs context
-      run: echo '${{ toJSON(needs.*.result) }}'
+      run: echo '${{ contains(needs.*.result, 'failure') }}'
 
     - name: send action status
       uses: appleboy/telegram-action@master
