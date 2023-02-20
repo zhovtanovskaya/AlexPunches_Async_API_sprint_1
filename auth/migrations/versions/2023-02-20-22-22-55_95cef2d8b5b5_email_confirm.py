@@ -21,7 +21,6 @@ def upgrade():
     op.add_column('users', sa.Column('email_confirmation', sa.Boolean(), nullable=True))
     op.add_column('users', sa.Column('confirmation_code', postgresql.UUID(as_uuid=True), nullable=True))
     op.create_unique_constraint('users_confirmation_code_key', 'users', ['confirmation_code'])
-    op.create_unique_constraint('users_id_key', 'users', ['id'])
     # ### end Alembic commands ###
 
 

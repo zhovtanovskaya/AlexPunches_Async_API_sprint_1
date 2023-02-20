@@ -36,6 +36,8 @@ class User(BaseDt):
     id: str
     email: str
     active: str
+    email_confirmation: str
+    confirmation_code: str
     password: str
 
 
