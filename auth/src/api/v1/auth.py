@@ -8,9 +8,8 @@ from flask_pydantic import validate
 import services.auth.auth as services_auth
 import services.jwt.token as services_jwt_token
 import services.social_auth as social_auth_service
-from api.v1.schemes.auth import RegistrationConfirmation, UserSigninScheme
+from api.v1.schemes.auth import EmailConfirmation, UserSigninScheme
 from core.config import logger
-from services.auth.exceptions import ConfirmationFailed
 from services.jwt.request import get_jwt, jwt_required
 from utils import messages as msg
 
@@ -73,14 +72,11 @@ def social_auth(service_name: str) -> Response:
     return jsonify(access_token=access_token, refresh_token=refresh_token)
 
 
-@auth.route('/email-confirmation', methods=['GET'])
+@auth.route('/confirm-email', methods=['GET'])
 @validate()
-def confirmation_registration(query: RegistrationConfirmation) -> Response:
+def confirmation_registration(query: EmailConfirmation) -> Response:
     """Подтвердить электронный адрес."""
-    try:
-        services_auth.email_confirmate(query.code)
-    except ConfirmationFailed:
-        logger.info(f'{msg.confirmation_failed}, for code {query.code}')
-        return jsonify(message=msg.confirmation_failed)
-    else:
+    if services_auth.email_confirmate(query.code):
         return jsonify(message=msg.email_confirmation_succes)
+    logger.info(f'{msg.confirmation_failed}, for code {query.code}')
+    return jsonify(message=msg.confirmation_failed)

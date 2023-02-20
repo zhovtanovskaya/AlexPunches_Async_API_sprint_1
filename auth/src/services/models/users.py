@@ -14,6 +14,7 @@ class UserBaseModel(BaseModel):
     password: str | None = None
     roles: list[service_role_models.RoleModel] = []
     active: bool | None = None
+    email_confirmation: bool | None = None
 
 
 class UserModel(UserBaseModel):
@@ -22,6 +23,7 @@ class UserModel(UserBaseModel):
     id: UUID
     email: EmailStr
     active: bool
+    email_confirmation: bool
 
     class Config:  # noqa
         orm_mode = True

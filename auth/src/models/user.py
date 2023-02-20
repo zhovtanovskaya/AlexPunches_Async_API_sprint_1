@@ -26,6 +26,9 @@ class User(BaseModel):
     password = db.Column(db.String, nullable=False)
     roles = db.relationship('Role', secondary=roles_users, lazy='subquery',
                             backref=db.backref('users', lazy='subquery'))
+    confirmation_code = db.Column(
+        UUID(as_uuid=True), default=uuid.uuid4, unique=True, nullable=True,
+    )
 
     def __str__(self):
         """Вернуть в виде строки."""

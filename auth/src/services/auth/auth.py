@@ -4,8 +4,7 @@ from uuid import UUID
 from werkzeug.security import check_password_hash
 
 from models.user import User
-from services.auth.exceptions import AuthenticationFailed, ConfirmationFailed
-from utils import messages as msg
+from services.auth.exceptions import AuthenticationFailed
 
 
 def authenticate(email: str, password: str):
@@ -21,10 +20,11 @@ def authenticate(email: str, password: str):
         raise AuthenticationFailed('Пароль не верен.')
 
 
-def email_confirmate(code: UUID):
+def email_confirmate(code: UUID) -> bool:
     """Подтвердить email."""
-    if user := User.query.filter_by(id=code).first():
+    if user := User.query.filter_by(confirmation_code=code).first():
         user.email_confirmation = True
+        user.confirmation_code = None
         user.save()
         return True
-    raise ConfirmationFailed(msg.confirmation_failed)
+    return False

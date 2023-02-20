@@ -17,5 +17,5 @@ class UserSigninScheme(BaseModel):
         min_anystr_length = 1
 
 
-class RegistrationConfirmation(BaseModel):
+class EmailConfirmation(BaseModel):
     code: UUID
