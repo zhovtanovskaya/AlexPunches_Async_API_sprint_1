@@ -1,6 +1,7 @@
 """Подключение к Реббиту и декларирование очередей с обменниками."""
 from aio_pika import connect
-from aio_pika.abc import AbstractChannel, AbstractConnection, ExchangeType
+from aio_pika.abc import (AbstractChannel, AbstractConnection, AbstractQueue,
+                          ExchangeType)
 from aiormq import AMQPConnectionError
 
 from core.config import config
@@ -19,7 +20,7 @@ async def get_rabbitmq() -> AbstractConnection | None:
     return rabbitmq
 
 
-async def get_notification_queue(channel: AbstractChannel):
+async def get_notification_queue(channel: AbstractChannel) -> AbstractQueue:
     """Получить очередь для нотификаций. Не забыть настроить retry-очередь."""
     await channel.set_qos(
         prefetch_count=config.queue_prefetch_count,
