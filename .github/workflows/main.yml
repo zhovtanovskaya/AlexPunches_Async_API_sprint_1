@@ -96,18 +96,22 @@ jobs:
     name: Send Telegram message
     runs-on: ubuntu-latest
     steps:
-    - name: Dump needs context
-      run: echo '${{ contains(needs.*.result, 'failure') }}'
-
     - name: send action status
+      if: "!contains(needs.*.result, 'failure')"
       uses: appleboy/telegram-action@master
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
         format: markdown
         message: |
-          ${{ github.repository }}: Pipeline for ${{ github.sha }} finished ${{ github.action_status }}!
-#        if: ${{ always() }}
-#        if: ${{ failure() }}
-#        message: |
-#          {name of step} failed
+          ${{ github.repository }}: Pipeline for ${{ github.sha }} finished successfully!
+
+    - name: send action status
+      if: "contains(needs.*.result, 'failure')"
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        format: markdown
+        message: |
+          ${{ github.repository }}: Pipeline for ${{ github.sha }} finished with error!
