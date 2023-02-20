@@ -1,4 +1,4 @@
-name: Online Cinema application workflow
+name: Online_Cinema
 
 on: [pull_request]
 
