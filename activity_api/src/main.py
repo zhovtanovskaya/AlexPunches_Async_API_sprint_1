@@ -21,9 +21,7 @@ if config.activity_sentry_dsn:
         dsn=config.activity_sentry_dsn,
         traces_sample_rate=1.0,
     )
-app = Fast
-
-API(
+app = FastAPI(
     title=config.project_name,
     docs_url='/api/v1/activities/openapi',
     openapi_url='/api/v1/activities/openapi.json',
