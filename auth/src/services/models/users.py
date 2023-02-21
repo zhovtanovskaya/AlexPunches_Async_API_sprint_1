@@ -15,6 +15,7 @@ class UserBaseModel(BaseModel):
     roles: list[service_role_models.RoleModel] = []
     active: bool | None = None
     email_confirmation: bool | None = None
+    confirmation_code: UUID | None = None
 
 
 class UserModel(UserBaseModel):

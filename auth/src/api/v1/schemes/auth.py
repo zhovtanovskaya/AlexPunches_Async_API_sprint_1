@@ -3,6 +3,8 @@ from uuid import UUID
 
 from pydantic import BaseModel, EmailStr
 
+from core.config import config
+
 
 class UserSigninScheme(BaseModel):
     """Схема JSON для логина."""
@@ -19,3 +21,4 @@ class UserSigninScheme(BaseModel):
 
 class EmailConfirmation(BaseModel):
     code: UUID
+    back_url: str = config.redirect_confirm

@@ -103,6 +103,9 @@ class ApiSettings(BaseSettings):
     event_store_host: str = 'localhost'
     event_store_port: str = '9092'
     notify_events_topic: str = 'notify_events'
+    redirect_confirm: str = '/'
+    shortlink_ttl: int = 1  # 1 day
+    shortlink_length: int = 5
 
 
 @lru_cache()

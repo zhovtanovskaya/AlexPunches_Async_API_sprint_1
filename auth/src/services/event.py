@@ -1,5 +1,4 @@
-"""Ассинхронный сервис для работы с Кафкой."""
-import asyncio
+"""Cервис для работы с Кафкой."""
 from functools import lru_cache
 
 from kafka import KafkaProducer
@@ -7,10 +6,12 @@ from kafka import KafkaProducer
 import services.models.users as service_user_models
 from core.config import config, logger
 from db.kafka_producer import get_producer
+from services.auth.auth import get_comfirm_email_url_by_user
 from services.models.events import WelcomUserEventModel
+from services.shortlink import ShortlinkService, get_shortlink_service
 from utils import messages as msg
 
-loop = asyncio.get_event_loop()
+shortlink_service: ShortlinkService = get_shortlink_service()
 
 
 class EventService:
@@ -38,10 +39,13 @@ class EventService:
         user: service_user_models.UserModel,
     ) -> WelcomUserEventModel:
         """Создать евент регистрации пользователя из модели пользователя."""
+        confirm_link = get_comfirm_email_url_by_user(user)
+        short_link = shortlink_service.create_shortlink(longlink=confirm_link)
         return WelcomUserEventModel(
             id=user.id,
             details={
-                'email': user.email
+                'email': user.email,
+                'confirm_link': short_link,
             }
         )
 

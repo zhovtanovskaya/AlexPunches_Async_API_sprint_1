@@ -2,8 +2,9 @@
 from http import HTTPStatus
 
 import flask
-from flask import Blueprint, Response, jsonify
+from flask import Blueprint, Response, jsonify, redirect
 from flask_pydantic import validate
+from werkzeug.wrappers import Response as BaseResponse
 
 import services.auth.auth as services_auth
 import services.jwt.token as services_jwt_token
@@ -74,9 +75,9 @@ def social_auth(service_name: str) -> Response:
 
 @auth.route('/confirm-email', methods=['GET'])
 @validate()
-def confirmation_registration(query: EmailConfirmation) -> Response:
+def confirmation_registration(query: EmailConfirmation) -> BaseResponse:
     """Подтвердить электронный адрес."""
     if services_auth.email_confirmate(query.code):
-        return jsonify(message=msg.email_confirmation_succes)
+        return redirect(query.back_url, HTTPStatus.MOVED_PERMANENTLY)
     logger.info(f'{msg.confirmation_failed}, for code {query.code}')
     return jsonify(message=msg.confirmation_failed)
