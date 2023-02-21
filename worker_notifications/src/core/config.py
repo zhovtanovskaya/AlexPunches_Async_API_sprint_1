@@ -10,12 +10,12 @@ logging_config.dictConfig(LOGGING)
 
 
 class AmqpConect(BaseSettings):
-    notifications_queue_user: str = 'user'
-    notifications_queue_password: str = '123456'
+    notifications_queue_user: str
+    notifications_queue_password: str
     notifications_queue_host: str = '51.250.2.205'
     notifications_queue_port: str = '5672'
 
-    def get_conn(self) -> str:
+    def get_conn_str(self) -> str:
         """Получить троку подключения к Реббиту."""
         return str(
             f'amqp://{self.notifications_queue_user}'
@@ -32,16 +32,13 @@ class WorkerSettings(BaseSettings):
     retry_queue_name: str = 'retry_notifications'
     retry_exchanger_name: str = 'notifications_retry_exchanger'
     ttl_for_retry: int = 600000
-    queue_conn: str = AmqpConect().get_conn()
+    queue_conn_str: str = AmqpConect().get_conn_str()
+    mq_timeout: int = 10
     def_priority: int = 5
     max_priority: int = 10
     def_timezone: str = 'Europe/Moscow'
     night_start_hour: int = Field(22, ge=0, le=24)
     night_stop_hour: int = Field(8, ge=0, le=24)
-
-    mapping_senders_type: dict = {
-        'smart_email': ''
-    }
 
 
 @lru_cache()
