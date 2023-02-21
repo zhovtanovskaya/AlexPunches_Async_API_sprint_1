@@ -30,10 +30,6 @@ jobs:
 #      run: |
 #        python3 -m mypy --config-file=setup.cfg activity_api/
 
-      if: ${{ failure() }}
-    - name: Set color
-      id: random-color-generator
-      run: echo "SELECTED_COLOR=green" >> $GITHUB_OUTPUT
 
 #  run_functional_tests:
 #    name: Run functional tests in Auth
@@ -124,3 +120,4 @@ jobs:
         format: markdown
         message: |
           ${{ github.repository }}: Pipeline for ${{ github.sha }} finished with error!
+          ${{ jobs.tests.result }}
