@@ -98,8 +98,8 @@ jobs:
     name: Send Telegram message
     runs-on: ubuntu-latest
     steps:
-    - name: Get color
-      run: echo "The selected color is ${{ steps.random-color-generator.outputs.SELECTED_COLOR }}"
+    - name: Get result
+      run: echo "result ${{ jobs.tests.result }}"
 
     - name: send action status
       if: "!contains(needs.*.result, 'failure')"
@@ -120,4 +120,3 @@ jobs:
         format: markdown
         message: |
           ${{ github.repository }}: Pipeline for ${{ github.sha }} finished with error!
-          ${{ jobs.tests.result }}
