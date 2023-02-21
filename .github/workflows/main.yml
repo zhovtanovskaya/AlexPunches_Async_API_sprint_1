@@ -97,7 +97,8 @@ jobs:
 
   send_message:
     if: ${{ always() }}
-    needs: [tests, run_functional_tests]
+    needs: [tests]
+#    needs: [tests, run_functional_tests]
     name: Send Telegram message
     runs-on: ubuntu-latest
     steps:
