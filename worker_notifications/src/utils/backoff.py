@@ -21,7 +21,7 @@ def backoff(
             while True:
                 try:
                     return await func(*args, **kwargs)
-                except exceptions as e:
+                except exceptions:
                     _logger.warning(msg.i_will_try_again,
                                     sleep_time)
                     await asyncio.sleep(sleep_time)
