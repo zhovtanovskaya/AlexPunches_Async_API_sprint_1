@@ -10,8 +10,6 @@ RUN  pip install --no-cache-dir --upgrade pip \
 
 COPY . .
 
-COPY ./wait-for-it.sh /opt/app/wait-for-it.sh
-
 EXPOSE 80
 
 CMD ["python3", "/opt/app/src/main.py"]

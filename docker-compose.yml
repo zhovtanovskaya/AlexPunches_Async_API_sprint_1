@@ -161,6 +161,17 @@ services:
     entrypoint: ["./wait-for-it.sh", "-s", "-t", "600", "${EVENT_STORE_HOST}:${EVENT_STORE_PORT}", "--"]
     command: ["gunicorn", "-b", "0.0.0.0:8000", "--workers", "4", "-k", "uvicorn.workers.UvicornWorker", "src.main:app"]
 
+  worker_notifications:
+    build: worker_notifications
+    environment:
+      NOTIFICATIONS_QUEUE_USER: ${NOTIFICATIONS_QUEUE_USER}
+      NOTIFICATIONS_QUEUE_PASSWORD: ${NOTIFICATIONS_QUEUE_PASSWORD}
+
+#  etl_notifications:
+#    build: etl_notifications
+
+
+
 volumes:
   service_static_value:
   service_media_value:
