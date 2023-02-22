@@ -1,5 +1,9 @@
 """Схемы для аутенификации."""
+from uuid import UUID
+
 from pydantic import BaseModel, EmailStr
+
+from core.config import config
 
 
 class UserSigninScheme(BaseModel):
@@ -13,3 +17,8 @@ class UserSigninScheme(BaseModel):
 
         anystr_strip_whitespace = True
         min_anystr_length = 1
+
+
+class EmailConfirmation(BaseModel):
+    code: UUID
+    back_url: str = config.redirect_confirm

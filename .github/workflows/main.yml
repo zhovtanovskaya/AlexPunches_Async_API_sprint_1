@@ -1,9 +1,9 @@
-name: Online Cinema application workflow
+name: Online_Cinema
 
 on: [pull_request]
 
 jobs:
-  tests:
+  linters:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -17,7 +17,7 @@ jobs:
         python-version: ${{ matrix.python-version }}
 
     - name: Install dependencies
-      run: | 
+      run: |
         python3 -m pip install --upgrade pip
         pip3 install -r activity_api/requirements.txt
         pip3 install flake8 flake8-isort mypy==0.982
@@ -28,11 +28,11 @@ jobs:
 
     - name: Check with mypy
       run: |
-        python3 -m mypy -v --config-file=setup.cfg activity_api/
+        python3 -m mypy --config-file=setup.cfg activity_api/
 
   run_functional_tests:
     name: Run functional tests in Auth
-    needs: tests
+    needs: linters
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -75,6 +75,7 @@ jobs:
       JAEGER_HOST: ${secrets.JAEGER_HOST}
       JAEGER_PORT: ${secrets.JAEGER_PORT}
       AUTH_SENTRY_DSN: ${secrets.AUTH_SENTRY_DSN}
+      EVENT_STORE_HOST: ${secrets.EVENT_STORE_HOST}
     steps:
       - uses: actions/checkout@v3
       - uses: isbang/compose-action@v1.4.1
@@ -90,8 +91,28 @@ jobs:
           pip install -r auth/tests/functional/requirements.txt
           pytest auth/tests/functional/src
 
-      - name: send default message
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
+  send_message:
+    if: ${{ always() }}
+    needs: [linters, run_functional_tests]
+    name: Send Telegram message
+    runs-on: ubuntu-latest
+    steps:
+    - name: send action status
+      if: "!contains(needs.*.result, 'failure')"
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        format: markdown
+        message: |
+          ${{ github.repository }}: Pipeline for ${{ github.sha }} finished successfully!
+
+    - name: send action status
+      if: "contains(needs.*.result, 'failure')"
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        format: markdown
+        message: |
+          ${{ github.repository }}: Pipeline for ${{ github.sha }} finished with error!

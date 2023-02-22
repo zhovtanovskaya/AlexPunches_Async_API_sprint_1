@@ -7,8 +7,8 @@ from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.inspection import inspect
 
 from core.config import config
-from core.db import db
 from core.exceptions import BasicExceptionError, ResourceNotFoundError
+from db.postgres import db
 from utils import messages as msg
 
 
