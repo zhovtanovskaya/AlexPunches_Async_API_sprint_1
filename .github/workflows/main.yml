@@ -30,14 +30,6 @@ jobs:
       run: |
         python3 -m mypy --config-file=setup.cfg activity_api/
 
-    - name: Get status
-      if: ${{ always() }}
-      run: |
-        if [[ job.status == 'failure' ]]; then
-          echo "### Hello linters! :rocket:" >> $GITHUB_STEP_SUMMARY
-        fi
-
-
   run_functional_tests:
     name: Run functional tests in Auth
     needs: linters
@@ -98,13 +90,6 @@ jobs:
           pip install -r auth/tests/functional/requirements.txt
           pytest auth/tests/functional/src
 
-      - name: Get status
-        if: ${{ always() }}
-        run: |
-          if [[ job.status == 'failure' ]]; then
-            echo "### Hello tests! :rocket:" >> $GITHUB_STEP_SUMMARY
-          fi
-
   send_message:
     if: ${{ always() }}
     needs: [linters, run_functional_tests]
@@ -130,4 +115,3 @@ jobs:
         format: markdown
         message: |
           ${{ github.repository }}: Pipeline for ${{ github.sha }} finished with error!
-          ${{ $GITHUB_STEP_SUMMARY }}
