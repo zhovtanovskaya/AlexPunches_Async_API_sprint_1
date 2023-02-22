@@ -1,6 +1,5 @@
 import asyncio
 
-from aio_pika import Message
 from aiokafka import AIOKafkaConsumer
 
 from src.core.config import settings
@@ -37,4 +36,3 @@ async def shutdown():
 
 if __name__ == '__main__':
     asyncio.run(main())
-
