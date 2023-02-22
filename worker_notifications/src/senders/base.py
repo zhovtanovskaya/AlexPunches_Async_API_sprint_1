@@ -48,5 +48,5 @@ class BaseNotificationSender:
 
     def _check_not_night(self):
         """Проверить что сейчас не ночь. Учесть часовой пояс получателя."""
-        user_tz = ZoneInfo(self.posting.user_info.timezone)
+        user_tz = ZoneInfo(self.posting.user.timezone)
         return not is_night(datetime.now(tz=user_tz))

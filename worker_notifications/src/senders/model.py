@@ -18,7 +18,7 @@ class PostingBaseModel(BaseModel):
     """Базовая модель отправления."""
 
     deadline: datetime
-    user_info: UserInfoModel
+    user: UserInfoModel
 
 
 class WelcomeEmailPosting(PostingBaseModel):
