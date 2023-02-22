@@ -1,6 +1,12 @@
 import asyncio
+import os
+import sys
 
 from aiokafka import AIOKafkaConsumer
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(
+    __file__)))
+sys.path.append(BASE_DIR)
 
 from src.core.config import settings
 from src.db import kafka
