@@ -24,4 +24,14 @@ class PostingBaseModel(BaseModel):
 class WelcomeEmailPosting(PostingBaseModel):
     """Модель отправления приветственного письма."""
 
-    pass
+    def is_ready(self):
+        return self.is_actual()
+
+    def is_actual(self) -> bool:
+        """Проверить что сообщение актуально."""
+        return self.posting.deadline > datetime.now()
+
+    def is_daytime(self) -> bool:
+        """Проверить что сейчас ночь в часовом поясе получателя."""
+        user_tz = ZoneInfo(self.user_info.timezone)
+        return not is_night(datetime.now(tz=user_tz))
