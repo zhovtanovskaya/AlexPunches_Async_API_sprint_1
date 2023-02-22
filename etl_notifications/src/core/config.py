@@ -10,7 +10,7 @@ class KafkaSettings(BaseSettings):
     notifications_group_id: str
 
     @property
-    def bootstrap_servers(self):
+    def bootstrap_servers(self) -> str:
         return f'{self.event_store_host}:{self.event_store_port}'
 
 
@@ -34,8 +34,8 @@ class RabbitMQSettings(BaseSettings):
 
 
 class Settings(BaseSettings):
-    kafka = KafkaSettings()
-    rabbitmq = RabbitMQSettings()
+    kafka: KafkaSettings = KafkaSettings()
+    rabbitmq: RabbitMQSettings = RabbitMQSettings()
 
 
 settings = Settings()

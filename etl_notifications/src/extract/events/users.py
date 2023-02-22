@@ -15,5 +15,5 @@ class UserSignedUpEvent(BaseModel):
     from_service: str = 'auth'
     details: UserSignedUpPayload
 
-    class Config:  # noqa
+    class Config:
         orm_mode = True

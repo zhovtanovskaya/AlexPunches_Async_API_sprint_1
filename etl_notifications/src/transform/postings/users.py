@@ -17,7 +17,7 @@ class PostingBaseModel(BaseModel):
     deadline: datetime
     user: UserInfo
 
-    def json_bytes(self):
+    def json_bytes(self) -> bytes:
         """Получить JSON объекта в виде байт-строки."""
         return self.json().encode()
 

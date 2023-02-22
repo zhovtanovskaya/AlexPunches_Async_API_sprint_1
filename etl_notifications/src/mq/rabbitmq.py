@@ -41,5 +41,5 @@ async def get_notification_queue(channel: AbstractChannel) -> AbstractQueue:
 exchange: Coroutine[Any, Any, AbstractQueue] = None
 
 
-async def get_rabbitmq_exchange():
+async def get_rabbitmq_exchange() -> Coroutine[Any, Any, AbstractQueue]:
     return exchange

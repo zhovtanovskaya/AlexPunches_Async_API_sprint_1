@@ -1,4 +1,7 @@
+from typing import Any, Coroutine
+
 from aio_pika import Message
+from aio_pika.abc import AbstractQueue
 from aiokafka import AIOKafkaConsumer
 
 from src.core.config import settings
@@ -10,7 +13,8 @@ from src.transform.users import UserSignedUpTransformer
 
 async def etl():
     consumer: AIOKafkaConsumer = await get_kafka_consumer()
-    exchange = await get_rabbitmq_exchange()
+    exchange: Coroutine[Any, Any, AbstractQueue] = \
+        await get_rabbitmq_exchange()
     transformer = UserSignedUpTransformer()
     async for event in extract(consumer):
         print(event)
