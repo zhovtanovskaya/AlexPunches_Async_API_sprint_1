@@ -31,9 +31,11 @@ jobs:
         python3 -m mypy --config-file=setup.cfg activity_api/
 
     - name: Get status
-      if: job.status == 'failure'
+      if: ${{ always() }}
       run: |
-        echo "### Hello linters! :rocket:" >> $GITHUB_STEP_SUMMARY
+        if [[ job.status == 'failure' ]] then
+          echo "### Hello linters! :rocket:" >> $GITHUB_STEP_SUMMARY
+        fi
 
 
   run_functional_tests:
@@ -97,9 +99,11 @@ jobs:
           pytest auth/tests/functional/src
 
       - name: Get status
-        if: job.status == 'failure'
+        if: ${{ always() }}
         run: |
-          echo "### Hello tests! :rocket:" >> $GITHUB_STEP_SUMMARY
+          if [[ job.status == 'failure' ]] then
+            echo "### Hello tests! :rocket:" >> $GITHUB_STEP_SUMMARY
+          fi
 
   send_message:
     if: ${{ always() }}
