@@ -10,4 +10,4 @@ class SmartEmailSender(BaseNotificationSender):
 
     def send(self) -> None:
         self.check_permit(checkers=('deadline', 'not_night'))
-        logger.info(self.posting.user_info.name)
+        logger.info(self.posting.user.email)

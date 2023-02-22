@@ -2,11 +2,31 @@
 # Репозиторий
 [https://github.com/AlexPunches/Async_API_sprint_1](https://github.com/AlexPunches/Async_API_sprint_1)
 
-# Спринт 9
+# Спринт 10
+### Как работает сервис Нотификаций.
 
-- [Бенчмаркинг Монги добавился к прошлым бенчмаркингам](https://github.com/AlexPunches/Async_API_sprint_1/blob/main/benchmarking_storage)
-- [Структура проекта .plantuml](https://github.com/AlexPunches/Async_API_sprint_1/tree/main/documentation/architecture/sprint_9)
-- [API для UGC подселился к activity_api](https://github.com/AlexPunches/Async_API_sprint_1/tree/main/activity_api)
+В системе происходят всякие разные события. Они о себе сообщают в Кафку.  
+На кафку на нужный топик подписан некоторый консюмер (сервис ETL-notification),
+  
+ETL ожидает события, которые провоцируют отправку сообщений.
+Получив событие, он преобразует его в сообщение(ия). 
+При этом определяет всякое: кому, когда, каким способом отправлять и т.д.
+Каждое сообщение помещает в RabitMQ.  
+  
+На RabbitMQ подписан некоторый консюмер (сервис worker_notifications)
+Он получает сообщения и передает их нужному рассылателю. 
+
+В рамках спринта реализована только отпрака приветсвенных писем зарегистрированных пользователей.  
+Но функционал готов к расширению на другие собития и каналы доставки сообщений.
+----
+В сервисе AUTH реализован механизм подтверждения email. И сокращатель любых ссылок внутри проекта.
+
+
+- [ETL](https://github.com/AlexPunches/Async_API_sprint_1/blob/main/etl_notifications)  
+- [Воркер](https://github.com/AlexPunches/Async_API_sprint_1/blob/main/worker_notifications)  
+
+- [Процесс проектирования в .plantuml](https://github.com/AlexPunches/Async_API_sprint_1/tree/main/documentation/architecture/sprint_10)
+- [Проектирование архитектуры и реализации](https://github.com/AlexPunches/Async_API_sprint_1/tree/main/documentation/design/sprint_10)
 
 
 # Подготовка проекта

@@ -43,6 +43,7 @@ services:
       - /tmp/logs/activity_api/:/var/log/activity_api:ro
       - /tmp/logs/async_api/:/var/log/async_api:ro
       - /tmp/logs/admin_panel/:/var/log/admin_panel:ro
+      - /tmp/logs/worker_notifications/:/var/log/worker_notifications:ro
       - ./deploy/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
     depends_on:
       - elk_logstash
