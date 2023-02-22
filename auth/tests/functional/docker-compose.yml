@@ -43,6 +43,7 @@ services:
       JWT_SECRET_KEY: 'jwt_secret_key'
       GOOGLE_OAUTH_CLIENT_ID: ''
       GOOGLE_OAUTH_CLIENT_SECRET: ''
+      EVENT_STORE_HOST: ${EVENT_STORE_HOST}
     ports:
       - "5000:5000"
     depends_on:
@@ -71,6 +72,7 @@ services:
       AUTH_HOST: 'test-auth'
       JWT_ACCESS_TOKEN_EXPIRES: '1 00:00:00.000000'
       JWT_REFRESH_TOKEN_EXPIRES: '30 00:00:00.000000'
+      EVENT_STORE_HOST: ${EVENT_STORE_HOST}
     depends_on:
       - test-redis
       - test-auth

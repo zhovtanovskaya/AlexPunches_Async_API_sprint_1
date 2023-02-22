@@ -1,6 +1,6 @@
 """SQLAlchemy-модель Роли для БД."""
 
-from core.db import db
+from db.postgres import db
 from models import BaseModel
 
 

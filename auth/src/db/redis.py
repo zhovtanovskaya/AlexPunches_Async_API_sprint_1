@@ -10,3 +10,10 @@ jwt_redis_blocklist = redis.StrictRedis(
     db=0,
     decode_responses=True,
 )
+
+shortlink_redis = redis.StrictRedis(
+    host=config.redis_host,
+    port=config.redis_port,
+    db=1,
+    decode_responses=True,
+)

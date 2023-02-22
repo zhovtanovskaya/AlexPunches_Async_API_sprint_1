@@ -1,6 +1,6 @@
 """Отзыв JWT-токенов."""
 
-from core.redis import jwt_redis_blocklist
+from db.redis import jwt_redis_blocklist
 from manage import app
 
 

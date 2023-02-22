@@ -9,7 +9,7 @@ from flask_pydantic import validate
 from api.v1.schemes.login_histories import (ListLoginHistoryScheme,
                                             LoginHistoryScheme)
 from api.v1.schemes.pagination import Page
-from core.db import db
+from db.postgres import db
 from models import LoginHistory, User
 from services.jwt.request import admin_required
 
