@@ -17,7 +17,6 @@ async def etl():
         await get_rabbitmq_exchange()
     transformer = UserSignedUpTransformer()
     async for event in extract(consumer):
-        print(event)
         async for posting in transformer.make_postings(event):
             message = Message(body=posting.json_bytes())
             await exchange.publish(
