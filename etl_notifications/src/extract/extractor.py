@@ -1,9 +1,12 @@
 from typing import AsyncIterable
 
-from extract.models.protocols import Event
-from extract.models.user_events import UserCreatedEvent
+import orjson
+
+from src.extract.events.protocols import Event
+from src.extract.events.users import UserSignedUpEvent
 
 
 async def extract(consumer) -> AsyncIterable[Event]:
     async for event in consumer:
-        yield event
+        d = orjson.loads(event.value.decode())
+        yield UserSignedUpEvent(**d)
