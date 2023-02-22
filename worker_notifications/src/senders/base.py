@@ -3,9 +3,9 @@ from zoneinfo import ZoneInfo
 
 import senders.exceptions as sender_exc
 from core.config import logger
-from senders.posting_model import PostingBaseModel
+from senders.model import PostingBaseModel
 from utils import messages as msg
-from utils.helpers import is_it_hight
+from utils.helpers import is_night
 
 
 class BaseNotificationSender:
@@ -49,4 +49,4 @@ class BaseNotificationSender:
     def _check_not_night(self):
         """Проверить что сейчас не ночь. Учесть часовой пояс получателя."""
         user_tz = ZoneInfo(self.posting.user_info.timezone)
-        return not is_it_hight(datetime.now(tz=user_tz))
+        return not is_night(datetime.now(tz=user_tz))

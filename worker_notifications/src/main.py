@@ -2,15 +2,15 @@ import asyncio
 
 from aio_pika.abc import AbstractIncomingMessage
 
-import senders
 import senders.exceptions as sender_exc
 from mq.rabbitmq import get_notification_queue, get_rabbitmq
+from senders.pick import get_sender_by_posting
 
 
 async def on_message(message: AbstractIncomingMessage) -> None:
     """Пытаемся отправить сообщение по нужному каналу."""
     async with message.process():
-        sender_service = senders.get_sender_by_posting(message.body)
+        sender_service = get_sender_by_posting(message.body)
 
         try:
             sender_service.send()
