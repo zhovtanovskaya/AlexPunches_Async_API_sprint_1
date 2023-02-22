@@ -1,15 +1,11 @@
 """Подключение к Реббиту и декларирование очередей с обменниками."""
-import asyncio
 from typing import Any, Coroutine
 
 from aio_pika import connect
 from aio_pika.abc import (AbstractChannel, AbstractConnection, AbstractQueue,
                           ExchangeType)
-from aiormq import AMQPConnectionError
 
 from src.core.config import settings
-
-# from utils.backoff import backoff
 
 rabbitmq: AbstractConnection | None = None
 
@@ -18,10 +14,6 @@ class RabbitPingError(Exception):
     ...
 
 
-# @backoff(
-#     AMQPConnectionError, asyncio.exceptions.TimeoutError,
-#     _logger=logger,
-# )
 async def get_rabbitmq() -> AbstractConnection | None:
     """Подключиться к Реббиту."""
     global rabbitmq
