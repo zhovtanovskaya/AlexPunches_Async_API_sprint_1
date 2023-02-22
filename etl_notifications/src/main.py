@@ -17,18 +17,24 @@ async def startup():
     )
     await kafka.consumer.start()
 
-    connection = await rabbitmq.get_rabbitmq()
-    channel = await connection.channel()
+    rabbitmq.connection = await rabbitmq.get_rabbitmq()
+    channel = await rabbitmq.connection.channel()
     rabbitmq.exchange = await rabbitmq.get_notification_queue(channel)
 
 
 async def main():
-    await startup()
-    await etl()
+    try:
+        await startup()
+        await etl()
+    except KeyboardInterrupt:
+        await shutdown()
+
+
+async def shutdown():
+    await kafka.consumer.stop()
+    await rabbitmq.connection.close()
 
 
 if __name__ == '__main__':
-    try:
-        asyncio.run(main())
-    except KeyboardInterrupt:
-        pass
+    asyncio.run(main())
+

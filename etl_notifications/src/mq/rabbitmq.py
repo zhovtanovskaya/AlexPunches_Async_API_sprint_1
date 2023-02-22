@@ -1,7 +1,7 @@
 """Подключение к Реббиту и декларирование очередей с обменниками."""
 from typing import Any, Coroutine
 
-from aio_pika import connect
+from aio_pika import Connection, connect
 from aio_pika.abc import (AbstractChannel, AbstractConnection, AbstractQueue,
                           ExchangeType)
 
@@ -38,6 +38,7 @@ async def get_notification_queue(channel: AbstractChannel) -> AbstractQueue:
     return exchange
 
 
+connection: Connection
 exchange: Coroutine[Any, Any, AbstractQueue] = None
 
 
