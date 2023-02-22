@@ -7,13 +7,13 @@ from tests.unit.src.core.config import settings
 from tests.unit.src.extract.fixtures.events import UserSignedUpEvent
 
 
-class ReactionTestCase(unittest.IsolatedAsyncioTestCase):
+class ExtractTestCase(unittest.IsolatedAsyncioTestCase):
 
     async def asyncSetUp(self):
         self.consumer = AIOKafkaConsumer(
             settings.kafka.notifications_topic,
             bootstrap_servers=settings.kafka.bootstrap_servers,
-            group_id=settings.kafka.notifications_group_id,
+            group_id=settings.kafka.test_notifications_group_id,
         )
         await self.consumer.start()
         self.producer = AIOKafkaProducer(

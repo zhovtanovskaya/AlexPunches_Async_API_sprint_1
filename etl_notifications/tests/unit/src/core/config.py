@@ -7,7 +7,7 @@ class KafkaSettings(BaseSettings):
     notifications_topic: str
     event_store_host: IPv4Address | str
     event_store_port: int = 9092
-    notifications_group_id: str
+    test_notifications_group_id: str = 'test_notifications_group_id'
 
     @property
     def bootstrap_servers(self):
