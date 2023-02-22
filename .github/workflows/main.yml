@@ -33,7 +33,7 @@ jobs:
     - name: Get status
       if: ${{ always() }}
       run: |
-        if [[ job.status == 'failure' ]] then
+        if [[ job.status == 'failure' ]]; then
           echo "### Hello linters! :rocket:" >> $GITHUB_STEP_SUMMARY
         fi
 
@@ -101,7 +101,7 @@ jobs:
       - name: Get status
         if: ${{ always() }}
         run: |
-          if [[ job.status == 'failure' ]] then
+          if [[ job.status == 'failure' ]]; then
             echo "### Hello tests! :rocket:" >> $GITHUB_STEP_SUMMARY
           fi
 
