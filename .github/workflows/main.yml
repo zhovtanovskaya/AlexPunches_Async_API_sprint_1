@@ -107,9 +107,6 @@ jobs:
     name: Send Telegram message
     runs-on: ubuntu-latest
     steps:
-    - name: Get result
-      run: echo "result ${{ jobs.tests.result }}"
-
     - name: send action status
       if: "!contains(needs.*.result, 'failure')"
       uses: appleboy/telegram-action@master
