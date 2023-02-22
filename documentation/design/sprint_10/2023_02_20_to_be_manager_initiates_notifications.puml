@@ -1,0 +1,79 @@
+@startuml to_be
+!theme materia
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+skinparam maxmessagesize 60
+skinparam backgroundColor white
+
+title Менеджером иницированна рассылка
+
+note as Note
+  Пусть есть Admin UI,
+  где менеджер создал объект "Рассылка".
+
+  В ней следующие поля:
+    список получателей
+    шаблон
+    имена переменных в контексте и из значения
+    дата отправки
+    истечение актуальности рассылки
+
+  Когда придет время сделать рассылку,
+  менеджер нажмет кнопку "Разослать".
+  В ответ на это в Kafka появится
+  событие "Инициирована рассылка".
+end note
+
+class Event {
+  +id
+  +type = "manual_mailing"
+}
+
+package ETL {
+  class ManualMailingTransformer {
+    +__init__(auth_service, admin_ui_service)
+    +get_postings(event) -> AsyncGenerator[Posting]
+  }
+  class Loader {
+    +load(posting: Posting)
+  }
+  class EmailPosting {
+    +sender
+    +receiver
+    +bcc
+    +body
+  }
+  class SMSPosting {
+    +phone_number
+    +text
+  }
+}
+
+package Worker {
+  class EmailSender {
+    +send(posting: EmailPosting)
+    +batch_send(postings: list[EmailPosting]
+  }
+  class SMSSender {
+    +send(posting: SMSPosting)
+  }
+}
+
+package "Service Layer" {
+  class AuthService {
+    +get_receivers() -> AsyncGenerator[User]
+  }
+  class AdminUIService {
+    +get_mailing() -> Mailing
+  }
+  class Mailing {
+    +template_name: str
+    +template_context: dict
+    +receivers: QueryString
+  }
+}
+ManualMailingTransformer o--down-- AuthService
+ManualMailingTransformer o--down-- AdminUIService
+
+@enduml
+

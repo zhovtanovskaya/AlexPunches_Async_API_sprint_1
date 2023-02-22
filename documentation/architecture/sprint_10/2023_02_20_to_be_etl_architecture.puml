@@ -1,0 +1,46 @@
+@startuml to_be
+!theme materia
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+skinparam maxmessagesize 60
+skinparam backgroundColor white
+
+title Уведомления
+
+queue Kafka [
+  <b>Kafka
+  ----
+  Для событий
+  микросервисов.
+]
+component AutoEventsGenerator [
+  <b>Генератор 
+  автоматических
+  событий
+  ----
+  Шедулер, cron.
+]
+component NotificationsETL [
+  <b>ETL
+  ----
+  Потребляет события на 
+  создание уведомлений.
+]
+database PostingsDB [
+  <b>База или 
+  очередь 
+  отправлений
+  ----
+  Отправления,
+  которые потребляют
+  воркеры.
+]
+
+AutoEventsGenerator --down--> Kafka: "Создает автоматическое событие"
+[Auth] --right--> Kafka: "Пишет событие в Kafka."  
+NotificationsETL --left--> Kafka: "Читает события из Kafka."
+NotificationsETL -down-> PostingsDB: "Создает отправление типа Posting."
+[Worker] --up--> PostingsDB: Читает Posting.
+
+@enduml
+

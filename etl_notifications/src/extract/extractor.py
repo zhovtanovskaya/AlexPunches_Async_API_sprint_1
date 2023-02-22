@@ -1,13 +1,13 @@
 from typing import AsyncIterable
 
-from extract.models.protocols import Event
-from extract.models.user_events import UserCreatedEvent
+import orjson
+from aiokafka import AIOKafkaConsumer
+
+from src.extract.events.protocols import Event
+from src.extract.events.users import UserSignedUpEvent
 
 
-class Extractor:
-
-    async def extract(self) -> AsyncIterable[Event]:
-        counter = 1
-        while counter < 100:
-            yield UserCreatedEvent()
-            counter += 1
+async def extract(consumer: AIOKafkaConsumer) -> AsyncIterable[Event]:
+    async for event in consumer:
+        d = orjson.loads(event.value.decode())
+        yield UserSignedUpEvent(**d)
