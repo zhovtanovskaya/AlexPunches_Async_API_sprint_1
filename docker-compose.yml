@@ -163,6 +163,8 @@ services:
 
   worker_notifications:
     build: worker_notifications
+    volumes:
+      - /tmp/logs/worker_notifications/:/var/log/worker_notifications
     environment:
       NOTIFICATIONS_QUEUE_USER: ${NOTIFICATIONS_QUEUE_USER}
       NOTIFICATIONS_QUEUE_PASSWORD: ${NOTIFICATIONS_QUEUE_PASSWORD}
