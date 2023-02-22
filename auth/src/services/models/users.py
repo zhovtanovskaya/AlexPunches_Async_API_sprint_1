@@ -14,7 +14,7 @@ class UserBaseModel(BaseModel):
     password: str | None = None
     roles: list[service_role_models.RoleModel] = []
     active: bool | None = None
-    email_confirmation: bool | None = None
+    is_email_confirmed: bool | None = None
     confirmation_code: UUID | None = None
 
 
@@ -24,7 +24,7 @@ class UserModel(UserBaseModel):
     id: UUID
     email: EmailStr
     active: bool
-    email_confirmation: bool
+    is_email_confirmed: bool
 
     class Config:  # noqa
         orm_mode = True

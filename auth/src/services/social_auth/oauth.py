@@ -3,7 +3,7 @@ from typing import Mapping
 
 import services.social_auth as social_auth
 from core.exceptions import ResourceNotFoundError
-from db.db import db
+from db.postgres import db
 from services.social_account import SocialAccountService
 from utils import messages as msg
 

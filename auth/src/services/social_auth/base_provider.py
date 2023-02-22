@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from typing import Type
 from uuid import UUID
 
-from db.db import db
+from db.postgres import db
 from models.social_account import SocialAccount
 
 

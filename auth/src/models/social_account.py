@@ -3,7 +3,7 @@ import uuid
 
 from sqlalchemy.dialects.postgresql import UUID
 
-from db.db import db
+from db.postgres import db
 from models import BaseModel, User
 
 

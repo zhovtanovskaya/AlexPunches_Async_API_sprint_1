@@ -8,7 +8,7 @@ from sqlalchemy.inspection import inspect
 
 from core.config import config
 from core.exceptions import BasicExceptionError, ResourceNotFoundError
-from db.db import db
+from db.postgres import db
 from utils import messages as msg
 
 

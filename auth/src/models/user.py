@@ -4,7 +4,7 @@ import uuid
 
 from sqlalchemy.dialects.postgresql import UUID
 
-from db.db import db
+from db.postgres import db
 from models import BaseModel, roles_users
 
 
@@ -22,7 +22,7 @@ class User(BaseModel):
                    unique=True, nullable=False)
     email = db.Column(db.String, nullable=False, unique=True)
     active = db.Column(db.Boolean, default=True, nullable=False)
-    email_confirmation = db.Column(db.Boolean, default=False, nullable=True)
+    is_email_confirmed = db.Column(db.Boolean, default=False, nullable=True)
     password = db.Column(db.String, nullable=False)
     roles = db.relationship('Role', secondary=roles_users, lazy='subquery',
                             backref=db.backref('users', lazy='subquery'))

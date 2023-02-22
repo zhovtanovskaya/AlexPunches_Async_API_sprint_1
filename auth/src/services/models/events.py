@@ -3,7 +3,7 @@ from uuid import UUID
 from pydantic import BaseModel
 
 
-class WelcomUserEventModel(BaseModel):
+class UserSignedUpEventModel(BaseModel):
     id: UUID
     event_type: str = 'user_signed_up'
     priority: str = 'immediate'

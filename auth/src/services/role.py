@@ -3,7 +3,7 @@ from functools import lru_cache
 from typing import Type
 
 import services.models.roles as service_models
-from db.db import db
+from db.postgres import db
 from models import Role, User
 
 

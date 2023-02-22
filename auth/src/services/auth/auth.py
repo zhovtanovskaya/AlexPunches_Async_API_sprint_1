@@ -38,7 +38,7 @@ def get_comfirm_email_url_by_user(
 def email_confirmate(code: UUID) -> bool:
     """Подтвердить email."""
     if user := User.query.filter_by(confirmation_code=code).first():
-        user.email_confirmation = True
+        user.is_email_confirmed = True
         user.confirmation_code = None
         user.save()
         return True

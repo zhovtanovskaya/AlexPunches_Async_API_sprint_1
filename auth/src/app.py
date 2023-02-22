@@ -22,7 +22,7 @@ from api.v1.roles import roles
 from api.v1.users import users
 from core.config import config
 from core.exceptions import exceptions
-from db.db import db
+from db.postgres import db
 
 
 def configure_tracer() -> None:

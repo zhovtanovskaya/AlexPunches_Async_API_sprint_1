@@ -7,7 +7,7 @@ import services.models.users as service_user_models
 from core.config import config, logger
 from db.kafka_producer import get_producer
 from services.auth.auth import get_comfirm_email_url_by_user
-from services.models.events import WelcomUserEventModel
+from services.models.events import UserSignedUpEventModel
 from services.shortlink import ShortlinkService, get_shortlink_service
 from utils import messages as msg
 
@@ -21,7 +21,7 @@ class EventService:
         """Сервис зависит от Продюсера Кафки."""
         self.producer = producer
 
-    def send_event(self, event: WelcomUserEventModel) -> None:
+    def send_event(self, event: UserSignedUpEventModel) -> None:
         """Отправить событие в хранилище."""
         if self.producer is None:
             logger.info(msg.event_has_not_been_sent)
@@ -37,11 +37,11 @@ class EventService:
     @staticmethod
     def create_event_user_register(
         user: service_user_models.UserModel,
-    ) -> WelcomUserEventModel:
+    ) -> UserSignedUpEventModel:
         """Создать евент регистрации пользователя из модели пользователя."""
         confirm_link = get_comfirm_email_url_by_user(user)
         short_link = shortlink_service.create_shortlink(longlink=confirm_link)
-        return WelcomUserEventModel(
+        return UserSignedUpEventModel(
             id=user.id,
             details={
                 'email': user.email,

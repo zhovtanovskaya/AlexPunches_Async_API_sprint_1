@@ -69,7 +69,7 @@ class FakerData:
             id=fake.uuid4(),
             email=fake.email(),
             active=fake.pybool(),
-            email_confirmation=fake.pybool(),
+            is_email_confirmed=fake.pybool(),
             password=fake.password(length=10),
             confirmation_code=fake.uuid4(),
         ) for _ in range(self.COUNT_USERS)]
