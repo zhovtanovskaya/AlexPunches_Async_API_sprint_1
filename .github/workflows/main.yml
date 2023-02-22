@@ -130,3 +130,4 @@ jobs:
         format: markdown
         message: |
           ${{ github.repository }}: Pipeline for ${{ github.sha }} finished with error!
+          ${{ $GITHUB_STEP_SUMMARY }}
