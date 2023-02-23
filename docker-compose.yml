@@ -169,6 +169,8 @@ services:
     environment:
       NOTIFICATIONS_QUEUE_USER: ${NOTIFICATIONS_QUEUE_USER}
       NOTIFICATIONS_QUEUE_PASSWORD: ${NOTIFICATIONS_QUEUE_PASSWORD}
+      SMTP_USERNAME: ${SMTP_USERNAME}
+      SMTP_PASSWORD: ${SMTP_PASSWORD}
 
   etl_notifications:
     build: etl_notifications
