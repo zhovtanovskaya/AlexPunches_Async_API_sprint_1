@@ -19,15 +19,15 @@ class BaseNotificationSender:
         self.posting = posting
         raise NotImplementedError(msg.needs_method)
 
-    def send(self):
+    async def send(self):
         """Отправить сообщение.
 
         Обязательно для реализации в дочерних классах.
         """
-        self.check_permit(checkers=('deadline',))
+        await self.check_permit(checkers=('deadline',))
         raise NotImplementedError(msg.needs_method)
 
-    def check_permit(
+    async def check_permit(
               self,
               checkers: tuple = ('deadline', 'not_night'),
     ) -> bool:

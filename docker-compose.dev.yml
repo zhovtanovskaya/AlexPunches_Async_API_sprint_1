@@ -125,6 +125,14 @@ services:
       EVENT_STORE_HOST: ${EVENT_STORE_HOST}
       NOTIFICATIONS_GROUP_ID: ${NOTIFICATIONS_GROUP_ID}
 
+  mailhog:
+    image: mailhog/mailhog
+    logging:
+      driver: 'none'
+    ports:
+      - "1025:1025" # smtp server
+      - "8025:8025" # web ui
+
 volumes:
   service_static_value:
   service_media_value:
