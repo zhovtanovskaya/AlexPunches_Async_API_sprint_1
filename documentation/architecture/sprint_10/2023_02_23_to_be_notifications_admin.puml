@@ -1,0 +1,37 @@
+@startuml to_be
+!theme materia
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+skinparam maxmessagesize 70
+skinparam backgroundColor white
+
+title Админка для уведомлений
+
+component admin [
+  =Django Admin UI
+  ----
+  Интерфейс
+  менеджера.
+]
+component db [
+  =Postgres
+  ----
+  База с
+  рассылками.
+]
+component scheduler [
+  =Celery
+  ----
+  Фоновый процесс.
+]
+queue kafka [
+  =Kafka
+  ----
+  Очередь событий
+  для Notifications.
+]
+admin -right-> db: "Менеджер создает рассылку (Mailing)."
+scheduler -left-> db: "Проверяет рассылки."
+scheduler -down-> kafka: "Создает события для Notifications ETL в нужные моменты."
+
+@enduml
