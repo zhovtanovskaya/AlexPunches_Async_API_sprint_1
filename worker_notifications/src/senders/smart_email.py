@@ -18,12 +18,12 @@ class SmartEmailSender(BaseNotificationSender):
 
     async def send(self) -> None:
         await self.check_permit(checkers=('deadline', 'not_night'))
-        await self.send_with_smtp()
+        await self._send_with_smtp()
         logger.info(msg.email_sent, self.posting.user.email)
 
-    async def send_with_smtp(self) -> None:
+    async def _send_with_smtp(self) -> None:
         subject = msg.email_confirm_subject
-        text = self.render_mail_from_posting()
+        text = self._render_mail_from_posting()
 
         message = MIMEMultipart()
         message["From"] = config.smtp_from
@@ -41,7 +41,7 @@ class SmartEmailSender(BaseNotificationSender):
         await smtp_client.send_message(message)
         await smtp_client.quit()
 
-    def render_mail_from_posting(self) -> str:
+    def _render_mail_from_posting(self) -> str:
         # шаблоны скорее всего должны управляться админкой, но пока так...
         env = Environment(
             loader=FileSystemLoader(
