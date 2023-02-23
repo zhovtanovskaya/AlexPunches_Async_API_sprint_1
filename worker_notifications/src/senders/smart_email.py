@@ -13,13 +13,8 @@ from utils import messages as msg
 
 class SmartEmailSender(BaseNotificationSender):
 
-    def __init__(
-              self,
-              posting,
-              template_id: str = 'email_confirmation',
-    ):
+    def __init__(self, posting):
         self.posting = WelcomeEmailPosting.parse_raw(posting)
-        self.template_id = template_id
 
     async def send(self) -> None:
         await self.check_permit(checkers=('deadline', 'not_night'))
@@ -46,7 +41,7 @@ class SmartEmailSender(BaseNotificationSender):
         await smtp_client.send_message(message)
         await smtp_client.quit()
 
-    def render_mail_from_posting(self):
+    def render_mail_from_posting(self) -> str:
         # шаблоны скорее всего должны управляться админкой, но пока так...
         env = Environment(
             loader=FileSystemLoader(
