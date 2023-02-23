@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="985.4167px" preserveAspectRatio="none" style="width:767px;height:985px;background:#FFFFFF;" version="1.1" viewBox="0 0 767 985" width="767.7083px" zoomAndPan="magnify"><defs><linearGradient id="gfjha130t95fx0" x1="50%" x2="50%" y1="0%" y2="100%"><stop offset="0%" stop-color="#4DABF5"/><stop offset="100%" stop-color="#2196F3"/></linearGradient><filter height="300%" id="ffjha130t95fx" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0833333333333335"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.166666666666667" dy="4.166666666666667" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#FFFFFF" height="57.5846" id="_title" rx="4.1667" ry="4.1667" style="stroke:#CCCCCC;stroke-width:1.0416666666666667;" width="197.9167" x="280.2083" y="20.8333"/><text fill="#2196F3" font-family="&quot;Verdana&quot;" font-size="20.8333" font-weight="bold" lengthAdjust="spacing" textLength="164.5833" x="296.875" y="56.838">Уведомления</text><!--MD5=[59ceac3e1bb6f0ece56988f2042cffc2]
+entity Kafka--><g id="elem_Kafka"><path d="M245.3125,129.4596 L384.8958,129.4596 C390.1042,129.4596 390.1042,181.4941 390.1042,181.4941 C390.1042,181.4941 390.1042,233.5286 384.8958,233.5286 L245.3125,233.5286 C240.1042,233.5286 240.1042,181.4941 240.1042,181.4941 C240.1042,181.4941 240.1042,129.4596 245.3125,129.4596 " fill="url(#gfjha130t95fx0)" filter="url(#ffjha130t95fx)" style="stroke:#2196F3;stroke-width:1.0416666666666667;"/><path d="M384.8958,129.4596 C379.6875,129.4596 379.6875,181.4941 379.6875,181.4941 C379.6875,233.5286 384.8958,233.5286 384.8958,233.5286 " fill="none" style="stroke:#2196F3;stroke-width:1.0416666666666667;"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="12.5" font-weight="bold" lengthAdjust="spacing" textLength="41.6667" x="255.7292" y="156.6874">Kafka</text><line style="stroke:#2196F3;stroke-width:1.0416666666666667;" x1="241.1458" x2="379.7911" y1="170.0521" y2="170.0521"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="88.5417" x="255.7292" y="196.2382">Для событий</text><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="108.3333" x="255.7292" y="210.789">микросервисов.</text></g><!--MD5=[ccc263031916df1c0ef71863004f3e80]
+entity NotificationsETL--><g id="elem_NotificationsETL"><rect fill="url(#gfjha130t95fx0)" filter="url(#ffjha130t95fx)" height="168.6198" rx="4.1667" ry="4.1667" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="238.5417" x="511.4583" y="97.168"/><rect fill="url(#gfjha130t95fx0)" height="10.4167" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="15.625" x="729.1667" y="102.3763"/><rect fill="url(#gfjha130t95fx0)" height="2.0833" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="4.1667" x="727.0833" y="104.4596"/><rect fill="url(#gfjha130t95fx0)" height="2.0833" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="4.1667" x="727.0833" y="108.6263"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="12.5" font-weight="bold" lengthAdjust="spacing" textLength="25" x="537.5" y="140.0208">ETL</text><line style="stroke:#2196F3;stroke-width:1.0416666666666667;" x1="512.5" x2="748.9583" y1="153.3854" y2="153.3854"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="152.0833" x="537.5" y="179.5715">Для каждого события</text><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="176.0417" x="537.5" y="194.1223">формирует отправления.</text><line style="stroke:#2196F3;stroke-width:1.0416666666666667;" x1="512.5" x2="748.9583" y1="211.6536" y2="211.6536"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="107.2917" x="537.5" y="237.8398">etl_notifications/</text></g><!--MD5=[6ac17ab7955a1f93539d65fbac4bb370]
+entity PostingsDB--><g id="elem_PostingsDB"><path d="M528.6458,404.4596 C528.6458,394.043 630.7292,394.043 630.7292,394.043 C630.7292,394.043 732.8125,394.043 732.8125,404.4596 L732.8125,541.4388 C732.8125,551.8555 630.7292,551.8555 630.7292,551.8555 C630.7292,551.8555 528.6458,551.8555 528.6458,541.4388 L528.6458,404.4596 " fill="url(#gfjha130t95fx0)" filter="url(#ffjha130t95fx)" style="stroke:#2196F3;stroke-width:1.0416666666666667;"/><path d="M528.6458,404.4596 C528.6458,414.8763 630.7292,414.8763 630.7292,414.8763 C630.7292,414.8763 732.8125,414.8763 732.8125,404.4596 " fill="none" style="stroke:#2196F3;stroke-width:1.0416666666666667;"/><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="16.6667" font-weight="bold" lengthAdjust="spacing" textLength="89.5833" x="549.4792" y="444.93">RabbitMQ</text><path d="M528.6458,454.069 C528.6458,464.4857 630.7292,464.4857 630.7292,464.4857 C630.7292,464.4857 732.8125,464.4857 732.8125,454.069 " fill="none" style="stroke:#2196F3;stroke-width:1.0416666666666667;"/><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="158.3333" x="549.4792" y="485.4635">Отправления (Posting).</text><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="139.5833" x="549.4792" y="500.0142">Готовые к отправке</text><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="162.5" x="549.4792" y="514.565">каждому пользователю</text><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="92.7083" x="549.4792" y="529.1158">уведомления.</text></g><!--MD5=[823f69c0793ff4acbd80a559420afab7]
+entity Worker--><g id="elem_Worker"><rect fill="url(#gfjha130t95fx0)" filter="url(#ffjha130t95fx)" height="173.4049" rx="4.1667" ry="4.1667" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="226.0417" x="517.7083" y="795.0846"/><rect fill="url(#gfjha130t95fx0)" height="10.4167" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="15.625" x="722.9167" y="800.293"/><rect fill="url(#gfjha130t95fx0)" height="2.0833" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="4.1667" x="720.8333" y="802.3763"/><rect fill="url(#gfjha130t95fx0)" height="2.0833" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="4.1667" x="720.8333" y="806.543"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="16.6667" font-weight="bold" lengthAdjust="spacing" textLength="69.7917" x="543.75" y="841.805">Worker</text><line style="stroke:#2196F3;stroke-width:1.0416666666666667;" x1="518.75" x2="742.7083" y1="856.1523" y2="856.1523"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="148.9583" x="543.75" y="882.3385">Отправляет Posting-и</text><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="129.1667" x="543.75" y="896.8892">соответствующим</text><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="69.7917" x="543.75" y="911.44">способом:</text><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="163.5417" x="543.75" y="925.9908">EmailSender, SMSSender</text><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="12.5" x="543.75" y="940.5416">...</text></g><!--MD5=[39222abbbfd087a4fdab60e627dc976f]
+entity Auth--><g id="elem_Auth"><rect fill="url(#gfjha130t95fx0)" filter="url(#ffjha130t95fx)" height="66.6341" rx="4.1667" ry="4.1667" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="92.7083" x="17.7083" y="148.2096"/><rect fill="url(#gfjha130t95fx0)" height="10.4167" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="15.625" x="89.5833" y="153.418"/><rect fill="url(#gfjha130t95fx0)" height="2.0833" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="4.1667" x="87.5" y="155.5013"/><rect fill="url(#gfjha130t95fx0)" height="2.0833" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="4.1667" x="87.5" y="159.668"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="30.2083" x="43.75" y="191.0624">Auth</text></g><!--MD5=[48262d2be0b72ccd0a330d08906ecf89]
+link Auth to Kafka--><g id="link_Auth_Kafka"><path d="M110.6979,181.543 C145.3021,181.543 193.3542,181.543 234.1771,181.543 " fill="none" id="Auth-to-Kafka" style="stroke:#2196F3;stroke-width:3.125;"/><polygon fill="#2196F3" points="239.6354,181.543,230.2604,177.3763,234.4271,181.543,230.2604,185.7096,239.6354,181.543" style="stroke:#2196F3;stroke-width:3.125;"/><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="46.875" x="149.7396" y="135.8541">Пишет</text><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="70.8333" x="139.8438" y="150.4049">событие в</text><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="39.5833" x="155.4688" y="164.9556">Kafka.</text></g><!--MD5=[bc980d336349254705983b11cdbc3e6d]
+reverse link Kafka to NotificationsETL--><g id="link_Kafka_NotificationsETL"><path d="M395.875,181.543 C430.9792,181.543 472.8229,181.543 511.4063,181.543 " fill="none" id="Kafka-backto-NotificationsETL" style="stroke:#2196F3;stroke-width:3.125;"/><polygon fill="#2196F3" points="390.3021,181.543,399.6771,185.7096,395.5104,181.543,399.6771,177.3763,390.3021,181.543" style="stroke:#2196F3;stroke-width:3.125;"/><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="52.0833" x="422.6563" y="135.8541">Читает</text><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="58.3333" x="419.5313" y="150.4049">события</text><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="59.375" x="421.0938" y="164.9556">из Kafka.</text></g><!--MD5=[5e98b938e8153b33c207f6961d6e1454]
+link NotificationsETL to PostingsDB--><g id="link_NotificationsETL_PostingsDB"><path d="M630.7292,265.9596 C630.7292,304.3346 630.7292,349.7826 630.7292,388.2305 " fill="none" id="NotificationsETL-to-PostingsDB" style="stroke:#2196F3;stroke-width:3.125;"/><polygon fill="#2196F3" points="630.7292,393.8555,634.8958,384.4805,630.7292,388.6471,626.5625,384.4805,630.7292,393.8555" style="stroke:#2196F3;stroke-width:3.125;"/><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="59.375" x="657.8125" y="320.2291">Создает</text><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="57.2917" x="658.8542" y="334.7799">очередь</text><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="94.7917" x="642.1875" y="349.3306">отправлений.</text></g><!--MD5=[e30707c8c4ef0088441c31342983c8ca]
+reverse link PostingsDB to Worker--><g id="link_PostingsDB_Worker"><path d="M630.7292,557.9388 C630.7292,627.2201 630.7292,725.2721 630.7292,795.043 " fill="none" id="PostingsDB-backto-Worker" style="stroke:#2196F3;stroke-width:3.125;"/><polygon fill="#2196F3" points="630.7292,552.5846,626.5625,561.9596,630.7292,557.793,634.8958,561.9596,630.7292,552.5846" style="stroke:#2196F3;stroke-width:3.125;"/><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="52.0833" x="660.9375" y="671.2708">Читает</text><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="93.75" x="642.1875" y="685.8215">отправления.</text></g><!--MD5=[06011856e71a5560218409ca15a0d28d]
+@startuml
+!theme materia
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+skinparam maxmessagesize 70
+skinparam backgroundColor white
+
+title Уведомления
+
+queue Kafka [
+  <b>Kafka
+  - - - -
+  Для событий
+  микросервисов.
+]
+
+component NotificationsETL [
+  <b>ETL
+  - - - -
+  Для каждого события
+  формирует отправления.
+  - - - -
+  etl_notifications/
+]
+database PostingsDB [
+  =RabbitMQ
+  - - - -
+  Отправления (Posting). 
+  Готовые к отправке
+  каждому пользователю
+  уведомления.
+]
+component Worker [
+  =Worker
+  - - - -
+  Отправляет Posting-и
+  соответствующим
+  способом: 
+  EmailSender, SMSSender
+  ...
+]
+
+[Auth] - -right- -> Kafka: "Пишет событие в Kafka."  
+NotificationsETL - -left- -> Kafka: "Читает события из Kafka."
+NotificationsETL -down-> PostingsDB: "Создает очередь отправлений."
+Worker - -up- -> PostingsDB: "Читает отправления."
+@enduml
+
+@startuml
+
+
+
+skinparam backgroundColor transparent
+skinparam useBetaStyle false
+
+
+
+
+
+
+<style>
+  root {
+    BackgroundColor transparent
+    FontColor #FFF
+    HyperLinkColor #fd7e14
+    LineColor #1a78c2
+    LineThickness 1
+    Margin 10
+    Padding 6
+    Shadowing 0.0
+  }
+  node {
+   Padding 15
+   roundcorner 20
+   BackgroundColor #2196F3-#1a78c2
+  }
+  caption {
+    LineThickness 0
+  }
+  footer {
+    LineThickness 0
+  }
+  groupHeader {
+    BackgroundColor #fff
+    FontColor #9C27B0
+    FontStyle bold
+  }
+  header {
+    LineThickness 0
+  }
+  referenceHeader {
+    BackgroundColor transparent
+    FontColor #222
+    FontStyle bold
+  }
+  separator {
+    BackgroundColor #222
+    FontColor transparent
+    FontStyle bold
+  }
+  title {
+	FontSize 20
+	BorderRoundCorner            8
+	BorderThickness 	         1
+	BackgroundColor  #fff-#fff
+	FontColor #2196F3
+	BorderColor #fff
+  }
+  nwdiagDiagram {
+	network {
+			FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3    
+		LineColor #2196F3
+		LineThickness 1.0
+		FontColor #1a78c2
+	}
+	server {
+			FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	}
+	arrow {
+		FontColor #1a78c2
+		LineColor #1a78c2
+	}
+	group {
+		BackGroundColor #fff
+		LineColor $LIGHT_DARK
+		LineThickness 2.0
+		Margin 5
+		Padding 5
+	}
+  }
+  ganttDiagram {
+	task {
+			FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+		LineColor #2196F3
+		Margin 10
+		Padding 6
+	}
+	note {
+		FontColor #FFF
+		LineColor #7D1F8D
+		BackGroundColor #9C27B0
+	}
+	separator {
+		LineColor #fff
+		BackGroundColor #fff-#cccccc
+		FontColor #222
+	}
+	milestone {
+		FontColor #9C27B0
+		FontSize 16
+		FontStyle italic
+		BackGroundColor #fff
+		LineColor #cccccc
+	}
+	timeline {
+		BackgroundColor #fff
+		FontColor #222
+	}
+	closed {
+		BackgroundColor #CC7A00
+		FontColor #FFF
+	}
+  }
+</style>
+skinparam defaultFontName       "Verdana"
+skinparam defaultFontSize       12
+skinparam dpi                   100
+skinparam shadowing             true
+skinparam roundcorner           8
+skinparam ParticipantPadding    40
+skinparam BoxPadding            40
+skinparam Padding               10
+skinparam ArrowColor            #666
+skinparam stereotype {
+    CBackgroundColor #fff
+    CBorderColor #cccccc
+    ABackgroundColor #70bf73
+    ABorderColor #3D8C40
+    IBackgroundColor #B7161C
+    IBorderColor #b7161c
+    EBackgroundColor #ffad33
+    EBorderColor #CC7A00
+    NBackgroundColor #b052c0
+    NBorderColor #7D1F8D
+}
+skinparam title {
+	FontColor	                 #2196F3
+	BorderColor	                 #cccccc
+	FontSize	    	         20
+	BorderRoundCorner            8
+	BorderThickness 	         1
+	BackgroundColor              #fff-#fff
+}
+
+skinparam legend {
+	BackgroundColor #fff
+	BorderColor #cccccc
+	FontColor #222
+}
+
+skinparam swimlane {
+	BorderColor #9C27B0
+	BorderThickness 2
+	TitleBackgroundColor  #fff-#fff
+	TitleFontColor #2196F3
+}
+
+
+skinparam activity {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	BarColor #4CAF50
+	StartColor #9C27B0
+	EndColor #9C27B0
+	DiamondBackgroundColor #FFF-#fff
+  	DiamondBorderColor #cccccc
+	DiamondFontColor #222
+}
+
+
+skinparam participant {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	ParticipantBorderThickness 2
+}
+
+
+skinparam actor {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	FontColor #222
+}
+
+
+skinparam arrow {
+	Thickness 3
+	Color #2196F3
+	FontColor #222
+}
+
+
+skinparam sequence {
+	BorderColor #2196F3
+	TitleFontColor #2196F3
+	BackgroundColor transparent
+	StartColor #2196F3
+	EndColor #2196F3
+	BoxBackgroundColor #fff
+	BoxBorderColor #666
+	BoxFontColor #222
+	DelayFontColor #222
+	LifeLineBorderColor #cccccc
+	LifeLineBorderThickness 2
+	LifeLineBackgroundColor #fff
+	GroupBorderColor #666
+	GroupFontColor #222
+	GroupHeaderFontColor #9C27B0
+	DividerBackgroundColor #FFF-#fff
+    DividerBorderColor #666
+    DividerBorderThickness 2
+    DividerFontColor #222
+	ReferenceBackgroundColor transparent
+	ReferenceBorderColor #666
+	ReferenceFontColor #222
+	ReferenceHeaderFontColor #9C27B0
+	StereotypeFontColor #FFF
+}
+
+
+skinparam partition {
+	BorderColor #2196F3
+	FontColor #2196F3
+	BackgroundColor transparent
+}
+
+
+skinparam collections {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+}
+
+
+skinparam control {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	FontColor #222
+}
+
+
+skinparam entity {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	FontColor #222
+}
+
+
+skinparam boundary {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	FontColor #222
+}
+
+
+skinparam agent {
+	BackgroundColor #orange
+	BorderColor #999999
+	FontColor #333333
+}
+
+
+skinparam note {
+	BorderThickness 1
+	BackgroundColor #b052c0-#9C27B0
+	BorderColor #9C27B0
+	FontColor #FFF
+}
+
+
+skinparam artifact {
+	BackgroundColor #FFF-#fff
+	BorderColor #666
+	FontColor #666
+}
+
+
+skinparam component {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+}
+
+
+skinparam interface {
+	BackgroundColor  #B7161C
+	BorderColor  #e51c23
+	FontColor #222
+}
+
+
+skinparam storage {
+	BackgroundColor #ffad33-#ff9800
+  	BorderColor #ff9800
+	FontColor #FFF
+}
+
+
+skinparam node {
+	BackgroundColor #fff-#fff
+	BorderColor #222
+	FontColor #222
+}
+
+
+skinparam cloud {
+	BackgroundColor #F2FCFE-#eeeeee
+	BorderColor #F2FCFE
+	FontColor #222
+}
+
+
+skinparam database {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	FontColor #222
+}
+
+
+skinparam class {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	HeaderBackgroundColor #2196F3-#1a78c2
+	StereotypeFontColor #222
+	BorderThickness 1
+	AttributeFontColor #fff
+	AttributeFontSize 11
+}
+
+
+skinparam object {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	StereotypeFontColor #222
+	BorderThickness 1
+	AttributeFontColor #222
+	AttributeFontSize 11
+}
+
+
+skinparam usecase {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	BorderThickness 2
+	StereotypeFontColor #2196F3
+}
+
+
+skinparam rectangle {
+	FontColor #2196F3
+	BackgroundColor #fff-#fff
+	BorderThickness 2
+	StereotypeFontColor #2196F3
+}
+
+
+skinparam package {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	BackgroundColor #fff-#fff
+	BorderThickness 2
+}
+
+
+skinparam folder {
+	BackgroundColor #FFF-#fff
+  	BorderColor #ff9800
+	FontColor #ff9800
+	BorderThickness 2
+}
+
+
+skinparam frame {
+	BackgroundColor #FFF-#fff
+  	BorderColor #9C27B0
+	FontColor #9C27B0
+	BorderThickness 2
+}
+
+
+skinparam state {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	BorderColor #1a78c2
+	StartColor #9C27B0
+	EndColor #9C27B0
+	AttributeFontColor #222
+	AttributeFontSize 11
+}
+
+
+skinparam queue {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+}
+
+
+skinparam card {
+	BackgroundColor #b052c0-#9C27B0
+	BorderColor #9C27B0
+	FontColor #FFF
+}
+
+
+skinparam file {
+	BackgroundColor #fff-#fff
+	BorderColor #666
+	FontColor #666
+
+}
+
+
+skinparam stack {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+}
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+skinparam maxmessagesize 70
+skinparam backgroundColor white
+
+title Уведомления
+
+queue Kafka [
+  <b>Kafka
+  - - - -
+  Для событий
+  микросервисов.
+]
+
+component NotificationsETL [
+  <b>ETL
+  - - - -
+  Для каждого события
+  формирует отправления.
+  - - - -
+  etl_notifications/
+]
+database PostingsDB [
+  =RabbitMQ
+  - - - -
+  Отправления (Posting). 
+  Готовые к отправке
+  каждому пользователю
+  уведомления.
+]
+component Worker [
+  =Worker
+  - - - -
+  Отправляет Posting-и
+  соответствующим
+  способом: 
+  EmailSender, SMSSender
+  ...
+]
+
+[Auth] - -right- -> Kafka: "Пишет событие в Kafka."  
+NotificationsETL - -left- -> Kafka: "Читает события из Kafka."
+NotificationsETL -down-> PostingsDB: "Создает очередь отправлений."
+Worker - -up- -> PostingsDB: "Читает отправления."
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 17:01:30 UTC 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>

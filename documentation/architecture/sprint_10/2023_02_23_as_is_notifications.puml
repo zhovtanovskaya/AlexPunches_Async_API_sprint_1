@@ -1,0 +1,48 @@
+@startuml to_be
+!theme materia
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+skinparam maxmessagesize 70
+skinparam backgroundColor white
+
+title Уведомления
+
+queue Kafka [
+  <b>Kafka
+  ----
+  Для событий
+  микросервисов.
+]
+
+component NotificationsETL [
+  <b>ETL
+  ----
+  Для каждого события
+  формирует отправления.
+  ----
+  etl_notifications/
+]
+database PostingsDB [
+  =RabbitMQ
+  ----
+  Отправления (Posting).
+  Готовые к отправке
+  каждому пользователю
+  уведомления.
+]
+component Worker [
+  =Worker
+  ----
+  Отправляет Posting-и
+  соответствующим
+  способом:
+  EmailSender, SMSSender
+  ...
+]
+
+[Auth] --right--> Kafka: "Пишет событие в Kafka."
+NotificationsETL --left--> Kafka: "Читает события из Kafka."
+NotificationsETL -down-> PostingsDB: "Создает очередь отправлений."
+Worker --up--> PostingsDB: "Читает отправления."
+
+@enduml

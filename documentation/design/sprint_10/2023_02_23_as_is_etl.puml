@@ -1,0 +1,39 @@
+@startuml to_be
+!theme materia
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+skinparam backgroundColor white
+
+title ETL
+
+participant "etl()" as etl
+participant "extractor" as extractor
+participant transformer [
+  =Transformer
+  ----
+  Преобразует
+  конкретное событие
+  в отвечающие ему
+  отправления.
+]
+participant auth_service [
+  =AuthService
+  ----
+  Обертка для Auth.
+  Обращается за
+  данными к API
+  микросервиса
+  Auth по HTTP.
+]
+
+etl -> extractor : ".extract()"
+extractor --> etl: "event: Event"
+etl -> transformer: ".make_postings(event: Event)"
+activate transformer
+transformer -> auth_service: ".get_user_details()"
+auth_service --> transformer:
+
+transformer --> etl: "AsyncGenerator[Posting]"
+deactivate transformer
+
+@enduml
