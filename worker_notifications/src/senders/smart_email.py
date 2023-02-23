@@ -1,7 +1,9 @@
+import os
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
 from aiosmtplib import SMTP
+from jinja2 import Environment, FileSystemLoader
 
 from core.config import config, logger
 from senders.base import BaseNotificationSender
@@ -21,24 +23,19 @@ class SmartEmailSender(BaseNotificationSender):
 
     async def send(self) -> None:
         await self.check_permit(checkers=('deadline', 'not_night'))
-
-        await self.send_with_smtp(to=self.posting.user.email)
+        await self.send_with_smtp()
         logger.info(msg.email_sent, self.posting.user.email)
 
-    async def send_with_smtp(
-              self,
-              to: str,
-              subject: str | None = None,
-    ):
-        if subject is None:
-            subject = msg.email_confirm_subject
-        message = MIMEMultipart("alternative")
+    async def send_with_smtp(self) -> None:
+        subject = msg.email_confirm_subject
+        text = self.render_mail_from_posting()
+
+        message = MIMEMultipart()
         message["From"] = config.smtp_from
-        message["To"] = to
+        message["To"] = self.posting.user.email
         message["Subject"] = subject
 
-        message.attach(MIMEText("hello", "plain", "utf-8"))
-        message.attach(MIMEText("<html><body><h1>Hello</h1></body></html>", "html", "utf-8"))
+        message.attach(MIMEText(text, "html", "utf-8"))
         smtp_client = SMTP(
             hostname=config.smtp_host,
             port=config.smtp_port,
@@ -48,3 +45,13 @@ class SmartEmailSender(BaseNotificationSender):
         await smtp_client.connect()
         await smtp_client.send_message(message)
         await smtp_client.quit()
+
+    def render_mail_from_posting(self):
+        # шаблоны скорее всего должны управляться админкой, но пока так...
+        env = Environment(
+            loader=FileSystemLoader(
+                '%s/templates/' % os.path.dirname(os.path.dirname(__file__))
+            )
+        )
+        template = env.get_template('email_confirmation.html')
+        return template.render(posting=self.posting)
