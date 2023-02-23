@@ -13,7 +13,7 @@ async def on_message(message: AbstractIncomingMessage) -> None:
         sender_service = get_sender_by_posting(message.body)
 
         try:
-            sender_service.send()
+            await sender_service.send()
         except sender_exc.TimeOfDayNotifyError:
             await message.nack(requeue=False)
         except sender_exc.DeadlineNotifyError:

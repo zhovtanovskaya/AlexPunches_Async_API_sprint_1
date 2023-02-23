@@ -115,6 +115,8 @@ services:
     environment:
       NOTIFICATIONS_QUEUE_USER: ${NOTIFICATIONS_QUEUE_USER}
       NOTIFICATIONS_QUEUE_PASSWORD: ${NOTIFICATIONS_QUEUE_PASSWORD}
+      SMTP_USERNAME: ${SMTP_USERNAME}
+      SMTP_PASSWORD: ${SMTP_PASSWORD}
 
   etl_notifications:
     build: etl_notifications
@@ -124,6 +126,14 @@ services:
       NOTIFICATIONS_TOPIC: ${NOTIFICATIONS_TOPIC}
       EVENT_STORE_HOST: ${EVENT_STORE_HOST}
       NOTIFICATIONS_GROUP_ID: ${NOTIFICATIONS_GROUP_ID}
+
+  mailhog:
+    image: mailhog/mailhog
+    logging:
+      driver: 'none'
+    ports:
+      - "1025:1025"
+      - "8025:8025"
 
 volumes:
   service_static_value:

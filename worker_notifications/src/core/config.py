@@ -39,6 +39,11 @@ class WorkerSettings(BaseSettings):
     def_timezone: str = 'Europe/Moscow'
     night_start_hour: int = Field(22, ge=0, le=24)
     night_stop_hour: int = Field(8, ge=0, le=24)
+    smtp_host: str = 'localhost'
+    smtp_port: str = '1025'
+    smtp_from: str = 'email@email.email'
+    smtp_username: str = 'root'
+    smtp_password: str = 'root'
 
 
 @lru_cache()
