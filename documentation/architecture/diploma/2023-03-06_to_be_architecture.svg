@@ -1,0 +1,562 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="787.5px" preserveAspectRatio="none" style="width:679px;height:787px;background:#FFFFFF;" version="1.1" viewBox="0 0 679 787" width="679.1667px" zoomAndPan="magnify"><defs><linearGradient id="gz0lyf07wl9y90" x1="50%" x2="50%" y1="0%" y2="100%"><stop offset="0%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#FFFFFF"/></linearGradient><filter height="300%" id="fz0lyf07wl9y9" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0833333333333335"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.166666666666667" dy="4.166666666666667" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter><linearGradient id="gz0lyf07wl9y91" x1="50%" x2="50%" y1="0%" y2="100%"><stop offset="0%" stop-color="#4DABF5"/><stop offset="100%" stop-color="#2196F3"/></linearGradient></defs><g><rect fill="#FFFFFF" height="57.5846" id="_title" rx="4.1667" ry="4.1667" style="stroke:#CCCCCC;stroke-width:1.0416666666666667;" width="303.125" x="183.3333" y="20.8333"/><text fill="#2196F3" font-family="&quot;Verdana&quot;" font-size="20.8333" font-weight="bold" lengthAdjust="spacing" textLength="269.7917" x="200" y="56.838">Совместный просмотр</text><!--MD5=[61229934f089374b2120aa0c404e4eef]
+cluster Кино вместе--><g id="cluster_Кино вместе"><rect fill="url(#gz0lyf07wl9y90)" filter="url(#fz0lyf07wl9y9)" height="196.875" rx="4.1667" ry="4.1667" style="stroke:#2196F3;stroke-width:2.0833333333333335;" width="469.7917" x="191.6667" y="340.918"/><text fill="#2196F3" font-family="&quot;Verdana&quot;" font-size="20.8333" font-weight="bold" lengthAdjust="spacing" textLength="152.0833" x="350.5208" y="372.7559">Кино вместе</text></g><!--MD5=[f3a8924489bc837fbb87a4e0f51db4ce]
+entity movie_mates--><g id="elem_movie_mates"><rect fill="url(#gz0lyf07wl9y91)" filter="url(#fz0lyf07wl9y9)" height="100.5859" rx="4.1667" ry="4.1667" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="200" x="444.7917" y="412.793"/><rect fill="url(#gz0lyf07wl9y91)" height="10.4167" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="15.625" x="623.9583" y="418.0013"/><rect fill="url(#gz0lyf07wl9y91)" height="2.0833" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="4.1667" x="621.875" y="420.0846"/><rect fill="url(#gz0lyf07wl9y91)" height="2.0833" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="4.1667" x="621.875" y="424.2513"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="16.6667" font-weight="bold" lengthAdjust="spacing" textLength="137.5" x="470.8333" y="459.5133">"Кино вместе"</text><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="70.8333" x="470.8333" y="475.0468">Публикует</text><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="34.375" x="470.8333" y="489.5976">в БД.</text></g><!--MD5=[aa298b68aac876a6eef5f32c3c2e3e6b]
+entity movie_mates_2--><g id="elem_movie_mates_2"><rect fill="url(#gz0lyf07wl9y91)" filter="url(#fz0lyf07wl9y9)" height="115.1367" rx="4.1667" ry="4.1667" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="200" x="208.3333" y="405.5013"/><rect fill="url(#gz0lyf07wl9y91)" height="10.4167" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="15.625" x="387.5" y="410.7096"/><rect fill="url(#gz0lyf07wl9y91)" height="2.0833" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="4.1667" x="385.4167" y="412.793"/><rect fill="url(#gz0lyf07wl9y91)" height="2.0833" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="4.1667" x="385.4167" y="416.9596"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="16.6667" font-weight="bold" lengthAdjust="spacing" textLength="137.5" x="234.375" y="452.2217">"Кино вместе"</text><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="73.9583" x="234.375" y="467.7551">Подписчик</text><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="79.1667" x="234.375" y="482.3059">на события</text><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="42.7083" x="234.375" y="496.8567">из БД.</text></g><!--MD5=[566d030539b723e971a6f8b3c93ccf7b]
+entity commands_db--><g id="elem_commands_db"><path d="M366.1458,647.168 C366.1458,636.7513 436.4583,636.7513 436.4583,636.7513 C436.4583,636.7513 506.7708,636.7513 506.7708,647.168 L506.7708,755.0456 C506.7708,765.4622 436.4583,765.4622 436.4583,765.4622 C436.4583,765.4622 366.1458,765.4622 366.1458,755.0456 L366.1458,647.168 " fill="url(#gz0lyf07wl9y91)" filter="url(#fz0lyf07wl9y9)" style="stroke:#2196F3;stroke-width:1.0416666666666667;"/><path d="M366.1458,647.168 C366.1458,657.5846 436.4583,657.5846 436.4583,657.5846 C436.4583,657.5846 506.7708,657.5846 506.7708,647.168 " fill="none" style="stroke:#2196F3;stroke-width:1.0416666666666667;"/><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="16.6667" font-weight="bold" lengthAdjust="spacing" textLength="27.0833" x="386.9792" y="687.6383">БД</text><path d="M366.1458,696.7773 C366.1458,707.194 436.4583,707.194 436.4583,707.194 C436.4583,707.194 506.7708,707.194 506.7708,696.7773 " fill="none" style="stroke:#2196F3;stroke-width:1.0416666666666667;"/><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="80.2083" x="386.9792" y="728.1718">Для команд</text><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="98.9583" x="386.9792" y="742.7226">видео-плеера.</text></g><!--MD5=[6a992b358a967aacccec65b9cdf2e5e6]
+entity video_player--><g id="elem_video_player"><rect fill="url(#gz0lyf07wl9y91)" filter="url(#fz0lyf07wl9y9)" height="129.7526" rx="4.1667" ry="4.1667" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="177.0833" x="456.25" y="97.168"/><rect fill="url(#gz0lyf07wl9y91)" height="10.4167" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="15.625" x="612.5" y="102.3763"/><rect fill="url(#gz0lyf07wl9y91)" height="2.0833" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="4.1667" x="610.4167" y="104.4596"/><rect fill="url(#gz0lyf07wl9y91)" height="2.0833" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="4.1667" x="610.4167" y="108.6263"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="16.6667" font-weight="bold" lengthAdjust="spacing" textLength="114.5833" x="482.2917" y="143.8883">Video Player</text><line style="stroke:#2196F3;stroke-width:1.0416666666666667;" x1="457.2917" x2="632.2917" y1="158.2357" y2="158.2357"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="91.6667" x="482.2917" y="184.4218">Огранизатор</text><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="80.2083" x="482.2917" y="198.9726">просмотра.</text></g><!--MD5=[2c09f5a0122c03891b8af32cbac95be6]
+entity video_player_2--><g id="elem_video_player_2"><rect fill="url(#gz0lyf07wl9y91)" filter="url(#fz0lyf07wl9y9)" height="115.2018" rx="4.1667" ry="4.1667" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="177.0833" x="231.25" y="104.4596"/><rect fill="url(#gz0lyf07wl9y91)" height="10.4167" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="15.625" x="387.5" y="109.668"/><rect fill="url(#gz0lyf07wl9y91)" height="2.0833" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="4.1667" x="385.4167" y="111.7513"/><rect fill="url(#gz0lyf07wl9y91)" height="2.0833" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="4.1667" x="385.4167" y="115.918"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="16.6667" font-weight="bold" lengthAdjust="spacing" textLength="114.5833" x="257.2917" y="151.18">Video Player</text><line style="stroke:#2196F3;stroke-width:1.0416666666666667;" x1="232.2917" x2="407.2917" y1="165.5273" y2="165.5273"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="43.75" x="257.2917" y="191.7135">Гость.</text></g><!--MD5=[113de7946b4be14aa2f75cf4314129ac]
+entity video_player_3--><g id="elem_video_player_3"><rect fill="url(#gz0lyf07wl9y91)" filter="url(#fz0lyf07wl9y9)" height="115.2018" rx="4.1667" ry="4.1667" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="177.0833" x="17.7083" y="104.4596"/><rect fill="url(#gz0lyf07wl9y91)" height="10.4167" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="15.625" x="173.9583" y="109.668"/><rect fill="url(#gz0lyf07wl9y91)" height="2.0833" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="4.1667" x="171.875" y="111.7513"/><rect fill="url(#gz0lyf07wl9y91)" height="2.0833" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="4.1667" x="171.875" y="115.918"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="16.6667" font-weight="bold" lengthAdjust="spacing" textLength="114.5833" x="43.75" y="151.18">Video Player</text><line style="stroke:#2196F3;stroke-width:1.0416666666666667;" x1="18.75" x2="193.75" y1="165.5273" y2="165.5273"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="43.75" x="43.75" y="191.7135">Гость.</text></g><!--MD5=[d2db0d6564df75f98555c87075be7ce5]
+link movie_mates to commands_db--><g id="link_movie_mates_commands_db"><path codeLine="29" d="M521.9479,514.1055 C506.2604,548.2617 485.2396,594.043 467.9688,631.668 " fill="none" id="movie_mates-to-commands_db" style="stroke:#2196F3;stroke-width:3.125;"/><polygon fill="#2196F3" points="465.6667,636.6784,473.365,629.897,467.8398,631.9451,465.7917,626.4199,465.6667,636.6784" style="stroke:#2196F3;stroke-width:3.125;"/><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="75" x="519.7917" y="584.8124">Публикует.</text><path d="M505.3194,567.9656 A10.4167,10.4167 0 0 0 491.9318 561.8186" fill="none" style="stroke:#2196F3;stroke-width:1.5625;"/><ellipse cx="495.5521" cy="571.5859" fill="#FFFFFF" rx="6.25" ry="6.25" style="stroke:#2196F3;stroke-width:1.5625;"/></g><!--MD5=[0ff636114dcc49b48b9d63546d171452]
+link movie_mates_2 to commands_db--><g id="link_movie_mates_2_commands_db"><path codeLine="30" d="M328.3021,521.4701 C338.4063,547.7617 351.6979,578.9388 366.6667,605.5013 C372.5417,615.918 379.3646,626.5221 386.4167,636.6888 " fill="none" id="movie_mates_2-commands_db" style="stroke:#2196F3;stroke-width:3.125;"/><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="68.75" x="385.4167" y="584.8124">Получает.</text><path d="M349.3677,553.6496 A10.4167,10.4167 0 0 0 335.9256 559.6766" fill="none" style="stroke:#2196F3;stroke-width:1.5625;"/><ellipse cx="345.6602" cy="563.3841" fill="#FFFFFF" rx="6.25" ry="6.25" style="stroke:#2196F3;stroke-width:1.5625;"/></g><!--MD5=[6b5fe7a07ea52e0ba7c4528fe4634f5d]
+link video_player to movie_mates--><g id="link_video_player_movie_mates"><path codeLine="48" d="M544.7917,227.4492 C544.7917,280.918 544.7917,356.293 544.7917,407.1055 " fill="none" id="video_player-to-movie_mates" style="stroke:#2196F3;stroke-width:3.125;"/><polygon fill="#2196F3" points="544.7917,412.5534,548.9583,403.1784,544.7917,407.3451,540.625,403.1784,544.7917,412.5534" style="stroke:#2196F3;stroke-width:3.125;"/><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="67.7083" x="563.5417" y="288.9791">Посылает</text><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="64.5833" x="567.1875" y="303.5299">команды.</text><ellipse cx="544.7917" cy="318.2734" fill="#FFFFFF" rx="6.25" ry="6.25" style="stroke:#2196F3;stroke-width:1.5625;"/></g><!--MD5=[42b6b144dced73d07b40c283731a7bc1]
+reverse link video_player_2 to movie_mates_2--><g id="link_video_player_2_movie_mates_2"><path codeLine="49" d="M317.4063,225.6159 C315.375,278.4701 312.5,353.6784 310.5313,405.043 " fill="none" id="video_player_2-backto-movie_mates_2" style="stroke:#2196F3;stroke-width:3.125;"/><polygon fill="#2196F3" points="317.6146,220.2513,313.1028,229.4652,317.4213,225.456,321.4304,229.7745,317.6146,220.2513" style="stroke:#2196F3;stroke-width:3.125;"/><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="83.3333" x="335.4167" y="288.9791">Отправляет</text><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="64.5833" x="344.7917" y="303.5299">команды.</text><ellipse cx="313.9453" cy="315.888" fill="#FFFFFF" rx="6.25" ry="6.25" style="stroke:#2196F3;stroke-width:1.5625;"/></g><!--MD5=[26b56e0bf3e53d5b7454479aed4cc1de]
+reverse link video_player_3 to movie_mates_2--><g id="link_video_player_3_movie_mates_2"><path codeLine="50" d="M131.8542,225.0117 C145.8333,255.9076 164.5417,293.2305 185.4167,324.2513 C204.5833,352.7305 229.2083,381.5221 251.3646,405.3763 " fill="none" id="video_player_3-backto-movie_mates_2" style="stroke:#2196F3;stroke-width:3.125;"/><polygon fill="#2196F3" points="129.6458,220.1055,129.6666,230.3647,131.7708,224.8606,137.2749,226.9648,129.6458,220.1055" style="stroke:#2196F3;stroke-width:3.125;"/><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="83.3333" x="204.1667" y="288.9791">Отправляет</text><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="64.5833" x="213.5417" y="303.5299">команды.</text><ellipse cx="185.4167" cy="324.2513" fill="#FFFFFF" rx="6.25" ry="6.25" style="stroke:#2196F3;stroke-width:1.5625;"/></g><!--MD5=[be32833247ba6fd31f06c3b9f768331f]
+@startuml
+!theme materia
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+skinparam maxmessagesize 70
+skinparam backgroundColor white
+
+title Совместный просмотр
+
+database commands_db [
+  =БД 
+  - - - -
+  Для команд
+  видео-плеера.
+]
+
+package "Кино вместе" {
+  component movie_mates [
+    ="Кино вместе"
+    Публикует
+    в БД.
+  ]
+  component movie_mates_2 [
+    ="Кино вместе"
+    Подписчик
+    на события
+    из БД.
+  ]  
+}
+movie_mates -(0-> commands_db: "Публикует."
+movie_mates_2 -(0- commands_db: "Получает."
+
+component video_player [
+  =Video Player
+  - - - -
+  Огранизатор
+  просмотра.
+]
+component video_player_2 [
+  =Video Player
+  - - - -
+  Гость.
+]
+component video_player_3 [
+  =Video Player
+  - - - -
+  Гость.
+]
+video_player -0-> movie_mates: "Посылает команды."
+movie_mates_2 -up0-> video_player_2: "Отправляет команды."
+movie_mates_2 -up0-> video_player_3: "Отправляет команды."
+@enduml
+
+@startuml
+
+
+
+skinparam backgroundColor transparent
+skinparam useBetaStyle false
+
+
+
+
+
+
+<style>
+  root {
+    BackgroundColor transparent
+    FontColor #FFF
+    HyperLinkColor #fd7e14
+    LineColor #1a78c2
+    LineThickness 1
+    Margin 10
+    Padding 6
+    Shadowing 0.0
+  }
+  node {
+   Padding 15
+   roundcorner 20
+   BackgroundColor #2196F3-#1a78c2
+  }
+  caption {
+    LineThickness 0
+  }
+  footer {
+    LineThickness 0
+  }
+  groupHeader {
+    BackgroundColor #fff
+    FontColor #9C27B0
+    FontStyle bold
+  }
+  header {
+    LineThickness 0
+  }
+  referenceHeader {
+    BackgroundColor transparent
+    FontColor #222
+    FontStyle bold
+  }
+  separator {
+    BackgroundColor #222
+    FontColor transparent
+    FontStyle bold
+  }
+  title {
+	FontSize 20
+	BorderRoundCorner            8
+	BorderThickness 	         1
+	BackgroundColor  #fff-#fff
+	FontColor #2196F3
+	BorderColor #fff
+  }
+  nwdiagDiagram {
+	network {
+			FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3    
+		LineColor #2196F3
+		LineThickness 1.0
+		FontColor #1a78c2
+	}
+	server {
+			FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	}
+	arrow {
+		FontColor #1a78c2
+		LineColor #1a78c2
+	}
+	group {
+		BackGroundColor #fff
+		LineColor $LIGHT_DARK
+		LineThickness 2.0
+		Margin 5
+		Padding 5
+	}
+  }
+  ganttDiagram {
+	task {
+			FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+		LineColor #2196F3
+		Margin 10
+		Padding 6
+	}
+	note {
+		FontColor #FFF
+		LineColor #7D1F8D
+		BackGroundColor #9C27B0
+	}
+	separator {
+		LineColor #fff
+		BackGroundColor #fff-#cccccc
+		FontColor #222
+	}
+	milestone {
+		FontColor #9C27B0
+		FontSize 16
+		FontStyle italic
+		BackGroundColor #fff
+		LineColor #cccccc
+	}
+	timeline {
+		BackgroundColor #fff
+		FontColor #222
+	}
+	closed {
+		BackgroundColor #CC7A00
+		FontColor #FFF
+	}
+  }
+</style>
+skinparam defaultFontName       "Verdana"
+skinparam defaultFontSize       12
+skinparam dpi                   100
+skinparam shadowing             true
+skinparam roundcorner           8
+skinparam ParticipantPadding    40
+skinparam BoxPadding            40
+skinparam Padding               10
+skinparam ArrowColor            #666
+skinparam stereotype {
+    CBackgroundColor #fff
+    CBorderColor #cccccc
+    ABackgroundColor #70bf73
+    ABorderColor #3D8C40
+    IBackgroundColor #B7161C
+    IBorderColor #b7161c
+    EBackgroundColor #ffad33
+    EBorderColor #CC7A00
+    NBackgroundColor #b052c0
+    NBorderColor #7D1F8D
+}
+skinparam title {
+	FontColor	                 #2196F3
+	BorderColor	                 #cccccc
+	FontSize	    	         20
+	BorderRoundCorner            8
+	BorderThickness 	         1
+	BackgroundColor              #fff-#fff
+}
+
+skinparam legend {
+	BackgroundColor #fff
+	BorderColor #cccccc
+	FontColor #222
+}
+
+skinparam swimlane {
+	BorderColor #9C27B0
+	BorderThickness 2
+	TitleBackgroundColor  #fff-#fff
+	TitleFontColor #2196F3
+}
+
+
+skinparam activity {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	BarColor #4CAF50
+	StartColor #9C27B0
+	EndColor #9C27B0
+	DiamondBackgroundColor #FFF-#fff
+  	DiamondBorderColor #cccccc
+	DiamondFontColor #222
+}
+
+
+skinparam participant {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	ParticipantBorderThickness 2
+}
+
+
+skinparam actor {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	FontColor #222
+}
+
+
+skinparam arrow {
+	Thickness 3
+	Color #2196F3
+	FontColor #222
+}
+
+
+skinparam sequence {
+	BorderColor #2196F3
+	TitleFontColor #2196F3
+	BackgroundColor transparent
+	StartColor #2196F3
+	EndColor #2196F3
+	BoxBackgroundColor #fff
+	BoxBorderColor #666
+	BoxFontColor #222
+	DelayFontColor #222
+	LifeLineBorderColor #cccccc
+	LifeLineBorderThickness 2
+	LifeLineBackgroundColor #fff
+	GroupBorderColor #666
+	GroupFontColor #222
+	GroupHeaderFontColor #9C27B0
+	DividerBackgroundColor #FFF-#fff
+    DividerBorderColor #666
+    DividerBorderThickness 2
+    DividerFontColor #222
+	ReferenceBackgroundColor transparent
+	ReferenceBorderColor #666
+	ReferenceFontColor #222
+	ReferenceHeaderFontColor #9C27B0
+	StereotypeFontColor #FFF
+}
+
+
+skinparam partition {
+	BorderColor #2196F3
+	FontColor #2196F3
+	BackgroundColor transparent
+}
+
+
+skinparam collections {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+}
+
+
+skinparam control {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	FontColor #222
+}
+
+
+skinparam entity {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	FontColor #222
+}
+
+
+skinparam boundary {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	FontColor #222
+}
+
+
+skinparam agent {
+	BackgroundColor #orange
+	BorderColor #999999
+	FontColor #333333
+}
+
+
+skinparam note {
+	BorderThickness 1
+	BackgroundColor #b052c0-#9C27B0
+	BorderColor #9C27B0
+	FontColor #FFF
+}
+
+
+skinparam artifact {
+	BackgroundColor #FFF-#fff
+	BorderColor #666
+	FontColor #666
+}
+
+
+skinparam component {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+}
+
+
+skinparam interface {
+	BackgroundColor  #B7161C
+	BorderColor  #e51c23
+	FontColor #222
+}
+
+
+skinparam storage {
+	BackgroundColor #ffad33-#ff9800
+  	BorderColor #ff9800
+	FontColor #FFF
+}
+
+
+skinparam node {
+	BackgroundColor #fff-#fff
+	BorderColor #222
+	FontColor #222
+}
+
+
+skinparam cloud {
+	BackgroundColor #F2FCFE-#eeeeee
+	BorderColor #F2FCFE
+	FontColor #222
+}
+
+
+skinparam database {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	FontColor #222
+}
+
+
+skinparam class {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	HeaderBackgroundColor #2196F3-#1a78c2
+	StereotypeFontColor #222
+	BorderThickness 1
+	AttributeFontColor #fff
+	AttributeFontSize 11
+}
+
+
+skinparam object {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	StereotypeFontColor #222
+	BorderThickness 1
+	AttributeFontColor #222
+	AttributeFontSize 11
+}
+
+
+skinparam usecase {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	BorderThickness 2
+	StereotypeFontColor #2196F3
+}
+
+
+skinparam rectangle {
+	FontColor #2196F3
+	BackgroundColor #fff-#fff
+	BorderThickness 2
+	StereotypeFontColor #2196F3
+}
+
+
+skinparam package {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	BackgroundColor #fff-#fff
+	BorderThickness 2
+}
+
+
+skinparam folder {
+	BackgroundColor #FFF-#fff
+  	BorderColor #ff9800
+	FontColor #ff9800
+	BorderThickness 2
+}
+
+
+skinparam frame {
+	BackgroundColor #FFF-#fff
+  	BorderColor #9C27B0
+	FontColor #9C27B0
+	BorderThickness 2
+}
+
+
+skinparam state {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	BorderColor #1a78c2
+	StartColor #9C27B0
+	EndColor #9C27B0
+	AttributeFontColor #222
+	AttributeFontSize 11
+}
+
+
+skinparam queue {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+}
+
+
+skinparam card {
+	BackgroundColor #b052c0-#9C27B0
+	BorderColor #9C27B0
+	FontColor #FFF
+}
+
+
+skinparam file {
+	BackgroundColor #fff-#fff
+	BorderColor #666
+	FontColor #666
+
+}
+
+
+skinparam stack {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+}
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+skinparam maxmessagesize 70
+skinparam backgroundColor white
+
+title Совместный просмотр
+
+database commands_db [
+  =БД 
+  - - - -
+  Для команд
+  видео-плеера.
+]
+
+package "Кино вместе" {
+  component movie_mates [
+    ="Кино вместе"
+    Публикует
+    в БД.
+  ]
+  component movie_mates_2 [
+    ="Кино вместе"
+    Подписчик
+    на события
+    из БД.
+  ]  
+}
+movie_mates -(0-> commands_db: "Публикует."
+movie_mates_2 -(0- commands_db: "Получает."
+
+component video_player [
+  =Video Player
+  - - - -
+  Огранизатор
+  просмотра.
+]
+component video_player_2 [
+  =Video Player
+  - - - -
+  Гость.
+]
+component video_player_3 [
+  =Video Player
+  - - - -
+  Гость.
+]
+video_player -0-> movie_mates: "Посылает команды."
+movie_mates_2 -up0-> video_player_2: "Отправляет команды."
+movie_mates_2 -up0-> video_player_3: "Отправляет команды."
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 17:01:30 UTC 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>
