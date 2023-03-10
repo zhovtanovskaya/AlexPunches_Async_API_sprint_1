@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="538.5417px" preserveAspectRatio="none" style="width:750px;height:538px;background:#00000000;" version="1.1" viewBox="0 0 750 538" width="750px" zoomAndPan="magnify"><defs><linearGradient id="gu96e2r5ziede0" x1="50%" x2="50%" y1="0%" y2="100%"><stop offset="0%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#FFFFFF"/></linearGradient><linearGradient id="gu96e2r5ziede1" x1="50%" x2="50%" y1="0%" y2="100%"><stop offset="0%" stop-color="#4DABF5"/><stop offset="100%" stop-color="#2196F3"/></linearGradient><filter height="300%" id="fu96e2r5ziede" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0833333333333335"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.166666666666667" dy="4.166666666666667" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter><linearGradient id="gu96e2r5ziede2" x1="50%" x2="50%" y1="0%" y2="100%"><stop offset="0%" stop-color="#2196F3"/><stop offset="100%" stop-color="#1A78C2"/></linearGradient><linearGradient id="gu96e2r5ziede3" x1="50%" x2="50%" y1="0%" y2="100%"><stop offset="0%" stop-color="#B052C0"/><stop offset="100%" stop-color="#9C27B0"/></linearGradient></defs><g><rect fill="url(#gu96e2r5ziede0)" height="57.5846" id="_title" rx="4.1667" ry="4.1667" style="stroke:#CCCCCC;stroke-width:1.0416666666666667;" width="143.75" x="298.4375" y="20.8333"/><text fill="#2196F3" font-family="&quot;Verdana&quot;" font-size="20.8333" font-weight="bold" lengthAdjust="spacing" textLength="110.4167" x="315.1042" y="56.838">Socket.io</text><!--MD5=[17342dff1aec70409e48d44c2c68c6a2]
+class BaseManager--><g id="elem_BaseManager"><rect codeLine="9" fill="url(#gu96e2r5ziede1)" filter="url(#fu96e2r5ziede)" height="129.598" id="BaseManager" rx="4.1667" ry="4.1667" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="133.3333" x="246.3542" y="114.3555"/><rect fill="url(#gu96e2r5ziede2)" height="44.5882" rx="4.1667" ry="4.1667" style="stroke:url(#gu96e2r5ziede2);stroke-width:1.0416666666666667;" width="133.3333" x="246.3542" y="114.3555"/><rect fill="url(#gu96e2r5ziede2)" height="4.1667" style="stroke:url(#gu96e2r5ziede2);stroke-width:1.0416666666666667;" width="133.3333" x="246.3542" y="154.777"/><rect codeLine="9" fill="none" height="129.598" id="BaseManager" rx="4.1667" ry="4.1667" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="133.3333" x="246.3542" y="114.3555"/><ellipse cx="260.9375" cy="136.6496" fill="none" rx="10.4167" ry="10.4167" style="stroke:#1A78C2;stroke-width:1.0416666666666667;"/><path d="M262.8418,141.0767 Q262.4186,141.2882 261.9466,141.4022 Q261.4746,141.5161 260.9701,141.5161 Q259.1146,141.5161 258.138,140.3117 Q257.1777,139.091 257.1777,136.7961 Q257.1777,134.4849 258.138,133.2804 Q259.1146,132.0597 260.9701,132.0597 Q261.4746,132.0597 261.9466,132.1737 Q262.4349,132.2713 262.8418,132.4992 L262.8418,134.5011 Q262.3861,134.078 261.9466,133.8826 Q261.5072,133.6711 261.0514,133.6711 Q260.0586,133.6711 259.554,134.4686 Q259.0495,135.2498 259.0495,136.7961 Q259.0495,138.326 259.554,139.1073 Q260.0586,139.8885 261.0514,139.8885 Q261.5072,139.8885 261.9466,139.6932 Q262.3861,139.4979 262.8418,139.0747 L262.8418,141.0767 Z " fill="#FFFFFF"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="11.4583" lengthAdjust="spacing" textLength="81.25" x="284.8958" y="140.6164">BaseManager</text><line style="stroke:#2196F3;stroke-width:1.0416666666666667;" x1="247.3958" x2="378.6458" y1="158.9437" y2="158.9437"/><ellipse cx="257.8125" cy="181.7586" fill="none" rx="3.125" ry="3.125" style="stroke:#1A78C2;stroke-width:1.0416666666666667;"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="11.4583" lengthAdjust="spacing" textLength="38.5417" x="276.5625" y="184.1629">rooms</text><line style="stroke:#2196F3;stroke-width:1.0416666666666667;" x1="247.3958" x2="378.6458" y1="201.4486" y2="201.4486"/><ellipse cx="257.8125" cy="224.2635" fill="none" rx="3.125" ry="3.125" style="stroke:#1A78C2;stroke-width:1.0416666666666667;"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="11.4583" lengthAdjust="spacing" textLength="34.375" x="276.5625" y="226.6678">emit()</text></g><g id="elem_GMN3623"><path d="M16.6667,131.0221 L16.6667,226.6927 A4.1667,4.1667 0 0 0 20.8333,230.8594 L205.2083,230.8594 A4.1667,4.1667 0 0 0 209.375,226.6927 L209.375,183.1055 L246.3021,178.9388 L209.375,174.7721 L209.375,137.2721 L198.9583,126.8555 L20.8333,126.8555 A4.1667,4.1667 0 0 0 16.6667,131.0221 " fill="url(#gu96e2r5ziede3)" filter="url(#fu96e2r5ziede)" style="stroke:#1A78C2;stroke-width:1.0416666666666667;"/><path d="M198.9583,126.8555 L198.9583,135.1888 A2.0833,2.0833 0 0 0 201.0417,137.2721 L209.375,137.2721 L198.9583,126.8555 " fill="url(#gu96e2r5ziede3)" style="stroke:#1A78C2;stroke-width:1.0416666666666667;"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="134.375" x="33.3333" y="154.0833">rooms -- вложенные</text><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="150" x="33.3333" y="168.634">другв друга объекты:</text><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="95.8333" x="33.3333" y="183.1848">• Namespaces</text><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="55.2083" x="41.6667" y="197.7356">• Rooms</text><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="86.4583" x="50" y="212.2864">• Session IDs</text></g><!--MD5=[038090aa0beeb4af4f1819444595fbdf]
+class AsyncRedisManager--><g id="elem_AsyncRedisManager"><rect fill="url(#gu96e2r5ziede1)" filter="url(#fu96e2r5ziede)" height="61.2549" id="AsyncRedisManager" rx="4.1667" ry="4.1667" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="169.7917" x="228.125" y="391.4388"/><rect fill="url(#gu96e2r5ziede2)" height="44.5882" rx="4.1667" ry="4.1667" style="stroke:url(#gu96e2r5ziede2);stroke-width:1.0416666666666667;" width="169.7917" x="228.125" y="391.4388"/><rect fill="url(#gu96e2r5ziede2)" height="4.1667" style="stroke:url(#gu96e2r5ziede2);stroke-width:1.0416666666666667;" width="169.7917" x="228.125" y="431.8604"/><rect fill="none" height="61.2549" id="AsyncRedisManager" rx="4.1667" ry="4.1667" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="169.7917" x="228.125" y="391.4388"/><ellipse cx="242.7083" cy="413.7329" fill="none" rx="10.4167" ry="10.4167" style="stroke:#1A78C2;stroke-width:1.0416666666666667;"/><path d="M244.6126,418.16 Q244.1895,418.3716 243.7174,418.4855 Q243.2454,418.5994 242.7409,418.5994 Q240.8854,418.5994 239.9089,417.395 Q238.9486,416.1743 238.9486,413.8794 Q238.9486,411.5682 239.9089,410.3638 Q240.8854,409.1431 242.7409,409.1431 Q243.2454,409.1431 243.7174,409.257 Q244.2057,409.3547 244.6126,409.5825 L244.6126,411.5845 Q244.1569,411.1613 243.7174,410.966 Q243.278,410.7544 242.8223,410.7544 Q241.8294,410.7544 241.3249,411.5519 Q240.8203,412.3332 240.8203,413.8794 Q240.8203,415.4093 241.3249,416.1906 Q241.8294,416.9718 242.8223,416.9718 Q243.278,416.9718 243.7174,416.7765 Q244.1569,416.5812 244.6126,416.158 L244.6126,418.16 Z " fill="#FFFFFF"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="11.4583" lengthAdjust="spacing" textLength="117.7083" x="266.6667" y="417.6997">AsyncRedisManager</text><line style="stroke:#2196F3;stroke-width:1.0416666666666667;" x1="229.1667" x2="396.875" y1="436.027" y2="436.027"/><line style="stroke:#2196F3;stroke-width:1.0416666666666667;" x1="229.1667" x2="396.875" y1="444.3604" y2="444.3604"/></g><!--MD5=[979e0f49fe01282a98e1c005054f5cf7]
+class PacketType--><g id="elem_PacketType"><rect codeLine="22" fill="url(#gu96e2r5ziede1)" filter="url(#fu96e2r5ziede)" height="197.9411" id="PacketType" rx="4.1667" ry="4.1667" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="123.9583" x="596.875" y="323.2096"/><rect fill="url(#gu96e2r5ziede2)" height="44.5882" rx="4.1667" ry="4.1667" style="stroke:url(#gu96e2r5ziede2);stroke-width:1.0416666666666667;" width="123.9583" x="596.875" y="323.2096"/><rect fill="url(#gu96e2r5ziede2)" height="4.1667" style="stroke:url(#gu96e2r5ziede2);stroke-width:1.0416666666666667;" width="123.9583" x="596.875" y="363.6312"/><rect codeLine="22" fill="none" height="197.9411" id="PacketType" rx="4.1667" ry="4.1667" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="123.9583" x="596.875" y="323.2096"/><ellipse cx="613.8021" cy="345.5037" fill="none" rx="10.4167" ry="10.4167" style="stroke:#1A78C2;stroke-width:1.0416666666666667;"/><path d="M615.7064,349.9308 Q615.2832,350.1424 614.8112,350.2563 Q614.3392,350.3703 613.8346,350.3703 Q611.9792,350.3703 611.0026,349.1659 Q610.0423,347.9451 610.0423,345.6502 Q610.0423,343.339 611.0026,342.1346 Q611.9792,340.9139 613.8346,340.9139 Q614.3392,340.9139 614.8112,341.0278 Q615.2995,341.1255 615.7064,341.3534 L615.7064,343.3553 Q615.2507,342.9321 614.8112,342.7368 Q614.3717,342.5252 613.916,342.5252 Q612.9232,342.5252 612.4186,343.3228 Q611.9141,344.104 611.9141,345.6502 Q611.9141,347.1802 612.4186,347.9614 Q612.9232,348.7427 613.916,348.7427 Q614.3717,348.7427 614.8112,348.5474 Q615.2507,348.3521 615.7064,347.9289 L615.7064,349.9308 Z " fill="#FFFFFF"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="11.4583" lengthAdjust="spacing" textLength="66.6667" x="638.2813" y="349.4705">PacketType</text><line style="stroke:#2196F3;stroke-width:1.0416666666666667;" x1="597.9167" x2="719.7917" y1="367.7979" y2="367.7979"/><ellipse cx="608.3333" cy="390.6128" fill="none" rx="3.125" ry="3.125" style="stroke:#1A78C2;stroke-width:1.0416666666666667;"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="11.4583" lengthAdjust="spacing" textLength="57.2917" x="627.0833" y="393.0171">CONNECT</text><ellipse cx="608.3333" cy="424.7843" fill="none" rx="3.125" ry="3.125" style="stroke:#1A78C2;stroke-width:1.0416666666666667;"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="11.4583" lengthAdjust="spacing" textLength="77.0833" x="627.0833" y="427.1886">DISCONNECT</text><ellipse cx="608.3333" cy="458.9559" fill="none" rx="3.125" ry="3.125" style="stroke:#1A78C2;stroke-width:1.0416666666666667;"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="11.4583" lengthAdjust="spacing" textLength="22.9167" x="627.0833" y="461.3602">ACK</text><ellipse cx="608.3333" cy="493.1274" fill="none" rx="3.125" ry="3.125" style="stroke:#1A78C2;stroke-width:1.0416666666666667;"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="11.4583" lengthAdjust="spacing" textLength="37.5" x="627.0833" y="495.5317">EVENT</text><line style="stroke:#2196F3;stroke-width:1.0416666666666667;" x1="597.9167" x2="719.7917" y1="512.8174" y2="512.8174"/></g><!--MD5=[ef70be79f6755a35fb39f64e7faf05f7]
+class Packet--><g id="elem_Packet"><rect codeLine="28" fill="url(#gu96e2r5ziede1)" filter="url(#fu96e2r5ziede)" height="163.7695" id="Packet" rx="4.1667" ry="4.1667" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="146.875" x="585.4167" y="97.168"/><rect fill="url(#gu96e2r5ziede2)" height="44.5882" rx="4.1667" ry="4.1667" style="stroke:url(#gu96e2r5ziede2);stroke-width:1.0416666666666667;" width="146.875" x="585.4167" y="97.168"/><rect fill="url(#gu96e2r5ziede2)" height="4.1667" style="stroke:url(#gu96e2r5ziede2);stroke-width:1.0416666666666667;" width="146.875" x="585.4167" y="137.5895"/><rect codeLine="28" fill="none" height="163.7695" id="Packet" rx="4.1667" ry="4.1667" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="146.875" x="585.4167" y="97.168"/><ellipse cx="625.3125" cy="119.4621" fill="none" rx="10.4167" ry="10.4167" style="stroke:#1A78C2;stroke-width:1.0416666666666667;"/><path d="M627.2168,123.8892 Q626.7936,124.1007 626.3216,124.2147 Q625.8496,124.3286 625.3451,124.3286 Q623.4896,124.3286 622.513,123.1242 Q621.5527,121.9035 621.5527,119.6086 Q621.5527,117.2974 622.513,116.0929 Q623.4896,114.8722 625.3451,114.8722 Q625.8496,114.8722 626.3216,114.9862 Q626.8099,115.0838 627.2168,115.3117 L627.2168,117.3136 Q626.7611,116.8905 626.3216,116.6951 Q625.8822,116.4836 625.4264,116.4836 Q624.4336,116.4836 623.929,117.2811 Q623.4245,118.0623 623.4245,119.6086 Q623.4245,121.1385 623.929,121.9198 Q624.4336,122.701 625.4264,122.701 Q625.8822,122.701 626.3216,122.5057 Q626.7611,122.3104 627.2168,121.8872 L627.2168,123.8892 Z " fill="#FFFFFF"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="11.4583" lengthAdjust="spacing" textLength="38.5417" x="654.8958" y="123.4289">Packet</text><line style="stroke:#2196F3;stroke-width:1.0416666666666667;" x1="586.4583" x2="731.25" y1="141.7562" y2="141.7562"/><ellipse cx="596.875" cy="164.5711" fill="none" rx="3.125" ry="3.125" style="stroke:#1A78C2;stroke-width:1.0416666666666667;"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="11.4583" lengthAdjust="spacing" textLength="100" x="615.625" y="166.9754">type: PacketType</text><ellipse cx="596.875" cy="198.7427" fill="none" rx="3.125" ry="3.125" style="stroke:#1A78C2;stroke-width:1.0416666666666667;"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="11.4583" lengthAdjust="spacing" textLength="55.2083" x="615.625" y="201.147">data: Any</text><ellipse cx="596.875" cy="232.9142" fill="none" rx="3.125" ry="3.125" style="stroke:#1A78C2;stroke-width:1.0416666666666667;"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="11.4583" lengthAdjust="spacing" textLength="68.75" x="615.625" y="235.3185">namespace</text><line style="stroke:#2196F3;stroke-width:1.0416666666666667;" x1="586.4583" x2="731.25" y1="252.6042" y2="252.6042"/></g><!--MD5=[f16a1ac96dbe98358680c0593473605e]
+class AsyncServer--><g id="elem_AsyncServer"><rect codeLine="35" fill="url(#gu96e2r5ziede1)" filter="url(#fu96e2r5ziede)" height="129.598" id="AsyncServer" rx="4.1667" ry="4.1667" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="126.0417" x="434.375" y="357.5846"/><rect fill="url(#gu96e2r5ziede2)" height="44.5882" rx="4.1667" ry="4.1667" style="stroke:url(#gu96e2r5ziede2);stroke-width:1.0416666666666667;" width="126.0417" x="434.375" y="357.5846"/><rect fill="url(#gu96e2r5ziede2)" height="4.1667" style="stroke:url(#gu96e2r5ziede2);stroke-width:1.0416666666666667;" width="126.0417" x="434.375" y="398.0062"/><rect codeLine="35" fill="none" height="129.598" id="AsyncServer" rx="4.1667" ry="4.1667" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="126.0417" x="434.375" y="357.5846"/><ellipse cx="448.9583" cy="379.8787" fill="none" rx="10.4167" ry="10.4167" style="stroke:#1A78C2;stroke-width:1.0416666666666667;"/><path d="M450.8626,384.3058 Q450.4395,384.5174 449.9674,384.6313 Q449.4954,384.7453 448.9909,384.7453 Q447.1354,384.7453 446.1589,383.5409 Q445.1986,382.3201 445.1986,380.0252 Q445.1986,377.714 446.1589,376.5096 Q447.1354,375.2889 448.9909,375.2889 Q449.4954,375.2889 449.9674,375.4028 Q450.4557,375.5005 450.8626,375.7284 L450.8626,377.7303 Q450.4069,377.3071 449.9674,377.1118 Q449.528,376.9002 449.0723,376.9002 Q448.0794,376.9002 447.5749,377.6978 Q447.0703,378.479 447.0703,380.0252 Q447.0703,381.5552 447.5749,382.3364 Q448.0794,383.1177 449.0723,383.1177 Q449.528,383.1177 449.9674,382.9224 Q450.4069,382.7271 450.8626,382.3039 L450.8626,384.3058 Z " fill="#FFFFFF"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="11.4583" lengthAdjust="spacing" textLength="73.9583" x="472.9167" y="383.8455">AsyncServer</text><line style="stroke:#2196F3;stroke-width:1.0416666666666667;" x1="435.4167" x2="559.375" y1="402.1729" y2="402.1729"/><ellipse cx="445.8333" cy="424.9878" fill="none" rx="3.125" ry="3.125" style="stroke:#1A78C2;stroke-width:1.0416666666666667;"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="11.4583" lengthAdjust="spacing" textLength="53.125" x="464.5833" y="427.3921">manager</text><line style="stroke:#2196F3;stroke-width:1.0416666666666667;" x1="435.4167" x2="559.375" y1="444.6777" y2="444.6777"/><ellipse cx="445.8333" cy="467.4927" fill="none" rx="3.125" ry="3.125" style="stroke:#1A78C2;stroke-width:1.0416666666666667;"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="11.4583" lengthAdjust="spacing" textLength="34.375" x="464.5833" y="469.897">emit()</text></g><!--MD5=[6b561bea880bc322147bd255ebdf22a6]
+reverse link BaseManager to AsyncRedisManager--><g id="link_BaseManager_AsyncRedisManager"><path codeLine="20" d="M313.0208,264.5846 C313.0208,308.6159 313.0208,359.6888 313.0208,391.2096 " fill="none" id="BaseManager-backto-AsyncRedisManager" style="stroke:#2196F3;stroke-width:3.125;"/><polygon fill="none" points="305.7292,264.4909,313.0208,243.6576,320.3125,264.4909,305.7292,264.4909" style="stroke:#2196F3;stroke-width:3.125;"/></g><!--MD5=[bcc7ed24f34d4f44ca8f1c03f1972c3f]
+reverse link Packet to PacketType--><g id="link_Packet_PacketType"><path codeLine="33" d="M658.8542,274.6576 C658.8542,290.4596 658.8542,306.8971 658.8542,322.793 " fill="none" id="Packet-backto-PacketType" style="stroke:#2196F3;stroke-width:3.125;"/><polygon fill="none" points="658.8542,260.9492,654.6875,267.1992,658.8542,273.4492,663.0208,267.1992,658.8542,260.9492" style="stroke:#2196F3;stroke-width:3.125;"/></g><!--MD5=[a6cd80534f4d1ea7f290ac42731522f6]
+link AsyncRedisManager to AsyncServer--><g id="link_AsyncRedisManager_AsyncServer"><path codeLine="39" d="M398.0104,422.168 C405.4375,422.168 412.8646,422.168 420.2917,422.168 " fill="none" id="AsyncRedisManager-to-AsyncServer" style="stroke:#2196F3;stroke-width:3.125;"/><polygon fill="none" points="434.1146,422.168,427.8646,418.0013,421.6146,422.168,427.8646,426.3346,434.1146,422.168" style="stroke:#2196F3;stroke-width:3.125;"/></g><!--MD5=[87d08c41a41eeeeabab7c921ef8febb4]
+@startuml
+!theme materia
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+skinparam maxmessagesize 60
+
+title "Socket.io"
+
+
+class BaseManager {
+  +rooms 
+  +emit()
+}
+note left of BaseManager
+  rooms - - вложенные 
+  другв друга объекты:
+  • Namespaces 
+    • Rooms 
+      • Session IDs 
+end note
+BaseManager <|- - AsyncRedisManager
+
+class PacketType {
+  +CONNECT
+  +DISCONNECT
+  +ACK
+  +EVENT
+}
+class Packet {
+  +type: PacketType
+  +data: Any
+  +namespace
+}
+Packet o- - PacketType
+
+class AsyncServer {
+  +manager
+  +emit()
+}
+AsyncServer o-left- AsyncRedisManager
+@enduml
+
+@startuml
+
+
+
+skinparam backgroundColor transparent
+skinparam useBetaStyle false
+
+
+
+
+
+
+<style>
+  root {
+    BackgroundColor transparent
+    FontColor #FFF
+    HyperLinkColor #fd7e14
+    LineColor #1a78c2
+    LineThickness 1
+    Margin 10
+    Padding 6
+    Shadowing 0.0
+  }
+  node {
+   Padding 15
+   roundcorner 20
+   BackgroundColor #2196F3-#1a78c2
+  }
+  caption {
+    LineThickness 0
+  }
+  footer {
+    LineThickness 0
+  }
+  groupHeader {
+    BackgroundColor #fff
+    FontColor #9C27B0
+    FontStyle bold
+  }
+  header {
+    LineThickness 0
+  }
+  referenceHeader {
+    BackgroundColor transparent
+    FontColor #222
+    FontStyle bold
+  }
+  separator {
+    BackgroundColor #222
+    FontColor transparent
+    FontStyle bold
+  }
+  title {
+	FontSize 20
+	BorderRoundCorner            8
+	BorderThickness 	         1
+	BackgroundColor  #fff-#fff
+	FontColor #2196F3
+	BorderColor #fff
+  }
+  nwdiagDiagram {
+	network {
+			FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3    
+		LineColor #2196F3
+		LineThickness 1.0
+		FontColor #1a78c2
+	}
+	server {
+			FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	}
+	arrow {
+		FontColor #1a78c2
+		LineColor #1a78c2
+	}
+	group {
+		BackGroundColor #fff
+		LineColor $LIGHT_DARK
+		LineThickness 2.0
+		Margin 5
+		Padding 5
+	}
+  }
+  ganttDiagram {
+	task {
+			FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+		LineColor #2196F3
+		Margin 10
+		Padding 6
+	}
+	note {
+		FontColor #FFF
+		LineColor #7D1F8D
+		BackGroundColor #9C27B0
+	}
+	separator {
+		LineColor #fff
+		BackGroundColor #fff-#cccccc
+		FontColor #222
+	}
+	milestone {
+		FontColor #9C27B0
+		FontSize 16
+		FontStyle italic
+		BackGroundColor #fff
+		LineColor #cccccc
+	}
+	timeline {
+		BackgroundColor #fff
+		FontColor #222
+	}
+	closed {
+		BackgroundColor #CC7A00
+		FontColor #FFF
+	}
+  }
+</style>
+skinparam defaultFontName       "Verdana"
+skinparam defaultFontSize       12
+skinparam dpi                   100
+skinparam shadowing             true
+skinparam roundcorner           8
+skinparam ParticipantPadding    40
+skinparam BoxPadding            40
+skinparam Padding               10
+skinparam ArrowColor            #666
+skinparam stereotype {
+    CBackgroundColor #fff
+    CBorderColor #cccccc
+    ABackgroundColor #70bf73
+    ABorderColor #3D8C40
+    IBackgroundColor #B7161C
+    IBorderColor #b7161c
+    EBackgroundColor #ffad33
+    EBorderColor #CC7A00
+    NBackgroundColor #b052c0
+    NBorderColor #7D1F8D
+}
+skinparam title {
+	FontColor	                 #2196F3
+	BorderColor	                 #cccccc
+	FontSize	    	         20
+	BorderRoundCorner            8
+	BorderThickness 	         1
+	BackgroundColor              #fff-#fff
+}
+
+skinparam legend {
+	BackgroundColor #fff
+	BorderColor #cccccc
+	FontColor #222
+}
+
+skinparam swimlane {
+	BorderColor #9C27B0
+	BorderThickness 2
+	TitleBackgroundColor  #fff-#fff
+	TitleFontColor #2196F3
+}
+
+
+skinparam activity {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	BarColor #4CAF50
+	StartColor #9C27B0
+	EndColor #9C27B0
+	DiamondBackgroundColor #FFF-#fff
+  	DiamondBorderColor #cccccc
+	DiamondFontColor #222
+}
+
+
+skinparam participant {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	ParticipantBorderThickness 2
+}
+
+
+skinparam actor {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	FontColor #222
+}
+
+
+skinparam arrow {
+	Thickness 3
+	Color #2196F3
+	FontColor #222
+}
+
+
+skinparam sequence {
+	BorderColor #2196F3
+	TitleFontColor #2196F3
+	BackgroundColor transparent
+	StartColor #2196F3
+	EndColor #2196F3
+	BoxBackgroundColor #fff
+	BoxBorderColor #666
+	BoxFontColor #222
+	DelayFontColor #222
+	LifeLineBorderColor #cccccc
+	LifeLineBorderThickness 2
+	LifeLineBackgroundColor #fff
+	GroupBorderColor #666
+	GroupFontColor #222
+	GroupHeaderFontColor #9C27B0
+	DividerBackgroundColor #FFF-#fff
+    DividerBorderColor #666
+    DividerBorderThickness 2
+    DividerFontColor #222
+	ReferenceBackgroundColor transparent
+	ReferenceBorderColor #666
+	ReferenceFontColor #222
+	ReferenceHeaderFontColor #9C27B0
+	StereotypeFontColor #FFF
+}
+
+
+skinparam partition {
+	BorderColor #2196F3
+	FontColor #2196F3
+	BackgroundColor transparent
+}
+
+
+skinparam collections {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+}
+
+
+skinparam control {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	FontColor #222
+}
+
+
+skinparam entity {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	FontColor #222
+}
+
+
+skinparam boundary {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	FontColor #222
+}
+
+
+skinparam agent {
+	BackgroundColor #orange
+	BorderColor #999999
+	FontColor #333333
+}
+
+
+skinparam note {
+	BorderThickness 1
+	BackgroundColor #b052c0-#9C27B0
+	BorderColor #9C27B0
+	FontColor #FFF
+}
+
+
+skinparam artifact {
+	BackgroundColor #FFF-#fff
+	BorderColor #666
+	FontColor #666
+}
+
+
+skinparam component {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+}
+
+
+skinparam interface {
+	BackgroundColor  #B7161C
+	BorderColor  #e51c23
+	FontColor #222
+}
+
+
+skinparam storage {
+	BackgroundColor #ffad33-#ff9800
+  	BorderColor #ff9800
+	FontColor #FFF
+}
+
+
+skinparam node {
+	BackgroundColor #fff-#fff
+	BorderColor #222
+	FontColor #222
+}
+
+
+skinparam cloud {
+	BackgroundColor #F2FCFE-#eeeeee
+	BorderColor #F2FCFE
+	FontColor #222
+}
+
+
+skinparam database {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	FontColor #222
+}
+
+
+skinparam class {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	HeaderBackgroundColor #2196F3-#1a78c2
+	StereotypeFontColor #222
+	BorderThickness 1
+	AttributeFontColor #fff
+	AttributeFontSize 11
+}
+
+
+skinparam object {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	StereotypeFontColor #222
+	BorderThickness 1
+	AttributeFontColor #222
+	AttributeFontSize 11
+}
+
+
+skinparam usecase {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	BorderThickness 2
+	StereotypeFontColor #2196F3
+}
+
+
+skinparam rectangle {
+	FontColor #2196F3
+	BackgroundColor #fff-#fff
+	BorderThickness 2
+	StereotypeFontColor #2196F3
+}
+
+
+skinparam package {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	BackgroundColor #fff-#fff
+	BorderThickness 2
+}
+
+
+skinparam folder {
+	BackgroundColor #FFF-#fff
+  	BorderColor #ff9800
+	FontColor #ff9800
+	BorderThickness 2
+}
+
+
+skinparam frame {
+	BackgroundColor #FFF-#fff
+  	BorderColor #9C27B0
+	FontColor #9C27B0
+	BorderThickness 2
+}
+
+
+skinparam state {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	BorderColor #1a78c2
+	StartColor #9C27B0
+	EndColor #9C27B0
+	AttributeFontColor #222
+	AttributeFontSize 11
+}
+
+
+skinparam queue {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+}
+
+
+skinparam card {
+	BackgroundColor #b052c0-#9C27B0
+	BorderColor #9C27B0
+	FontColor #FFF
+}
+
+
+skinparam file {
+	BackgroundColor #fff-#fff
+	BorderColor #666
+	FontColor #666
+
+}
+
+
+skinparam stack {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+}
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+skinparam maxmessagesize 60
+
+title "Socket.io"
+
+
+class BaseManager {
+  +rooms 
+  +emit()
+}
+note left of BaseManager
+  rooms - - вложенные 
+  другв друга объекты:
+  • Namespaces 
+    • Rooms 
+      • Session IDs 
+end note
+BaseManager <|- - AsyncRedisManager
+
+class PacketType {
+  +CONNECT
+  +DISCONNECT
+  +ACK
+  +EVENT
+}
+class Packet {
+  +type: PacketType
+  +data: Any
+  +namespace
+}
+Packet o- - PacketType
+
+class AsyncServer {
+  +manager
+  +emit()
+}
+AsyncServer o-left- AsyncRedisManager
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 17:01:30 UTC 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>
