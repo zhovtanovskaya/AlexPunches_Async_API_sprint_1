@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Чебурашка</title>
-	<meta charset="utf-8">
-	<link rel="shortcut icon" href="/assets/images/favicon.ico">
+    <title>Чебурашка</title>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="/assets/images/favicon.ico">
 
-	<!-- Google Font -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap">
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap">
 
-	<!-- Plugins CSS -->
-	<link rel="stylesheet" type="text/css" href="/assets/vendor/font-awesome/css/all.min.css">
-	<link rel="stylesheet" type="text/css" href="/assets/vendor/bootstrap-icons/bootstrap-icons.css">
-	<link rel="stylesheet" type="text/css" href="/assets/vendor/plyr/plyr.css" />
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/font-awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/plyr/plyr.css" />
 
-	<!-- Theme CSS -->
-	<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+    <!-- Theme CSS -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
 
 </head>
 
@@ -25,69 +25,68 @@
 <!-- **************** MAIN CONTENT START **************** -->
 <main>
 
-<section class="py-0 bg-dark position-relative">
+    <section class="py-0 bg-dark position-relative">
 
-	<div class="row g-0">
-		<div class="d-flex">
-			<div class="overflow-hidden fullscreen-video w-100">
-				<!-- Full screen video START -->
-				<div class="video-player rounded-3">
-					<video controls crossorigin="anonymous" playsinline poster="/assets/images/videos/poster.jpg">
-						<source src="/assets/images/videos/720p.mp4" type="video/mp4" size="720">
-					</video>
-				</div>
-				<!-- Full screen video END -->
+        <div class="row g-0">
+            <div class="d-flex">
+                <div class="overflow-hidden fullscreen-video w-100">
+                    <!-- Full screen video START -->
+                    <div class="video-player rounded-3">
+                        <video controls crossorigin="anonymous" playsinline poster="/assets/images/videos/poster.jpg">
+                            <source src="/assets/images/videos/720p.mp4" type="video/mp4" size="720">
+                        </video>
+                    </div>
+                    <!-- Full screen video END -->
 
-				<!-- Plyr resources and browser polyfills are specified in the pen settings -->
-			</div>
+                    <!-- Plyr resources and browser polyfills are specified in the pen settings -->
+                </div>
 
-			<!-- Page content START -->
-			<div class="justify-content-end position-relative">
-				<!-- Collapse button START -->
-				<button class="navbar-toggler btn btn-white mt-4 plyr-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
-					<span class="navbar-toggler-animation">
-						<span></span>
-						<span></span>
-						<span></span>
-					</span>
-				</button>
-				<!-- Collapse button END -->
+                <!-- Page content START -->
+                <div class="justify-content-end position-relative">
+                    <!-- Collapse button START -->
+                    <button class="navbar-toggler btn btn-white mt-4 plyr-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+                    <span class="navbar-toggler-animation">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                    </button>
+                    <!-- Collapse button END -->
 
-				<!-- Collapse body START -->
-				<div class="collapse collapse-horizontal show" id="collapseWidthExample">
-					<div class="card vh-100 overflow-auto rounded-0 w-280px w-sm-400px">
-						<!-- Title -->
-						<div class="card-header bg-light rounded-0">
-							<h1 class="mt-2 fs-5">Смотрим «Чебурашка»</h1>
-						</div>
+                    <!-- Collapse body START -->
+                    <div class="collapse collapse-horizontal show" id="collapseWidthExample">
+                        <div class="card vh-100 overflow-auto rounded-0 w-280px w-sm-400px">
+                            <!-- Title -->
+                            <div class="card-header bg-light rounded-0">
+                                <h1 class="mt-2 fs-5">Смотрим «Чебурашка»</h1>
+                            </div>
 
-						<!-- Course content START -->
-						<div class="card-body" id="board">
-						</div>
-						<!-- Course content END -->
+                            <!-- Course content START -->
+                            <div class="card-body" id="board">
+                            </div>
+                            <!-- Course content END -->
 
-						<div class="card-footer">
-							<form action="" class="chat-form">
-								<div class="row" style="margin-bottom: 1em;">
-									<div class="col-12">
+                            <div class="card-footer">
+                                <form action="" class="chat-form">
+                                    <div class="row" style="margin-bottom: 1em;">
+                                        <div class="col-12">
+                                            <textarea class="form-control" id="chat-text" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="d-grid">
+                                        <button type="submit" href="#" class="btn btn-primary-soft mb-0" id="submit-chat-form">Отправить</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Collapse body END -->
+                </div>
+                <!-- Page content END -->
+            </div>
+        </div>
 
-										<textarea class="form-control" id="chat-text" rows="3"></textarea>
-									</div>
-								</div>
-								<div class="d-grid">
-									<button type="submit" href="#" class="btn btn-primary-soft mb-0" id="submit-chat-form">Отправить</button>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-				<!-- Collapse body END -->
-			</div>
-			<!-- Page content END -->
-		</div>
-	</div>
-
-</section>
+    </section>
 </main>
 <!-- **************** MAIN CONTENT END **************** -->
 
@@ -101,68 +100,69 @@
 <!-- Template Functions -->
 <script src="/assets/js/functions.js"></script>
 <script>
-window.addEventListener("DOMContentLoaded", () => {
-  const chat = document.querySelector(".chat-form");
-  // Open the WebSocket connection and register event handlers.
+    window.addEventListener("DOMContentLoaded", () => {
+        const chat = document.querySelector(".chat-form");
+        // Open the WebSocket connection and register event handlers.
 
-  const path = location.pathname.split('/');
-  if (path[path.length-1].indexOf('.html')>-1) {
-    path.length = path.length - 1;
-  }
-  const roomPath = path.join('/');
-  console.log(roomPath);
-  const websocket = new WebSocket("ws://localhost:8001"+ roomPath +"?token=123");
+        const path = location.pathname.split('/');
+        if (path[path.length-1].indexOf('.html')>-1) {
+            path.length = path.length - 1;
+        }
+        const roomPath = path.join('/');
+        console.log(roomPath);
+        const websocket = new WebSocket("ws://localhost:8001/{{ room_id }}?token={{ token }}");
 
-  receiveMoves(chat, websocket);
-  sendMoves(chat, websocket);
-});
+        receiveMoves(chat, websocket);
+        sendMoves(chat, websocket);
+    });
 
 
-function sendMoves(chat, websocket) {
-  chat.addEventListener("submit", function(e) {
-    e.preventDefault()
-    const messageelement = document.getElementById('chat-text');
-    const message = messageelement.value;
+    function sendMoves(chat, websocket) {
+        chat.addEventListener("submit", function(e) {
+            e.preventDefault()
+            const messageelement = document.getElementById('chat-text');
+            const message = messageelement.value;
 
-    if (message === '') {
-      return;
+            if (message === '') {
+                return;
+            }
+            const event = {
+                event_type: "chat_message",
+                user_id: "user_1",
+                message: message,
+            };
+            websocket.send(JSON.stringify(event));
+            console.log(message);
+            messageelement.value = "";
+        });
     }
-    const event = {
-      event_type: "chat_message",
-      user_id: "user_1",
-      message: message,
-    };
-    websocket.send(JSON.stringify(event));
-    console.log(message);
-    messageelement.value = "";
-  });
-}
 
-function receiveMoves(board, websocket) {
-  websocket.addEventListener("message", ({ data }) => {
-    const event = JSON.parse(data);
-    console.log(event.message)
-    switch (event.event_type) {
-      case "chat_message":
-        chatAdd(event.message, event.from);
-        break;
-      case "player_command":
-        // ...
-        break;
-      case "error":
-        // ...
-        break;
-      default:
-        throw new Error("Unsupported event type: ${event.type}.");
+    function receiveMoves(board, websocket) {
+        websocket.addEventListener("message", ({ data }) => {
+            const event = JSON.parse(data);
+            console.log(event.message)
+            switch (event.event_type) {
+                case "chat_message":
+                    chatAdd(event.message, event.from);
+                    break;
+                case "player_command":
+                    // ...
+                    console.log(event.message)
+                    break;
+                case "error":
+                    // ...
+                    break;
+                default:
+                    throw new Error("Unsupported event type: ${event.type}.");
+            }
+        });
     }
-  });
-}
 
 
-function chatAdd(message, user) {
-  const board = document.getElementById('board');
-  board.innerHTML += '<p>' + user + ': ' + message + '</p>';
-}
+    function chatAdd(message, user) {
+        const board = document.getElementById('board');
+        board.innerHTML += '<p>' + user + ': ' + message + '</p>';
+    }
 </script>
 
 </body>

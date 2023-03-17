@@ -42,6 +42,7 @@ class WsData:
               room_id: str,
               websocket: QueryParamProtocol,
     ) -> None:
+
         if room_id not in cls.rooms.keys():
             cls.rooms[room_id] = {websocket}
         cls.rooms[room_id].add(websocket)
