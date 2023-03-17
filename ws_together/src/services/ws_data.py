@@ -26,7 +26,7 @@ class WsData:
               cls,
               websocket: QueryParamProtocol,
     ) -> str | None:
-        room_id = await get_room_id_by_path(websocket.path)
+        room_id = get_room_id_by_path(websocket.path)
         if websocket in cls.rooms[room_id]:
             return room_id
         return None
@@ -42,7 +42,6 @@ class WsData:
               room_id: str,
               websocket: QueryParamProtocol,
     ) -> None:
-        zz = cls.rooms
         if room_id not in cls.rooms.keys():
             cls.rooms[room_id] = {websocket}
         cls.rooms[room_id].add(websocket)

@@ -3,11 +3,11 @@ window.addEventListener("DOMContentLoaded", () => {
   const chat = document.querySelector(".chat-form");
   // Open the WebSocket connection and register event handlers.
 
-  var path = location.pathname.split('/');
+  const path = location.pathname.split('/');
   if (path[path.length-1].indexOf('.html')>-1) {
     path.length = path.length - 1;
   }
-  var roomPath = path.join('/'); //  if you want the whole thing like '/one/two/three'
+  const roomPath = path.join('/');
   console.log(roomPath);
 
 
