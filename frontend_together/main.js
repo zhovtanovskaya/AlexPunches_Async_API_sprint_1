@@ -2,7 +2,7 @@
 window.addEventListener("DOMContentLoaded", () => {
   const chat = document.querySelector(".chat-form");
   // Open the WebSocket connection and register event handlers.
-  const websocket = new WebSocket("ws://localhost:8001/?room=qww77&token=123");
+  const websocket = new WebSocket("ws://localhost:8001/roomid?token=123");
 
   const xz = JSON.stringify({message: "event"})
   websocket.onopen = () => websocket.send(xz);

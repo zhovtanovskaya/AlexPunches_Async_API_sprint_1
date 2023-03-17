@@ -1,7 +1,8 @@
 import asyncio
 import json
-import urllib.parse
 from http import HTTPStatus
+from pathlib import PurePosixPath
+from urllib.parse import parse_qs, unquote, urlparse
 from uuid import UUID
 
 import websockets
@@ -26,7 +27,7 @@ class QueryParamProtocol(websockets.WebSocketServerProtocol):
             return HTTPStatus.UNAUTHORIZED, [], b"Authentication failed\n"
 
         # проверить доступность рума для юзера
-        room = get_query_param(path, "room")
+        room = get_room_id_by_path(path)
         if room is None:
             return HTTPStatus.UNAUTHORIZED, [], b"Missing room\n"
         self.room = room
@@ -75,11 +76,15 @@ def create_hello_event() -> dict:
 
 # в утилиты
 def get_query_param(path, key):
-    query = urllib.parse.urlparse(path).query
-    params = urllib.parse.parse_qs(query)
+    query = urlparse(path).query
+    params = parse_qs(query)
     values = params.get(key, [])
     if len(values) == 1:
         return values[0]
+
+
+def get_room_id_by_path(path):
+    return PurePosixPath(unquote(urlparse(path).path)).parts[1]
 
 
 
