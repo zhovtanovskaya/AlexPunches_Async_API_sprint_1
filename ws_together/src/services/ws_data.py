@@ -1,33 +1,40 @@
 from core.ws_protocol import QueryParamProtocol
-
-# тут напрашивается что-то редисное
-USERS = set()
+from utils.helpers import get_room_id_by_path
 
 
-# Какбы вместо однокомнатного USERS = set()
-# пока только заготовка
 class WsData:
     """Структура данных, в которой можно быстро получить:
 
      рум по вебсокету,
      и спиок всех вебсокетов в руме."""
 
+    # тут напрашивается сортед сет Редис персистентс
+    rooms: dict[str, set] = {}
+
     @classmethod
     async def get_all_rooms_websockets_by_websocket(
               cls,
               websocket: QueryParamProtocol,
-    ) -> set:
+    ) -> set | None:
         """Получить набор всех вебсокетов, из комнаты websocket'а."""
-        room_id = await cls._get_room_id_by_websocket(websocket)
-        return await cls._get_websockets_by_room_id(room_id)
+        if room_id := await cls._get_room_id_by_websocket(websocket):
+            return await cls._get_websockets_by_room_id(room_id)
+        return None
 
     @classmethod
-    async def _get_room_id_by_websocket(cls, websocket: QueryParamProtocol) -> str:
-        pass
+    async def _get_room_id_by_websocket(
+              cls,
+              websocket: QueryParamProtocol,
+    ) -> str | None:
+        room_id = await get_room_id_by_path(websocket.path)
+        if websocket in cls.rooms[room_id]:
+            return room_id
+        return None
+
 
     @classmethod
     async def _get_websockets_by_room_id(cls, room_id: str) -> set:
-        return USERS
+        return cls.rooms[room_id]
 
     @classmethod
     async def add_websocket_to_room(
@@ -35,4 +42,7 @@ class WsData:
               room_id: str,
               websocket: QueryParamProtocol,
     ) -> None:
-        USERS.add(websocket)
+        zz = cls.rooms
+        if room_id not in cls.rooms.keys():
+            cls.rooms[room_id] = {websocket}
+        cls.rooms[room_id].add(websocket)

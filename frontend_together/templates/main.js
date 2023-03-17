@@ -2,7 +2,16 @@
 window.addEventListener("DOMContentLoaded", () => {
   const chat = document.querySelector(".chat-form");
   // Open the WebSocket connection and register event handlers.
-  const websocket = new WebSocket("ws://localhost:8001/roomid?token=123");
+
+  var path = location.pathname.split('/');
+  if (path[path.length-1].indexOf('.html')>-1) {
+    path.length = path.length - 1;
+  }
+  var roomPath = path.join('/'); //  if you want the whole thing like '/one/two/three'
+  console.log(roomPath);
+
+
+  const websocket = new WebSocket("ws://localhost:8001"+ roomPath +"?token=123");
 
   const xz = JSON.stringify({message: "event"})
   websocket.onopen = () => websocket.send(xz);

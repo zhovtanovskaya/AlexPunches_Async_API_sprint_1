@@ -13,7 +13,7 @@ class QueryParamProtocol(websockets.WebSocketServerProtocol):
     и path-параметр
     room_id = ид комнаты
     """
-    # наверно красивее будет room_id как path, а jwt где-то в заголовках, но это посложнее
+    # наверно красивее будет jwt где-то в заголовках, но это посложнее
     async def process_request(self, path, headers):
         # авторизовать
         token = get_query_param(path, "token")
