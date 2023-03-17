@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="773.9583px" preserveAspectRatio="none" style="width:678px;height:773px;background:#FFFFFF;" version="1.1" viewBox="0 0 678 773" width="678.125px" zoomAndPan="magnify"><defs><linearGradient id="g1t5f3965njf2y0" x1="50%" x2="50%" y1="0%" y2="100%"><stop offset="0%" stop-color="#4DABF5"/><stop offset="100%" stop-color="#2196F3"/></linearGradient><filter height="300%" id="f1t5f3965njf2y" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0833333333333335"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.166666666666667" dy="4.166666666666667" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#FFFFFF" height="57.5846" id="_title" rx="4.1667" ry="4.1667" style="stroke:#CCCCCC;stroke-width:1.0416666666666667;" width="330.2083" x="169.2708" y="20.8333"/><text fill="#2196F3" font-family="&quot;Verdana&quot;" font-size="20.8333" font-weight="bold" lengthAdjust="spacing" textLength="296.875" x="185.9375" y="56.838">Синхронизация плееров</text><!--MD5=[63f2d67f1c3e351e571014a8138fa853]
+entity master_player--><g id="elem_master_player"><rect fill="url(#g1t5f3965njf2y0)" filter="url(#f1t5f3965njf2y)" height="115.2018" rx="4.1667" ry="4.1667" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="191.6667" x="381.25" y="641.9596"/><rect fill="url(#g1t5f3965njf2y0)" height="10.4167" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="15.625" x="552.0833" y="647.168"/><rect fill="url(#g1t5f3965njf2y0)" height="2.0833" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="4.1667" x="550" y="649.2513"/><rect fill="url(#g1t5f3965njf2y0)" height="2.0833" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="4.1667" x="550" y="653.418"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="16.6667" font-weight="bold" lengthAdjust="spacing" textLength="129.1667" x="407.2917" y="688.68">Master Player</text><line style="stroke:#2196F3;stroke-width:1.0416666666666667;" x1="382.2917" x2="571.875" y1="703.0273" y2="703.0273"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="4.1667" x="407.2917" y="729.2135"> </text></g><!--MD5=[ef26e34d36f9d094d1411a75403ae767]
+entity movie_service--><g id="elem_movie_service"><rect fill="url(#g1t5f3965njf2y0)" filter="url(#f1t5f3965njf2y)" height="115.2018" rx="4.1667" ry="4.1667" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="184.375" x="384.8958" y="369.5638"/><rect fill="url(#g1t5f3965njf2y0)" height="10.4167" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="15.625" x="548.4375" y="374.7721"/><rect fill="url(#g1t5f3965njf2y0)" height="2.0833" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="4.1667" x="546.3542" y="376.8555"/><rect fill="url(#g1t5f3965njf2y0)" height="2.0833" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="4.1667" x="546.3542" y="381.0221"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="16.6667" font-weight="bold" lengthAdjust="spacing" textLength="121.875" x="410.9375" y="416.2842">MovieService</text><line style="stroke:#2196F3;stroke-width:1.0416666666666667;" x1="385.9375" x2="568.2292" y1="430.6315" y2="430.6315"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="4.1667" x="410.9375" y="456.8176"> </text></g><!--MD5=[d5e734e716f1c3ce9a852f31284e0a2d]
+entity slave_player--><g id="elem_slave_player"><rect fill="url(#g1t5f3965njf2y0)" filter="url(#f1t5f3965njf2y)" height="115.2018" rx="4.1667" ry="4.1667" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="173.9583" x="390.1042" y="97.168"/><rect fill="url(#g1t5f3965njf2y0)" height="10.4167" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="15.625" x="543.2292" y="102.3763"/><rect fill="url(#g1t5f3965njf2y0)" height="2.0833" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="4.1667" x="541.1458" y="104.4596"/><rect fill="url(#g1t5f3965njf2y0)" height="2.0833" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="4.1667" x="541.1458" y="108.6263"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="16.6667" font-weight="bold" lengthAdjust="spacing" textLength="111.4583" x="416.1458" y="143.8883">Slave Player</text><line style="stroke:#2196F3;stroke-width:1.0416666666666667;" x1="391.1458" x2="563.0208" y1="158.2357" y2="158.2357"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="4.1667" x="416.1458" y="184.4218"> </text></g><!--MD5=[cb3d4dfbea20ff16a76089163b3ed77a]
+entity mobile_chat--><g id="elem_mobile_chat"><rect fill="url(#g1t5f3965njf2y0)" filter="url(#f1t5f3965njf2y)" height="173.4049" rx="4.1667" ry="4.1667" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="212.5" x="17.7083" y="340.918"/><rect fill="url(#g1t5f3965njf2y0)" height="10.4167" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="15.625" x="209.375" y="346.1263"/><rect fill="url(#g1t5f3965njf2y0)" height="2.0833" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="4.1667" x="207.2917" y="348.2096"/><rect fill="url(#g1t5f3965njf2y0)" height="2.0833" style="stroke:#2196F3;stroke-width:1.0416666666666667;" width="4.1667" x="207.2917" y="352.3763"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="16.6667" font-weight="bold" lengthAdjust="spacing" textLength="108.3333" x="43.75" y="387.6383">Mobile Chat</text><line style="stroke:#2196F3;stroke-width:1.0416666666666667;" x1="18.75" x2="229.1667" y1="401.9857" y2="401.9857"/><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="141.6667" x="43.75" y="428.1718">В чат можно кидать</text><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="150" x="43.75" y="442.7226">не только сообщения</text><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="129.1667" x="43.75" y="457.2734">пользователям, но</text><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="137.5" x="43.75" y="471.8241">и реакцию на сцену</text><text fill="#FFFFFF" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="134.375" x="43.75" y="486.3749">для видео-плееров.</text></g><!--MD5=[d1287d0bb52345c05f85a1eda7ebbe24]
+reverse link movie_service to master_player--><g id="link_movie_service_master_player"><path codeLine="34" d="M477.0833,490.8867 C477.0833,536.418 477.0833,597.6263 477.0833,641.8138 " fill="none" id="movie_service-backto-master_player" style="stroke:#2196F3;stroke-width:3.125;"/><polygon fill="#2196F3" points="477.0833,485.418,472.9167,494.793,477.0833,490.6263,481.25,494.793,477.0833,485.418" style="stroke:#2196F3;stroke-width:3.125;"/><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="27.0833" x="555.7292" y="568.1458">Это</text><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="48.9583" x="544.7917" y="582.6965">первое</text><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="165.625" x="488.5417" y="597.2473">websocket-подключение</text></g><!--MD5=[253bcba18e6293befbb0d7ab9818622f]
+reverse link slave_player to movie_service--><g id="link_slave_player_movie_service"><path codeLine="35" d="M477.0833,218.4909 C477.0833,264.0221 477.0833,325.2305 477.0833,369.418 " fill="none" id="slave_player-backto-movie_service" style="stroke:#2196F3;stroke-width:3.125;"/><polygon fill="#2196F3" points="477.0833,213.0221,472.9167,222.3971,477.0833,218.2305,481.25,222.3971,477.0833,213.0221" style="stroke:#2196F3;stroke-width:3.125;"/><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="27.0833" x="555.7292" y="267.1041">Это</text><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="50" x="544.2708" y="281.6549">второе</text><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="165.625" x="488.5417" y="296.2056">websocket-подключение</text></g><!--MD5=[e9367f41c0f325c6f80340eb17ced92a]
+link mobile_chat to movie_service--><g id="link_mobile_chat_movie_service"><path codeLine="36" d="M230.3854,427.3763 C277.7083,427.3763 333.0521,427.3763 379.3229,427.3763 " fill="none" id="mobile_chat-to-movie_service" style="stroke:#2196F3;stroke-width:3.125;"/><polygon fill="#2196F3" points="384.625,427.3763,375.25,423.2096,379.4167,427.3763,375.25,431.543,384.625,427.3763" style="stroke:#2196F3;stroke-width:3.125;"/><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="48.9583" x="280.9896" y="337.9374">Третье</text><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="68.75" x="271.0938" y="352.4882">веб-сокет</text><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="95.8333" x="259.6354" y="367.039">подключение.</text><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="25" x="292.9688" y="381.5898">Для</text><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="72.9167" x="271.0938" y="396.1405">текстовых</text><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="82.2917" x="266.4063" y="410.6913">сообщений.</text></g><!--MD5=[9d242a25cb93da4acd7b5856d720d3ea]
+@startuml
+!theme materia
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+skinparam maxmessagesize 70
+skinparam backgroundColor white
+
+title Синхронизация плееров
+
+component master_player [
+  =Master Player
+  - - - -
+
+]
+component movie_service [
+  =MovieService
+  - - - -
+
+]
+component slave_player [
+  =Slave Player
+  - - - -
+ 
+]
+component mobile_chat [
+  =Mobile Chat
+  - - - -
+  В чат можно кидать
+  не только сообщения
+  пользователям, но
+  и реакцию на сцену
+  для видео-плееров.
+]
+
+master_player -up-> movie_service: "Это первое websocket-подключение"
+movie_service -up-> slave_player: "Это второе websocket-подключение"
+mobile_chat -> movie_service: "Третье веб-сокет подключение. Для текстовых сообщений."
+@enduml
+
+@startuml
+
+
+
+skinparam backgroundColor transparent
+skinparam useBetaStyle false
+
+
+
+
+
+
+<style>
+  root {
+    BackgroundColor transparent
+    FontColor #FFF
+    HyperLinkColor #fd7e14
+    LineColor #1a78c2
+    LineThickness 1
+    Margin 10
+    Padding 6
+    Shadowing 0.0
+  }
+  node {
+   Padding 15
+   roundcorner 20
+   BackgroundColor #2196F3-#1a78c2
+  }
+  caption {
+    LineThickness 0
+  }
+  footer {
+    LineThickness 0
+  }
+  groupHeader {
+    BackgroundColor #fff
+    FontColor #9C27B0
+    FontStyle bold
+  }
+  header {
+    LineThickness 0
+  }
+  referenceHeader {
+    BackgroundColor transparent
+    FontColor #222
+    FontStyle bold
+  }
+  separator {
+    BackgroundColor #222
+    FontColor transparent
+    FontStyle bold
+  }
+  title {
+	FontSize 20
+	BorderRoundCorner            8
+	BorderThickness 	         1
+	BackgroundColor  #fff-#fff
+	FontColor #2196F3
+	BorderColor #fff
+  }
+  nwdiagDiagram {
+	network {
+			FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3    
+		LineColor #2196F3
+		LineThickness 1.0
+		FontColor #1a78c2
+	}
+	server {
+			FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	}
+	arrow {
+		FontColor #1a78c2
+		LineColor #1a78c2
+	}
+	group {
+		BackGroundColor #fff
+		LineColor $LIGHT_DARK
+		LineThickness 2.0
+		Margin 5
+		Padding 5
+	}
+  }
+  ganttDiagram {
+	task {
+			FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+		LineColor #2196F3
+		Margin 10
+		Padding 6
+	}
+	note {
+		FontColor #FFF
+		LineColor #7D1F8D
+		BackGroundColor #9C27B0
+	}
+	separator {
+		LineColor #fff
+		BackGroundColor #fff-#cccccc
+		FontColor #222
+	}
+	milestone {
+		FontColor #9C27B0
+		FontSize 16
+		FontStyle italic
+		BackGroundColor #fff
+		LineColor #cccccc
+	}
+	timeline {
+		BackgroundColor #fff
+		FontColor #222
+	}
+	closed {
+		BackgroundColor #CC7A00
+		FontColor #FFF
+	}
+  }
+</style>
+skinparam defaultFontName       "Verdana"
+skinparam defaultFontSize       12
+skinparam dpi                   100
+skinparam shadowing             true
+skinparam roundcorner           8
+skinparam ParticipantPadding    40
+skinparam BoxPadding            40
+skinparam Padding               10
+skinparam ArrowColor            #666
+skinparam stereotype {
+    CBackgroundColor #fff
+    CBorderColor #cccccc
+    ABackgroundColor #70bf73
+    ABorderColor #3D8C40
+    IBackgroundColor #B7161C
+    IBorderColor #b7161c
+    EBackgroundColor #ffad33
+    EBorderColor #CC7A00
+    NBackgroundColor #b052c0
+    NBorderColor #7D1F8D
+}
+skinparam title {
+	FontColor	                 #2196F3
+	BorderColor	                 #cccccc
+	FontSize	    	         20
+	BorderRoundCorner            8
+	BorderThickness 	         1
+	BackgroundColor              #fff-#fff
+}
+
+skinparam legend {
+	BackgroundColor #fff
+	BorderColor #cccccc
+	FontColor #222
+}
+
+skinparam swimlane {
+	BorderColor #9C27B0
+	BorderThickness 2
+	TitleBackgroundColor  #fff-#fff
+	TitleFontColor #2196F3
+}
+
+
+skinparam activity {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	BarColor #4CAF50
+	StartColor #9C27B0
+	EndColor #9C27B0
+	DiamondBackgroundColor #FFF-#fff
+  	DiamondBorderColor #cccccc
+	DiamondFontColor #222
+}
+
+
+skinparam participant {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	ParticipantBorderThickness 2
+}
+
+
+skinparam actor {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	FontColor #222
+}
+
+
+skinparam arrow {
+	Thickness 3
+	Color #2196F3
+	FontColor #222
+}
+
+
+skinparam sequence {
+	BorderColor #2196F3
+	TitleFontColor #2196F3
+	BackgroundColor transparent
+	StartColor #2196F3
+	EndColor #2196F3
+	BoxBackgroundColor #fff
+	BoxBorderColor #666
+	BoxFontColor #222
+	DelayFontColor #222
+	LifeLineBorderColor #cccccc
+	LifeLineBorderThickness 2
+	LifeLineBackgroundColor #fff
+	GroupBorderColor #666
+	GroupFontColor #222
+	GroupHeaderFontColor #9C27B0
+	DividerBackgroundColor #FFF-#fff
+    DividerBorderColor #666
+    DividerBorderThickness 2
+    DividerFontColor #222
+	ReferenceBackgroundColor transparent
+	ReferenceBorderColor #666
+	ReferenceFontColor #222
+	ReferenceHeaderFontColor #9C27B0
+	StereotypeFontColor #FFF
+}
+
+
+skinparam partition {
+	BorderColor #2196F3
+	FontColor #2196F3
+	BackgroundColor transparent
+}
+
+
+skinparam collections {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+}
+
+
+skinparam control {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	FontColor #222
+}
+
+
+skinparam entity {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	FontColor #222
+}
+
+
+skinparam boundary {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	FontColor #222
+}
+
+
+skinparam agent {
+	BackgroundColor #orange
+	BorderColor #999999
+	FontColor #333333
+}
+
+
+skinparam note {
+	BorderThickness 1
+	BackgroundColor #b052c0-#9C27B0
+	BorderColor #9C27B0
+	FontColor #FFF
+}
+
+
+skinparam artifact {
+	BackgroundColor #FFF-#fff
+	BorderColor #666
+	FontColor #666
+}
+
+
+skinparam component {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+}
+
+
+skinparam interface {
+	BackgroundColor  #B7161C
+	BorderColor  #e51c23
+	FontColor #222
+}
+
+
+skinparam storage {
+	BackgroundColor #ffad33-#ff9800
+  	BorderColor #ff9800
+	FontColor #FFF
+}
+
+
+skinparam node {
+	BackgroundColor #fff-#fff
+	BorderColor #222
+	FontColor #222
+}
+
+
+skinparam cloud {
+	BackgroundColor #F2FCFE-#eeeeee
+	BorderColor #F2FCFE
+	FontColor #222
+}
+
+
+skinparam database {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	FontColor #222
+}
+
+
+skinparam class {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	HeaderBackgroundColor #2196F3-#1a78c2
+	StereotypeFontColor #222
+	BorderThickness 1
+	AttributeFontColor #fff
+	AttributeFontSize 11
+}
+
+
+skinparam object {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	StereotypeFontColor #222
+	BorderThickness 1
+	AttributeFontColor #222
+	AttributeFontSize 11
+}
+
+
+skinparam usecase {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	BorderThickness 2
+	StereotypeFontColor #2196F3
+}
+
+
+skinparam rectangle {
+	FontColor #2196F3
+	BackgroundColor #fff-#fff
+	BorderThickness 2
+	StereotypeFontColor #2196F3
+}
+
+
+skinparam package {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	BackgroundColor #fff-#fff
+	BorderThickness 2
+}
+
+
+skinparam folder {
+	BackgroundColor #FFF-#fff
+  	BorderColor #ff9800
+	FontColor #ff9800
+	BorderThickness 2
+}
+
+
+skinparam frame {
+	BackgroundColor #FFF-#fff
+  	BorderColor #9C27B0
+	FontColor #9C27B0
+	BorderThickness 2
+}
+
+
+skinparam state {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+	BorderColor #1a78c2
+	StartColor #9C27B0
+	EndColor #9C27B0
+	AttributeFontColor #222
+	AttributeFontSize 11
+}
+
+
+skinparam queue {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+}
+
+
+skinparam card {
+	BackgroundColor #b052c0-#9C27B0
+	BorderColor #9C27B0
+	FontColor #FFF
+}
+
+
+skinparam file {
+	BackgroundColor #fff-#fff
+	BorderColor #666
+	FontColor #666
+
+}
+
+
+skinparam stack {
+		FontColor #FFF
+	BorderColor #2196F3
+	BackgroundColor #4dabf5-#2196F3
+}
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+skinparam maxmessagesize 70
+skinparam backgroundColor white
+
+title Синхронизация плееров
+
+component master_player [
+  =Master Player
+  - - - -
+
+]
+component movie_service [
+  =MovieService
+  - - - -
+
+]
+component slave_player [
+  =Slave Player
+  - - - -
+ 
+]
+component mobile_chat [
+  =Mobile Chat
+  - - - -
+  В чат можно кидать
+  не только сообщения
+  пользователям, но
+  и реакцию на сцену
+  для видео-плееров.
+]
+
+master_player -up-> movie_service: "Это первое websocket-подключение"
+movie_service -up-> slave_player: "Это второе websocket-подключение"
+mobile_chat -> movie_service: "Третье веб-сокет подключение. Для текстовых сообщений."
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 17:01:30 UTC 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>
