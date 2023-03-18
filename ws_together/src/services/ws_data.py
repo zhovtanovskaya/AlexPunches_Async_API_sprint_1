@@ -17,12 +17,12 @@ class WsData:
               websocket: QueryParamProtocol,
     ) -> set | None:
         """Получить набор всех вебсокетов, из комнаты websocket'а."""
-        if room_id := await cls._get_room_id_by_websocket(websocket):
-            return await cls._get_websockets_by_room_id(room_id)
+        if room_id := await cls.get_room_id_by_websocket(websocket):
+            return await cls.get_websockets_by_room_id(room_id)
         return None
 
     @classmethod
-    async def _get_room_id_by_websocket(
+    async def get_room_id_by_websocket(
               cls,
               websocket: QueryParamProtocol,
     ) -> str | None:
@@ -32,7 +32,7 @@ class WsData:
         return None
 
     @classmethod
-    async def _get_websockets_by_room_id(cls, room_id: str) -> set:
+    async def get_websockets_by_room_id(cls, room_id: str) -> set:
         return cls.rooms[room_id]
 
     @classmethod

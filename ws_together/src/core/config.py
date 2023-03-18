@@ -11,6 +11,11 @@ class EventTypes(str, Enum):
     room_state = 'room_state'
 
 
+class PlayerStatuses(str, Enum):
+    pause = 'pause'
+    play = 'play'
+
+
 class WebsocketSettings(BaseSettings):
     lead_role_name: str = 'lead'
     mute_role_name: str = 'mute'
@@ -18,6 +23,7 @@ class WebsocketSettings(BaseSettings):
     redis_port: str = Field('6379', env='redis_port')
     redis_db: int = 3
     event_types: Type[EventTypes] = EventTypes
+    player_statuses: Type[PlayerStatuses] = PlayerStatuses
 
 
 @lru_cache()

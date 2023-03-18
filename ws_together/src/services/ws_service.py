@@ -1,5 +1,6 @@
 import json
 from functools import lru_cache
+from typing import Type
 
 import websockets
 
@@ -11,19 +12,27 @@ from utils import messages as msg
 
 class WebsocketService:
 
+    ws_data: Type[WsData] = WsData()
+
+    @classmethod
+    async def send_to_websocket(
+              cls,
+              websocket: QueryParamProtocol,
+              message: dict[str, str],
+    ) -> None:
+        await websocket.send(json.dumps(message))
+
     @classmethod
     async def broadcast_to_room(
               cls,
-              websocket: QueryParamProtocol,
+              room_id: str,
               message: str,
     ) -> None:
-        if not cls._validate_message(websocket, message):
-            return None
-        clients = await WsData.get_rooms_websockets_by_websocket(websocket)
+        clients = await cls.ws_data.get_websockets_by_room_id(room_id)
         websockets.broadcast(clients, message)
 
     @classmethod
-    def _validate_message(
+    def validate_message(
               cls,
               websocket: QueryParamProtocol,
               message: str,
@@ -43,13 +52,29 @@ class WebsocketService:
                 return True
 
         if event_type == 'room_state':
-            if message_text == 'get_state':
-                return True
-            if (message_text == 'sent_state' and
-                config.lead_role_name in websocket.roles
+            if (
+                  message_text == 'sent_state' and
+                  config.lead_role_name not in websocket.roles
             ):
-                return True
+                # принимаем стейт только от ведущего
+                return False
+            return True
         return False
+
+    @classmethod
+    async def add_websocket_to_room(
+              cls,
+              room_id: str,
+              websocket: QueryParamProtocol,
+    ) -> None:
+        await cls.ws_data.add_websocket_to_room(room_id, websocket)
+
+    @classmethod
+    async def get_room_id_by_websocket(
+              cls,
+              websocket: QueryParamProtocol,
+    ) -> str:
+        return await cls.ws_data.get_room_id_by_websocket(websocket)
 
     @staticmethod
     def assign_lead(websocket: QueryParamProtocol) -> None:
@@ -72,7 +97,7 @@ class WebsocketService:
         websocket.roles.remove(config.mute_role_name)
 
     @staticmethod
-    def create_hello_event(websocket: QueryParamProtocol) -> dict:
+    async def create_hello_event(websocket: QueryParamProtocol) -> dict:
         if config.lead_role_name in websocket.roles:
             return {
                 'message': 'you_are_leader',
@@ -81,6 +106,26 @@ class WebsocketService:
         return {
             'message': msg.hello,
             'event_type': config.event_types.chat_message,
+        }
+
+    @classmethod
+    async def create_state_by_room_id(cls, room_id: str) -> dict:
+        return {
+            'timecode': 20,
+            'player_status': config.player_statuses.play,
+            'chat_messages': [
+                {
+                    'datetime': '',
+                    'user_name': 'user_1',
+                    'message': 'qwerqwe',
+                },
+                {
+                    'datetime': '',
+                    'user_name': 'user_1',
+                    'message': '444444444',
+                },
+            ],
+            'event_type': config.event_types.room_state,
         }
 
 
