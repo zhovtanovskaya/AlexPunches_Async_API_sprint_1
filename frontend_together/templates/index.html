@@ -26,7 +26,6 @@
 <main>
 
     <section class="py-0 bg-dark position-relative">
-
         <div class="row g-0">
             <div class="d-flex">
                 <div class="overflow-hidden fullscreen-video w-100">
@@ -85,8 +84,23 @@
                 <!-- Page content END -->
             </div>
         </div>
-
     </section>
+
+<!-- Button trigger modal -->
+
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Давай вместе смотреть «Чебурашку»</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Отлично!</button>
+      </div>
+    </div>
+  </div>
+</div>
 </main>
 <!-- **************** MAIN CONTENT END **************** -->
 
@@ -98,8 +112,23 @@
 <script src="/assets/vendor/plyr/plyr.js"></script>
 
 <!-- Template Functions -->
-<script src="/assets/js/functions.js"></script>
+
 <script>
+    document.documentElement.setAttribute('data-bs-theme', 'dark');
+    const playerHtmlvideo = new Plyr('video', {
+        controls: [ 'mute', 'volume', 'fullscreen', 'current-time'],
+        clickToPlay: false,
+        // controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'settings', 'pip', 'airplay', 'fullscreen']
+    });
+
+    const myModal = new bootstrap.Modal(document.getElementById('myModal'));
+    myModal.show();
+    const myModalEl = document.getElementById('myModal')
+    myModalEl.addEventListener('hide.bs.modal', function (event) {
+      playerHtmlvideo.play();
+    })
+    // hide.bs.modal
+
     window.addEventListener("DOMContentLoaded", () => {
         const chat = document.querySelector(".chat-form");
         // Open the WebSocket connection and register event handlers.
@@ -140,14 +169,14 @@
     function receiveMoves(board, websocket) {
         websocket.addEventListener("message", ({ data }) => {
             const event = JSON.parse(data);
-            console.log(event.message)
             switch (event.event_type) {
                 case "chat_message":
                     chatAdd(event.message, event.from);
+                    console.log(event.message)
                     break;
                 case "player_command":
                     // ...
-                    console.log(event.message);
+                    // console.log(event.message);
                     break;
                 case "room_state":
                     const chatMessages = event.chat_messages;
@@ -170,6 +199,7 @@
         const board = document.getElementById('board');
         board.innerHTML += '<p>' + user + ': ' + message + '</p>';
     }
+
 </script>
 
 </body>
