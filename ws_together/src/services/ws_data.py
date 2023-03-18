@@ -31,7 +31,6 @@ class WsData:
             return room_id
         return None
 
-
     @classmethod
     async def _get_websockets_by_room_id(cls, room_id: str) -> set:
         return cls.rooms[room_id]

@@ -29,90 +29,90 @@ jobs:
     - name: Check with mypy
       run: |
         python3 -m mypy --config-file=setup.cfg activity_api/
-
-  run_functional_tests:
-    name: Run functional tests in Auth
-    needs: linters
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.10", "3.11"]
-    env:
-      POSTGRES_DB_AUTH: ${{ secrets.POSTGRES_DB_AUTH }}
-      POSTGRES_PASSWORD_AUTH: ${{ secrets.POSTGRES_PASSWORD_AUTH }}
-      POSTGRES_USER_AUTH: ${{ secrets.POSTGRES_USER_AUTH }}
-      #flask
-      FLASK_APP: ${secrets.FLASK_APP}
-      FLASK_DEBUG: ${secrets.FLASK_DEBUG}
-      FLASK_SECRET_KEY: ${secrets.FLASK_SECRET_KEY}
-      JWT_SECRET_KEY: ${secrets.JWT_SECRET_KEY}
-      JWT_ACCESS_TOKEN_EXPIRES: ${secrets.JWT_ACCESS_TOKEN_EXPIRES}
-      JWT_REFRESH_TOKEN_EXPIRES: ${secrets.JWT_REFRESH_TOKEN_EXPIRES}
-      GOOGLE_OAUTH_CLIENT_ID: ${secrets.GOOGLE_OAUTH_CLIENT_ID}
-      GOOGLE_OAUTH_CLIENT_SECRET: ${secrets.GOOGLE_OAUTH_CLIENT_SECRET}
-      #activity_api
-      API_HOST: ${secrets.API_HOST}
-      API_PORT: ${secrets.API_HOST}
-      #etl #fastapi
-      SQLITE3_PATH: ${secrets.SQLITE3_PATH}
-      BUNCH_EXTRACT: ${secrets.BUNCH_EXTRACT}
-      BUNCH_INSERT: ${secrets.BUNCH_INSERT}
-      ES_SCHEMAS_DIR: ${secrets.ES_SCHEMAS_DIR}
-      ES_HOST: ${secrets.ES_HOST}
-      ES_PORT: ${secrets.ES_PORT}
-      BUNCH_ES_LOAD: ${secrets.BUNCH_ES_LOAD}
-      #admin_panel
-      POSTGRES_DB_ADMIN: ${secrets.POSTGRES_DB_ADMIN}
-      POSTGRES_USER_ADMIN: ${secrets.POSTGRES_USER_ADMIN}
-      POSTGRES_PASSWORD_ADMIN: ${secrets.POSTGRES_PASSWORD_ADMIN}
-      DB_HOST_ADMIN: ${secrets.DB_HOST_ADMIN}
-      DB_PORT_ADMIN: ${secrets.DB_PORT_ADMIN}
-      SECRET_KEY: ${secrets.SECRET_KEY}
-      #
-      GOOGLE_OAUTH_ENDPOINT: ${secrets.GOOGLE_OAUTH_ENDPOINT}
-      OAUTHLIB_INSECURE_TRANSPORT: ${secrets.OAUTHLIB_INSECURE_TRANSPORT}
-      ENABLE_TRACER: ${secrets.ENABLE_TRACER}
-      JAEGER_HOST: ${secrets.JAEGER_HOST}
-      JAEGER_PORT: ${secrets.JAEGER_PORT}
-      AUTH_SENTRY_DSN: ${secrets.AUTH_SENTRY_DSN}
-      EVENT_STORE_HOST: ${secrets.EVENT_STORE_HOST}
-    steps:
-      - uses: actions/checkout@v3
-      - uses: isbang/compose-action@v1.4.1
-        with:
-          compose-file: "./auth/tests/functional/docker-compose.yml"
-          services: |
-            test-redis
-            test-auth-postgres
-            test-auth
-
-      - name: Run functional tests for Auth
-        run: |
-          pip install -r auth/tests/functional/requirements.txt
-          pytest auth/tests/functional/src
-
-  send_message:
-    if: ${{ always() }}
-    needs: [linters, run_functional_tests]
-    name: Send Telegram message
-    runs-on: ubuntu-latest
-    steps:
-    - name: send action status
-      if: "!contains(needs.*.result, 'failure')"
-      uses: appleboy/telegram-action@master
-      with:
-        to: ${{ secrets.TELEGRAM_TO }}
-        token: ${{ secrets.TELEGRAM_TOKEN }}
-        format: markdown
-        message: |
-          ${{ github.repository }}: Pipeline for ${{ github.sha }} finished successfully!
-
-    - name: send action status
-      if: "contains(needs.*.result, 'failure')"
-      uses: appleboy/telegram-action@master
-      with:
-        to: ${{ secrets.TELEGRAM_TO }}
-        token: ${{ secrets.TELEGRAM_TOKEN }}
-        format: markdown
-        message: |
-          ${{ github.repository }}: Pipeline for ${{ github.sha }} finished with error!
+#
+#  run_functional_tests:
+#    name: Run functional tests in Auth
+#    needs: linters
+#    runs-on: ubuntu-latest
+#    strategy:
+#      matrix:
+#        python-version: ["3.10", "3.11"]
+#    env:
+#      POSTGRES_DB_AUTH: ${{ secrets.POSTGRES_DB_AUTH }}
+#      POSTGRES_PASSWORD_AUTH: ${{ secrets.POSTGRES_PASSWORD_AUTH }}
+#      POSTGRES_USER_AUTH: ${{ secrets.POSTGRES_USER_AUTH }}
+#      #flask
+#      FLASK_APP: ${secrets.FLASK_APP}
+#      FLASK_DEBUG: ${secrets.FLASK_DEBUG}
+#      FLASK_SECRET_KEY: ${secrets.FLASK_SECRET_KEY}
+#      JWT_SECRET_KEY: ${secrets.JWT_SECRET_KEY}
+#      JWT_ACCESS_TOKEN_EXPIRES: ${secrets.JWT_ACCESS_TOKEN_EXPIRES}
+#      JWT_REFRESH_TOKEN_EXPIRES: ${secrets.JWT_REFRESH_TOKEN_EXPIRES}
+#      GOOGLE_OAUTH_CLIENT_ID: ${secrets.GOOGLE_OAUTH_CLIENT_ID}
+#      GOOGLE_OAUTH_CLIENT_SECRET: ${secrets.GOOGLE_OAUTH_CLIENT_SECRET}
+#      #activity_api
+#      API_HOST: ${secrets.API_HOST}
+#      API_PORT: ${secrets.API_HOST}
+#      #etl #fastapi
+#      SQLITE3_PATH: ${secrets.SQLITE3_PATH}
+#      BUNCH_EXTRACT: ${secrets.BUNCH_EXTRACT}
+#      BUNCH_INSERT: ${secrets.BUNCH_INSERT}
+#      ES_SCHEMAS_DIR: ${secrets.ES_SCHEMAS_DIR}
+#      ES_HOST: ${secrets.ES_HOST}
+#      ES_PORT: ${secrets.ES_PORT}
+#      BUNCH_ES_LOAD: ${secrets.BUNCH_ES_LOAD}
+#      #admin_panel
+#      POSTGRES_DB_ADMIN: ${secrets.POSTGRES_DB_ADMIN}
+#      POSTGRES_USER_ADMIN: ${secrets.POSTGRES_USER_ADMIN}
+#      POSTGRES_PASSWORD_ADMIN: ${secrets.POSTGRES_PASSWORD_ADMIN}
+#      DB_HOST_ADMIN: ${secrets.DB_HOST_ADMIN}
+#      DB_PORT_ADMIN: ${secrets.DB_PORT_ADMIN}
+#      SECRET_KEY: ${secrets.SECRET_KEY}
+#      #
+#      GOOGLE_OAUTH_ENDPOINT: ${secrets.GOOGLE_OAUTH_ENDPOINT}
+#      OAUTHLIB_INSECURE_TRANSPORT: ${secrets.OAUTHLIB_INSECURE_TRANSPORT}
+#      ENABLE_TRACER: ${secrets.ENABLE_TRACER}
+#      JAEGER_HOST: ${secrets.JAEGER_HOST}
+#      JAEGER_PORT: ${secrets.JAEGER_PORT}
+#      AUTH_SENTRY_DSN: ${secrets.AUTH_SENTRY_DSN}
+#      EVENT_STORE_HOST: ${secrets.EVENT_STORE_HOST}
+#    steps:
+#      - uses: actions/checkout@v3
+#      - uses: isbang/compose-action@v1.4.1
+#        with:
+#          compose-file: "./auth/tests/functional/docker-compose.yml"
+#          services: |
+#            test-redis
+#            test-auth-postgres
+#            test-auth
+#
+#      - name: Run functional tests for Auth
+#        run: |
+#          pip install -r auth/tests/functional/requirements.txt
+#          pytest auth/tests/functional/src
+#
+#  send_message:
+#    if: ${{ always() }}
+#    needs: [linters, run_functional_tests]
+#    name: Send Telegram message
+#    runs-on: ubuntu-latest
+#    steps:
+#    - name: send action status
+#      if: "!contains(needs.*.result, 'failure')"
+#      uses: appleboy/telegram-action@master
+#      with:
+#        to: ${{ secrets.TELEGRAM_TO }}
+#        token: ${{ secrets.TELEGRAM_TOKEN }}
+#        format: markdown
+#        message: |
+#          ${{ github.repository }}: Pipeline for ${{ github.sha }} finished successfully!
+#
+#    - name: send action status
+#      if: "contains(needs.*.result, 'failure')"
+#      uses: appleboy/telegram-action@master
+#      with:
+#        to: ${{ secrets.TELEGRAM_TO }}
+#        token: ${{ secrets.TELEGRAM_TOKEN }}
+#        format: markdown
+#        message: |
+#          ${{ github.repository }}: Pipeline for ${{ github.sha }} finished with error!

@@ -30,15 +30,26 @@ class WebsocketService:
     ) -> bool:
         json_message = json.loads(message)
         event_type = json_message.get('event_type')
+        message_text = json_message.get('message')
         if not event_type:
             return False
+
         if event_type == 'player_command':
-            if config.lead_role_name not in websocket.roles:
-                return False
+            if config.lead_role_name in websocket.roles:
+                return True
+
         if event_type == 'chat_message':
-            if config.mute_role_name in websocket.roles:
-                return False
-        return True
+            if config.mute_role_name not in websocket.roles:
+                return True
+
+        if event_type == 'room_state':
+            if message_text == 'get_state':
+                return True
+            if (message_text == 'sent_state' and
+                config.lead_role_name in websocket.roles
+            ):
+                return True
+        return False
 
     @staticmethod
     def assign_lead(websocket: QueryParamProtocol) -> None:
@@ -65,11 +76,11 @@ class WebsocketService:
         if config.lead_role_name in websocket.roles:
             return {
                 'message': 'you_are_leader',
-                'event_type': 'player_command',
+                'event_type': config.event_types.player_command,
             }
         return {
             'message': msg.hello,
-            'event_type': 'chat_message',
+            'event_type': config.event_types.chat_message,
         }
 
 
