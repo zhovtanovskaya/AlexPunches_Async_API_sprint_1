@@ -21,11 +21,7 @@ async def handler(websocket):
     await websocket.send(json.dumps(hello_event))
 
     async for message in websocket:
-        event = json.loads(message)
-        clients = await WsData.get_all_rooms_websockets_by_websocket(
-            websocket=websocket,
-        )
-        websockets.broadcast(clients, json.dumps(event))
+        await ws_service.broadcast_to_room(websocket, message)
 
 
 async def main():
@@ -39,7 +35,7 @@ async def main():
                 create_protocol=QueryParamProtocol,
             ):
         await asyncio.Future()
-        await db_redis.redis.close()
+    await db_redis.redis.close()
 
 
 if __name__ == "__main__":

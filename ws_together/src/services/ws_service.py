@@ -1,11 +1,44 @@
+import json
 from functools import lru_cache
+
+import websockets
 
 from core.config import config
 from core.ws_protocol import QueryParamProtocol
+from services.ws_data import WsData
 from utils import messages as msg
 
 
 class WebsocketService:
+
+    @classmethod
+    async def broadcast_to_room(
+              cls,
+              websocket: QueryParamProtocol,
+              message: str,
+    ) -> None:
+        if not cls._validate_message(websocket, message):
+            return None
+        clients = await WsData.get_rooms_websockets_by_websocket(websocket)
+        websockets.broadcast(clients, message)
+
+    @classmethod
+    def _validate_message(
+              cls,
+              websocket: QueryParamProtocol,
+              message: str,
+    ) -> bool:
+        json_message = json.loads(message)
+        event_type = json_message.get('event_type')
+        if not event_type:
+            return False
+        if event_type == 'player_command':
+            if config.lead_role_name not in websocket.roles:
+                return False
+        if event_type == 'chat_message':
+            if config.mute_role_name in websocket.roles:
+                return False
+        return True
 
     @staticmethod
     def assign_lead(websocket: QueryParamProtocol) -> None:

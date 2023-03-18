@@ -12,7 +12,7 @@ class WsData:
     rooms: dict[str, set] = {}
 
     @classmethod
-    async def get_all_rooms_websockets_by_websocket(
+    async def get_rooms_websockets_by_websocket(
               cls,
               websocket: QueryParamProtocol,
     ) -> set | None:

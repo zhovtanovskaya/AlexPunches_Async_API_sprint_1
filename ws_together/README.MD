@@ -8,6 +8,6 @@ python ws_together/src/main.py
 Нужны клиеты  
 ```bash
 cd frontend_together
-python -m http.server
+python server.py
 ```
-теперь можно открыть пару вкладок браузеров [localhost:8000](http://localhost:8000)
+теперь можно открыть пару вкладок браузеров [localhost:8000/room-213](http://localhost:8000/room-123)
