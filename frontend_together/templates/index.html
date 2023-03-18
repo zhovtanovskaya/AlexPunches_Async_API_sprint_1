@@ -147,11 +147,14 @@
                     break;
                 case "player_command":
                     // ...
-                    console.log(event.message)
+                    console.log(event.message);
                     break;
                 case "room_state":
-                    // ...
-                    console.log(event)
+                    const chatMessages = event.chat_messages;
+                    chatMessages.forEach((item, index, array) => {
+                        chatAdd(item.message, item.user_name);
+                    })
+                    console.log(chatMessages);
                     break;
                 case "error":
                     // ...

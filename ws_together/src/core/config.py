@@ -8,6 +8,7 @@ from pydantic import BaseSettings, Field
 class EventTypes(str, Enum):
     chat_message = 'chat_message'
     player_command = 'player_command'
+    room_command = 'room_command'
     room_state = 'room_state'
 
 

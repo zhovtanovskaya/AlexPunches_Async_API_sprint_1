@@ -51,12 +51,12 @@ class WebsocketService:
             if config.mute_role_name not in websocket.roles:
                 return True
 
-        if event_type == 'room_state':
+        if event_type == 'room_command':
             if (
                   message_text == 'sent_state' and
                   config.lead_role_name not in websocket.roles
             ):
-                # принимаем стейт только от ведущего
+                # принимаем room_command sent_state только от ведущего
                 return False
             return True
         return False
@@ -101,10 +101,12 @@ class WebsocketService:
         if config.lead_role_name in websocket.roles:
             return {
                 'message': 'you_are_leader',
+                'from': 'bot',
                 'event_type': config.event_types.player_command,
             }
         return {
             'message': msg.hello,
+            'from': 'bot',
             'event_type': config.event_types.chat_message,
         }
 
