@@ -6,10 +6,11 @@ from pydantic import BaseSettings, Field
 
 
 class EventTypes(str, Enum):
-    chat_message = 'chat_message'
-    player_command = 'player_command'
-    room_command = 'room_command'
-    room_state = 'room_state'
+    chat_message = 'chat_message'  # Сообщения в чат
+    broadcast_command = 'broadcast_command'  # Команды на все плееры в руме (pause, play, ...)
+    room_command = 'room_command'  # Команды WS-серверу (get_room_state, get_player_state, ...)
+    chat_state = 'chat_state' # история всех сообщений чата для комнаты
+    player_state = 'player_state' # состояние плеера (пока только timestamp, и статус "ведущий")
 
 
 class PlayerStatuses(str, Enum):

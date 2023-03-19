@@ -14,19 +14,15 @@ ws_service = get_websocket_service()
 async def handler(websocket):
     room_id = websocket.room_id
     await ws_service.add_websocket_to_room(room_id, websocket)
+    await ws_service.welcome_websocket(websocket)
 
-    # отправить текущий стейт подключившемуся
-    state_msg = await ws_service.create_state_by_room_id(room_id)
-    await ws_service.send_to_websocket(websocket, message=state_msg)
-    # отправить приветственное сообщение
-    hello_msg = await ws_service.create_hello_event(websocket)
-    await ws_service.send_to_websocket(websocket, message=hello_msg)
 
     async for message in websocket:
-        if not ws_service.validate_message(websocket, message):
-            return None
-        room_id = await ws_service.get_room_id_by_websocket(websocket)
-        await ws_service.broadcast_to_room(room_id, message)
+        # если сообщение прошло валидацию, отправляем всей комнате
+        # сервисные сообщения обрабатываются на уровне валидации
+        if valid_message := await ws_service.validate_message(websocket, message):
+            room_id = await ws_service.get_room_id_by_websocket(websocket)
+            await ws_service.broadcast_to_room(room_id, valid_message)
 
 
 async def main():

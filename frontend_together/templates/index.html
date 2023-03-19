@@ -31,7 +31,7 @@
                 <div class="overflow-hidden fullscreen-video w-100">
                     <!-- Full screen video START -->
                     <div class="video-player rounded-3">
-                        <video controls crossorigin="anonymous" playsinline poster="/assets/images/videos/poster.jpg">
+                        <video crossorigin="anonymous" playsinline poster="/assets/images/videos/poster.jpg">
                             <source src="/assets/images/videos/720p.mp4" type="video/mp4" size="720">
                         </video>
                     </div>
@@ -115,30 +115,18 @@
 
 <script>
     document.documentElement.setAttribute('data-bs-theme', 'dark');
-    const playerHtmlvideo = new Plyr('video', {
-        controls: [ 'mute', 'volume', 'fullscreen', 'current-time'],
-        clickToPlay: false,
-        // controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'settings', 'pip', 'airplay', 'fullscreen']
-    });
-
     const myModal = new bootstrap.Modal(document.getElementById('myModal'));
     myModal.show();
-    const myModalEl = document.getElementById('myModal')
-    myModalEl.addEventListener('hide.bs.modal', function (event) {
-      playerHtmlvideo.play();
-    })
-    // hide.bs.modal
+    const myModalEl = document.getElementById('myModal');
+    let controls = ['mute', 'volume', 'fullscreen', 'current-time'];
+    let clickToPlay = false;
+    let playerHtmlvideo = new Plyr('video', {
+        controls: controls,
+        clickToPlay: clickToPlay,
+    });
 
     window.addEventListener("DOMContentLoaded", () => {
         const chat = document.querySelector(".chat-form");
-        // Open the WebSocket connection and register event handlers.
-
-        const path = location.pathname.split('/');
-        if (path[path.length-1].indexOf('.html')>-1) {
-            path.length = path.length - 1;
-        }
-        const roomPath = path.join('/');
-        console.log(roomPath);
         const websocket = new WebSocket("ws://localhost:8001/{{ room_id }}?token={{ token }}");
 
         receiveMoves(chat, websocket);
@@ -150,40 +138,59 @@
         chat.addEventListener("submit", function(e) {
             e.preventDefault()
             const messageelement = document.getElementById('chat-text');
-            const message = messageelement.value;
+            const messageText = messageelement.value;
 
-            if (message === '') {
+            if (messageText === '') {
                 return;
             }
-            const event = {
+            const messageObj = {
                 event_type: "chat_message",
-                user_id: "user_1",
-                message: message,
+                payload: {
+                    "message": messageText,
+                },
             };
-            websocket.send(JSON.stringify(event));
-            console.log(message);
+            websocket.send(JSON.stringify(messageObj));
             messageelement.value = "";
+        });
+
+        // Когда закрываем приветственное модальное окно, запрашиваем стейт плеера, чтобы переключить на нужное время
+        myModalEl.addEventListener('hide.bs.modal', function (event) {
+            const messageObj = {
+                event_type: "room_command",
+                payload: {
+                    "command": "get_player_state",
+                },
+            };
+            websocket.send(JSON.stringify(messageObj));
         });
     }
 
     function receiveMoves(board, websocket) {
         websocket.addEventListener("message", ({ data }) => {
             const event = JSON.parse(data);
+            const payload = event.payload;
             switch (event.event_type) {
                 case "chat_message":
-                    chatAdd(event.message, event.from);
-                    console.log(event.message)
+                    chatAdd(payload.message, payload.from);
                     break;
-                case "player_command":
-                    // ...
-                    // console.log(event.message);
+                case "player_state":
+                    console.log(payload)
+                    if (payload.player_type === 'lead'){
+                        playerInit('lead')
+                    }
+                    if (payload.timecode) {
+                        playerHtmlvideo.currentTime = payload.timecode;
+                    }
                     break;
-                case "room_state":
-                    const chatMessages = event.chat_messages;
+                case "chat_state":
+                    const chatMessages = payload.chat_messages;
                     chatMessages.forEach((item, index, array) => {
                         chatAdd(item.message, item.user_name);
                     })
-                    console.log(chatMessages);
+                    break;
+                case "room_command":
+                    break;
+                case "video_state":
                     break;
                 case "error":
                     // ...
@@ -194,6 +201,19 @@
         });
     }
 
+    function playerInit(type) {
+        if (type === 'lead') {
+            playerHtmlvideo.destroy()
+            controls = ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'airplay', 'fullscreen'];
+            clickToPlay = true;
+            console.log(controls)
+            playerHtmlvideo = new Plyr('video', {
+                controls: controls,
+                clickToPlay: clickToPlay,
+            });
+        }
+
+    }
 
     function chatAdd(message, user) {
         const board = document.getElementById('board');

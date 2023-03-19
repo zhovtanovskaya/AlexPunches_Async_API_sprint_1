@@ -32,34 +32,44 @@ class WebsocketService:
         websockets.broadcast(clients, message)
 
     @classmethod
-    def validate_message(
+    async def validate_message(
               cls,
               websocket: QueryParamProtocol,
               message: str,
-    ) -> bool:
+    ) -> str | None:
         json_message = json.loads(message)
         event_type = json_message.get('event_type')
-        message_text = json_message.get('message')
+        payload = json_message.get('payload')
         if not event_type:
-            return False
+            return None
 
-        if event_type == 'player_command':
-            if config.lead_role_name in websocket.roles:
-                return True
-
-        if event_type == 'chat_message':
+        if event_type == config.event_types.chat_message:
             if config.mute_role_name not in websocket.roles:
-                return True
+                return message
 
-        if event_type == 'room_command':
-            if (
-                  message_text == 'sent_state' and
-                  config.lead_role_name not in websocket.roles
-            ):
-                # принимаем room_command sent_state только от ведущего
-                return False
-            return True
-        return False
+        if event_type == config.event_types.broadcast_command:
+            if config.lead_role_name in websocket.roles:
+                return message
+
+        if event_type == config.event_types.room_command:
+            room_id = await cls.get_room_id_by_websocket(websocket)
+            # get_room_state
+            if payload.get('command') == 'get_room_state':
+                chat_state = await cls.get_chat_state_by_websocket(room_id)
+                await cls.send_to_websocket(websocket, chat_state)
+                return None
+            # get_player_state
+            if payload.get('command') == 'get_player_state':
+                player_state = await cls.get_player_state_by_websocket(websocket)
+                await cls.send_to_websocket(websocket, player_state)
+                return None
+            if payload.get('command') == 'set_state':
+                if config.lead_role_name not in websocket.roles:
+                    # принимаем room_command sent_state только от ведущего
+                    return None
+
+            return message
+        return None
 
     @classmethod
     async def add_websocket_to_room(
@@ -97,38 +107,65 @@ class WebsocketService:
         websocket.roles.remove(config.mute_role_name)
 
     @staticmethod
-    async def create_hello_event(websocket: QueryParamProtocol) -> dict:
-        if config.lead_role_name in websocket.roles:
-            return {
-                'message': 'you_are_leader',
-                'from': 'bot',
-                'event_type': config.event_types.player_command,
-            }
+    async def create_hello_msg(websocket: QueryParamProtocol) -> dict:
         return {
-            'message': msg.hello,
-            'from': 'bot',
             'event_type': config.event_types.chat_message,
+            'payload': {
+                'message': msg.hello,
+                'from': 'bot',
+            },
         }
 
     @classmethod
-    async def create_state_by_room_id(cls, room_id: str) -> dict:
+    async def get_chat_state_by_websocket(
+              cls,
+              websocket: QueryParamProtocol,
+    ) -> dict:
         return {
-            'timecode': 20,
-            'player_status': config.player_statuses.play,
-            'chat_messages': [
-                {
-                    'datetime': '',
-                    'user_name': 'user_1',
-                    'message': 'qwerqwe',
-                },
-                {
-                    'datetime': '',
-                    'user_name': 'user_1',
-                    'message': '444444444',
-                },
-            ],
-            'event_type': config.event_types.room_state,
+            'payload': {
+                'chat_messages': [
+                    {
+                        'datetime': '',
+                        'user_name': 'user_1',
+                        'message': 'qwerqwe',
+                    },
+                    {
+                        'datetime': '',
+                        'user_name': 'user_1',
+                        'message': '444444444',
+                    },
+                ],
+            },
+            'event_type': config.event_types.chat_state,
         }
+
+    @classmethod
+    async def get_player_state_by_websocket(
+              cls,
+              websocket: QueryParamProtocol,
+    ) -> dict:
+        player_type = ''
+        if config.lead_role_name in websocket.roles:
+            player_type = config.lead_role_name
+        return {
+            'payload': {
+                'player_type': player_type,
+                'timecode': 20,
+            },
+            'event_type': config.event_types.player_state,
+        }
+
+    @classmethod
+    async def welcome_websocket(cls, websocket: QueryParamProtocol) -> None:
+        # отправить текущий стейт чата подключившемуся
+        chat_state = await cls.get_chat_state_by_websocket(websocket)
+        await cls.send_to_websocket(websocket, message=chat_state)
+        # # отправить текущий стейт плеера подключившемуся
+        # player_state = await cls.get_player_state_by_websocket(websocket)
+        # await cls.send_to_websocket(websocket, message=player_state)
+        # отправить приветственное сообщение от бота
+        hello_msg = await cls.create_hello_msg(websocket)
+        await cls.send_to_websocket(websocket, message=hello_msg)
 
 
 @lru_cache()
