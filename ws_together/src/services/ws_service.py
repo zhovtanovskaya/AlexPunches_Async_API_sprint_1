@@ -131,7 +131,6 @@ class WebsocketService:
         }
         await cls.send_to_websocket(websocket, message=message)
 
-
     async def save_state(
               self,
               websocket: QueryParamProtocol,

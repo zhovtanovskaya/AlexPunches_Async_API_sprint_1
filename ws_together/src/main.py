@@ -11,6 +11,7 @@ from services.ws_service import WebsocketService, get_websocket_service
 ws_service: WebsocketService = get_websocket_service()
 ws_data: WsData = get_ws_data()
 
+
 async def handler(websocket):
     room_id = websocket.room_id
     await ws_data.add_websocket_to_room(room_id, websocket)

@@ -2,7 +2,6 @@ from handlers.base import BaseHandler
 
 from core.config import config, logger
 from services.ws_data import WsData, get_ws_data
-from services.ws_service import get_websocket_service
 from utils import messages as msg
 
 ws_data: WsData = get_ws_data()

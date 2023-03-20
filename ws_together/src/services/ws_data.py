@@ -71,7 +71,6 @@ class WsData:
         self._set_lead_for_room(room_id, new_lead)
         return new_lead
 
-
     def _set_lead_for_room(
               self,
               room_id: str,
