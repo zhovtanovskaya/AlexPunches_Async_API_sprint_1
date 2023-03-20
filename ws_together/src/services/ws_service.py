@@ -6,14 +6,15 @@ import websockets
 
 from core.config import config
 from core.ws_protocol import QueryParamProtocol
-from services.ws_data import WsData
+from services.ws_data import WsData, get_ws_data
 from utils import messages as msg
 from utils.helpers import orjson_dumps
+
+ws_data: WsData = get_ws_data()
 
 
 class WebsocketService:
 
-    ws_data: Type[WsData] = WsData()
 
     @classmethod
     async def send_to_websocket(
@@ -30,7 +31,7 @@ class WebsocketService:
               message: dict[str, str],
               exclude: set[QueryParamProtocol] | None = None,
     ) -> None:
-        clients = await cls.ws_data.get_websockets_by_room_id(room_id)
+        clients = await ws_data.get_websockets_by_room_id(room_id)
         if exclude is not None:
             clients = clients - exclude
         websockets.broadcast(clients, orjson_dumps(message))
@@ -41,7 +42,7 @@ class WebsocketService:
               room_id: str,
               websocket: QueryParamProtocol,
     ) -> None:
-        await cls.ws_data.add_websocket_to_room(room_id, websocket)
+        await ws_data.add_websocket_to_room(room_id, websocket)
 
     @staticmethod
     def assign_lead(websocket: QueryParamProtocol) -> None:
@@ -102,7 +103,7 @@ class WebsocketService:
               websocket: QueryParamProtocol,
     ) -> dict:
         player_type = ''
-        if config.lead_role_name in websocket.roles:
+        if websocket == ws_data.get_lead_by_room_id(websocket.room_id):
             player_type = config.lead_role_name
         return {
             'payload': {
@@ -142,6 +143,7 @@ class WebsocketService:
             'event_type': config.event_types.error,
         }
         await cls.send_to_websocket(websocket, error_message)
+
 
 @lru_cache()
 def get_websocket_service() -> WebsocketService:

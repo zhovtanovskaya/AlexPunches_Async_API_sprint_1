@@ -123,7 +123,10 @@
     let playerHtmlvideo = new Plyr('video', {
         controls: controls,
         clickToPlay: clickToPlay,
+        player_type: 'lead',
     });
+    playerHtmlvideo.player_type = 'watcher';
+
 
     window.addEventListener("DOMContentLoaded", () => {
         const chat = document.querySelector(".chat-form");
@@ -132,6 +135,7 @@
         receiveMoves(chat, websocket);
         sendMoves(chat, websocket);
     });
+
 
 
     function sendMoves(chat, websocket) {
@@ -144,7 +148,7 @@
                 return;
             }
             const messageObj = {
-                event_type: "chat_message",
+                event_type: "broadcast_message",
                 payload: {
                     "message": messageText,
                 },
@@ -156,7 +160,7 @@
         // Когда закрываем приветственное модальное окно, запрашиваем стейт плеера, чтобы переключить на нужное время
         myModalEl.addEventListener('hide.bs.modal', function (event) {
             const messageObj = {
-                event_type: "room_command",
+                event_type: "room_request",
                 payload: {
                     "command": "get_player_state",
                 },
@@ -170,16 +174,24 @@
             const event = JSON.parse(data);
             const payload = event.payload;
             switch (event.event_type) {
-                case "chat_message":
+                case "broadcast_message":
                     chatAdd(payload.message, payload.from);
                     break;
                 case "player_state":
-                    console.log(payload)
-                    if (payload.player_type === 'lead'){
-                        playerInit('lead')
+                    if (payload.player_type === 'lead' && playerHtmlvideo.player_type !== 'lead'){
+                        playerInit('lead', websocket);
                     }
                     if (payload.timecode) {
                         playerHtmlvideo.currentTime = payload.timecode;
+                        console.log('get-currentTime')
+                    }
+                    if (payload.player_status === 'play'){
+                        playerHtmlvideo.play();
+                        console.log('get-play')
+                    }
+                    if (payload.player_status === 'pause'){
+                        playerHtmlvideo.pause();
+                        console.log('get-pause')
                     }
                     break;
                 case "chat_state":
@@ -188,28 +200,75 @@
                         chatAdd(item.message, item.user_name);
                     })
                     break;
-                case "room_command":
+                case "broadcast_command":
+                    if (payload.timecode) {
+                        playerHtmlvideo.currentTime = payload.timecode;
+                        console.log('get-currentTime')
+                    }
+                    if (payload.player_status === 'play'){
+                        playerHtmlvideo.play();
+                        console.log('get-play')
+                    }
+                    if (payload.player_status === 'pause'){
+                        playerHtmlvideo.pause();
+                        console.log('get-pause')
+                    }
                     break;
                 case "video_state":
                     break;
                 case "error":
-                    // ...
+                    const errorMessages = payload.message;
+                    console.log(errorMessages)
                     break;
                 default:
+                    console.log(event.event_type)
                     throw new Error("Unsupported event type: ${event.type}.");
             }
         });
     }
 
-    function playerInit(type) {
+    function playerInit(type, websocket) {
         if (type === 'lead') {
             playerHtmlvideo.destroy()
             controls = ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'airplay', 'fullscreen'];
             clickToPlay = true;
-            console.log(controls)
             playerHtmlvideo = new Plyr('video', {
                 controls: controls,
                 clickToPlay: clickToPlay,
+            });
+            playerHtmlvideo.player_type = 'lead';
+
+            playerHtmlvideo.on('play', (event) => {
+                const messageObj = {
+                    event_type: "broadcast_command",
+                    payload: {
+                        'timecode': playerHtmlvideo.currentTime,
+                        'player_status': 'play',
+                    },
+                };
+                websocket.send(JSON.stringify(messageObj));
+                console.log('play')
+            });
+            playerHtmlvideo.on('pause', (event) => {
+                const messageObj = {
+                    event_type: "broadcast_command",
+                    payload: {
+                        'timecode': playerHtmlvideo.currentTime,
+                        'player_status': 'pause',
+                    },
+                };
+                websocket.send(JSON.stringify(messageObj));
+                console.log('pause')
+            });
+            playerHtmlvideo.on('seeked', (event) => {
+                const messageObj = {
+                    event_type: "broadcast_command",
+                    payload: {
+                        'timecode': playerHtmlvideo.currentTime,
+                    },
+                };
+                websocket.send(JSON.stringify(messageObj));
+                console.log('seeked')
             });
         }
 

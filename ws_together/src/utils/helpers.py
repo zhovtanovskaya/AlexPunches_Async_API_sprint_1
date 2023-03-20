@@ -21,4 +21,3 @@ def get_room_id_by_path(path):
         return PurePosixPath(unquote(urlparse(path).path)).parts[1]
     except IndexError:
         return None
-

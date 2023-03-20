@@ -1,5 +1,3 @@
-from typing import Any, Mapping
-
 from pydantic import BaseModel, Field
 
 from core.config import EventTypes

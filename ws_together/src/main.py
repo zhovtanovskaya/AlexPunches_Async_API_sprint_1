@@ -14,8 +14,21 @@ async def handler(websocket):
     await ws_service.add_websocket_to_room(room_id, websocket)
     await ws_service.welcome_websocket(websocket)
 
-    async for message in websocket:
-        await message_handler_router(websocket, message)
+    try:
+        async for message in websocket:
+                await message_handler_router(websocket, message)
+    except Exception as e:
+        print(f'except {e}')
+    finally:
+        # TODO
+        # удалить из комнаты
+        #
+        # если ведущий
+        #    переназначить
+        #
+        # если вообще последний
+        #    удалить комнату
+        print(f'finaly {websocket}')
 
 
 async def main():

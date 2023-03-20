@@ -32,13 +32,12 @@ class QueryParamProtocol(websockets.WebSocketServerProtocol):
         self.room_id = room_id
 
         # TODO Назначить ведущим при необходимости
-        self.roles = set()  # lead | mute
-        user_id = ...
-        if user_is_lead(user_id, room_id):
-            self.roles.add(config.lead_role_name)
-        pass
+        self.roles = set()  # mute
 
+    @property
+    async def is_organizer(self) -> bool:
+        """Сверяемся с системой бронирования."""
+        return True
 
 # TODO Определять ведущесть
-def user_is_lead(user_id: UUID, room_id: str) -> bool:
-    return True
+

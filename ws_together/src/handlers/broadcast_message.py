@@ -1,8 +1,13 @@
+from typing import Type
+
 from handlers.base import BaseHandler
 
 from core.config import config, logger
+from services.ws_data import WsData, get_ws_data
 from services.ws_service import get_websocket_service
 from utils import messages as msg
+
+ws_data: WsData = get_ws_data()
 
 
 class BroadcastMessageHandler(BaseHandler):
@@ -10,6 +15,7 @@ class BroadcastMessageHandler(BaseHandler):
     ws_service = get_websocket_service()
 
     async def handler(self) -> None:
+        print(ws_data.rooms)
         if not self.validate():
             logger.info(msg.message_not_valid)
             return None

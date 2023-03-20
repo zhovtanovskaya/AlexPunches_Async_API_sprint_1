@@ -12,12 +12,18 @@ logging_config.dictConfig(LOGGING)
 
 
 class EventTypes(str, Enum):
-    broadcast_message = 'broadcast_message'  # Сообщения в чат
-    broadcast_command = 'broadcast_command'  # Команды на все плееры в руме (pause, play, ...)
-    room_request = 'room_request'  # Запросы WS-серверу (get_room_state, get_player_state, ...)
-    chat_state = 'chat_state' # история всех сообщений чата для комнаты
-    player_state = 'player_state' # состояние плеера (пока только timestamp, и статус "ведущий")
-    error = 'error' # Сообщение об ошибке (для клиента)
+    # Сообщения в чат
+    broadcast_message = 'broadcast_message'
+    # Команды на все плееры в руме (pause, play, ...)
+    broadcast_command = 'broadcast_command'
+    # Запросы WS-серверу (get_room_state, get_player_state, ...)
+    room_request = 'room_request'
+    # история всех сообщений чата для комнаты
+    chat_state = 'chat_state'
+    # состояние плеера (timestamp, и статус "ведущий")
+    player_state = 'player_state'
+    # Сообщение об ошибке (для клиента)
+    error = 'error'
 
 
 class PlayerStatuses(str, Enum):
