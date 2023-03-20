@@ -1,7 +1,7 @@
 from handlers.base import BaseHandler
 
 from core.config import config, logger
-from services.ws_data import WsData, get_ws_data
+from services.ws_data import RoomState, WsData, get_ws_data
 from utils import messages as msg
 
 ws_data: WsData = get_ws_data()
@@ -47,6 +47,10 @@ class RoomRequestHandler(BaseHandler):
         lead = ws_data.get_lead_by_room_id(self.sender_websocket.room_id)
         if self.sender_websocket != lead:
             return None
-        # TODO реализовать cохранение стейта
-        state = self.message
-        await self.ws_service.save_state(self.sender_websocket, state)
+        payload = self.message.get('payload')
+        state = RoomState(
+            timecode=payload.get('timecode'),
+            player_status=payload.get('player_status'),
+            speed=payload.get('speed'),
+        )
+        ws_data.set_state_for_room(self.sender_websocket.room_id, state)

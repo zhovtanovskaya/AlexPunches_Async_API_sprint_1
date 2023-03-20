@@ -2,14 +2,23 @@ import random
 from dataclasses import dataclass, field
 from functools import lru_cache
 
+from core.config import config
 from core.ws_protocol import QueryParamProtocol
 
 
-@dataclass()
+@dataclass
+class RoomState:
+    timecode: float  # sec
+    player_status: config.player_statuses
+    speed: float = 1.0
+
+
+@dataclass
 class Room:
     id: str
     clients: set[QueryParamProtocol] = field(default_factory=set)
     lead: QueryParamProtocol | None = None
+    state: RoomState | None = None
 
 
 class WsData:
@@ -70,6 +79,17 @@ class WsData:
         new_lead: QueryParamProtocol = random.choice(list(room.clients))
         self._set_lead_for_room(room_id, new_lead)
         return new_lead
+
+    def set_state_for_room(self, room_id: str, state: RoomState) -> None:
+        room = self.rooms.get(room_id)
+        if not room:
+            return None
+        room.state = state
+
+    def get_state_for_room(self, room_id: str) -> RoomState | None:
+        if room := self.rooms.get(room_id):
+            return room.state
+        return None
 
     def _set_lead_for_room(
               self,

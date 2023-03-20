@@ -122,21 +122,22 @@ class WebsocketService:
 
     @classmethod
     async def you_leader(cls, websocket: QueryParamProtocol) -> None:
-        message = {
-            'payload': {
+        if state := cls.ws_data.get_state_for_room(websocket.room_id):
+            payload = {
                 'player_type': config.lead_role_name,
-                'timecode': 97,
-            },
+                'timecode': state.timecode,
+                'player_status': state.player_status,
+                'speed': state.speed,
+            }
+        else:
+            payload = {
+                'player_type': config.lead_role_name,
+            }
+        message = {
+            'payload': payload,
             'event_type': config.event_types.player_state,
         }
         await cls.send_to_websocket(websocket, message=message)
-
-    async def save_state(
-              self,
-              websocket: QueryParamProtocol,
-              message: dict[str, str],
-    ):
-        pass
 
     @classmethod
     async def send_error_to_websocket(

@@ -29,6 +29,7 @@ class EventTypes(str, Enum):
 class PlayerStatuses(str, Enum):
     pause = 'pause'
     play = 'play'
+    stop = 'stop'
 
 
 class RoomRequests(str, Enum):
