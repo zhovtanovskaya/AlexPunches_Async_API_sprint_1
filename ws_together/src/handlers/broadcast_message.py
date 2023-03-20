@@ -10,8 +10,6 @@ ws_data: WsData = get_ws_data()
 
 class BroadcastMessageHandler(BaseHandler):
 
-    ws_service = get_websocket_service()
-
     async def handler(self) -> None:
         print(ws_data.rooms)
         if not self.validate():

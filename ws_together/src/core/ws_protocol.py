@@ -1,3 +1,4 @@
+import random
 from http import HTTPStatus
 
 import websockets
@@ -35,4 +36,10 @@ class QueryParamProtocol(websockets.WebSocketServerProtocol):
     @property
     async def is_organizer(self) -> bool:
         """Сверяемся с системой бронирования."""
-        return True
+        return random.choice([True, False])
+
+    def add_role(self, role_name: str) -> None:
+        self.roles.add(role_name)
+
+    def remove_role(self, role_name: str) -> None:
+        self.roles.remove(role_name)

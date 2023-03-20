@@ -10,8 +10,6 @@ ws_data: WsData = get_ws_data()
 
 class RoomRequestHandler(BaseHandler):
 
-    ws_service = get_websocket_service()
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.handler_mapping = {
@@ -50,6 +48,6 @@ class RoomRequestHandler(BaseHandler):
         lead = ws_data.get_lead_by_room_id(self.sender_websocket.room_id)
         if self.sender_websocket != lead:
             return None
-        # TODO реализовать
+        # TODO реализовать cохранение стейта
         state = self.message
         await self.ws_service.save_state(self.sender_websocket, state)

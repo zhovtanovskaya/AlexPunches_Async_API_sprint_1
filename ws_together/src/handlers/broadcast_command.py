@@ -10,8 +10,6 @@ ws_data: WsData = get_ws_data()
 
 class BroadcastCommandHandler(BaseHandler):
 
-    ws_service = get_websocket_service()
-
     async def handler(self) -> None:
         if not self.validate():
             logger.info(msg.message_not_valid)

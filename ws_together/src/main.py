@@ -3,32 +3,26 @@ import asyncio
 import websockets
 from handlers.router import message_handler_router
 
+from core.config import logger
 from core.ws_protocol import QueryParamProtocol
-from services.ws_service import get_websocket_service
+from services.ws_data import WsData, get_ws_data
+from services.ws_service import WebsocketService, get_websocket_service
 
-ws_service = get_websocket_service()
-
+ws_service: WebsocketService = get_websocket_service()
+ws_data: WsData = get_ws_data()
 
 async def handler(websocket):
     room_id = websocket.room_id
-    await ws_service.add_websocket_to_room(room_id, websocket)
+    await ws_data.add_websocket_to_room(room_id, websocket)
     await ws_service.welcome_websocket(websocket)
 
     try:
         async for message in websocket:
             await message_handler_router(websocket, message)
     except Exception as e:
-        print(f'except {e}')
+        logger.warning(e)
     finally:
-        # TODO
-        # удалить из комнаты
-        #
-        # если ведущий
-        #    переназначить
-        #
-        # если вообще последний
-        #    удалить комнату
-        print(f'finaly {websocket}')
+        await ws_service.goodbay_websocket(room_id, websocket)
 
 
 async def main():
