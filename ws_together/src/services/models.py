@@ -15,5 +15,5 @@ class ChatMessagePayload(BaseModel):
 
 
 class ChatMessage(BaseMessage):
-    event_type: EventTypes = EventTypes.chat_message
+    event_type: EventTypes = EventTypes.broadcast_message
     payload: ChatMessagePayload

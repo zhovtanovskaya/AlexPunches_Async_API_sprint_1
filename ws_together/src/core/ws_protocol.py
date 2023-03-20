@@ -17,7 +17,6 @@ class QueryParamProtocol(websockets.WebSocketServerProtocol):
     """
 
     async def process_request(self, path, headers):
-        self.roles = set()  # lead | mute
         # TODO авторизовать
         token = get_query_param(path, "token")
         if token is None:
@@ -33,6 +32,7 @@ class QueryParamProtocol(websockets.WebSocketServerProtocol):
         self.room_id = room_id
 
         # TODO Назначить ведущим при необходимости
+        self.roles = set()  # lead | mute
         user_id = ...
         if user_is_lead(user_id, room_id):
             self.roles.add(config.lead_role_name)
@@ -41,4 +41,4 @@ class QueryParamProtocol(websockets.WebSocketServerProtocol):
 
 # TODO Определять ведущесть
 def user_is_lead(user_id: UUID, room_id: str) -> bool:
-    return False
+    return True

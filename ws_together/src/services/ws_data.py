@@ -1,39 +1,22 @@
+from typing import Any
+
+from core.config import config
 from core.ws_protocol import QueryParamProtocol
-from utils.helpers import get_room_id_by_path
 
 
 class WsData:
     """Структура данных, в которой можно быстро получить:
 
-     рум по вебсокету,
-     и спиок всех вебсокетов в руме."""
+     и спиок всех вебсокетов в руме,
+     лида в руме,
+     """
 
     # тут напрашивается сортед сет Редис персистентс
-    rooms: dict[str, set] = {}
-
-    @classmethod
-    async def get_rooms_websockets_by_websocket(
-              cls,
-              websocket: QueryParamProtocol,
-    ) -> set | None:
-        """Получить набор всех вебсокетов, из комнаты websocket'а."""
-        if room_id := await cls.get_room_id_by_websocket(websocket):
-            return await cls.get_websockets_by_room_id(room_id)
-        return None
-
-    @classmethod
-    async def get_room_id_by_websocket(
-              cls,
-              websocket: QueryParamProtocol,
-    ) -> str | None:
-        room_id = get_room_id_by_path(websocket.path)
-        if websocket in cls.rooms[room_id]:
-            return room_id
-        return None
+    rooms: dict[str, dict[str, Any]] = {}
 
     @classmethod
     async def get_websockets_by_room_id(cls, room_id: str) -> set:
-        return cls.rooms[room_id]
+        return cls.rooms[room_id]['websockets']
 
     @classmethod
     async def add_websocket_to_room(
@@ -41,7 +24,9 @@ class WsData:
               room_id: str,
               websocket: QueryParamProtocol,
     ) -> None:
-
         if room_id not in cls.rooms.keys():
-            cls.rooms[room_id] = {websocket}
-        cls.rooms[room_id].add(websocket)
+            cls.rooms[room_id] = {}
+            cls.rooms[room_id]['websockets'] = {websocket}
+            cls.rooms[room_id]['lead'] = websocket
+            websocket.roles.add(config.lead_role_name)
+        cls.rooms[room_id]['websockets'].add(websocket)
