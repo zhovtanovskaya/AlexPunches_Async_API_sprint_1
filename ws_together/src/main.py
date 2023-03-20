@@ -16,7 +16,7 @@ async def handler(websocket):
 
     try:
         async for message in websocket:
-                await message_handler_router(websocket, message)
+            await message_handler_router(websocket, message)
     except Exception as e:
         print(f'except {e}')
     finally:

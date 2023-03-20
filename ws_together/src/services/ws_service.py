@@ -1,6 +1,5 @@
 import json
 from functools import lru_cache
-from typing import Type
 
 import websockets
 
@@ -14,7 +13,6 @@ ws_data: WsData = get_ws_data()
 
 
 class WebsocketService:
-
 
     @classmethod
     async def send_to_websocket(

@@ -1,5 +1,3 @@
-from typing import Type
-
 from handlers.base import BaseHandler
 
 from core.config import config, logger

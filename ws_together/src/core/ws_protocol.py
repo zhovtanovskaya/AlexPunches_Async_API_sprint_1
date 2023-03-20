@@ -1,9 +1,7 @@
 from http import HTTPStatus
-from uuid import UUID
 
 import websockets
 
-from core.config import config
 from utils.helpers import get_query_param, get_room_id_by_path
 
 
@@ -31,13 +29,10 @@ class QueryParamProtocol(websockets.WebSocketServerProtocol):
             return HTTPStatus.UNAUTHORIZED, [], b"Missing room\n"
         self.room_id = room_id
 
-        # TODO Назначить ведущим при необходимости
-        self.roles = set()  # mute
+        # тут будут разные роли, например mute, и т.д.
+        self.roles = set()
 
     @property
     async def is_organizer(self) -> bool:
         """Сверяемся с системой бронирования."""
         return True
-
-# TODO Определять ведущесть
-

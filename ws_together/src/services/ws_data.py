@@ -1,7 +1,6 @@
 from dataclasses import dataclass, field
 from functools import lru_cache
 
-from core.config import config
 from core.ws_protocol import QueryParamProtocol
 
 
