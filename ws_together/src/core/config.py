@@ -1,5 +1,4 @@
 import logging
-from enum import Enum
 from functools import lru_cache
 from logging import config as logging_config
 from typing import Type
@@ -7,35 +6,9 @@ from typing import Type
 from pydantic import BaseSettings, Field
 
 from core.logger import LOGGING
+from services.models.enums import EventTypes, PlayerStatuses, RoomRequests
 
 logging_config.dictConfig(LOGGING)
-
-
-class EventTypes(str, Enum):
-    # Сообщения в чат
-    broadcast_message = 'broadcast_message'
-    # Команды на все плееры в руме (pause, play, ...)
-    broadcast_command = 'broadcast_command'
-    # Запросы WS-серверу (get_room_state, get_player_state, ...)
-    room_request = 'room_request'
-    # история всех сообщений чата для комнаты
-    chat_state = 'chat_state'
-    # состояние плеера (timestamp, и статус "ведущий")
-    player_state = 'player_state'
-    # Сообщение об ошибке (для клиента)
-    error = 'error'
-
-
-class PlayerStatuses(str, Enum):
-    pause = 'pause'
-    play = 'play'
-    stop = 'stop'
-
-
-class RoomRequests(str, Enum):
-    get_room_state = 'get_room_state'
-    get_player_state = 'get_player_state'
-    set_state = 'set_state'
 
 
 class WebsocketSettings(BaseSettings):
@@ -48,6 +21,7 @@ class WebsocketSettings(BaseSettings):
     event_types: Type[EventTypes] = EventTypes
     player_statuses: Type[PlayerStatuses] = PlayerStatuses
     room_requests: Type[RoomRequests] = RoomRequests
+    chat_bot_name: str = 'Bot'
 
 
 @lru_cache()

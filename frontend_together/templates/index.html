@@ -175,7 +175,7 @@
             const payload = event.payload;
             switch (event.event_type) {
                 case "broadcast_message":
-                    chatAdd(payload.message, payload.from);
+                    chatAdd(payload.message, payload.from_user);
                     break;
                 case "player_state":
                     if (payload.player_type === 'lead' && playerHtmlvideo.player_type !== 'lead'){

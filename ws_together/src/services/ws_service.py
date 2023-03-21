@@ -1,10 +1,14 @@
-import json
 from functools import lru_cache
+from typing import Any
 
 import websockets
 
 from core.config import config
 from core.ws_protocol import QueryParamProtocol
+from services.models.chat_message import ChatMessagePayload, ChatMessageScheme
+from services.models.enums import PlayerType
+from services.models.error import ErrorPayload, ErrorScheme
+from services.models.transfoms import room_state_to_player_state_scheme
 from services.ws_data import WsData, get_ws_data
 from utils import messages as msg
 from utils.helpers import orjson_dumps
@@ -18,15 +22,15 @@ class WebsocketService:
     async def send_to_websocket(
               cls,
               websocket: QueryParamProtocol,
-              message: dict[str, str],
+              message: dict[str, Any],
     ) -> None:
-        await websocket.send(json.dumps(message))
+        await websocket.send(orjson_dumps(message))
 
     @classmethod
     async def broadcast_to_room(
               cls,
               room_id: str,
-              message: dict[str, str],
+              message: dict[str, Any],
               exclude: set[QueryParamProtocol] | None = None,
     ) -> None:
         clients = cls.ws_data.get_websockets_by_room_id(room_id)
@@ -45,17 +49,14 @@ class WebsocketService:
         websocket.remove_role(role_name)
 
     @staticmethod
-    async def create_hello_msg(websocket: QueryParamProtocol) -> dict:
-        return {
-            'event_type': config.event_types.broadcast_message,
-            'payload': {
-                'message': msg.hello,
-                'from': 'bot',
-            },
-        }
+    async def create_hello_msg() -> ChatMessageScheme:
+        return ChatMessageScheme(payload=ChatMessagePayload(
+            message=msg.hello,
+            from_user=config.chat_bot_name,
+        ))
 
     @classmethod
-    async def get_room_state_by_websocket(
+    async def get_chat_state_by_websocket(
               cls,
               websocket: QueryParamProtocol,
     ) -> dict:
@@ -78,30 +79,14 @@ class WebsocketService:
         }
 
     @classmethod
-    async def get_player_state_by_websocket(
-              cls,
-              websocket: QueryParamProtocol,
-    ) -> dict:
-        player_type = ''
-        if websocket == cls.ws_data.get_lead_by_room_id(websocket.room_id):
-            player_type = config.lead_role_name
-        return {
-            'payload': {
-                'player_type': player_type,
-                'timecode': 97,
-                'player_status': config.player_statuses.pause,
-            },
-            'event_type': config.event_types.player_state,
-        }
-
-    @classmethod
     async def welcome_websocket(cls, websocket: QueryParamProtocol) -> None:
         # отправить текущий стейт чата подключившемуся
-        chat_state = await cls.get_room_state_by_websocket(websocket)
+        chat_state = await cls.get_chat_state_by_websocket(websocket)
         await cls.send_to_websocket(websocket, message=chat_state)
         # отправить приветственное сообщение от бота
-        hello_msg = await cls.create_hello_msg(websocket)
-        await cls.send_to_websocket(websocket, message=hello_msg)
+        hello_msg = await cls.create_hello_msg()
+        await cls.send_to_websocket(
+            websocket, message=hello_msg.dict(exclude_none=True))
 
     @classmethod
     async def goodbay_websocket(
@@ -112,46 +97,30 @@ class WebsocketService:
         room_lead = cls.ws_data.get_lead_by_room_id(room_id)
         await cls.ws_data.remove_websocket_from_room(room_id, websocket)
 
+        room_clients = cls.ws_data.get_websockets_by_room_id(room_id)
+        if len(room_clients) == 0:
+            cls.ws_data.delete_room(room_id)
+            return None
+
         if room_lead == websocket:
             new_lead = cls.ws_data.set_random_lead_for_room(room_id)
             await cls.you_leader(new_lead)
 
-        room_clients = cls.ws_data.get_websockets_by_room_id(room_id)
-        if len(room_clients) == 0:
-            cls.ws_data.delete_room(room_id)
-
     @classmethod
     async def you_leader(cls, websocket: QueryParamProtocol) -> None:
-        if state := cls.ws_data.get_state_for_room(websocket.room_id):
-            payload = {
-                'player_type': config.lead_role_name,
-                'timecode': state.timecode,
-                'player_status': state.player_status,
-                'speed': state.speed,
-            }
-        else:
-            payload = {
-                'player_type': config.lead_role_name,
-            }
-        message = {
-            'payload': payload,
-            'event_type': config.event_types.player_state,
-        }
-        await cls.send_to_websocket(websocket, message=message)
+        room_state = cls.ws_data.get_state_for_room(websocket.room_id)
+        message_scheme = room_state_to_player_state_scheme(room_state)
+        message_scheme.payload.player_type = PlayerType.lead
+        await cls.send_to_websocket(websocket, message=message_scheme.dict())
 
     @classmethod
     async def send_error_to_websocket(
               cls,
               websocket: QueryParamProtocol,
-              msg: str,
+              message: str,
     ) -> None:
-        error_message = {
-            'payload': {
-                'message': msg,
-            },
-            'event_type': config.event_types.error,
-        }
-        await cls.send_to_websocket(websocket, error_message)
+        error_message = ErrorScheme(payload=ErrorPayload(message=message))
+        await cls.send_to_websocket(websocket, error_message.dict())
 
 
 @lru_cache()

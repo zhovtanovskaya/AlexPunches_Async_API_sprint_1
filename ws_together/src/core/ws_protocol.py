@@ -32,6 +32,7 @@ class QueryParamProtocol(websockets.WebSocketServerProtocol):
 
         # тут будут разные роли, например mute, и т.д.
         self.roles = set()
+        self.user_name = None
 
     @property
     async def is_organizer(self) -> bool:
