@@ -1,9 +1,9 @@
-import random
 from http import HTTPStatus
 
 import websockets
 
 from auth import decode_jwt
+from core.config import config
 from utils.helpers import get_query_param, get_room_id_by_path
 
 
@@ -17,12 +17,11 @@ class QueryParamProtocol(websockets.WebSocketServerProtocol):
     """
 
     async def process_request(self, path, headers):
-        # TODO авторизовать
-        token = get_query_param(path, "token")
-        if token is None:
+        self.token = get_query_param(path, "token")
+        if self.token is None:
             return HTTPStatus.UNAUTHORIZED, [], b"Missing token\n"
-        is_auth = decode_jwt(token)
-        if is_auth is None:
+        auth_payload = decode_jwt(self.token)
+        if auth_payload is None:
             return HTTPStatus.UNAUTHORIZED, [], b"Authentication failed\n"
 
         room_id = get_room_id_by_path(path)
@@ -37,7 +36,9 @@ class QueryParamProtocol(websockets.WebSocketServerProtocol):
     @property
     async def is_organizer(self) -> bool:
         """Сверяемся с системой бронирования."""
-        return random.choice([True, False])
+        if auth_payload := decode_jwt(self.token):
+            return config.admin_role_name in auth_payload.roles
+        return False
 
     def add_role(self, role_name: str) -> None:
         self.roles.add(role_name)

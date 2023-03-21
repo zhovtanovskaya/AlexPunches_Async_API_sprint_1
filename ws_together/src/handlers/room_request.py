@@ -36,10 +36,8 @@ class RoomRequestHandler(BaseHandler):
         await handler()
 
     async def chat_state(self):
-        state = await self.ws_service.get_chat_state_by_websocket(
-            self.sender_websocket,
-        )
-        await self.ws_service.send_to_websocket(self.sender_websocket, state)
+        # TODO добавить получение и отправку chat_state
+        pass
 
     async def player_state(self) -> None:
         room_id = self.sender_websocket.room_id

@@ -21,5 +21,5 @@ def player_state_scheme_to_room_state(scheme: PlayerStateScheme) -> RoomState:
     return RoomState(
         speed=scheme.payload.speed,
         timecode=scheme.payload.timecode,
-        player_status=scheme.payload.player_type,
+        player_status=scheme.payload.player_status,
     )

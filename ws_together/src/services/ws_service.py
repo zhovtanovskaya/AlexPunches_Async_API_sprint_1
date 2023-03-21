@@ -56,35 +56,11 @@ class WebsocketService:
         ))
 
     @classmethod
-    async def get_chat_state_by_websocket(
-              cls,
-              websocket: QueryParamProtocol,
-    ) -> dict:
-        return {
-            'payload': {
-                'chat_messages': [
-                    {
-                        'datetime': '',
-                        'from': 'user_1',
-                        'message': 'qwerqwe',
-                    },
-                    {
-                        'datetime': '',
-                        'from': 'user_1',
-                        'message': '444444444',
-                    },
-                ],
-            },
-            'event_type': config.event_types.chat_state,
-        }
-
-    @classmethod
     async def welcome_websocket(cls, websocket: QueryParamProtocol) -> None:
-        """Отправить текущий стет и приветственное сообщение подключившемуся.
-        """
-        chat_state = await cls.get_chat_state_by_websocket(websocket)
-        await cls.send_to_websocket(websocket, message=chat_state)
+        """Отправить приветственное сообщение подключившемуся.
 
+        TODO добавить отправку всего чата
+        """
         hello_msg = await cls.create_hello_msg()
         await cls.send_to_websocket(
             websocket, message=hello_msg.dict(exclude_none=True))

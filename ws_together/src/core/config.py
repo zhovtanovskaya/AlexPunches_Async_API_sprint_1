@@ -15,6 +15,7 @@ class WebsocketSettings(BaseSettings):
     project_name: str = Field('Movies', env='project_name')
     lead_role_name: str = 'lead'
     mute_role_name: str = 'mute'
+    admin_role_name: str = 'admin'
     redis_host: str = Field('127.0.0.1', env='redis_host')
     redis_port: str = Field('6379', env='redis_port')
     redis_db: int = 3
