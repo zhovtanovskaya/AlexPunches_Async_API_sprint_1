@@ -80,10 +80,11 @@ class WebsocketService:
 
     @classmethod
     async def welcome_websocket(cls, websocket: QueryParamProtocol) -> None:
-        # отправить текущий стейт чата подключившемуся
+        """Отправить текущий стет и приветственное сообщение подключившемуся.
+        """
         chat_state = await cls.get_chat_state_by_websocket(websocket)
         await cls.send_to_websocket(websocket, message=chat_state)
-        # отправить приветственное сообщение от бота
+
         hello_msg = await cls.create_hello_msg()
         await cls.send_to_websocket(
             websocket, message=hello_msg.dict(exclude_none=True))
