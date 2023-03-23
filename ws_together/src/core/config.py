@@ -13,6 +13,8 @@ logging_config.dictConfig(LOGGING)
 
 class WebsocketSettings(BaseSettings):
     project_name: str = Field('Movies', env='project_name')
+    websockets_host: str = ''
+    websockets_port: int = 8001
     lead_role_name: str = 'lead'
     mute_role_name: str = 'mute'
     admin_role_name: str = 'admin'
