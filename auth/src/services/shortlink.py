@@ -21,7 +21,7 @@ class ShortlinkService:
             self.create_shortlink(longlink=longlink, days_ttl=days_ttl)
         redis.getex(name=shortlink_id, ex=days_ttl * 60 * 60 * 24)
 
-        return f'/{shortlink_id}'
+        return f'/{config.shortlink_prefix}/{shortlink_id}'
 
     @staticmethod
     def get_longlink_by_shortlink_id(link_id: str) -> str:
