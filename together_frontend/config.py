@@ -6,8 +6,8 @@ from pydantic import BaseSettings
 class FrontendTogetherSettings(BaseSettings):
     websockets_host: str = 'localhost'
     websockets_port: int = 8000
-    frontend_host: str
-    frontend_port: int
+    frontend_host: str = '0.0.0.0'
+    frontend_port: int = 8000
 
 
 @lru_cache()

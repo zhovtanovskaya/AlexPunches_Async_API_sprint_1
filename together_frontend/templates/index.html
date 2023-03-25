@@ -130,7 +130,7 @@
 
     window.addEventListener("DOMContentLoaded", () => {
         const chat = document.querySelector(".chat-form");
-        const websocket = new WebSocket("ws://{{ ws_host }}:{{ ws_port }}/{{ room_id }}?token={{ token }}");
+        const websocket = new WebSocket("ws://{{ ws_host }}:{{ ws_port }}/room/{{ room_id }}?token={{ token }}");
 
         receiveMoves(chat, websocket);
         sendMoves(chat, websocket);
