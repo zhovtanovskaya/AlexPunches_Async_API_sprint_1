@@ -3,8 +3,6 @@ from urllib.parse import parse_qs, unquote, urlparse
 
 import orjson
 
-from core.config import logger
-
 
 def orjson_dumps(v):
     return orjson.dumps(v).decode()
