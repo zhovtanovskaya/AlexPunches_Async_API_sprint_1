@@ -8,7 +8,7 @@ class FrontendTogetherSettings(BaseSettings):
     websockets_port: int = 8000
     frontend_host: str = '0.0.0.0'
     frontend_port: int = 8000
-    cloud_host: str
+    cloud_host: str = 'localhost'
     cloud_port: int = 8000
 
 
