@@ -19,8 +19,8 @@ def sample(room_id: str):
         'index.html',
         room_id=room_id,
         token=token,
-        ws_host=config.websockets_host,
-        ws_port=config.websockets_port,
+        ws_host=config.cloud_host,
+        ws_port=config.cloud_port,
     )
 
 
