@@ -27,6 +27,7 @@ class WebsocketSettings(BaseSettings):
     chat_bot_name: str = 'Bot'
     jwt_secret_key: str = Field('jwt_secret_key')
     jwt_algorithm: str = 'HS256'
+    anonim_user_name: str = 'Аноним'
 
 
 @lru_cache()

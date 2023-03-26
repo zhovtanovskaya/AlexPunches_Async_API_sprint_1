@@ -22,7 +22,7 @@ class QueryParamProtocol(websockets.WebSocketServerProtocol):
         self.token = get_query_param(path, "token")
         # if self.token is None:
         #     return HTTPStatus.UNAUTHORIZED, [], b"Missing token\n"
-        # auth_payload = decode_jwt(self.token)
+        auth_payload = decode_jwt(self.token)
         # if auth_payload is None:
         #     return HTTPStatus.UNAUTHORIZED, [], b"Authentication failed\n"
 
@@ -33,7 +33,10 @@ class QueryParamProtocol(websockets.WebSocketServerProtocol):
 
         # тут будут разные роли, например mute, и т.д.
         self.roles = set()
-        self.user_name = None
+        if auth_payload and auth_payload.sub:
+            self.user_name = auth_payload.sub
+        else:
+            self.user_name = config.anonim_user_name
 
     @property
     async def is_organizer(self) -> bool:
