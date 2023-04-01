@@ -21,6 +21,7 @@ class AccessTokenPayload(BaseModel):
     user_id: Optional[UUID] = None
     roles: list[str]
     type: str = Field('access', const=True)
+    sub: str | None = None
 
 
 def decode_jwt(token: str) -> AccessTokenPayload | None:

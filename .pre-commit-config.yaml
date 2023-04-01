@@ -4,7 +4,7 @@ repos:
     -   id: isort
         name: isort
         description: ordering imports
-        entry: isort --settings-path setup.cfg --src auth/src --src auth/tests/functional --src fastapi/src --src activity_api/ --src etl_notifications/src/ --src benchmarking_storage --src worker_notifications/src
+        entry: isort --settings-path setup.cfg --src auth/src --src auth/tests --src fastapi/src --src activity_api/ --src etl_notifications/src/ --src benchmarking_storage --src worker_notifications/src
         verbose: true
         language: python
         types: [python]

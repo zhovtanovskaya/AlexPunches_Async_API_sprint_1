@@ -45,6 +45,9 @@ services:
       - /tmp/logs/admin_panel/:/var/log/admin_panel:ro
       - /tmp/logs/worker_notifications/:/var/log/worker_notifications:ro
       - ./deploy/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+      - /tmp/logs/together_api/:/var/log/together_api:ro
+      - /tmp/logs/together_frontend/:/var/log/together_frontend:ro
+      - /tmp/logs/ws_together/:/var/log/ws_together:ro
     depends_on:
       - elk_logstash
       - elkelasticsearch

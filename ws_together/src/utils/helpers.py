@@ -17,7 +17,11 @@ def get_query_param(path, key):
 
 
 def get_room_id_by_path(path):
+    """Получить рум_ид.
+
+    В строке типа '/room/{room_id}' это будет parts[2]
+    """
     try:
-        return PurePosixPath(unquote(urlparse(path).path)).parts[1]
+        return PurePosixPath(unquote(urlparse(path).path)).parts[2]
     except IndexError:
         return None

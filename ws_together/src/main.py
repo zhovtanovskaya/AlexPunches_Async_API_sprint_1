@@ -3,7 +3,7 @@ import asyncio
 import websockets
 from handlers.router import message_handler_router
 
-from core.config import logger
+from core.config import config, logger
 from core.ws_protocol import QueryParamProtocol
 from services.ws_data import WsData, get_ws_data
 from services.ws_service import WebsocketService, get_websocket_service
@@ -29,8 +29,8 @@ async def handler(websocket):
 async def main():
     async with websockets.serve(
                 handler,
-                host='',
-                port=8001,
+                host=config.websockets_host,
+                port=config.websockets_port,
                 create_protocol=QueryParamProtocol,
             ):
         await asyncio.Future()

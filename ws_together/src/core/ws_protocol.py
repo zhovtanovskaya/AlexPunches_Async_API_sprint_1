@@ -1,12 +1,11 @@
-import random
+# import random
 from http import HTTPStatus
 
 import websockets
 
-# from auth import decode_jwt
-# from core.config import config
-# from utils.helpers import get_query_param, get_room_id_by_path
-from utils.helpers import get_room_id_by_path
+from auth import decode_jwt
+from core.config import config
+from utils.helpers import get_query_param, get_room_id_by_path
 
 
 class QueryParamProtocol(websockets.WebSocketServerProtocol):
@@ -20,10 +19,10 @@ class QueryParamProtocol(websockets.WebSocketServerProtocol):
 
     async def process_request(self, path, headers):
         # для демонстрации отключить авторизацию
-        # self.token = get_query_param(path, "token")
+        self.token = get_query_param(path, "token")
         # if self.token is None:
         #     return HTTPStatus.UNAUTHORIZED, [], b"Missing token\n"
-        # auth_payload = decode_jwt(self.token)
+        auth_payload = decode_jwt(self.token)
         # if auth_payload is None:
         #     return HTTPStatus.UNAUTHORIZED, [], b"Authentication failed\n"
 
@@ -34,16 +33,19 @@ class QueryParamProtocol(websockets.WebSocketServerProtocol):
 
         # тут будут разные роли, например mute, и т.д.
         self.roles = set()
-        self.user_name = None
+        if auth_payload and auth_payload.sub:
+            self.user_name = auth_payload.sub
+        else:
+            self.user_name = config.anonim_user_name
 
     @property
     async def is_organizer(self) -> bool:
         """Сверяемся с системой бронирования."""
         # для демонстрации рандомный ведущий
-        return random.choice([True, False])
-        # if auth_payload := decode_jwt(self.token):
-        #     return config.admin_role_name in auth_payload.roles
-        # return False
+        # return random.choice([True, False])
+        if auth_payload := decode_jwt(self.token):
+            return config.admin_role_name in auth_payload.roles
+        return False
 
     def add_role(self, role_name: str) -> None:
         self.roles.add(role_name)

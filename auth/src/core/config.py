@@ -106,6 +106,7 @@ class ApiSettings(BaseSettings):
     redirect_confirm: str = '/'
     shortlink_ttl: int = 1  # 1 day
     shortlink_length: int = 5
+    shortlink_prefix: str = 's'
 
 
 @lru_cache()

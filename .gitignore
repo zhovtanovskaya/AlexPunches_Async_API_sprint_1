@@ -148,3 +148,4 @@ admin_panel/static/
 snippets
 dotenvs
 .envrc
+deploy/.mongodb/root.crt
