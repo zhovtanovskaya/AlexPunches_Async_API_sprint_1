@@ -1,4 +1,5 @@
 from importlib import import_module
+from typing import Callable
 
 
 class Consumers:
@@ -22,7 +23,7 @@ class Consumers:
             import_module(module_name)
 
 
-def consumer(alias: str):
+def consumer(alias: str) -> Callable:
     def func_wrapper(func):
         print('@consumer')
         Consumers().add(func, alias)
