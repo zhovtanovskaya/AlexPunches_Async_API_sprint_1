@@ -9,6 +9,7 @@ from src.server.rooms import Rooms
 
 logger = logging.getLogger(__name__)
 
+
 class Receiver:
     def __init__(self, consumers: Consumers, rooms: Rooms):
         self.consumers = consumers
@@ -27,4 +28,4 @@ class Receiver:
                 logger.exception(e)
             else:
                 consumer = self.consumers.get(event.type)
-                await consumer(client, room, event.content)
+                await consumer(client, room, event)

@@ -6,5 +6,5 @@ WebSocket-сервер запускается командой `make run_server`
 ```
 > {"type": "help", "content": "?"}
 Alison, Bob
-> {"type": "send_text", "content": "Alison: Hello!"}
+> {"type": "send_text", "to": "Alison", "content": "Hello!"}
 ```
