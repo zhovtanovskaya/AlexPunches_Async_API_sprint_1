@@ -4,7 +4,7 @@ from typing import Callable
 
 class Consumers:
 
-    consumers = {}
+    consumers: dict = {}
 
     def __new__(cls):
         if not hasattr(cls, 'instance'):
@@ -12,6 +12,8 @@ class Consumers:
         return cls.instance
 
     def add(self, func, alias: str):
+        if alias in self.consumers:
+            raise Exception("Duplicate consumer " + alias)
         self.consumers[alias] = func
 
     def get(self, alias):
@@ -23,10 +25,11 @@ class Consumers:
             import_module(module_name)
 
 
-def consumer(alias: str) -> Callable:
+def consumer() -> Callable:
     def func_wrapper(func):
+        # print()
         print('@consumer')
-        Consumers().add(func, alias)
+        Consumers().add(func, func.__name__)
         return func
     return func_wrapper
 
