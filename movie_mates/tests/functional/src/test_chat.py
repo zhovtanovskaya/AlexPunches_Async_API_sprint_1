@@ -1,0 +1,3 @@
+def test(ws_client):
+    # raise Exception('>>>>', ws_client)
+    ...
