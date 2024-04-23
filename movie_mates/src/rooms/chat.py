@@ -20,13 +20,18 @@ class Room:
     def get_client_names(self) -> list[str]:
         return [c.name for c in self.clients]
 
-    async def send(self, text, to, author=None):
-        if author:
-            # Пересылаем сообщение в канал получателя, указав отправителя
-            await self.web_sockets[to].send(f'Сообщение от {author}: {text}')
-        else:
-            await self.web_sockets[to].send(text)
+    def has_client_name(self, name: str) -> bool:
+        return name in self.get_client_names()
 
-    async def send_broadcast(self, message):
+    def get_client(self, name: str) -> Client:
+        for client in self.clients:
+            if client.name == name:
+                return client
+
+    async def send(self, to: str, message: str):
+        client = self.get_client(to)
+        await client.ws.send(message)
+
+    async def send_broadcast(self, message: str):
         for ws in self.web_sockets:
             await ws.send(message)
