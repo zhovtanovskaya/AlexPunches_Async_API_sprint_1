@@ -6,6 +6,7 @@ from websockets import WebSocketServerProtocol
 from src.server.consumers import Consumers
 from src.server.events import Event
 from src.server.rooms import Rooms
+from src.server.urltools import get_room_name
 
 logger = logging.getLogger(__name__)
 
@@ -16,10 +17,9 @@ class Receiver:
         self.rooms = rooms
 
     async def __call__(self, ws: WebSocketServerProtocol, path: str):
-        await ws.send('Назовите комнату:')
-        room_name = await ws.recv()
+        room_name = get_room_name(path)
         room = self.rooms.get(room_name)
-        client = await room.register(ws)
+        client = room.register(ws)
         while True:
             message = (await ws.recv()).strip()
             try:

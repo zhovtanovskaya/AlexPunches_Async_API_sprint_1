@@ -6,17 +6,19 @@ from src.rooms.clients import Client
 class Room:
 
     def __init__(self):
-        self.web_sockets = {}
+        self.web_sockets = set()
+        self.clients = set()
         self.lead = set()
 
-    async def register(self, ws: WebSocketServerProtocol):
-        # Авторизация и установка статуса ведущий-ведомый. Dependency Inversion.
-        await ws.send('Представьтесь!')
-        name = await ws.recv()
-        await ws.send('Чтобы поговорить, напишите "<имя>: <сообщение>". Например: Ира: купи хлеб.')
-        await ws.send('Посмотреть список участников можно командой "?"')
-        self.web_sockets[name.strip()] = ws
-        return Client(ws, name)
+    def register(self, ws: WebSocketServerProtocol):
+        """Добавить websocket-подключение в комнату."""
+        self.web_sockets.add(ws)
+        client = Client(ws)
+        self.clients.add(client)
+        return client
+
+    def get_client_names(self) -> list[str]:
+        return [c.name for c in self.clients]
 
     async def send(self, msg, to, author=None):
         if author:

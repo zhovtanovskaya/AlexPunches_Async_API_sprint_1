@@ -3,7 +3,7 @@ from src.server.consumers import consumer
 
 @consumer()
 async def help(client, room, event):
-    await client.send(', '.join(room.web_sockets.keys()))
+    await client.send(', '.join(room.get_client_names()))
 
 
 @consumer()

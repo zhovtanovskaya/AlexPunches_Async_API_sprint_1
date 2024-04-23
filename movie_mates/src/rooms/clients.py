@@ -2,7 +2,7 @@ from websockets import WebSocketServerProtocol
 
 
 class Client:
-    def __init__(self, ws: WebSocketServerProtocol, name=''):
+    def __init__(self, ws: WebSocketServerProtocol, name='AnonymousClient'):
         self.ws = ws
         self.name = name
 
