@@ -12,3 +12,8 @@ class Event(BaseModel):
     type: str
     to: Optional[str] = ''
     content: str = ''
+
+
+class SetUserNameEvent(BaseModel):
+    type: str = 'set_name'
+    user_name: str

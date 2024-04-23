@@ -4,7 +4,6 @@ from orjson import JSONDecodeError, loads
 from websockets import WebSocketServerProtocol
 
 from src.server.consumers import Consumers
-from src.server.events import Event
 from src.server.rooms import Rooms
 from src.server.urltools import get_room_name
 
@@ -23,9 +22,9 @@ class Receiver:
         while True:
             message = (await ws.recv()).strip()
             try:
-                event = Event(**loads(message))
+                message_json = loads(message)
             except JSONDecodeError as e:
                 logger.exception(e)
             else:
-                consumer = self.consumers.get(event.type)
-                await consumer(client, room, event)
+                consumer = self.consumers.get(message_json['type'])
+                await consumer(client, room, message_json)
