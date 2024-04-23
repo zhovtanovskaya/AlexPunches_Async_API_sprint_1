@@ -11,7 +11,7 @@ class SendTextEvent(BaseModel):
     """
     type: str
     to: Optional[str] = ''
-    content: str = ''
+    text: str = ''
 
 
 class SetUserNameEvent(BaseModel):
