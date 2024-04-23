@@ -3,7 +3,7 @@ from typing import Optional
 from pydantic import BaseModel
 
 
-class Event(BaseModel):
+class SendTextEvent(BaseModel):
     """Событие в веб-сокете.
 
     Например, сообщение от одного пользователя другому или

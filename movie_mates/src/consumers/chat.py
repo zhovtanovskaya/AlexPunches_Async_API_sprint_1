@@ -1,4 +1,4 @@
-from src.consumers.events import Event, SetUserNameEvent
+from src.consumers.events import SendTextEvent, SetUserNameEvent
 from src.server.consumers import consumer
 
 
@@ -9,7 +9,7 @@ async def help(client, room, message):
 
 @consumer()
 async def send_text(client, room, message):
-    event = Event(**message)
+    event = SendTextEvent(**message)
     if event.to in room.web_sockets:
         await room.send(event.content, event.to, client.name)
     else:
