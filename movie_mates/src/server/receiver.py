@@ -1,3 +1,5 @@
+"""Получатель всех сообщений, поступающих в вебсокет."""
+
 import logging
 
 from orjson import JSONDecodeError, loads
@@ -11,11 +13,23 @@ logger = logging.getLogger(__name__)
 
 
 class Receiver:
+    """Получатель сообщений из веб-сокета.
+
+    Получает сообщения в виде JSON-строки и передает их на
+    обработку соответствующему консьюмеру в виде `dict`.
+    """
     def __init__(self, consumers: Consumers, rooms: Rooms):
         self.consumers = consumers
         self.rooms = rooms
 
     async def __call__(self, ws: WebSocketServerProtocol, path: str):
+        """Подключить вебсокет к комнате, указанной в `path`.
+
+        Arguments:
+        ws - новый вебсокет в комнате.
+        path - URL-путь, в котором указано имя комнаты, например,
+            '/test_room/'.
+        """
         room_name = get_room_name(path)
         room = self.rooms.get(room_name)
         client = room.register(ws)

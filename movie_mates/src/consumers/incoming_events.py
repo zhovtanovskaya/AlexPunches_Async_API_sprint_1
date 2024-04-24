@@ -1,4 +1,4 @@
-from typing import Optional
+"""Входящие события от клиента серверу через вебсокет."""
 
 from pydantic import BaseModel
 
@@ -10,10 +10,11 @@ class SendTextEvent(BaseModel):
     запрос помощи в чате.
     """
     type: str
-    to: Optional[str] = ''
+    to: str = ''
     text: str = ''
 
 
 class SetUserNameEvent(BaseModel):
+    """Собитие установки нового имени пользователя."""
     type: str = 'set_name'
     user_name: str
