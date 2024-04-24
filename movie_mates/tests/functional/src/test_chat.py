@@ -23,3 +23,16 @@ def test_send_text_to_self(ws_client):
     message = ws_client.recv()
     expected = '{"type":"incoming_text","author":"test_user","text":"Hello!"}'
     assert message == expected
+
+
+def test_send_to_unknown_user(ws_client):
+    ws_client.send('{"type": "send_text", "text": "Hello!", "to": "unknown_user"}')
+    message = ws_client.recv()
+    expected = (
+        '{'
+            '"type":"error",'
+            '"text":"Пользователь unknown_user не найден",'
+            '"on_event":{"type":"send_text","to":"unknown_user","text":"Hello!"}'
+        '}'
+    )
+    assert message == expected
