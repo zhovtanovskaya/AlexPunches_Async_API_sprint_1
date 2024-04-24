@@ -1,4 +1,5 @@
 from websockets import WebSocketServerProtocol
+from websockets.exceptions import ConnectionClosedOK
 
 from src.rooms.clients import Client
 
@@ -39,4 +40,7 @@ class Room:
     async def send_broadcast(self, message: str):
         """Послать сообщение всем пользователям в комнате."""
         for ws in self.web_sockets:
-            await ws.send(message)
+            try:
+                await ws.send(message)
+            except ConnectionClosedOK as e:
+                ...
