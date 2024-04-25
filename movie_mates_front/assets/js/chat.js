@@ -1,5 +1,5 @@
 window.addEventListener("DOMContentLoaded", () => {
-    let playerHtmlvideo = new Plyr('video', {
+    let playerHtmlVideo = new Plyr('video', {
         controls: ['mute', 'volume', 'fullscreen', 'current-time'],
         clickToPlay: false,
     });
@@ -11,14 +11,7 @@ window.addEventListener("DOMContentLoaded", () => {
             addChatMessage(data.text, data.author);
         }
         if (data.type === 'set_leading_client') {
-            // Разрешить элементы управления воспроизведением.
-            playerHtmlvideo.destroy();
-            controls = ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'airplay', 'fullscreen'];
-            clickToPlay = true;
-            playerHtmlvideo = new Plyr('video', {
-                controls: controls,
-                clickToPlay: clickToPlay,
-            });
+            setLeadingPlayer(playerHtmlVideo, websocket)
         }
     };
     websocket.onclose = (event) => {
@@ -40,6 +33,28 @@ function getChatMessage() {
     const messageText = messageelement.value;
     messageelement.value = "";
     return messageText;
+}
+
+
+function setLeadingPlayer(player, websocket) {
+    // Разрешить элементы управления воспроизведением.
+    player.destroy();
+    controls = ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'airplay', 'fullscreen'];
+    clickToPlay = true;
+    player = new Plyr('video', {
+        controls: controls,
+        clickToPlay: clickToPlay,
+    });
+    player.on('play', (event) => {
+        const messageObj = {
+            type: 'leading_player_changed',
+            'timecode': player.currentTime,
+            'player_status': 'play',
+        };
+        json = JSON.stringify(messageObj);
+        console.log(json);
+        websocket.send(json);
+    });
 }
 
 
