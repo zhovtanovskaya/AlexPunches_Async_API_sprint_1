@@ -9,12 +9,14 @@ class SendTextEvent(BaseModel):
     Например, сообщение от одного пользователя другому или
     запрос помощи в чате.
     """
-    type: str
+
+    type: str = 'send_text'
     to: str = ''
     text: str = ''
 
 
 class SetUserNameEvent(BaseModel):
     """Собитие установки нового имени пользователя."""
+
     type: str = 'set_name'
     user_name: str
