@@ -1,7 +1,11 @@
 window.addEventListener("DOMContentLoaded", () => {
     const websocket = new WebSocket("ws://localhost:8765/test_room/");
     websocket.onmessage = (event) => {
-        console.log("Server response:", event.data);
+        const data = JSON.parse(event.data);
+        console.log('Server response:', data);
+        if (data.type === 'incoming_text') {
+            addChatMessage(data.text, data.author);
+        }
     };
     websocket.onclose = (event) => {
         console.log("Connection closed");
