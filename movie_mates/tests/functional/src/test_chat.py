@@ -1,7 +1,8 @@
-def test_clients_in_room(ws_client):
-    ws_client.send('{"type": "help", "content": "?"}')
+
+
+def test_clients_is_leading(ws_client):
     message = ws_client.recv()
-    assert message == 'AnonymousClient'
+    assert message == '{"type":"set_leading_client"}'
 
 
 def test_set_client_name(ws_client):
@@ -31,7 +32,7 @@ def test_send_to_unknown_user(ws_client):
     expected = (
         '{'
             '"type":"error",'
-            '"text":"Пользователь unknown_user не найден",'
+            '"text":"Пользователь unknown_user не найден.",'
             '"on_event":{"type":"send_text","to":"unknown_user","text":"Hello!"}'
         '}'
     )

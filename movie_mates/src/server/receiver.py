@@ -18,6 +18,7 @@ class Receiver:
     Получает сообщения в виде JSON-строки и передает их на
     обработку соответствующему консьюмеру в виде `dict`.
     """
+
     def __init__(self, consumers: Consumers, rooms: Rooms):
         self.consumers = consumers
         self.rooms = rooms
@@ -28,11 +29,11 @@ class Receiver:
         Arguments:
         ws - новый вебсокет в комнате.
         path - URL-путь, в котором указано имя комнаты, например,
-            '/test_room/'.
+        '/test_room/'.
         """
         room_name = get_room_name(path)
         room = self.rooms.get(room_name)
-        client = room.register(ws)
+        client = await room.register(ws)
         while True:
             message = (await ws.recv()).strip()
             try:
