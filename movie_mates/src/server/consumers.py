@@ -27,7 +27,6 @@ class Consumers:
 
 def consumer() -> Callable:
     def func_wrapper(func):
-        print('@consumer')
         Consumers().add(func, func.__name__)
         return func
     return func_wrapper

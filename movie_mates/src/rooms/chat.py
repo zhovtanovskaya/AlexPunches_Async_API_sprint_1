@@ -71,12 +71,21 @@ class Room:
     async def send(self, to: str, message: str):
         """Послать сообщение одному пользователю в комнате."""
         client = self.get_client(to)
-        await client.ws.send(message)
+        try:
+            await client.send(message)
+        except ConnectionClosedOK:
+            await self.unregister(client)
 
     async def send_broadcast(self, message: str):
         """Послать сообщение всем пользователям в комнате."""
+        failed_clients = []
         for client in self.clients:
             try:
                 await client.send(message)
-            except ConnectionClosedOK as e:
-                ...
+            except ConnectionClosedOK:
+                failed_clients.append(client)
+        # Удалить из набора клиентов тех, кто отключился.
+        # Этого нельзя делать в цикле выше, потому что получается
+        # исключение "RuntimeError: Set changed size during iteration".
+        for client in failed_clients:
+            await self.unregister(client)

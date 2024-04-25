@@ -8,6 +8,6 @@ class Client:
 
     async def send(self, msg):
         # `self.ws` может быть None в unit-тестах.
-        # В других случаях должен быть not None.
+        # В других случаях он должен быть not None.
         if self.ws is not None:
             await self.ws.send(msg)
