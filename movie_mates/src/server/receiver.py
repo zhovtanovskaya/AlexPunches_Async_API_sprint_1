@@ -4,6 +4,7 @@ import logging
 
 from orjson import JSONDecodeError, loads
 from websockets import WebSocketServerProtocol
+from websockets.exceptions import ConnectionClosedOK
 
 from src.server.consumers import Consumers
 from src.server.rooms import Rooms
@@ -35,11 +36,15 @@ class Receiver:
         room = self.rooms.get(room_name)
         client = await room.register(ws)
         while True:
-            message = (await ws.recv()).strip()
             try:
-                message_json = loads(message)
-            except JSONDecodeError as e:
-                logger.exception(e)
+                message = (await ws.recv()).strip()
+            except ConnectionClosedOK:
+                await room.unregister(client)
             else:
-                consumer = self.consumers.get(message_json['type'])
-                await consumer(client, room, message_json)
+                try:
+                    message_json = loads(message)
+                except JSONDecodeError as e:
+                    logger.exception(e)
+                else:
+                    consumer = self.consumers.get(message_json['type'])
+                    await consumer(client, room, message_json)

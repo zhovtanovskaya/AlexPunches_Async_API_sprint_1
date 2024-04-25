@@ -39,7 +39,10 @@ class Room:
         нового ведущего клиента из оставшихся.  И уведомить его
         об этом сообщением "set_leading_client".
         """
-        self.clients.remove(client)
+        try:
+            self.clients.remove(client)
+        except KeyError:
+            pass
         if self.is_leading_client(client):
             # Выбрать нового ведущего клиента.
             try:
