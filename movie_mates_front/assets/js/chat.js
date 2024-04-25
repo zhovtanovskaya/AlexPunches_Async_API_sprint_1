@@ -1,10 +1,24 @@
 window.addEventListener("DOMContentLoaded", () => {
+    let playerHtmlvideo = new Plyr('video', {
+        controls: ['mute', 'volume', 'fullscreen', 'current-time'],
+        clickToPlay: false,
+    });
     const websocket = new WebSocket("ws://localhost:8765/test_room/");
     websocket.onmessage = (event) => {
         const data = JSON.parse(event.data);
         console.log('Server response:', data);
         if (data.type === 'incoming_text') {
             addChatMessage(data.text, data.author);
+        }
+        if (data.type === 'set_leading_client') {
+            // Разрешить элементы управления воспроизведением.
+            playerHtmlvideo.destroy();
+            controls = ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'airplay', 'fullscreen'];
+            clickToPlay = true;
+            playerHtmlvideo = new Plyr('video', {
+                controls: controls,
+                clickToPlay: clickToPlay,
+            });
         }
     };
     websocket.onclose = (event) => {
