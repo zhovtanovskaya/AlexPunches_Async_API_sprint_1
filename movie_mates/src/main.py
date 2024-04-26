@@ -12,6 +12,7 @@ if __name__ == '__main__':
     consumers = Consumers()
     consumers.include(
         'src.consumers.chat',
+        'src.consumers.player',
     )
     rooms = Rooms(room_class=Room)
     ws_server = websockets.serve(Receiver(consumers, rooms), 'localhost', 8765)

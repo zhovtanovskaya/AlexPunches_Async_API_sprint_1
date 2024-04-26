@@ -1,4 +1,9 @@
-"""Потребители событий из веб-сокета."""
+"""Потребители событий из веб-сокета.
+
+Имена консьюмеров должны быть уникальными на всем сервере.
+Консьюмер потребляет события, тип которых в точности
+равен названию консьюмера.
+"""
 
 from src.consumers.incoming_events import SendTextEvent, SetUserNameEvent
 from src.consumers.outgoing_events import ErrorEvent, IncomingTextEvent

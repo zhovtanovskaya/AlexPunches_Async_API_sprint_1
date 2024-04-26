@@ -20,3 +20,11 @@ class SetUserNameEvent(BaseModel):
 
     type: str = 'set_name'
     user_name: str
+
+
+class LeadingPlayerChangedEvent(BaseModel):
+    """Измененилось состояние ведущего плеера."""
+
+    type: str = 'leading_player_changed'
+    timecode: float
+    player_status: str = 'play'

@@ -47,4 +47,7 @@ class Receiver:
                     logger.exception(e)
                 else:
                     consumer = self.consumers.get(message_json['type'])
-                    await consumer(client, room, message_json)
+                    # Вызвать консьюмера этого типа сообщений, если
+                    # он найден.
+                    if consumer is not None:
+                        await consumer(client, room, message_json)
