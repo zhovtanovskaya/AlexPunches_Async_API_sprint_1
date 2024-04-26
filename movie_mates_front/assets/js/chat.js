@@ -3,6 +3,7 @@ window.addEventListener("DOMContentLoaded", () => {
         controls: ['mute', 'volume', 'fullscreen', 'current-time'],
         clickToPlay: false,
     });
+    let isLeading = false;
     const websocket = new WebSocket("ws://localhost:8765/test_room/");
     websocket.onmessage = (event) => {
         const data = JSON.parse(event.data);
@@ -11,7 +12,19 @@ window.addEventListener("DOMContentLoaded", () => {
             addChatMessage(data.text, data.author);
         }
         if (data.type === 'set_leading_client') {
+            isLeading = true;
             setLeadingPlayer(playerHtmlVideo, websocket)
+        }
+        if (data.type === 'leading_player_changed') {
+            if (isLeading === false) {
+                playerHtmlVideo.currentTime = data.timecode;
+                if (data.player_status === 'play'){
+                    playerHtmlVideo.play();
+                }
+                if (data.player_status === 'pause'){
+                    playerHtmlVideo.pause();
+                }
+            }
         }
     };
     websocket.onclose = (event) => {
@@ -31,7 +44,7 @@ function addChatMessage(message, author) {
 function getChatMessage() {
     const messageelement = document.getElementById('chat-text');
     const messageText = messageelement.value;
-    messageelement.value = "";
+    messageelement.value = '';
     return messageText;
 }
 
@@ -40,10 +53,9 @@ function setLeadingPlayer(player, websocket) {
     // Разрешить элементы управления воспроизведением.
     player.destroy();
     controls = ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'airplay', 'fullscreen'];
-    clickToPlay = true;
     player = new Plyr('video', {
         controls: controls,
-        clickToPlay: clickToPlay,
+        clickToPlay: true,
     });
     player.on('play', (event) => {
         const messageObj = {
@@ -52,7 +64,15 @@ function setLeadingPlayer(player, websocket) {
             'player_status': 'play',
         };
         json = JSON.stringify(messageObj);
-        console.log(json);
+        websocket.send(json);
+    });
+    player.on('pause', (event) => {
+        const messageObj = {
+            type: 'leading_player_changed',
+            'timecode': player.currentTime,
+            'player_status': 'pause',
+        };
+        json = JSON.stringify(messageObj);
         websocket.send(json);
     });
 }
