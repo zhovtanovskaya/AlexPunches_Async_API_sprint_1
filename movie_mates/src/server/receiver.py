@@ -4,7 +4,7 @@ import logging
 
 from orjson import JSONDecodeError, loads
 from websockets import WebSocketServerProtocol
-from websockets.exceptions import ConnectionClosedOK
+from websockets.exceptions import ConnectionClosedError, ConnectionClosedOK
 
 from src.server.consumers import Consumers
 from src.server.rooms import Rooms
@@ -35,22 +35,25 @@ class Receiver:
         room_name = get_room_name(path)
         room = self.rooms.get(room_name)
         client = room.register(ws)
-        await room.set_leading_client()
         while True:
             try:
+                await room.set_leading_client()
                 message = (await ws.recv()).strip()
-            except ConnectionClosedOK:
+            except (ConnectionClosedOK, ConnectionClosedError):
                 room.unregister(client)
-                if room.is_leading_client(None):
-                    await room.set_leading_client()
-            else:
-                try:
-                    message_json = loads(message)
-                except JSONDecodeError as e:
-                    logger.exception(e)
-                else:
-                    consumer = self.consumers.get(message_json['type'])
-                    # Вызвать консьюмера этого типа сообщений, если
-                    # он найден.
-                    if consumer is not None:
-                        await consumer(client, room, message_json)
+                continue
+            try:
+                message_json = loads(message)
+            except JSONDecodeError as e:
+                logger.exception(e)
+                continue
+            consumer = self.consumers.get(message_json['type'])
+            if consumer is None:
+                logger.info(f'Consumer {consumer} not found.')
+                continue
+            # Вызвать консьюмера этого типа сообщений, если
+            # он найден.
+            try:
+                await consumer(client, room, message_json)
+            except (ConnectionClosedOK, ConnectionClosedError):
+                room.unregister(client)
