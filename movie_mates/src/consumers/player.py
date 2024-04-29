@@ -6,6 +6,5 @@ from src.server.consumers import consumer
 
 @consumer()
 async def leading_player_changed(client: Client, room: Room, message: dict):
-    print(message)
     event = LeadingPlayerChangedEvent(**message)
     await room.send_broadcast(event.model_dump_json())

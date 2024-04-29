@@ -34,12 +34,15 @@ class Receiver:
         """
         room_name = get_room_name(path)
         room = self.rooms.get(room_name)
-        client = await room.register(ws)
+        client = room.register(ws)
+        await room.set_leading_client()
         while True:
             try:
                 message = (await ws.recv()).strip()
             except ConnectionClosedOK:
-                await room.unregister(client)
+                room.unregister(client)
+                if room.is_leading_client(None):
+                    await room.set_leading_client()
             else:
                 try:
                     message_json = loads(message)

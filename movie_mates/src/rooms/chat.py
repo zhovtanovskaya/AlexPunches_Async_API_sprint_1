@@ -16,46 +16,46 @@ class Room:
         self.clients = set()
         self.leading_client = None        # Ведущий клиент.
 
-    async def register(self, ws: WebSocketServerProtocol):
-        """Добавить websocket-подключение в комнату.
-
-        Если ведущий клиент комнаты не выбран, то добавляемый для
-        веб-сокета клиент будет назначен ведущим.  И ему будет отправлено
-        сообщение "set_leading_client".
-        """
+    def register(self, ws: WebSocketServerProtocol):
+        """Добавить websocket-подключение в комнату."""
         client = Client(ws)
         self.clients.add(client)
-        # Выбрать ведущего клиента.
-        if self.leading_client is None:
-            self.leading_client = client
-            outgoing_event = SetLeadingClientEvent()
-            await self.leading_client.send(outgoing_event.model_dump_json())
         return client
 
-    async def unregister(self, client: Client):
+    def unregister(self, client: Client):
         """Удалить клиента из комнаты.
 
-        В случае, если удаляемый клиент являлся ведущим, выбрать
-        нового ведущего клиента из оставшихся.  И уведомить его
-        об этом сообщением "set_leading_client".
+        В случае, если удаляемый клиент являлся ведущим, то
+        установить ведущего клиента в `None`.
         """
         try:
             self.clients.remove(client)
         except KeyError:
             pass
         if self.is_leading_client(client):
-            # Выбрать нового ведущего клиента.
-            try:
-                self.leading_client = self.clients.pop()
-            except KeyError:
-                # Если подключенных клиентов не осталось.
-                self.leading_client = None
-            else:
-                self.clients.add(self.leading_client)
-                outgoing_event = SetLeadingClientEvent()
-                await self.leading_client.send(outgoing_event.model_dump_json())
+            self.leading_client = None
+
+    async def set_leading_client(self):
+        """Выбрать ведущего клиента.
+
+        Если ведущий клиент уже выбран, то ничего не делать.
+        Если ведущего клиента нет, то выбрать его из клиентов в комнате,
+        и уведомить его сообщением `SetLeadingClientEvent`.
+        """
+        if self.leading_client is not None:
+            return
+        try:
+            self.leading_client = self.clients.pop()
+        except KeyError:
+            # Если подключенных клиентов не осталось.
+            self.leading_client = None
+        else:
+            outgoing_event = SetLeadingClientEvent()
+            await self.leading_client.send(outgoing_event.model_dump_json())
+            self.clients.add(self.leading_client)
 
     def is_leading_client(self, client: Client):
+        """`True` если `client` равен `self.leading_client`."""
         return client == self.leading_client
 
     def get_client_names(self) -> list[str]:
@@ -65,11 +65,12 @@ class Room:
     def has_client_name(self, name: str) -> bool:
         return name in self.get_client_names()
 
-    def get_client(self, name: str) -> Client:
+    def get_client(self, name: str) -> Client | None:
         """Получить клиета по имени."""
         for client in self.clients:
             if client.name == name:
                 return client
+        return None
 
     async def send(self, to: str, message: str):
         """Послать сообщение одному пользователю в комнате."""
