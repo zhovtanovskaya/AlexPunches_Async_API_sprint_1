@@ -6,7 +6,8 @@
 """
 
 from src.consumers.incoming_events import SendTextEvent, SetUserNameEvent
-from src.consumers.outgoing_events import ErrorEvent, IncomingTextEvent
+from src.consumers.outgoing_events import (ErrorEvent, IncomingTextEvent,
+                                           ListUserNamesEvent)
 from src.server.consumers import consumer
 from src.server.rooms.chat import Room
 from src.server.rooms.clients import Client
@@ -15,7 +16,8 @@ from src.server.rooms.clients import Client
 @consumer()
 async def help(client: Client, room: Room, message: dict):
     """Получить список имен всех участников чата."""
-    await client.send(', '.join(room.get_client_names()))
+    list_user_names = ListUserNamesEvent(user_names=room.get_client_names())
+    await client.send(list_user_names.model_dump_json())
 
 
 @consumer()

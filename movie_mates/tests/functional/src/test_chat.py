@@ -9,7 +9,7 @@ def test_set_client_name(ws_client):
     ws_client.send('{"type": "set_user_name", "user_name": "test_user"}')
     ws_client.send('{"type": "help", "content": "?"}')
     message = ws_client.recv()
-    assert message == 'test_user'
+    assert message == '{"type":"list_user_names","user_names":["test_user"]}'
 
 
 def test_send_text_to_all(ws_client):

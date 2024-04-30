@@ -2,7 +2,7 @@
 
 from pydantic import BaseModel
 
-__all__ = ['IncomingTextEvent', 'ErrorEvent']
+__all__ = ['IncomingTextEvent', 'ErrorEvent', 'ListUserNamesEvent']
 
 
 class IncomingTextEvent(BaseModel):
@@ -19,3 +19,10 @@ class ErrorEvent(BaseModel):
     type: str = 'error'
     text: str
     on_event: str | dict
+
+
+class ListUserNamesEvent(BaseModel):
+    """Список имен пользователей в комнате."""
+
+    type: str = 'list_user_names'
+    user_names: list[str]
