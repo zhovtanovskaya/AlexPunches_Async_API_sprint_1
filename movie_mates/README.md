@@ -1,10 +1,11 @@
 ## Movie Mates
 
-WebSocket-сервер запускается командой `make run_server`.  Подключиться к нему можно
-командой `websocat ws://localhost:8765`.  Примеры JSON-сообщений, которые можно слать
-в комнату с двумя участниками Alison и Bob:
+WebSocket-сервер запускается командами:
 ```
-> {"type": "help", "content": "?"}
-Alison, Bob
-> {"type": "send_text", "to": "Alison", "content": "Hello!"}
-```
+. ./venv/bin/activate
+make run_server
+```  
+
+Это бек-энд для проекта "Movie Mates".  Чтобы увидеть его в работе, нужно запустить
+фронтэнд проекта в папке "movie_mates_front/" такой же командой и открыть 
+фронэнд в браузере.
