@@ -12,6 +12,8 @@ from src.server.urltools import get_room_name
 
 logger = logging.getLogger(__name__)
 
+__all__ = ['Receiver']
+
 
 class Receiver:
     """Получатель сообщений из веб-сокета.

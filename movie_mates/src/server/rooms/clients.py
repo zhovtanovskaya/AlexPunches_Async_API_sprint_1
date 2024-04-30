@@ -1,5 +1,7 @@
 from websockets import WebSocketServerProtocol
 
+__all__ = ['Client']
+
 
 class Client:
     def __init__(self, ws: WebSocketServerProtocol, name='AnonymousClient'):

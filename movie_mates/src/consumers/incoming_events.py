@@ -2,6 +2,8 @@
 
 from pydantic import BaseModel
 
+__all__ = ['SendTextEvent', 'SetUserNameEvent', 'LeadingPlayerChangedEvent']
+
 
 class SendTextEvent(BaseModel):
     """Событие в веб-сокете.

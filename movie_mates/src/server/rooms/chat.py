@@ -4,6 +4,8 @@ from websockets.exceptions import ConnectionClosedOK
 from src.server.rooms.clients import Client
 from src.server.rooms.outgoing_events import SetLeadingClientEvent
 
+__all__ = ['Room']
+
 
 class Room:
     """Комната пользователей, общающихся через вебсокеты.

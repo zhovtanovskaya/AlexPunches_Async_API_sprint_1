@@ -1,12 +1,16 @@
 from importlib import import_module
 from typing import Callable
 
+__all__ = ['Consumers', 'consumer']
+
 
 class Consumers:
+    """Список потребителей событий от вебсокет-клиента."""
 
     consumers: dict = {}
 
     def __new__(cls):
+        # Сделать класс синглтоном.
         if not hasattr(cls, 'instance'):
             cls.instance = super(Consumers, cls).__new__(cls)
         return cls.instance

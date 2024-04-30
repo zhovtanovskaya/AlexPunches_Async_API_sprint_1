@@ -2,6 +2,8 @@
 
 from pydantic import BaseModel
 
+__all__ = ['IncomingTextEvent', 'ErrorEvent']
+
 
 class IncomingTextEvent(BaseModel):
     """Событие о новом сообщении в чате."""
