@@ -12,17 +12,17 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_ADMIN}
       POSTGRES_USER: ${POSTGRES_USER_ADMIN}
 
-  elastic:
-    image: elasticsearch:7.17.5
-    restart: unless-stopped
-    environment:
-      - discovery.type=single-node
-    volumes:
-      - elasticsearch_value:/usr/share/elasticsearch/data
-    expose:
-      - "9200"
-    depends_on:
-      - admin_postgres
+#  elastic:
+#    image: elasticsearch:7.17.5
+#    restart: unless-stopped
+#    environment:
+#      - discovery.type=single-node
+#    volumes:
+#      - elasticsearch_value:/usr/share/elasticsearch/data
+#    expose:
+#      - "9200"
+#    depends_on:
+#      - admin_postgres
 
   redis:
     image: redis:7-alpine
@@ -39,27 +39,20 @@ services:
       - /tmp/logs/admin_panel/:/var/log/admin_panel/
     expose:
       - "8000"
-    environment:
-      POSTGRES_DB_ADMIN: ${POSTGRES_DB_ADMIN}  
-      POSTGRES_USER_ADMIN: ${POSTGRES_USER_ADMIN}  
-      POSTGRES_PASSWORD_ADMIN: ${POSTGRES_PASSWORD_ADMIN}  
-      DB_HOST_ADMIN: ${DB_HOST_ADMIN}  
-      DB_PORT_ADMIN: ${DB_PORT_ADMIN}
-      SECRET_KEY: ${SECRET_KEY}
+    env_file:
+      - ./.env
 
   fastapi:
     build: fastapi
     volumes:
       - /tmp/logs/async_api/:/var/log/async_api/
     depends_on:
-      - elastic
+#      - elastic
       - redis
     expose:
       - "8000"
-    environment:
-      ES_HOST: ${ES_HOST}
-      ES_PORT: ${ES_PORT}
-      REDIS_HOST: ${REDIS_HOST}
+    env_file:
+      - ./.env
 
     entrypoint: ["./wait-for-it.sh", "-s", "-t", "0", "elastic:9200", "--"]
     command: ["gunicorn", "-b", "0.0.0.0:8000", "--workers", "4", "-k", "uvicorn.workers.UvicornWorker", "src.main:app"]
@@ -72,12 +65,13 @@ services:
       - ./nginx/configs:/etc/nginx/conf.d:ro
       - service_static_value:/var/html/static/
       - service_media_value:/var/html/media/
+      - service_assets_value:/var/html/assets/
       - /tmp/logs/nginx/:/var/log/nginx/
     depends_on:
       - fastapi
       - admin_panel
       - auth_flask
-      - activity_api
+#      - activity_api
     ports:
       - "8000:80"
 
@@ -85,18 +79,12 @@ services:
     build: etl_services
     volumes:
       - ./etl_services:/opt/app:ro
-    environment:
-      SQLITE3_PATH: ${SQLITE3_PATH}
-      BUNCH_EXTRACT: ${BUNCH_EXTRACT}
-      BUNCH_INSERT: ${BUNCH_INSERT}
-      ES_SCHEMAS_DIR: ${ES_SCHEMAS_DIR}
-      ES_HOST: ${ES_HOST}
-      ES_PORT: ${ES_PORT}
-      BUNCH_ES_LOAD: ${BUNCH_ES_LOAD}
-    depends_on:
-      - elastic
+#    depends_on:
+#      - elastic
     entrypoint: ["./wait-for-it.sh", "-s", "-t", "0", "elastic:9200", "--"]
     command: ["python3", "/opt/app/postgres_to_es/load_indexes.py"]
+    env_file:
+      - ./.env
 
   auth_postgres:
     image: postgres:14-alpine
@@ -119,22 +107,8 @@ services:
       - redis
     expose:
       - "5000"
-    environment:
-      POSTGRES_DB_AUTH: ${POSTGRES_DB_AUTH}
-      POSTGRES_USER_AUTH: ${POSTGRES_USER_AUTH}
-      POSTGRES_PASSWORD_AUTH: ${POSTGRES_PASSWORD_AUTH}
-      DB_HOST_AUTH: ${DB_HOST_AUTH}
-      REDIS_HOST: ${REDIS_HOST}
-      ENABLE_TRACER: ${ENABLE_TRACER}
-      FLASK_APP: ${FLASK_APP}
-      FLASK_DEBUG: ${FLASK_DEBUG}
-      FLASK_SECRET_KEY: ${FLASK_SECRET_KEY}
-      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
-      JWT_ACCESS_TOKEN_EXPIRES: ${JWT_ACCESS_TOKEN_EXPIRES}
-      JWT_REFRESH_TOKEN_EXPIRES: ${JWT_REFRESH_TOKEN_EXPIRES}
-      GOOGLE_OAUTH_CLIENT_ID: ${GOOGLE_OAUTH_CLIENT_ID}
-      GOOGLE_OAUTH_CLIENT_SECRET: ${GOOGLE_OAUTH_CLIENT_SECRET}
-      EVENT_STORE_HOST: ${EVENT_STORE_HOST}
+    env_file:
+      - ./.env
     entrypoint: >
       sh -c "python /opt/app/src/manage.py db upgrade head
       && gunicorn -b 0.0.0.0:5000 --workers 4 src.pywsgi:app"
@@ -150,39 +124,67 @@ services:
       - "16686:16686"
       - "6831:6831/udp"
 
-  activity_api:
-    build: activity_api
+#  activity_api:
+#    build: activity_api
+#    volumes:
+#      - /tmp/logs/activity_api/:/var/log/activity_api/
+#    expose:
+#      - "8000"
+#    env_file:
+#      - ./.env
+#    entrypoint: ["./wait-for-it.sh", "-s", "-t", "600", "${EVENT_STORE_HOST}:${EVENT_STORE_PORT}", "--"]
+#    command: ["gunicorn", "-b", "0.0.0.0:8000", "--workers", "4", "-k", "uvicorn.workers.UvicornWorker", "src.main:app"]
+
+#  together_api:
+#    build: together_api
+#    volumes:
+#      - /tmp/logs/together_api/:/var/log/together_api/
+#      - ./deploy/.mongodb/root.crt:/home/$USER/.mongodb/
+#    expose:
+#      - "8000"
+#    env_file:
+#      - ./.env
+#    entrypoint: ["./wait-for-it.sh", "-s", "-t", "600", "${EVENT_STORE_HOST}:${EVENT_STORE_PORT}", "--"]
+#    command: ["gunicorn", "-b", "0.0.0.0:8000", "--workers", "4", "-k", "uvicorn.workers.UvicornWorker", "src.main:app"]
+
+  together_frontend:
+    build: together_frontend
     volumes:
-      - /tmp/logs/activity_api/:/var/log/activity_api/
+      - /tmp/logs/together_frontend/:/var/log/together_frontend/
+      - service_assets_value:/opt/app/assets/
     expose:
       - "8000"
-    environment:
-      API_HOST: ${API_HOST}
-      API_PORT: ${API_HOST}
-    entrypoint: ["./wait-for-it.sh", "-s", "-t", "600", "${EVENT_STORE_HOST}:${EVENT_STORE_PORT}", "--"]
-    command: ["gunicorn", "-b", "0.0.0.0:8000", "--workers", "4", "-k", "uvicorn.workers.UvicornWorker", "src.main:app"]
+    env_file:
+      - ./.env
+
+  ws_together:
+    build: ws_together
+    volumes:
+      - /tmp/logs/ws_together/:/var/log/ws_together/
+    expose:
+      - "8000"
+    env_file:
+      - ./.env
 
   worker_notifications:
     build: worker_notifications
     volumes:
       - /tmp/logs/worker_notifications/:/var/log/worker_notifications
-    environment:
-      NOTIFICATIONS_QUEUE_USER: ${NOTIFICATIONS_QUEUE_USER}
-      NOTIFICATIONS_QUEUE_PASSWORD: ${NOTIFICATIONS_QUEUE_PASSWORD}
-      SMTP_USERNAME: ${SMTP_USERNAME}
-      SMTP_PASSWORD: ${SMTP_PASSWORD}
+    expose:
+      - "8000"
+    env_file:
+      - ./.env
 
   etl_notifications:
     build: etl_notifications
-    environment:
-      NOTIFICATIONS_QUEUE_USER: ${NOTIFICATIONS_QUEUE_USER}
-      NOTIFICATIONS_QUEUE_PASSWORD: ${NOTIFICATIONS_QUEUE_PASSWORD}
-
+    env_file:
+      - ./.env
 
 
 volumes:
   service_static_value:
   service_media_value:
-  elasticsearch_value:
+  service_assets_value:
+#  elasticsearch_value:
   pg_data_admin:
   pg_data_auth:

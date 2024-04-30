@@ -149,3 +149,4 @@ snippets
 dotenvs
 .envrc
 .DS_Store
+deploy/.mongodb/root.crt

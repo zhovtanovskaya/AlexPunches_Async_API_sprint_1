@@ -1,0 +1,65 @@
+version: '3'
+services:
+  fastapi:
+    image: alpine
+    stdin_open: true
+    tty: true
+
+  auth_flask:
+    image: alpine
+    stdin_open: true
+    tty: true
+
+  activity_api:
+    image: alpine
+    stdin_open: true
+    tty: true
+
+  together_api:
+    image: alpine
+    stdin_open: true
+    tty: true
+
+  admin_panel:
+    image: alpine
+    stdin_open: true
+    tty: true
+
+  nginx:
+    image: nginx:1.23
+    restart: unless-stopped
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/configs:/etc/nginx/conf.d:ro
+      - service_assets_value:/var/html/assets/
+      - /tmp/logs/nginx/:/var/log/nginx/
+    depends_on:
+      - fastapi
+      - auth_flask
+      - activity_api
+    ports:
+      - "8000:80"
+
+  together_frontend:
+    build: together_frontend
+    volumes:
+      - /tmp/logs/together_frontend/:/var/log/together_frontend/
+      - service_assets_value:/opt/app/assets/
+    expose:
+      - "8000"
+    env_file:
+      - ./.env
+
+  ws_together:
+    build: ws_together
+    volumes:
+      - /tmp/logs/ws_together/:/var/log/ws_together/
+    expose:
+      - "8000"
+    env_file:
+      - ./.env
+
+
+
+volumes:
+  service_assets_value:
