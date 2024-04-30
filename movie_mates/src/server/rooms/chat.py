@@ -1,8 +1,8 @@
 from websockets import WebSocketServerProtocol
 from websockets.exceptions import ConnectionClosedOK
 
-from src.rooms.clients import Client
-from src.rooms.outgoing_events import SetLeadingClientEvent
+from src.server.rooms.clients import Client
+from src.server.rooms.outgoing_events import SetLeadingClientEvent
 
 
 class Room:

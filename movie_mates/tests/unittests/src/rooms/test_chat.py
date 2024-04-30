@@ -1,6 +1,6 @@
 import unittest
 
-from src.rooms.chat import Room
+from src.server.rooms.chat import Room
 
 
 class TestRoom(unittest.IsolatedAsyncioTestCase):

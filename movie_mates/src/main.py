@@ -2,10 +2,10 @@ import asyncio
 
 import websockets
 
-from src.rooms.chat import Room
 from src.server.consumers import Consumers
 from src.server.receiver import Receiver
 from src.server.rooms import Rooms
+from src.server.rooms.chat import Room
 
 if __name__ == '__main__':
     # Создать сервер.
