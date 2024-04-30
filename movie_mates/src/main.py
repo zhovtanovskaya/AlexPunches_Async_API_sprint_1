@@ -7,16 +7,18 @@ from src.server.receiver import Receiver
 from src.server.rooms import Rooms
 from src.server.rooms.chat import Room
 
-if __name__ == '__main__':
-    # Создать сервер.
+
+async def main():
+    # Создать хэндлер вебсокет-сообщений.
     consumers = Consumers()
     consumers.include(
         'src.consumers.chat',
         'src.consumers.player',
     )
     rooms = Rooms(room_class=Room)
-    ws_server = websockets.serve(Receiver(consumers, rooms), 'localhost', 8765)
-    # Запустить event-loop.
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(ws_server)
-    loop.run_forever()
+    async with websockets.serve(Receiver(consumers, rooms), 'localhost', 8765):
+        await asyncio.Future()      # Run forever.
+
+
+if __name__ == '__main__':
+    asyncio.run(main())
