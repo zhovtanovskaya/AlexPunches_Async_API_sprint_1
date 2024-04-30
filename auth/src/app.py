@@ -14,11 +14,11 @@ from opentelemetry.sdk.trace.export import (BatchSpanProcessor,
                                             ConsoleSpanExporter)
 from sentry_sdk.integrations.flask import FlaskIntegration
 
-from api.shortlink import shortlink
 from api.v1.auth import auth
 from api.v1.login_histories import login_histories
 from api.v1.profile import profile
 from api.v1.roles import roles
+from api.v1.shortlink import shortlink
 from api.v1.users import users
 from core.config import config
 from core.exceptions import exceptions
@@ -60,7 +60,7 @@ def create_app():
     app.register_blueprint(auth, url_prefix='/api/v1')
     app.register_blueprint(login_histories, url_prefix='/api/v1')
     app.register_blueprint(profile, url_prefix='/api/v1')
-    app.register_blueprint(shortlink, url_prefix='/')
+    app.register_blueprint(shortlink, url_prefix=f'/{config.shortlink_prefix}')
     db.app = app
     db.init_app(app)
     if config.enable_tracer:

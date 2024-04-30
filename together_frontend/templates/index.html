@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Чебурашка</title>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="/assets/images/favicon.ico">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap">
+
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/font-awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/plyr/plyr.css" />
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+
+</head>
+
+<body>
+
+<!-- **************** MAIN CONTENT START **************** -->
+<main>
+
+    <section class="py-0 bg-dark position-relative">
+        <div class="row g-0">
+            <div class="d-flex">
+                <div class="overflow-hidden fullscreen-video w-100">
+                    <!-- Full screen video START -->
+                    <div class="video-player rounded-3">
+                        <video crossorigin="anonymous" playsinline poster="/assets/images/videos/poster.jpg">
+                            <source src="/assets/images/videos/720p.mp4" type="video/mp4" size="720">
+                        </video>
+                    </div>
+                    <!-- Full screen video END -->
+
+                    <!-- Plyr resources and browser polyfills are specified in the pen settings -->
+                </div>
+
+                <!-- Page content START -->
+                <div class="justify-content-end position-relative">
+                    <!-- Collapse button START -->
+                    <button class="navbar-toggler btn btn-white mt-4 plyr-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+                    <span class="navbar-toggler-animation">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                    </button>
+                    <!-- Collapse button END -->
+
+                    <!-- Collapse body START -->
+                    <div class="collapse collapse-horizontal show" id="collapseWidthExample">
+                        <div class="card vh-100 overflow-auto rounded-0 w-280px w-sm-400px">
+                            <!-- Title -->
+                            <div class="card-header bg-light rounded-0">
+                                <h1 class="mt-2 fs-5">Смотрим «Чебурашка»</h1>
+                            </div>
+
+                            <!-- Course content START -->
+                            <div class="card-body" id="board">
+                            </div>
+                            <!-- Course content END -->
+
+                            <div class="card-footer">
+                                <form action="" class="chat-form">
+                                    <div class="row" style="margin-bottom: 1em;">
+                                        <div class="col-12">
+                                            <textarea class="form-control" id="chat-text" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="d-grid">
+                                        <button type="submit" href="#" class="btn btn-primary-soft mb-0" id="submit-chat-form">Отправить</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Collapse body END -->
+                </div>
+                <!-- Page content END -->
+            </div>
+        </div>
+    </section>
+
+<!-- Button trigger modal -->
+
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Давай вместе смотреть «Чебурашку»</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Отлично!</button>
+      </div>
+    </div>
+  </div>
+</div>
+</main>
+<!-- **************** MAIN CONTENT END **************** -->
+
+
+<!-- Bootstrap JS -->
+<script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Vendors -->
+<script src="/assets/vendor/plyr/plyr.js"></script>
+
+<!-- Template Functions -->
+
+<script>
+    document.documentElement.setAttribute('data-bs-theme', 'dark');
+    const myModal = new bootstrap.Modal(document.getElementById('myModal'));
+    myModal.show();
+    const myModalEl = document.getElementById('myModal');
+    let controls = ['mute', 'volume', 'fullscreen', 'current-time'];
+    let clickToPlay = false;
+    let playerHtmlvideo = new Plyr('video', {
+        controls: controls,
+        clickToPlay: clickToPlay,
+        player_type: 'lead',
+    });
+    playerHtmlvideo.player_type = 'watcher';
+
+
+    window.addEventListener("DOMContentLoaded", () => {
+        const chat = document.querySelector(".chat-form");
+        const websocket = new WebSocket("ws://{{ ws_host }}:{{ ws_port }}/room/{{ room_id }}?token={{ token }}");
+
+        receiveMoves(chat, websocket);
+        sendMoves(chat, websocket);
+    });
+
+
+
+    function sendMoves(chat, websocket) {
+        chat.addEventListener("submit", function(e) {
+            e.preventDefault()
+            const messageelement = document.getElementById('chat-text');
+            const messageText = messageelement.value;
+
+            if (messageText === '') {
+                return;
+            }
+            const messageObj = {
+                event_type: "broadcast_message",
+                payload: {
+                    "message": messageText,
+                },
+            };
+            websocket.send(JSON.stringify(messageObj));
+            messageelement.value = "";
+        });
+
+        // Когда закрываем приветственное модальное окно, запрашиваем стейт плеера, чтобы переключить на нужное время
+        myModalEl.addEventListener('hide.bs.modal', function (event) {
+            const messageObj = {
+                event_type: "room_request",
+                payload: {
+                    "command": "get_player_state",
+                },
+            };
+            websocket.send(JSON.stringify(messageObj));
+        });
+    }
+
+    function receiveMoves(board, websocket) {
+        websocket.addEventListener("message", ({ data }) => {
+            const event = JSON.parse(data);
+            const payload = event.payload;
+            switch (event.event_type) {
+                case "broadcast_message":
+                    chatAdd(payload.message, payload.from_user);
+                    break;
+                case "player_state":
+                    if (payload.player_type === 'lead' && playerHtmlvideo.player_type !== 'lead'){
+                        playerInit('lead', websocket);
+                    }
+                    if (payload.timecode) {
+                        playerHtmlvideo.currentTime = payload.timecode;
+                    }
+                    if (payload.player_status === 'play'){
+                        playerHtmlvideo.play();
+                    }
+                    if (payload.player_status === 'pause'){
+                        playerHtmlvideo.pause();
+                    }
+                    break;
+                case "chat_state":
+                    const chatMessages = payload.chat_messages;
+                    chatMessages.forEach((item, index, array) => {
+                        chatAdd(item.message, item.user_name);
+                    })
+                    break;
+                case "broadcast_command":
+                    if (payload.timecode) {
+                        playerHtmlvideo.currentTime = payload.timecode;
+                    }
+                    if (payload.player_status === 'play'){
+                        playerHtmlvideo.play();
+                    }
+                    if (payload.player_status === 'pause'){
+                        playerHtmlvideo.pause();
+                    }
+                    break;
+                case "video_state":
+                    break;
+                case "error":
+                    const errorMessages = payload.message;
+                    console.log(errorMessages)
+                    break;
+                default:
+                    console.log(event.event_type)
+                    throw new Error("Unsupported event type: ${event.type}.");
+            }
+        });
+    }
+
+    function playerInit(type, websocket) {
+        if (type === 'lead') {
+            playerHtmlvideo.destroy()
+            controls = ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'airplay', 'fullscreen'];
+            clickToPlay = true;
+            playerHtmlvideo = new Plyr('video', {
+                controls: controls,
+                clickToPlay: clickToPlay,
+            });
+            playerHtmlvideo.player_type = 'lead';
+
+            playerHtmlvideo.on('play', (event) => {
+                const messageObj = {
+                    event_type: "broadcast_command",
+                    payload: {
+                        'timecode': playerHtmlvideo.currentTime,
+                        'player_status': 'play',
+                    },
+                };
+                websocket.send(JSON.stringify(messageObj));
+            });
+            playerHtmlvideo.on('pause', (event) => {
+                const messageObj = {
+                    event_type: "broadcast_command",
+                    payload: {
+                        'timecode': playerHtmlvideo.currentTime,
+                        'player_status': 'pause',
+                    },
+                };
+                websocket.send(JSON.stringify(messageObj));
+            });
+            playerHtmlvideo.on('seeked', (event) => {
+                const messageObj = {
+                    event_type: "broadcast_command",
+                    payload: {
+                        'timecode': playerHtmlvideo.currentTime,
+                    },
+                };
+                websocket.send(JSON.stringify(messageObj));
+                console.log('seeked')
+
+                setInterval(setState, 3000, websocket)
+
+
+
+            });
+        }
+
+    }
+
+    function setState(websocket){
+        let player_status = 'stop'
+        if (playerHtmlvideo.playing) {
+            player_status = 'play'
+        } else if (playerHtmlvideo.paused) {
+            player_status = 'pause'
+        }
+
+        const stateObj = {
+            event_type: "room_request",
+            payload: {
+                'timecode': playerHtmlvideo.currentTime,
+                'player_status': player_status,
+                'speed': playerHtmlvideo.speed,
+                'command': 'set_state',
+            },
+        };
+        websocket.send(JSON.stringify(stateObj));
+    }
+
+
+    function chatAdd(message, user) {
+        const board = document.getElementById('board');
+        board.innerHTML += '<p>' + user + ': ' + message + '</p>';
+    }
+
+</script>
+
+</body>
+</html>
